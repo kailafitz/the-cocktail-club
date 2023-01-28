@@ -1,6 +1,9 @@
 {
   "name": "cocktailsdb-typescript",
   "version": "0.1.0",
+  "engines": {
+    "node": "18.3.0"
+  },
   "private": true,
   "dependencies": {
     "@emotion/react": "^11.10.5",
