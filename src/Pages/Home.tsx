@@ -82,6 +82,7 @@ export const Home = () => {
             display: "flex",
             flexDirection: "row",
             justifyContent: "flex-start",
+            overflow: "hidden",
           }}
         >
           {data.map((drink: DrinkInterface) => {

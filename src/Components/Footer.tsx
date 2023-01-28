@@ -12,7 +12,7 @@ const StyledContainer = styled(Container)(
   display: flex;
   flex-direction: row;
   justify-content: center;
-  padding: ${theme.spacing(4)}
+  padding: ${theme.spacing(2)}
 `
 );
 

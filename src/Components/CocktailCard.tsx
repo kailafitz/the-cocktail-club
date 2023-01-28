@@ -21,36 +21,22 @@ const StyledNameTypography = styled(Typography)(
 const StyledIconButton = styled(IconButton)(
   ({ theme }) => `
     width: 25%;
-    transition: all .5s linear;
+    transition: all .3s linear;
     border-radius: 0;
-    background: ${theme.palette.primary.dark};
+    background: ${theme.palette.dark.main};
 
   &:hover {
-    width: 100%;
+    // width: 50%;
     background: ${theme.palette.primary.dark};
     border-radius: 0;
 
-    p {
-        width: unset;
-        height: unset;
-        overflow: hidden;
-        opacity: 1;
-        display: inline;
+    svg {
+      color: ${theme.palette.dark.main};
     }
   }
 
   svg {
-    color: #fff;
-  }
-
-  p {
-    width: 0;
-    height: 0;
-    opacity: 0;
-    display: none;
-    overflow: hidden;
-    color: #fff;
-    transition: all .35s ease-in-out;
+    color: ${theme.palette.primary.dark};
   }
 `
 ) as typeof IconButton;
@@ -95,7 +81,6 @@ export const CocktailCard = (props: CocktailCardProps) => {
               aria-label="arrow"
               href={`drink/${props.id}/details`}
             >
-              <Typography variant="body2">View Details </Typography>{" "}
               <ArrowForwardIcon />
             </StyledIconButton>
           </CardActions>
