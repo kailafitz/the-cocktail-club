@@ -1,0 +1,23 @@
+html {
+    min-height: 100vh;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    display: flex;
+    background-color: #151514;
+}
+
+#root {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    position: relative;
+    justify-content: space-between;
+}
+
+.loading {
+    margin: 0 auto;
+}
