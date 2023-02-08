@@ -13,6 +13,7 @@ export const ViewHeightContainer = (props: ViewHeightContainerProps) => {
       sx={{
         height: props.vh ? "100vh" : "100%",
         display: "flex",
+        flexGrow: 1,
         flexDirection: "column",
         justifyContent: "center",
       }}

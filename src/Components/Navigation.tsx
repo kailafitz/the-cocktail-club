@@ -5,30 +5,26 @@ import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
+import { Spin as Hamburger } from "hamburger-react";
 import { List, ListItem, ListItemText, ListItemButton } from "@mui/material";
-import { styled } from "@mui/material/styles";
+import { styled, useTheme } from "@mui/material/styles";
 
 const StyledAppBar = styled(AppBar)(
-  ({ theme }) => `
-    // background: #ffffff80;
-    // backdrop-filter: blur(3.5px);
+  () => `
     background: transparent;
+`
+);
 
-    div, button {
-      color: ${theme.palette.primary.dark};
+const StyledIconButton = styled(IconButton)(
+  () => `
+    :hover {
+      background-color: transparent;
     }
 `
 );
 
-const StyledMenuDropdown = styled(Box)(
-  ({ theme }) => `
-    width: 100%;
-    background: ${theme.palette.primary.dark};
-`
-);
-
 const StyledNavLink = styled(ListItem)(
-  () => `
+  ({ theme }) => `
     a {
         padding:  0 10px;
 
@@ -37,7 +33,8 @@ const StyledNavLink = styled(ListItem)(
         }
 
         div span {
-            color: #fff;
+            color: ${theme.palette.dark.main};
+            font-weight: 500;
         }
     }
 `
@@ -45,7 +42,7 @@ const StyledNavLink = styled(ListItem)(
 
 const StyledTypography = styled(Typography)(
   ({ theme }) => `
-    color: ${theme.palette.primary.light}
+    color: ${theme.palette.dark.main}
 `
 );
 
@@ -62,51 +59,82 @@ const menuItems = [
 
 export default function Navigation() {
   const [open, setOpen] = useState(false);
+  const theme = useTheme();
 
   return (
     <>
-      <StyledMenuDropdown
+      <StyledIconButton
+        disableRipple
+        size="large"
+        edge="start"
+        color={open ? "dark" : "primary"}
+        aria-label="open drawer"
         sx={{
-          display: open ? "block" : "none",
-          transition: "display 1s ease-in-out",
+          // mx: 2,
+          // mt: 1,
+          position: "absolute",
+          zIndex: 9,
+          transition: "color .6s ease",
+          p: 0,
+          pt: 1,
+          pl: 2,
         }}
       >
-        <List
-          sx={{ display: "flex", alignItems: "center", paddingLeft: "2rem" }}
-        >
-          {menuItems.map((link) => {
-            return (
-              <React.Fragment key={link.text}>
-                <StyledNavLink disablePadding sx={{ width: "fit-content" }}>
-                  <ListItemButton disableRipple component="a" href={link.href}>
-                    <ListItemText primary={link.text} />
-                  </ListItemButton>
-                </StyledNavLink>
-                <StyledTypography>|</StyledTypography>
-              </React.Fragment>
-            );
-          })}
-        </List>
-      </StyledMenuDropdown>
-      <Box>
+        <Hamburger toggled={open} toggle={setOpen} size={20} />
+      </StyledIconButton>
+      <Box
+        sx={{
+          background: theme.palette.primary.dark,
+          zIndex: 7,
+          transform: open ? "none" : "translateY(-80px)",
+          transition: "transform .6s ease-in-out",
+        }}
+      >
+        <AppBar position="fixed" elevation={0}>
+          <Toolbar>
+            <List
+              sx={{
+                display: "flex",
+                alignItems: "center",
+                ml: 5,
+              }}
+            >
+              {menuItems.map((link) => {
+                return (
+                  <React.Fragment key={link.text}>
+                    <StyledNavLink disablePadding sx={{ width: "fit-content" }}>
+                      <ListItemButton
+                        disableRipple
+                        component="a"
+                        href={link.href}
+                      >
+                        <ListItemText primary={link.text} />
+                      </ListItemButton>
+                    </StyledNavLink>
+                    <StyledTypography>|</StyledTypography>
+                  </React.Fragment>
+                );
+              })}
+            </List>
+          </Toolbar>
+        </AppBar>
+      </Box>
+      <Box
+        sx={{
+          ml: 5,
+        }}
+      >
         <StyledAppBar position="relative" elevation={0}>
           <Toolbar>
-            <IconButton
-              size="large"
-              edge="start"
-              color="primary"
-              aria-label="open drawer"
-              sx={{ mr: 2 }}
-              onClick={() => setOpen(!open)}
-            >
-              <MenuIcon />
-            </IconButton>
             <Typography
               variant="body1"
               noWrap
               component="div"
               color="primary"
-              sx={{ flexGrow: 1, display: { xs: "none", sm: "block" } }}
+              sx={{
+                flexGrow: 1,
+                display: { xs: "none", sm: "block" },
+              }}
             >
               The Cocktail Club
             </Typography>

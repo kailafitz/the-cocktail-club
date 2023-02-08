@@ -3,10 +3,7 @@ import { createTheme, responsiveFontSizes } from "@mui/material/styles";
 const theme = createTheme({
   palette: {
     primary: {
-      // light: "#0077",
-      // main: "#4b4b9f",
-      // dark: "#007",
-      main: "#ebd69c",
+      main: "#EBD69C",
       contrastText: "#151514",
     },
     neutral: {
@@ -14,7 +11,7 @@ const theme = createTheme({
     },
     dark: {
       main: "#151514",
-      contrastText: "#ebd69c",
+      contrastText: "#EBD69C",
     },
   },
   typography: {

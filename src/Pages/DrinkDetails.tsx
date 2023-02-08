@@ -48,6 +48,8 @@ export const DrinkDetails = () => {
 
   if (status === "success" && !loaded) {
     let ingredients: string[] = [];
+    // let specCharsRegex = /\\s+\.\(\)/;
+    let specCharsRegex = /\.()/;
     Promise.resolve()
       .then(() => {
         let drink = data;
@@ -57,7 +59,11 @@ export const DrinkDetails = () => {
             ingredients.push(drink[key]);
           }
           if (key === "strInstructions") {
-            instruc = drink[key].split(".").slice(0, -1);
+            if (drink[key].includes(". ")) {
+              instruc = drink[key].split(". ").slice(0, -1);
+            } else if (drink[key] !== null) {
+              instruc[0] = drink[key];
+            }
           }
         }
 
@@ -66,12 +72,7 @@ export const DrinkDetails = () => {
       })
       .then((res) => {
         for (let i = 0; i < res.length; i++) {
-          if (res[i].includes("(")) {
-            res[i] = res[i].replace("(", "");
-          } else if (res[i].includes(")")) {
-            res[i] = res[i].replace(")", "");
-          }
-          res[i] = res[i].trim();
+          res[i] = res[i].replace(specCharsRegex, "").trim();
         }
         setLoaded(true);
 
@@ -151,23 +152,23 @@ export const DrinkDetails = () => {
 
   if (status === "loading") {
     return (
-      <ViewHeightContainer vh>
-        <Loading color="black" />
+      <ViewHeightContainer>
+        <Loading color="white" />
       </ViewHeightContainer>
     );
   }
 
   if (status === "error") {
     return (
-      <ViewHeightContainer vh>
-        <Error message="Something went wrong!" />
+      <ViewHeightContainer>
+        <Error message="Something went wrong!" color="white" />
       </ViewHeightContainer>
     );
   }
 
   return (
-    <ViewHeightContainer vh>
-      <Loading color="black" />
+    <ViewHeightContainer>
+      <Error message="Something went wrong!" color="white" />
     </ViewHeightContainer>
   );
 };

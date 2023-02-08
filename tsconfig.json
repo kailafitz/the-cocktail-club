@@ -22,9 +22,14 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
-    "jsx": "react-jsx"
+    "jsx": "react-jsx",
+    "types": [
+      "vitest/globals",
+    ]
   },
   "include": [
-    "src"
+    "src",
+    "src/Tests/CocktailCard.test.tsx",
+    "src/Tests/SearchByLetter.test.tsx"
   ]
 }

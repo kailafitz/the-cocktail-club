@@ -12,13 +12,19 @@ const StyledContainer = styled(Container)(
   display: flex;
   flex-direction: row;
   justify-content: center;
-  padding: ${theme.spacing(2)}
+  padding: ${theme.spacing(2)};
 `
 );
 
 const StyledIcon = styled(IconButton)(
-  () => `
-  color: white;
+  ({ theme }) => `
+  color: ${theme.palette.primary.main};
+  transition: transform .3s ease-in-out;
+
+  &:hover {
+    color: ${theme.palette.primary.dark};
+    transform: translateY(-5px);
+  }
 `
 );
 

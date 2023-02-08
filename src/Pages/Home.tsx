@@ -95,18 +95,18 @@ export const Home = () => {
                         backgroundImage: `linear-gradient(to right, #151514, #ffffff00), url(${drink.strDrinkThumb})`,
                       }}
                     />
-                    <GoldDivider
+                    {/* <GoldDivider
                       src={goldDivider}
                       alt="Gold Divider"
                       style={{ transform: "scaleY(-1)" }}
-                    />
+                    /> */}
                     <StyledHeading2 variant="h3">
                       Welcome to the Club
                     </StyledHeading2>
                     <StyledHeading2>
                       Curating the careful craft of cocktails since 1898
                     </StyledHeading2>
-                    <GoldDivider src={goldDivider} alt="Gold Divider" />
+                    {/* <GoldDivider src={goldDivider} alt="Gold Divider" /> */}
                     <Typography
                       variant="h6"
                       sx={{ color: "white", textAlign: "center", mt: 5 }}
@@ -141,7 +141,9 @@ export const Home = () => {
                     </StyledHeading>
                     <StyledHeading
                       variant="h1"
-                      sx={{ textTransform: "capitalize", wordBreak: "break" }}
+                      sx={{
+                        textTransform: "capitalize",
+                      }}
                     >
                       {drink.strDrink}
                     </StyledHeading>
@@ -157,7 +159,7 @@ export const Home = () => {
 
   if (status === "loading") {
     return (
-      <ViewHeightContainer vh>
+      <ViewHeightContainer>
         <Loading color="white" />
       </ViewHeightContainer>
     );
@@ -165,14 +167,14 @@ export const Home = () => {
 
   if (status === "error") {
     return (
-      <ViewHeightContainer vh>
-        <Error message="Something went wrong!" />
+      <ViewHeightContainer>
+        <Error message="Something went wrong!" color="white" />
       </ViewHeightContainer>
     );
   }
 
   return (
-    <ViewHeightContainer vh>
+    <ViewHeightContainer>
       <Loading color="white" />
     </ViewHeightContainer>
   );
