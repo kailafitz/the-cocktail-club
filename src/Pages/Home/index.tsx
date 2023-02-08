@@ -1,67 +1,25 @@
 import React from "react";
 import axios from "axios";
 import { useQuery } from "react-query";
-import { Loading } from "../Components/Loading";
-import { Error } from "../Components/Error";
-import { ViewHeightContainer } from "../Components/ViewHeightContainer";
+import { Loading } from "../../Components/Status/Loading";
+import { Error } from "../../Components/Status/Error";
+import { ViewHeightContainer } from "../../Components/Layout/ViewHeightContainer";
 import { Button, IconButton, Typography } from "@mui/material";
-import { styled } from "@mui/material/styles";
-import { DrinkInterface } from "../Interfaces";
+import { DrinkInterface } from "../../Interfaces";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
-import goldDivider from "../Media/gold_divider.png";
-
-const StyledCocktailBackground = styled(`div`)(
-  () => `
-  position: absolute;
-  background-repeat: no-repeat;
-  background-size: cover;
-  z-index: -1;
-  top: 0;
-  right: 0;
-  width: 50vw;
-  height: 100vh;
-  filter: blur(4px);
-`
-);
-
-const StyledHeading = styled(Typography)(
-  () => `
-  color: white;
-`
-);
-
-const StyledHeading2 = styled(Typography)(
-  ({ theme }) => `
-  color: ${theme.palette.primary.main};
-  text-align: center;
-`
-);
-
-const GoldDivider = styled("img")(
-  () => `
-    width: 65%;
-    margin: 1rem auto;
-`
-);
-
-const FlexboxRow = styled("div")(
-  () => `
-  display: flex;
-  flex-direction: row;
-  overflow: hidden;
-  `
-);
-
-const FlexboxColumn = styled("div")(
-  () => `
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  width: 50vw;
-  `
-);
+import { useTheme } from "@mui/material/styles";
+import {
+  StyledCocktailBackground,
+  StyledHeading,
+  StyledHeading2,
+  FlexboxColumn,
+  FlexboxRow,
+} from "./styles";
+// import goldDivider from "../Media/gold_divider.png";
 
 export const Home = () => {
+  const theme = useTheme();
+
   const { data, status } = useQuery(
     ["drinkDetails"],
     () =>
@@ -92,7 +50,7 @@ export const Home = () => {
                   <FlexboxColumn>
                     <StyledCocktailBackground
                       sx={{
-                        backgroundImage: `linear-gradient(to right, #151514, #ffffff00), url(${drink.strDrinkThumb})`,
+                        backgroundImage: `linear-gradient(to right, ${theme.palette.common.black}, #ffffff00), url(${drink.strDrinkThumb})`,
                       }}
                     />
                     {/* <GoldDivider
@@ -109,7 +67,11 @@ export const Home = () => {
                     {/* <GoldDivider src={goldDivider} alt="Gold Divider" /> */}
                     <Typography
                       variant="h6"
-                      sx={{ color: "white", textAlign: "center", mt: 5 }}
+                      sx={{
+                        color: `${theme.palette.common.white}`,
+                        textAlign: "center",
+                        mt: 5,
+                      }}
                     >
                       Search our extensive range of luxury cocktails
                     </Typography>
@@ -134,7 +96,7 @@ export const Home = () => {
                       <IconButton
                         aria-label="view-details"
                         href={`drink/${drink.idDrink}/details`}
-                        sx={{ color: "white" }}
+                        sx={{ color: `${theme.palette.common.white}` }}
                       >
                         <ArrowForwardIcon />
                       </IconButton>
@@ -160,7 +122,7 @@ export const Home = () => {
   if (status === "loading") {
     return (
       <ViewHeightContainer>
-        <Loading color="white" />
+        <Loading color={`${theme.palette.common.white}`} />
       </ViewHeightContainer>
     );
   }
@@ -168,14 +130,17 @@ export const Home = () => {
   if (status === "error") {
     return (
       <ViewHeightContainer>
-        <Error message="Something went wrong!" color="white" />
+        <Error
+          message="Something went wrong!"
+          color={`${theme.palette.common.white}`}
+        />
       </ViewHeightContainer>
     );
   }
 
   return (
     <ViewHeightContainer>
-      <Loading color="white" />
+      <Loading color={`${theme.palette.common.white}`} />
     </ViewHeightContainer>
   );
 };

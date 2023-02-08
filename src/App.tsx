@@ -5,8 +5,8 @@ import { DrinkDetails } from "./Pages/DrinkDetails";
 import { Home } from "./Pages/Home";
 import { Search } from "./Pages/Search";
 import { ReactQueryDevtools } from "react-query/devtools";
-import Navigation from "./Components/Navigation";
-import { Footer } from "./Components/Footer";
+import Navigation from "./Components/Layout/Navigation";
+import { Footer } from "./Components/Layout/Footer";
 
 function App() {
   const queryClient = new QueryClient();

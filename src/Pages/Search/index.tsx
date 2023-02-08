@@ -1,26 +1,17 @@
 import React, { useState } from "react";
 import Grid from "@mui/material/Unstable_Grid2"; // Grid version 2
 import { Container, Typography } from "@mui/material";
-import { SearchByLetter } from "../Components/SearchByLetter";
-import { CocktailCard } from "../Components/CocktailCard";
-import { SearchByIngredient } from "../Components/SearchByIngredient";
-import { ViewHeightContainer } from "../Components/ViewHeightContainer";
-import { Loading } from "../Components/Loading";
-import { styled } from "@mui/material/styles";
-import { DrinkInterface } from "../Interfaces";
-
-const GradientBackground = styled(`div`)(
-  () => `
-  background: linear-gradient(to bottom, rgba(000, 000, 000, 1), rgba(255, 255, 255, 0.2));
-  position: absolute;
-  z-index: -1;
-  top: 0;
-  width: 100vw;
-  height: 100%;
-`
-);
+import { SearchByLetter } from "../../Components/CocktailSearch/SearchByLetter";
+import { CocktailCard } from "../../Components/CocktailCard";
+import { SearchByIngredient } from "../../Components/CocktailSearch/SearchByIngredient";
+import { ViewHeightContainer } from "../../Components/Layout/ViewHeightContainer";
+import { Loading } from "../../Components/Status/Loading";
+import { DrinkInterface } from "../../Interfaces";
+import { GradientBackground } from "./styles";
+import { useTheme } from "@mui/material/styles";
 
 export const Search = () => {
+  const theme = useTheme();
   const [data, setData] = useState<DrinkInterface[]>([]);
 
   return (
@@ -29,7 +20,7 @@ export const Search = () => {
       <SearchByIngredient searchByIngredient={setData} />
       <Typography
         variant="subtitle2"
-        sx={{ textAlign: "center", color: "white" }}
+        sx={{ textAlign: "center", color: `${theme.palette.common.white}` }}
       >
         or search by letter. . .
       </Typography>
@@ -52,13 +43,16 @@ export const Search = () => {
         </Container>
       ) : data === null ? (
         <ViewHeightContainer sx={{ flexGrow: 1 }}>
-          <Typography align="center" sx={{ color: "white" }}>
+          <Typography
+            align="center"
+            sx={{ color: `${theme.palette.common.white}` }}
+          >
             Nothing found
           </Typography>
         </ViewHeightContainer>
       ) : (
         <ViewHeightContainer vh sx={{ position: "absolute" }}>
-          <Loading color="white" />
+          <Loading color={`${theme.palette.common.white}`} />
         </ViewHeightContainer>
       )}
     </>

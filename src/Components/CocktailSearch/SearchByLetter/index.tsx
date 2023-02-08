@@ -1,17 +1,8 @@
 import React from "react";
 import LetterButton from "./LetterButton";
 import axios from "axios";
-import { Container } from "@mui/system";
-import styled from "@emotion/styled";
-import { DrinkInterface } from "../Interfaces";
-
-const StyledContainer = styled(Container)(() => ({
-  display: "flex",
-  flexWrap: "wrap",
-  width: "100%",
-  justifyContent: "center",
-  paddingBottom: "5rem",
-}));
+import { StyledContainer } from "./styles";
+import { DrinkInterface } from "../../../Interfaces";
 
 interface SearchByLetterProps {
   searchByLetter: (data: DrinkInterface[]) => void;

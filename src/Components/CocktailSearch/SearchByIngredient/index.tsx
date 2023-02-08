@@ -1,7 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
-import { styled, alpha } from "@mui/material/styles";
 import axios from "axios";
-import InputBase from "@mui/material/InputBase";
 import SearchIcon from "@mui/icons-material/Search";
 import MenuItem from "@mui/material/MenuItem";
 import MenuList from "@mui/material/MenuList";
@@ -9,40 +7,8 @@ import ClickAwayListener from "@mui/material/ClickAwayListener";
 import Grow from "@mui/material/Grow";
 import Paper from "@mui/material/Paper";
 import Popper from "@mui/material/Popper";
-import { Button } from "@mui/material";
-import { DrinkInterface } from "../Interfaces";
-
-const Search = styled("div")(({ theme }) => ({
-  position: "relative",
-  borderRadius: theme.shape.borderRadius,
-  backgroundColor: alpha(theme.palette.common.white, 1),
-  marginLeft: 0,
-  width: "60%",
-  [theme.breakpoints.up("sm")]: {
-    margin: "2rem auto",
-    width: "50%",
-  },
-}));
-
-const StyledInputBase = styled(InputBase)(({ theme }) => ({
-  color: "inherit",
-  "& .MuiInputBase-input": {
-    padding: theme.spacing(1, 1, 1, 0),
-    transition: theme.transitions.create("width"),
-    width: "100%",
-    [theme.breakpoints.up("sm")]: {
-      width: "20ch",
-      "&:focus": {
-        width: "20ch",
-      },
-    },
-  },
-}));
-
-const StyledButton = styled(Button)(() => ({
-  padding: 0,
-  width: "fit-content",
-}));
+import { DrinkInterface } from "../../../Interfaces";
+import { Search, StyledInputBase, StyledButton } from "./styles";
 
 interface SearchByIngredientsProps {
   searchByIngredient: (data: DrinkInterface[]) => void;

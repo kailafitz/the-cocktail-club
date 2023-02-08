@@ -3,48 +3,15 @@ import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
-import IconButton from "@mui/material/IconButton";
-import MenuIcon from "@mui/icons-material/Menu";
 import { Spin as Hamburger } from "hamburger-react";
-import { List, ListItem, ListItemText, ListItemButton } from "@mui/material";
-import { styled, useTheme } from "@mui/material/styles";
-
-const StyledAppBar = styled(AppBar)(
-  () => `
-    background: transparent;
-`
-);
-
-const StyledIconButton = styled(IconButton)(
-  () => `
-    :hover {
-      background-color: transparent;
-    }
-`
-);
-
-const StyledNavLink = styled(ListItem)(
-  ({ theme }) => `
-    a {
-        padding:  0 10px;
-
-        &:hover {
-            background: none;
-        }
-
-        div span {
-            color: ${theme.palette.dark.main};
-            font-weight: 500;
-        }
-    }
-`
-);
-
-const StyledTypography = styled(Typography)(
-  ({ theme }) => `
-    color: ${theme.palette.dark.main}
-`
-);
+import { List, ListItemText, ListItemButton } from "@mui/material";
+import { useTheme } from "@mui/material/styles";
+import {
+  StyledAppBar,
+  StyledIconButton,
+  StyledNavLink,
+  StyledTypography,
+} from "./styles";
 
 const menuItems = [
   {

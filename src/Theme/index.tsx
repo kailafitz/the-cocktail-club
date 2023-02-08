@@ -1,17 +1,20 @@
 import { createTheme, responsiveFontSizes } from "@mui/material/styles";
 
+const common = {
+  dark: "#151514",
+};
+
 const theme = createTheme({
   palette: {
     primary: {
       main: "#EBD69C",
-      contrastText: "#151514",
+      contrastText: common.dark,
     },
-    neutral: {
-      main: "#E9E9E9",
+    common: {
+      black: common.dark,
     },
     dark: {
-      main: "#151514",
-      contrastText: "#EBD69C",
+      main: common.dark,
     },
   },
   typography: {

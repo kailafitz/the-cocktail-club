@@ -2,33 +2,22 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useQuery } from "react-query";
 import axios from "axios";
-import { Box, Button, Container, Typography } from "@mui/material";
+import { Button, Container, Typography } from "@mui/material";
 import { useParams } from "react-router-dom";
-import { Loading } from "../Components/Loading";
-import { Error } from "../Components/Error";
-import { ViewHeightContainer } from "../Components/ViewHeightContainer";
+import { Loading } from "../../Components/Status/Loading";
+import { Error } from "../../Components/Status/Error";
+import { ViewHeightContainer } from "../../Components/Layout/ViewHeightContainer";
 import Grid from "@mui/material/Unstable_Grid2";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
-import { styled } from "@mui/material/styles";
-
-const StyledDetailsBox = styled(Box)(
-  ({ theme }) => `
-  background: ${theme.palette.primary.main};
-  padding: ${theme.spacing(3)};
-`
-);
-
-const StyledTypography = styled(Typography)(
-  () => `
-  font-size: 7rem;
-`
-);
+import { useTheme } from "@mui/material/styles";
+import { StyledDetailsBox, StyledTypography } from "./styles";
 
 export const DrinkDetails = () => {
+  const theme = useTheme();
   const { id } = useParams();
   const navigate = useNavigate();
   const [loaded, setLoaded] = useState<boolean>(false);
@@ -48,8 +37,8 @@ export const DrinkDetails = () => {
 
   if (status === "success" && !loaded) {
     let ingredients: string[] = [];
-    // let specCharsRegex = /\\s+\.\(\)/;
     let specCharsRegex = /\.()/;
+
     Promise.resolve()
       .then(() => {
         let drink = data;
@@ -101,7 +90,7 @@ export const DrinkDetails = () => {
                 pt: 5,
                 pr: 5,
                 mt: 5,
-                color: "white",
+                color: `${theme.palette.common.white}`,
                 wordBreak: "break",
                 textTransform: "capitalize",
               }}
@@ -110,7 +99,12 @@ export const DrinkDetails = () => {
             </StyledTypography>
             <Typography
               variant="subtitle2"
-              sx={{ mb: 5, mt: 1, color: "white", textTransform: "capitalize" }}
+              sx={{
+                mb: 5,
+                mt: 1,
+                color: `${theme.palette.common.white}`,
+                textTransform: "capitalize",
+              }}
             >
               {data.strAlcoholic}
             </Typography>
@@ -153,7 +147,7 @@ export const DrinkDetails = () => {
   if (status === "loading") {
     return (
       <ViewHeightContainer>
-        <Loading color="white" />
+        <Loading color={`${theme.palette.common.white}`} />
       </ViewHeightContainer>
     );
   }
@@ -161,14 +155,20 @@ export const DrinkDetails = () => {
   if (status === "error") {
     return (
       <ViewHeightContainer>
-        <Error message="Something went wrong!" color="white" />
+        <Error
+          message="Something went wrong!"
+          color={`${theme.palette.common.white}`}
+        />
       </ViewHeightContainer>
     );
   }
 
   return (
     <ViewHeightContainer>
-      <Error message="Something went wrong!" color="white" />
+      <Error
+        message="Something went wrong!"
+        color={`${theme.palette.common.white}`}
+      />
     </ViewHeightContainer>
   );
 };
