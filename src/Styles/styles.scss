@@ -8,6 +8,7 @@ body {
     min-height: 100vh;
     display: flex;
     background-color: #151514;
+    position: relative;
 }
 
 #root {
@@ -16,6 +17,7 @@ body {
     flex-grow: 1;
     position: relative;
     justify-content: space-between;
+    width: 100%;
 }
 
 .loading {

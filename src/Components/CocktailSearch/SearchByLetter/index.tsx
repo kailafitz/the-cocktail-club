@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import LetterButton from "./LetterButton";
 import axios from "axios";
 import { StyledContainer } from "./styles";

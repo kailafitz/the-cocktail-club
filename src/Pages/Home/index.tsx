@@ -4,14 +4,16 @@ import { useQuery } from "react-query";
 import { Loading } from "../../Components/Status/Loading";
 import { Error } from "../../Components/Status/Error";
 import { ViewHeightContainer } from "../../Components/Layout/ViewHeightContainer";
-import { Button, IconButton, Typography } from "@mui/material";
+import { IconButton, Typography } from "@mui/material";
 import { DrinkInterface } from "../../Interfaces";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import { useTheme } from "@mui/material/styles";
 import {
+  StyledContainer,
+  StyledDarkBackground,
   StyledCocktailBackground,
-  StyledHeading,
-  StyledHeading2,
+  StyledCocktailImg,
+  ActionSearchButton,
   FlexboxColumn,
   FlexboxRow,
 } from "./styles";
@@ -34,62 +36,56 @@ export const Home = () => {
   if (status === "success") {
     return (
       <>
-        <div
-          style={{
-            flexGrow: 1,
-            display: "flex",
-            flexDirection: "row",
-            justifyContent: "flex-start",
-            overflow: "hidden",
-          }}
-        >
+        <StyledContainer>
           {data.map((drink: DrinkInterface) => {
             return (
               <React.Fragment key={drink.idDrink}>
+                <StyledDarkBackground />
+                <StyledCocktailBackground
+                  sx={{
+                    background: {
+                      xs: `linear-gradient(to bottom, ${theme.palette.common.black}, #ffffff00) rgba(21, 21, 20, 0.3)`,
+                      md: `linear-gradient(to right, ${theme.palette.common.black}, #ffffff00) rgba(21, 21, 20, 0.3)`,
+                    },
+                  }}
+                >
+                  <StyledCocktailImg
+                    src={`${drink.strDrinkThumb}`}
+                    alt="cocktail of the day image"
+                  />
+                </StyledCocktailBackground>
                 <FlexboxRow>
                   <FlexboxColumn>
-                    <StyledCocktailBackground
-                      sx={{
-                        backgroundImage: `linear-gradient(to right, ${theme.palette.common.black}, #ffffff00), url(${drink.strDrinkThumb})`,
-                      }}
-                    />
                     {/* <GoldDivider
                       src={goldDivider}
                       alt="Gold Divider"
                       style={{ transform: "scaleY(-1)" }}
                     /> */}
-                    <StyledHeading2 variant="h3">
+                    <Typography variant="h3" color="primary" align="center">
                       Welcome to the Club
-                    </StyledHeading2>
-                    <StyledHeading2>
+                    </Typography>
+                    <Typography color="primary" align="center">
                       Curating the careful craft of cocktails since 1898
-                    </StyledHeading2>
+                    </Typography>
                     {/* <GoldDivider src={goldDivider} alt="Gold Divider" /> */}
                     <Typography
                       variant="h6"
+                      color="white"
+                      align="center"
                       sx={{
-                        color: `${theme.palette.common.white}`,
-                        textAlign: "center",
                         mt: 5,
                       }}
                     >
                       Search our extensive range of luxury cocktails
                     </Typography>
-                    <Button
-                      variant="outlined"
-                      href="/search"
-                      sx={{
-                        width: "50%",
-                        textTransform: "none",
-                        margin: "1rem auto",
-                      }}
-                    >
+                    <ActionSearchButton variant="outlined" href="/search">
                       Search
-                    </Button>
+                    </ActionSearchButton>
                   </FlexboxColumn>
                   <FlexboxColumn>
-                    <StyledHeading
+                    <Typography
                       variant="subtitle1"
+                      color="white"
                       sx={{ fontFamily: "Work Sans" }}
                     >
                       How to make our cocktail of the day
@@ -100,21 +96,23 @@ export const Home = () => {
                       >
                         <ArrowForwardIcon />
                       </IconButton>
-                    </StyledHeading>
-                    <StyledHeading
+                    </Typography>
+                    <Typography
                       variant="h1"
+                      color="white"
+                      // noWrap
                       sx={{
                         textTransform: "capitalize",
                       }}
                     >
                       {drink.strDrink}
-                    </StyledHeading>
+                    </Typography>
                   </FlexboxColumn>
                 </FlexboxRow>
               </React.Fragment>
             );
           })}
-        </div>
+        </StyledContainer>
       </>
     );
   }

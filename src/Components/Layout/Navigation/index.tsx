@@ -100,7 +100,7 @@ export default function Navigation() {
               color="primary"
               sx={{
                 flexGrow: 1,
-                display: { xs: "none", sm: "block" },
+                // display: { xs: "none", sm: "block" },
               }}
             >
               The Cocktail Club

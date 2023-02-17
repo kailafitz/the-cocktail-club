@@ -82,7 +82,7 @@ export const DrinkDetails = () => {
         >
           Go back
         </Button>
-        <Grid container>
+        <Grid rowSpacing={{ xs: 2, md: 0 }} container>
           <Grid xs={12} md={9}>
             <StyledTypography
               variant="h1"
@@ -91,7 +91,7 @@ export const DrinkDetails = () => {
                 pr: 5,
                 mt: 5,
                 color: `${theme.palette.common.white}`,
-                wordBreak: "break",
+                wordBreak: "break-all",
                 textTransform: "capitalize",
               }}
             >

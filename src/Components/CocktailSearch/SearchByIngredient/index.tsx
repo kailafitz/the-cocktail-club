@@ -68,7 +68,13 @@ export const SearchByIngredient = (props: SearchByIngredientsProps) => {
   return (
     <>
       <Search sx={{ position: "relative" }}>
-        <StyledButton onClick={() => getData()}>
+        <StyledButton
+          onClick={() => getData()}
+          sx={{
+            minWidth: "",
+            width: { xs: "15%", md: "10%" },
+          }}
+        >
           <SearchIcon />
         </StyledButton>
         <StyledInputBase
@@ -84,6 +90,7 @@ export const SearchByIngredient = (props: SearchByIngredientsProps) => {
           inputProps={{ "aria-label": "search" }}
           value={input}
           ref={anchorRef}
+          sx={{ width: { xs: "85%", md: "90%" } }}
         />
       </Search>
       <Popper

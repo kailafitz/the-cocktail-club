@@ -21,7 +21,7 @@ const theme = createTheme({
     fontFamily: "Work Sans",
     h1: {
       fontFamily: "Work Sans",
-      fontSize: "10rem",
+      // fontSize: "10rem",
     },
     h2: {
       fontFamily: "Work Sans",

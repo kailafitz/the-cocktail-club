@@ -7,10 +7,11 @@ export const Search = styled("div")(({ theme }) => ({
   borderRadius: theme.shape.borderRadius,
   backgroundColor: alpha(theme.palette.common.white, 1),
   marginLeft: 0,
-  width: "60%",
-  [theme.breakpoints.up("sm")]: {
+  margin: theme.spacing(3, "auto"),
+  width: "80%",
+  [theme.breakpoints.up("md")]: {
     margin: "2rem auto",
-    width: "50%",
+    width: "60%",
   },
 }));
 

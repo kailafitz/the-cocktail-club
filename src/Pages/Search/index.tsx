@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Grid from "@mui/material/Unstable_Grid2"; // Grid version 2
 import { Container, Typography } from "@mui/material";
 import { SearchByLetter } from "../../Components/CocktailSearch/SearchByLetter";

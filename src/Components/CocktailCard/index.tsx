@@ -21,7 +21,7 @@ interface CocktailCardProps {
 export const CocktailCard = (props: CocktailCardProps) => {
   return (
     <Grid xs={12} sm={5} md={4}>
-      <Card sx={{ position: "relative" }}>
+      <Card sx={{ position: "relative" }} elevation={0}>
         <CardMedia
           component="img"
           height="100%"

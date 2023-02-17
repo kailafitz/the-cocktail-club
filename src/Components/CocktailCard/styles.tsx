@@ -16,12 +16,11 @@ export const StyledIconButton = styled(IconButton)(
     width: 25%;
     transition: all .3s linear;
     border-radius: 0;
-    background: ${theme.palette.common.black};
     transition: all .3s;
     position: relative;
     overflow: hidden;
     z-index: 1;
-    border: ${theme.palette.common.black} solid 2px;
+    border: ${theme.palette.primary.main} solid 2px;
 
     svg {
       color: ${theme.palette.common.black};
@@ -34,7 +33,7 @@ export const StyledIconButton = styled(IconButton)(
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: ${theme.palette.common.black};
+    background-color: ${theme.palette.primary.main};
     z-index: -2;
   }
 
@@ -58,7 +57,7 @@ export const StyledIconButton = styled(IconButton)(
     }
 
     svg {
-      color: ${theme.palette.common.black};
+      color: ${theme.palette.primary.main};
     }
   }
 `
