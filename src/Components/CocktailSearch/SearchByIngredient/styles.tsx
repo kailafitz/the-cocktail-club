@@ -4,11 +4,11 @@ import InputBase from "@mui/material/InputBase";
 
 export const Search = styled("div")(({ theme }) => ({
   position: "relative",
-  borderRadius: theme.shape.borderRadius,
   backgroundColor: alpha(theme.palette.common.white, 1),
   marginLeft: 0,
   margin: theme.spacing(3, "auto"),
   width: "80%",
+
   [theme.breakpoints.up("md")]: {
     margin: "2rem auto",
     width: "60%",

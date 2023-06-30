@@ -3,12 +3,14 @@ import axios from "axios";
 import SearchIcon from "@mui/icons-material/Search";
 import MenuItem from "@mui/material/MenuItem";
 import MenuList from "@mui/material/MenuList";
+import { useTheme } from "@mui/material";
 import ClickAwayListener from "@mui/material/ClickAwayListener";
 import Grow from "@mui/material/Grow";
 import Paper from "@mui/material/Paper";
 import Popper from "@mui/material/Popper";
 import { DrinkInterface } from "../../../Interfaces";
 import { Search, StyledInputBase, StyledButton } from "./styles";
+import { scrollToResults } from "../../../Helper";
 
 interface SearchByIngredientsProps {
   searchByIngredient: (data: DrinkInterface[]) => void;
@@ -17,6 +19,7 @@ interface SearchByIngredientsProps {
 export const SearchByIngredient = (props: SearchByIngredientsProps) => {
   const [open, setOpen] = useState(false);
   const anchorRef = useRef<HTMLButtonElement>(null);
+  const theme = useTheme();
 
   const [input, setInput] = useState<string>("");
   const [ingredients, setIngredients] = useState<string[]>([]);
@@ -67,15 +70,19 @@ export const SearchByIngredient = (props: SearchByIngredientsProps) => {
 
   return (
     <>
-      <Search sx={{ position: "relative" }}>
+      <Search id="search" sx={{ position: "relative" }}>
         <StyledButton
-          onClick={() => getData()}
+          onClick={() => {
+            scrollToResults();
+            getData();
+          }}
           sx={{
             minWidth: "",
             width: { xs: "15%", md: "10%" },
+            borderRadius: 0,
           }}
         >
-          <SearchIcon />
+          <SearchIcon sx={{ color: `${theme.palette.common.black}` }} />
         </StyledButton>
         <StyledInputBase
           id="search"
@@ -125,6 +132,7 @@ export const SearchByIngredient = (props: SearchByIngredientsProps) => {
                         key={index}
                         onClick={(e) => {
                           getDrinks(ingredient);
+                          scrollToResults();
                           handleClose(e);
                         }}
                       >

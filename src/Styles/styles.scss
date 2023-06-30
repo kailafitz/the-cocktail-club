@@ -1,3 +1,7 @@
+* {
+    scroll-behavior: smooth;
+}
+
 html {
     min-height: 100vh;
 }
@@ -18,8 +22,31 @@ body {
     position: relative;
     justify-content: space-between;
     width: 100%;
+    overflow: hidden;
 }
 
 .loading {
     margin: 0 auto;
+}
+
+.onLoadAnimation {
+    animation: fadeInAnimation ease 3s;
+    animation-iteration-count: 1;
+    animation-fill-mode: forwards;
+}
+
+@keyframes fadeInAnimation {
+    0% {
+        opacity: 0;
+        transform: translateY(5rem);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.active {
+    color: red;
 }

@@ -20,15 +20,13 @@ const theme = createTheme({
   typography: {
     fontFamily: "Work Sans",
     h1: {
-      fontFamily: "Work Sans",
-      // fontSize: "10rem",
+      fontFamily: "'Cinzel Decorative', cursive",
     },
     h2: {
       fontFamily: "Work Sans",
-      fontSize: "6rem",
     },
     h3: {
-      fontFamily: "Imperial Script",
+      fontFamily: "Work Sans",
     },
     h4: {
       fontFamily: "Work Sans",
@@ -51,14 +49,24 @@ const theme = createTheme({
     subtitle2: {
       fontFamily: "Work Sans",
     },
-    button: {
-      fontFamily: "Work Sans",
-    },
     caption: {
       fontFamily: "Work Sans",
     },
     overline: {
       fontFamily: "Work Sans",
+    },
+  },
+  components: {
+    MuiButtonBase: {
+      defaultProps: {
+        disableRipple: true,
+        disableTouchRipple: true,
+      },
+      styleOverrides: {
+        root: {
+          fontFamily: "Work Sans",
+        },
+      },
     },
   },
 });

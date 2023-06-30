@@ -5,11 +5,8 @@ import CardMedia from "@mui/material/CardMedia";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Unstable_Grid2"; // Grid version 2
-import {
-  StyledNameTypography,
-  StyledIconButton,
-  StyledCardContent,
-} from "./styles";
+import { StyledNameTypography, StyledCardContent } from "./styles";
+import { AnimatedButton } from "../AnimatedButton";
 
 interface CocktailCardProps {
   src: string;
@@ -36,12 +33,10 @@ export const CocktailCard = (props: CocktailCardProps) => {
             {props.category}
           </Typography>
           <CardActions sx={{ p: 0, mt: 3, position: "relative" }}>
-            <StyledIconButton
-              aria-label="arrow"
+            <AnimatedButton
+              iconLabel={<ArrowForwardIcon />}
               href={`drink/${props.id}/details`}
-            >
-              <ArrowForwardIcon />
-            </StyledIconButton>
+            />
           </CardActions>
         </StyledCardContent>
       </Card>

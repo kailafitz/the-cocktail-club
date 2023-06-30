@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import Grid from "@mui/material/Unstable_Grid2"; // Grid version 2
 import { Container, Typography } from "@mui/material";
 import { SearchByLetter } from "../../Components/CocktailSearch/SearchByLetter";
@@ -7,8 +7,8 @@ import { SearchByIngredient } from "../../Components/CocktailSearch/SearchByIngr
 import { ViewHeightContainer } from "../../Components/Layout/ViewHeightContainer";
 import { Loading } from "../../Components/Status/Loading";
 import { DrinkInterface } from "../../Interfaces";
-import { GradientBackground } from "./styles";
 import { useTheme } from "@mui/material/styles";
+import { ScrollTop } from "../../Components/ScrollToTop";
 
 export const Search = () => {
   const theme = useTheme();
@@ -16,7 +16,6 @@ export const Search = () => {
 
   return (
     <>
-      <GradientBackground />
       <SearchByIngredient searchByIngredient={setData} />
       <Typography
         variant="subtitle2"
@@ -25,8 +24,9 @@ export const Search = () => {
         or search by letter. . .
       </Typography>
       <SearchByLetter searchByLetter={setData} />
-      {data !== null ? (
-        <Container sx={{ flexGrow: 1, pb: 4 }}>
+      <ScrollTop />
+      {data.length >= 1 ? (
+        <Container sx={{ flexGrow: 1, pb: 4 }} id="results">
           <Grid container spacing={6} justifyContent="center">
             {data.map((drink: DrinkInterface) => {
               return (
@@ -41,13 +41,13 @@ export const Search = () => {
             })}
           </Grid>
         </Container>
-      ) : data === null ? (
+      ) : data.length < 1 ? (
         <ViewHeightContainer sx={{ flexGrow: 1 }}>
           <Typography
             align="center"
             sx={{ color: `${theme.palette.common.white}` }}
           >
-            Nothing found
+            Nothing to see here. . . yet
           </Typography>
         </ViewHeightContainer>
       ) : (

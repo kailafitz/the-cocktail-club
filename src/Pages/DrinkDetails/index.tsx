@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useQuery } from "react-query";
 import axios from "axios";
-import { Button, Container, Typography } from "@mui/material";
+import { Box, Container, Typography } from "@mui/material";
 import { useParams } from "react-router-dom";
 import { Loading } from "../../Components/Status/Loading";
 import { Error } from "../../Components/Status/Error";
@@ -14,7 +14,9 @@ import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
 import { useTheme } from "@mui/material/styles";
-import { StyledDetailsBox, StyledTypography } from "./styles";
+import { StyledImage, StyledDivider } from "./styles";
+import { ArrowBack } from "@mui/icons-material";
+import { AnimatedButton } from "../../Components/AnimatedButton";
 
 export const DrinkDetails = () => {
   const theme = useTheme();
@@ -64,7 +66,6 @@ export const DrinkDetails = () => {
           res[i] = res[i].replace(specCharsRegex, "").trim();
         }
         setLoaded(true);
-
         return res;
       })
       .then((res) => {
@@ -75,42 +76,52 @@ export const DrinkDetails = () => {
   if (status === "success" && loaded) {
     return (
       <Container sx={{ position: "relative", flexGrow: 1 }}>
-        <Button
-          variant="outlined"
+        <AnimatedButton
+          href={""}
           onClick={() => navigate(-1)}
-          sx={{ position: "absolute", textTransform: "inherit" }}
+          sx={{
+            textTransform: "inherit",
+            width: "fit-content",
+            px: 2,
+            mt: 3,
+          }}
+          label="go back"
+          startIcon={<ArrowBack />}
+        />
+        <Typography
+          variant="h2"
+          sx={{
+            pt: 5,
+            pr: 5,
+            mt: 5,
+            color: `${theme.palette.common.white}`,
+            wordBreak: "break-word",
+            textTransform: "capitalize",
+            fontSize: { xs: "4rem", lg: "6rem" },
+          }}
         >
-          Go back
-        </Button>
-        <Grid rowSpacing={{ xs: 2, md: 0 }} container>
-          <Grid xs={12} md={9}>
-            <StyledTypography
-              variant="h1"
-              sx={{
-                pt: 5,
-                pr: 5,
-                mt: 5,
-                color: `${theme.palette.common.white}`,
-                wordBreak: "break-all",
-                textTransform: "capitalize",
-              }}
-            >
-              {data.strDrink}
-            </StyledTypography>
-            <Typography
-              variant="subtitle2"
-              sx={{
-                mb: 5,
-                mt: 1,
-                color: `${theme.palette.common.white}`,
-                textTransform: "capitalize",
-              }}
-            >
-              {data.strAlcoholic}
-            </Typography>
-          </Grid>
+          {data.strDrink}
+        </Typography>
+        <Typography
+          variant="subtitle2"
+          sx={{
+            mb: 5,
+            mt: 1,
+            color: `${theme.palette.common.white}`,
+            textTransform: "capitalize",
+          }}
+        >
+          {data.strAlcoholic}
+        </Typography>
+        <Grid rowSpacing={{ xs: 2, md: 0 }} columnSpacing={{ md: 5 }} container>
           <Grid xs={12} md={3}>
-            <StyledDetailsBox>
+            <Box
+              sx={{
+                background: (theme) => theme.palette.primary.main,
+                padding: (theme) => theme.spacing(3),
+                height: "100%",
+              }}
+            >
               <Typography variant="body1">Ingredients</Typography>
               <List dense={true}>
                 {ingredients.map((ingredient) => (
@@ -122,10 +133,16 @@ export const DrinkDetails = () => {
                   </ListItem>
                 ))}
               </List>
-            </StyledDetailsBox>
+            </Box>
           </Grid>
           <Grid xs={12} md={9}>
-            <StyledDetailsBox>
+            <Box
+              sx={{
+                background: (theme) => theme.palette.primary.main,
+                padding: (theme) => theme.spacing(3),
+                height: "100%",
+              }}
+            >
               <Typography variant="body1">Instructions</Typography>
               <List dense={true}>
                 {instructions.map((instruction) => (
@@ -137,9 +154,11 @@ export const DrinkDetails = () => {
                   </ListItem>
                 ))}
               </List>
-            </StyledDetailsBox>
+            </Box>
           </Grid>
         </Grid>
+        <StyledDivider />
+        <StyledImage src={data.strDrinkThumb} alt="drink image" />
       </Container>
     );
   }

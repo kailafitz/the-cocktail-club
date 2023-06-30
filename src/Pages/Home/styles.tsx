@@ -1,5 +1,17 @@
-import { styled } from "@mui/material/styles";
-import Button from "@mui/material/Button";
+import { alpha, styled } from "@mui/material/styles";
+import { Box, IconButton } from "@mui/material";
+
+export const StyledIconButton = styled(IconButton)(
+  ({ theme }) => `
+  color: ${theme.palette.common.white};
+  transition: transform .8s ease;
+  
+  &:hover {
+    transform: translateX(10px);
+    color: ${alpha(theme.palette.common.white, 0.75)};
+  }
+  `
+) as typeof IconButton;
 
 export const StyledContainer = styled("div")(
   ({ theme }) => `
@@ -11,76 +23,23 @@ export const StyledContainer = styled("div")(
   `
 );
 
-export const StyledDarkBackground = styled("div")(
+export const ImageContainer = styled("div")(
   ({ theme }) => `
-    background: linear-gradient(to top, #ffffff00, ${theme.palette.common.black} 50%);
-    position: absolute;
-    z-index: -1;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
+   width: 80%;
+   margin: 0 auto;
 
-    @media (min-width: ${theme.breakpoints.values.md}px) {
-      background: linear-gradient(to left, #ffffff00, ${theme.palette.common.black} 20%);
-      top: 0;
-      width: 60vw;
-      height: 100vh;
-    }
-  `
-);
-
-export const StyledCocktailBackground = styled("div")(
-  ({ theme }) => `
-    position: absolute;
-    z-index: -2;
-    bottom: 0;
-    right: 0;
-    width: 100vw;
-    filter: blur(4px);
-
-    @media (min-width: ${theme.breakpoints.values.md}px) {
-      top: 0;
-      width: 60vw;
-      height: 100vh;
-    }
-  `
-);
-
-export const StyledCocktailImg = styled("img")(
-  ({ theme }) => `
-    // background-repeat: no-repeat;
-    // background-size: contain;
-    // background-blend-mode: multiply;
-    filter: blur(4px);
+   img {
     width: 100%;
+    border-radius: 50%;
+   }
 
-    @media (min-width: ${theme.breakpoints.values.md}px) { 
-      height: 100%;
+   @media (min-width: ${theme.breakpoints.values.md}px) {
+      width: 500px;
     }
   `
 );
 
-export const GoldDivider = styled("img")(
-  ({ theme }) => `
-    width: 65%;
-    margin: ${theme.spacing(2, "auto")};
-  `
-);
-
-export const ActionSearchButton = styled(Button)(
-  ({ theme }) => `
-    width: 100%;
-    textTransform: none;
-    margin: ${theme.spacing(2, "auto")};
-
-    @media (min-width: ${theme.breakpoints.values.md}px) {
-      width: 50%;
-    }
-  `
-);
-
-export const FlexboxRow = styled("div")(
+export const FlexboxRow = styled(Box)(
   ({ theme }) => `
     display: flex;
     flex-direction: column;
@@ -93,7 +52,7 @@ export const FlexboxRow = styled("div")(
   `
 );
 
-export const FlexboxColumn = styled("div")(
+export const FlexboxColumn = styled(Box)(
   ({ theme }) => `
     display: flex;
     flex-direction: column;

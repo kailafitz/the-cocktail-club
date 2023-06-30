@@ -2,9 +2,8 @@ import React, { useState } from "react";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
-import Typography from "@mui/material/Typography";
 import { Spin as Hamburger } from "hamburger-react";
-import { List, ListItemText, ListItemButton } from "@mui/material";
+import { List, ListItemText, ListItemButton, Link } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
 import {
   StyledAppBar,
@@ -37,8 +36,6 @@ export default function Navigation() {
         color={open ? "dark" : "primary"}
         aria-label="open drawer"
         sx={{
-          // mx: 2,
-          // mt: 1,
           position: "absolute",
           zIndex: 9,
           transition: "color .6s ease",
@@ -93,18 +90,21 @@ export default function Navigation() {
       >
         <StyledAppBar position="relative" elevation={0}>
           <Toolbar>
-            <Typography
+            <Link
               variant="body1"
               noWrap
-              component="div"
               color="primary"
               sx={{
                 flexGrow: 1,
-                // display: { xs: "none", sm: "block" },
+                hover: {
+                  cursor: "pointer",
+                },
               }}
+              href="/"
+              underline="none"
             >
               The Cocktail Club
-            </Typography>
+            </Link>
           </Toolbar>
         </StyledAppBar>
       </Box>

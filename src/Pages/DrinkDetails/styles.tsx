@@ -1,16 +1,29 @@
 import { styled } from "@mui/material/styles";
-import Box from "@mui/material/Box";
-import Typography from "@mui/material/Typography";
 
-export const StyledDetailsBox = styled(Box)(
+export const StyledDivider = styled("hr")(
   ({ theme }) => `
-  background: ${theme.palette.primary.main};
-  padding: ${theme.spacing(3)};
+  color: ${theme.palette.primary.main};
+  width: 80%;
+  margin: ${theme.spacing(10)} auto;
+
+  @media (min-width: ${theme.breakpoints.values.md}px) {
+    width: 30%;
+    margin: ${theme.spacing(15)} auto;
+  }
 `
 );
 
-export const StyledTypography = styled(Typography)(
-  () => `
-  font-size: 7rem;
+export const StyledImage = styled("img")(
+  ({ theme }) => `
+  margin: 0 auto;
+  margin-bottom: ${theme.spacing(10)};
+  border-radius: 50%;
+  display: block;
+  width: 80%;
+
+  @media (min-width: ${theme.breakpoints.values.md}px) {
+    margin-bottom: ${theme.spacing(15)};
+    width: 30%;
+  }
 `
 );
