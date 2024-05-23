@@ -21,6 +21,10 @@ const menuItems = [
     href: "/search",
     text: "Search",
   },
+  {
+    href: "/about",
+    text: "About",
+  },
 ];
 
 export default function Navigation() {

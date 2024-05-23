@@ -7,6 +7,7 @@ import { Search } from "./Pages/Search";
 import { ReactQueryDevtools } from "react-query/devtools";
 import Navigation from "./Components/Layout/Navigation";
 import { Footer } from "./Components/Layout/Footer";
+import About from "./Pages/About";
 
 function App() {
   const queryClient = new QueryClient();
@@ -17,6 +18,7 @@ function App() {
         <Navigation />
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="/about" element={<About />} />
           <Route path="drink/:id/details" element={<DrinkDetails />} />
           <Route path="search" element={<Search />} />
         </Routes>

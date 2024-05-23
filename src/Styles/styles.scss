@@ -50,3 +50,11 @@ body {
 .active {
     color: red;
 }
+
+.about-image {
+    width: 100%;
+
+    @media screen and (min-width: 600px) {
+        width: 20%;
+    }
+}

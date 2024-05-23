@@ -56,7 +56,7 @@ export const Home: React.FC = () => {
       ),
     {
       refetchOnWindowFocus: false,
-      refetchInterval: 10000,
+      refetchInterval: 240000000,
     }
   );
 

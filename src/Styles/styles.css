@@ -47,4 +47,13 @@ body {
 }
 .active {
   color: red;
+}
+
+.about-image {
+  width: 100%;
+}
+@media screen and (min-width: 600px) {
+  .about-image {
+    width: 20%;
+  }
 }/*# sourceMappingURL=styles.css.map */
