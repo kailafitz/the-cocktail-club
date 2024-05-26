@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useQuery } from "react-query";
 import { Loading } from "../../Components/Status/Loading";
@@ -35,6 +35,12 @@ const dailyDrinks = [
 
 export const Home: React.FC = () => {
   const theme = useTheme();
+  const [dailyDrink, setDailyDrink] = useState([]);
+  let current = new Date();
+  let midnight = new Date(new Date().setHours(0, 0, 0, 0));
+  let timeToRefresh = current.getTime() - midnight.getTime();
+
+  console.log(timeToRefresh);
 
   const randomInt = (max: number, min: number) => {
     let randomNumber = Math.round(Math.random() * (max - min)) + min;
@@ -44,20 +50,36 @@ export const Home: React.FC = () => {
   const { data, status } = useQuery(
     ["drinkDetails"],
     () =>
-      wait(1000).then(() =>
+      wait(500).then(() =>
         axios
           .get(
             `https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${
               dailyDrinks[randomInt(0, dailyDrinks.length - 1)]
             }`
           )
-          .then((res) => res.data.drinks)
+          .then((res) => {
+            return res.data.drinks;
+          })
       ),
     {
+      refetchIntervalInBackground: false,
+      refetchOnReconnect: false,
       refetchOnWindowFocus: false,
-      refetchInterval: 240000000,
+      refetchOnMount: false,
+      refetchInterval: false,
+      cacheTime: 86400,
     }
   );
+
+  // useEffect(() => {
+  //   if (data) {
+  //     setInterval(() => {
+  //       setDailyDrink(data);
+  //     }, 86400);
+  //   }
+  // }, []);
+
+  console.log(data);
 
   if (status === "success") {
     return (
