@@ -4,6 +4,12 @@ import { ListItem, Typography, AppBar, IconButton } from "@mui/material";
 export const StyledAppBar = styled(AppBar)(
   () => `
     background: transparent;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 64px;
+    position: absolute;
+    z-index: 1;
 `
 );
 
@@ -34,6 +40,7 @@ export const StyledNavLink = styled(ListItem)(
 
 export const StyledTypography = styled(Typography)(
   ({ theme }) => `
-    color: ${theme.palette.common.black}
+    color: ${theme.palette.common.black};
+    margin: 0 0.5rem;
 `
 );

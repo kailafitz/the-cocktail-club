@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useQuery } from "react-query";
 import axios from "axios";
-import { Box, Container, Typography } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import { useParams } from "react-router-dom";
 import { Loading } from "../../Components/Status/Loading";
 import { Error } from "../../Components/Status/Error";
@@ -75,7 +75,7 @@ export const DrinkDetails = () => {
 
   if (status === "success" && loaded) {
     return (
-      <Container sx={{ position: "relative", flexGrow: 1 }}>
+      <ViewHeightContainer pt>
         <AnimatedButton
           href={""}
           onClick={() => navigate(-1)}
@@ -159,13 +159,13 @@ export const DrinkDetails = () => {
         </Grid>
         <StyledDivider />
         <StyledImage src={data.strDrinkThumb} alt="drink image" />
-      </Container>
+      </ViewHeightContainer>
     );
   }
 
   if (status === "loading") {
     return (
-      <ViewHeightContainer>
+      <ViewHeightContainer vh center>
         <Loading color={`${theme.palette.common.white}`} />
       </ViewHeightContainer>
     );
@@ -173,7 +173,7 @@ export const DrinkDetails = () => {
 
   if (status === "error") {
     return (
-      <ViewHeightContainer>
+      <ViewHeightContainer vh center>
         <Error
           message="Something went wrong!"
           color={`${theme.palette.common.white}`}
@@ -183,7 +183,7 @@ export const DrinkDetails = () => {
   }
 
   return (
-    <ViewHeightContainer>
+    <ViewHeightContainer vh center>
       <Error
         message="Something went wrong!"
         color={`${theme.palette.common.white}`}

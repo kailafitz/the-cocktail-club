@@ -8,7 +8,6 @@ import { Box, Typography } from "@mui/material";
 import { DrinkInterface } from "../../Interfaces";
 import { useTheme } from "@mui/material/styles";
 import {
-  StyledContainer,
   ImageContainer,
   FlexboxColumn,
   FlexboxRow,
@@ -63,22 +62,7 @@ export const Home: React.FC = () => {
   if (status === "success") {
     return (
       <>
-        <StyledContainer>
-          <Typography
-            variant="h1"
-            color="primary"
-            sx={{
-              fontSize: { xs: "7rem", md: "13rem", lg: "15rem" },
-              marginLeft: "-3rem",
-              opacity: 0.1,
-              position: "absolute",
-              display: "block",
-              zIndex: -4,
-              top: 0,
-            }}
-          >
-            Welcome to the Club...
-          </Typography>
+        <ViewHeightContainer>
           {data.map((drink: DrinkInterface) => {
             return (
               <React.Fragment key={drink.idDrink}>
@@ -91,9 +75,9 @@ export const Home: React.FC = () => {
                       <Typography
                         variant="h1"
                         color="primary"
-                        align="center"
+                        align="left"
                         sx={{
-                          fontSize: { xs: "3rem", md: "2rem" },
+                          fontSize: { xs: "3rem", md: "4rem" },
                         }}
                       >
                         Indulge in the mastery
@@ -101,22 +85,19 @@ export const Home: React.FC = () => {
                       <Typography
                         variant="h2"
                         color="primary"
-                        align="center"
+                        align="left"
+                        mb={1}
                         sx={{
                           fontSize: { xs: "1.2rem" },
-                          margin: "0 auto",
                         }}
                       >
                         Curating the careful craft of cocktails since 1898
                       </Typography>
                       <Typography
-                        variant="h3"
+                        variant="body1"
                         color="white"
-                        align="center"
-                        sx={{
-                          fontSize: { xs: "1.5rem" },
-                          mt: 5,
-                        }}
+                        align="left"
+                        mb={2}
                       >
                         Search our extensive range of luxury cocktails
                       </Typography>
@@ -124,7 +105,6 @@ export const Home: React.FC = () => {
                         href="/search"
                         label="Search"
                         sx={{
-                          margin: `${theme.spacing(2)} auto`,
                           display: "block",
                           fontSize: "1rem",
                           width: { xs: "100%", md: "25%" },
@@ -162,14 +142,14 @@ export const Home: React.FC = () => {
               </React.Fragment>
             );
           })}
-        </StyledContainer>
+        </ViewHeightContainer>
       </>
     );
   }
 
   if (status === "loading") {
     return (
-      <ViewHeightContainer>
+      <ViewHeightContainer vh center>
         <Loading color={`${theme.palette.common.white}`} />
       </ViewHeightContainer>
     );
@@ -177,9 +157,9 @@ export const Home: React.FC = () => {
 
   if (status === "error") {
     return (
-      <ViewHeightContainer>
+      <ViewHeightContainer vh center>
         <Error
-          message="Something went wrong!"
+          message="Apologies but something has gone wrong. Please check back later or report this to our support team at support@thecocktailclub.com. We apologise for this inconvenience and hope to back up shortly!"
           color={`${theme.palette.common.white}`}
         />
       </ViewHeightContainer>
@@ -187,7 +167,7 @@ export const Home: React.FC = () => {
   }
 
   return (
-    <ViewHeightContainer>
+    <ViewHeightContainer vh center>
       <Loading color={`${theme.palette.common.white}`} />
     </ViewHeightContainer>
   );

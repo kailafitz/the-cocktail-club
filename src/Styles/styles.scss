@@ -53,8 +53,11 @@ body {
 
 .about-image {
     width: 100%;
+    color: white;
 
     @media screen and (min-width: 600px) {
         width: 20%;
+        height: 200px;
+        object-fit: cover;
     }
 }

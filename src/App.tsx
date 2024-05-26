@@ -8,6 +8,7 @@ import { ReactQueryDevtools } from "react-query/devtools";
 import Navigation from "./Components/Layout/Navigation";
 import { Footer } from "./Components/Layout/Footer";
 import About from "./Pages/About";
+import ContactUs from "./Pages/Contact Us";
 
 function App() {
   const queryClient = new QueryClient();
@@ -21,6 +22,7 @@ function App() {
           <Route path="/about" element={<About />} />
           <Route path="drink/:id/details" element={<DrinkDetails />} />
           <Route path="search" element={<Search />} />
+          <Route path="/contact-us" element={<ContactUs />} />
         </Routes>
         <Footer />
         <ReactQueryDevtools initialIsOpen={false} />

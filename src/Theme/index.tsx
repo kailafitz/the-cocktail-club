@@ -1,4 +1,19 @@
+import React from "react";
 import { createTheme, responsiveFontSizes } from "@mui/material/styles";
+import {
+  Link as RouterLink,
+  LinkProps as RouterLinkProps,
+} from "react-router-dom";
+import { LinkProps } from "@mui/material/Link";
+
+const LinkBehavior = React.forwardRef<
+  HTMLAnchorElement,
+  Omit<RouterLinkProps, "to"> & { href: RouterLinkProps["to"] }
+>((props, ref) => {
+  const { href, ...other } = props;
+  // Map href (Material UI) -> to (react-router)
+  return <RouterLink ref={ref} to={href} {...other} />;
+});
 
 const common = {
   dark: "#151514",
@@ -20,7 +35,8 @@ const theme = createTheme({
   typography: {
     fontFamily: "Work Sans",
     h1: {
-      fontFamily: "'Cinzel Decorative', cursive",
+      fontFamily: "'Cinzel Decorative', sans-serif",
+      fontSize: "2rem",
     },
     h2: {
       fontFamily: "Work Sans",
@@ -59,9 +75,20 @@ const theme = createTheme({
   components: {
     MuiButtonBase: {
       defaultProps: {
+        LinkComponent: LinkBehavior,
         disableRipple: true,
         disableTouchRipple: true,
       },
+      styleOverrides: {
+        root: {
+          fontFamily: "Work Sans",
+        },
+      },
+    },
+    MuiLink: {
+      defaultProps: {
+        component: LinkBehavior,
+      } as LinkProps,
       styleOverrides: {
         root: {
           fontFamily: "Work Sans",

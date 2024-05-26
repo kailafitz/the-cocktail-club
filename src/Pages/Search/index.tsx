@@ -16,15 +16,17 @@ export const Search = () => {
 
   return (
     <>
-      <SearchByIngredient searchByIngredient={setData} />
-      <Typography
-        variant="subtitle2"
-        sx={{ textAlign: "center", color: `${theme.palette.common.white}` }}
-      >
-        or search by letter. . .
-      </Typography>
-      <SearchByLetter searchByLetter={setData} />
-      <ScrollTop />
+      <ViewHeightContainer pt>
+        <SearchByIngredient searchByIngredient={setData} />
+        <Typography
+          variant="subtitle2"
+          sx={{ textAlign: "center", color: `${theme.palette.common.white}` }}
+        >
+          or search by letter. . .
+        </Typography>
+        <SearchByLetter searchByLetter={setData} />
+        <ScrollTop />
+      </ViewHeightContainer>
       {data.length >= 1 ? (
         <Container sx={{ flexGrow: 1, pb: 4 }} id="results">
           <Grid container spacing={6} justifyContent="center">

@@ -9,8 +9,12 @@ interface ErrorProps {
 export const Error = (props: ErrorProps) => {
   return (
     <>
-      <Typography color={props.color}>Error!</Typography>
-      <Typography color={props.color}>{props.message}</Typography>
+      <Typography color={props.color} variant="h3" align="center">
+        Error!
+      </Typography>
+      <Typography color={props.color} variant="body2" align="center">
+        {props.message}
+      </Typography>
     </>
   );
 };

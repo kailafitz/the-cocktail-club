@@ -1,5 +1,6 @@
 import React from "react";
-import { Box, Container, Link, Typography } from "@mui/material";
+import { Box, Link, Typography } from "@mui/material";
+import { ViewHeightContainer } from "../../Components/Layout/ViewHeightContainer";
 
 type Props = {};
 
@@ -14,42 +15,37 @@ const images = [
 const About = (props: Props) => {
   return (
     <>
-      <Container sx={{ flexGrow: 1, mb: 20 }}>
-        <Box>
-          <Typography
-            variant="h2"
-            color="primary"
-            sx={{
-              pt: 5,
-              pr: 5,
-              mt: 5,
-              fontSize: { xs: "4rem", lg: "6rem" },
-            }}
-          >
-            About The Cocktail Club
-          </Typography>
-          <Typography variant="h5" color="primary" mb={4}>
-            Who Doesn't Love a Good Cocktail?
-          </Typography>
+      <ViewHeightContainer pt sx={{ pb: { xs: 10, sm: 0 } }}>
+        <Typography
+          variant="h2"
+          color="primary"
+          sx={{
+            fontSize: { xs: "4rem", lg: "6rem" },
+          }}
+        >
+          About The Cocktail Club
+        </Typography>
+        <Typography variant="h5" color="primary" mb={4}>
+          Who Doesn't Love a Good Cocktail?
+        </Typography>
 
-          <Typography variant="body2" color="primary" mb={4}>
-            Well I certainly do!
-          </Typography>
-          <Typography variant="body2" color="primary">
-            This website is using the React-Query library to fetch data from the
-            TheCocktailDB API found{" "}
-            <Link href="https://www.thecocktaildb.com/api.php" target="_blank">
-              here
-            </Link>
-            . Displaying certain information on the cocktails, such as the
-            "instructions", has been a challenge regarding formatting. This has
-            more to do with how the data was originally saved into the
-            "database" so to speak but you will see that I have tried to capture
-            the information as best as I can.
-          </Typography>
-        </Box>
-      </Container>
-      <Box display="flex" flexDirection={{ xs: "column", md: "row" }}>
+        <Typography variant="body2" color="primary" mb={4}>
+          Well I certainly do!
+        </Typography>
+        <Typography variant="body2" color="primary">
+          This website is using the React-Query library to fetch data from the
+          TheCocktailDB API found{" "}
+          <Link href="https://www.thecocktaildb.com/api.php" target="_blank">
+            here
+          </Link>
+          . Displaying certain information on the cocktails, such as the
+          "instructions", has been a challenge regarding formatting. This has
+          more to do with how the data was originally saved into the "database"
+          so to speak but you will see that I have tried to capture the
+          information as best as I can.
+        </Typography>
+      </ViewHeightContainer>
+      <Box display="flex" flexDirection={{ xs: "column", sm: "row" }}>
         {images.map((src, i) => {
           return (
             <img

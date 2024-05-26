@@ -5,6 +5,8 @@ interface ViewHeightContainerProps {
   children?: React.ReactNode | string;
   vh?: boolean;
   sx?: Object;
+  center?: boolean;
+  pt?: boolean;
 }
 
 export const ViewHeightContainer = (props: ViewHeightContainerProps) => {
@@ -15,7 +17,9 @@ export const ViewHeightContainer = (props: ViewHeightContainerProps) => {
         display: "flex",
         flexGrow: 1,
         flexDirection: "column",
-        justifyContent: "center",
+        justifyContent: props.center ? "center" : "unset",
+        pt: props.pt ? 10 : 0,
+        ...props.sx,
       }}
     >
       {props.children}

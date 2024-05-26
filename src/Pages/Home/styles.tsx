@@ -13,16 +13,6 @@ export const StyledIconButton = styled(IconButton)(
   `
 ) as typeof IconButton;
 
-export const StyledContainer = styled("div")(
-  ({ theme }) => `
-    display: flex;
-    flex-grow: 1;
-    flex-direction: row;
-    justify-content: flex-start;
-    margin: ${theme.spacing(0, "auto")};
-  `
-);
-
 export const ImageContainer = styled("div")(
   ({ theme }) => `
    width: 80%;

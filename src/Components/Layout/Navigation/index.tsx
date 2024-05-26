@@ -3,14 +3,9 @@ import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 import { Spin as Hamburger } from "hamburger-react";
-import { List, ListItemText, ListItemButton, Link } from "@mui/material";
+import { List, Link } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
-import {
-  StyledAppBar,
-  StyledIconButton,
-  StyledNavLink,
-  StyledTypography,
-} from "./styles";
+import { StyledAppBar, StyledIconButton, StyledTypography } from "./styles";
 
 const menuItems = [
   {
@@ -24,6 +19,10 @@ const menuItems = [
   {
     href: "/about",
     text: "About",
+  },
+  {
+    href: "/contact-us",
+    text: "Contact Us",
   },
 ];
 
@@ -67,18 +66,17 @@ export default function Navigation() {
                 ml: 5,
               }}
             >
-              {menuItems.map((link) => {
+              {menuItems.map((link, i) => {
                 return (
                   <React.Fragment key={link.text}>
-                    <StyledNavLink disablePadding sx={{ width: "fit-content" }}>
-                      <ListItemButton
-                        disableRipple
-                        component="a"
-                        href={link.href}
-                      >
-                        <ListItemText primary={link.text} />
-                      </ListItemButton>
-                    </StyledNavLink>
+                    <Link
+                      key={i}
+                      href={link.href}
+                      sx={{ color: "black" }}
+                      onClick={() => setOpen(false)}
+                    >
+                      {link.text}
+                    </Link>
                     <StyledTypography>|</StyledTypography>
                   </React.Fragment>
                 );
@@ -87,31 +85,24 @@ export default function Navigation() {
           </Toolbar>
         </AppBar>
       </Box>
-      <Box
-        sx={{
-          ml: 5,
-        }}
-      >
-        <StyledAppBar position="relative" elevation={0}>
-          <Toolbar>
-            <Link
-              variant="body1"
-              noWrap
-              color="primary"
-              sx={{
-                flexGrow: 1,
-                hover: {
-                  cursor: "pointer",
-                },
-              }}
-              href="/"
-              underline="none"
-            >
-              The Cocktail Club
-            </Link>
-          </Toolbar>
-        </StyledAppBar>
-      </Box>
+      <StyledAppBar elevation={0}>
+        <Link
+          variant="body1"
+          noWrap
+          color="primary"
+          sx={{
+            ml: "56px",
+            display: "block",
+            hover: {
+              cursor: "pointer",
+            },
+          }}
+          href="/"
+          underline="none"
+        >
+          The Cocktail Club
+        </Link>
+      </StyledAppBar>
     </>
   );
 }
