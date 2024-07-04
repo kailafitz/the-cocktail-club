@@ -56,6 +56,18 @@ export const ensureAuthenticated = (req, res, next) => {
 }
 
 // Check user authentication status (frontend)
+// authRouter.get("/api/login/status", (req, res) => {
+//     console.log("Status Endpoint", req.user ? true : false);
+//     if (req.user) {
+//         return res.status(200).send(true);
+//         // return res.send(true);
+//     }
+//     else {
+//         return res.status(401).send(false);
+//         // return res.send(false);
+//     }
+// })
+
 authRouter.get("/api/login/status", (req, res) => {
     console.log("Status Endpoint", req.user ? true : false);
     if (req.user) {
@@ -63,7 +75,7 @@ authRouter.get("/api/login/status", (req, res) => {
         // return res.send(true);
     }
     else {
-        return res.status(401).send(false);
+        return res.status(200).send(false);
         // return res.send(false);
     }
 })

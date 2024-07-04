@@ -5,7 +5,7 @@ import Loading from "../Status/Loading";
 import { useAuthentication } from "../../Helper";
 
 export const ProtectedRoute = ({ children }: { children?: ReactNode }) => {
-  const { status } = useAuthentication();
+  const { isAuth, status } = useAuthentication();
   console.log("Protected route", status);
 
   if (status === "loading") {
@@ -16,7 +16,11 @@ export const ProtectedRoute = ({ children }: { children?: ReactNode }) => {
     );
   }
 
-  if (status === "error") {
+  // if (status === "error") {
+  //   return <Navigate to="/login" replace />;
+  // }
+
+  if (!isAuth || status === "error") {
     return <Navigate to="/login" replace />;
   }
 

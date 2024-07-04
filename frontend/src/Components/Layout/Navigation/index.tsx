@@ -91,24 +91,26 @@ const Navigation = () => {
                 },
               }}
             >
-              {standardRoutes.map((link, i) => {
-                return (
-                  <React.Fragment key={link.text}>
-                    <Link
-                      component={NavLink}
-                      key={i}
-                      to={link.href}
-                      sx={{
-                        color: "common.black",
-                      }}
-                      onClick={() => setOpen(false)}
-                    >
-                      {link.text}
-                    </Link>
-                  </React.Fragment>
-                );
-              })}
-              {status !== "error" &&
+              {!isAuth &&
+                standardRoutes.map((link, i) => {
+                  return (
+                    <React.Fragment key={link.text}>
+                      <Link
+                        component={NavLink}
+                        key={i}
+                        to={link.href}
+                        sx={{
+                          color: "common.black",
+                        }}
+                        onClick={() => setOpen(false)}
+                      >
+                        {link.text}
+                      </Link>
+                    </React.Fragment>
+                  );
+                })}
+              {/* status !== "error" */}
+              {isAuth &&
                 authRoutes.map((link, i) => {
                   return (
                     <React.Fragment key={link.text}>
@@ -125,6 +127,7 @@ const Navigation = () => {
                   );
                 })}
             </List>
+            {/* status !== "error" */}
             {isAuth ? (
               <Logout />
             ) : (

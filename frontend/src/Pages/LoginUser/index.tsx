@@ -37,7 +37,10 @@ const LoginUser = () => {
     onSuccess() {
       console.log("Redirect");
       queryClient.invalidateQueries("authenticationStatus");
-      navigate("/profile");
+      // navigate("/profile");
+      setTimeout(() => {
+        navigate("/profile");
+      }, 500);
     },
     onError: (error: AxiosError) => {
       setErrorMessage(
