@@ -24,7 +24,7 @@ const LoginUser = () => {
   const mutation = useMutation({
     mutationFn: (data: LoginInterface) => {
       return axios.post(
-        "/api/login",
+        "api/login",
         {
           email: data.email,
           password: data.password,
@@ -45,7 +45,9 @@ const LoginUser = () => {
     onError: (error: AxiosError) => {
       setErrorMessage(
         typeof error.response?.data === "string"
-          ? `${error.response?.data}`
+          ? error.response?.status === 500
+            ? `${error.message}`
+            : `${error.response?.data}`
           : "Something has gone wrong. Please try again later."
       );
     },

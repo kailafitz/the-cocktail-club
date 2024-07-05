@@ -77,7 +77,7 @@ export const useAuthentication = () => {
     ["authenticationStatus"],
     () =>
       axios
-        .get("/api/login/status", {
+        .get("api/login/status", {
           withCredentials: true,
         })
         .then((res) => {
