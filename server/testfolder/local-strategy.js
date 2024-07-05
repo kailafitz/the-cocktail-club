@@ -4,12 +4,12 @@ import { pool } from "../db.js";
 import { comparePasswords } from "../Helpers/hash-password.js";
 
 passport.serializeUser((user, done) => {
-    // console.log("Serializer Endpoint", user.id);
+    console.log("--> Serializer Endpoint", user.id);
     done(null, user.id)
 })
 
 passport.deserializeUser(async (id, done) => {
-    // console.log("Deserializer Endpoint", id);
+    console.log("--> Deserializer Endpoint", id);
     try {
         const findUser = await pool.query("SELECT id, email, password FROM users WHERE id = $1", [id]);
         if (!findUser) {
@@ -27,18 +27,18 @@ passport.deserializeUser(async (id, done) => {
 
 export default passport.use(
     new Strategy({ usernameField: "email" }, async (username, password, done) => {
-        console.log("Passport Login Endpoint", username, password);
+        console.log("--> Passport Login Endpoint", username, password);
         try {
             const findUser = await pool.query("SELECT id, email, password FROM users WHERE email = $1", [username]);
             if (!findUser.rows[0]) {
-                console.log("User does not exist");
+                console.log("--> User does not exist");
                 done(null, false);
             }
             if (!(comparePasswords(password, findUser.rows[0]["password"]))) {
-                console.log("Passwords do not match");
+                console.log("--> Passwords do not match");
                 done(null, false);
             }
-            console.log("findUser", findUser.rows[0]);
+            console.log("--> findUser", findUser.rows[0]);
             done(null, findUser.rows[0]);
         }
         catch (err) {

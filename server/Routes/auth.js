@@ -7,7 +7,7 @@ const authRouter = express.Router();
 
 // Sign up user
 authRouter.post("/api/sign-up", async (req, res) => {
-    console.log("Signup Endpoint");
+    console.log("--> Signup Endpoint");
     try {
         const { firstName, lastName, email, password, confirm_password } = req.body;
 
@@ -46,9 +46,9 @@ authRouter.post("/api/sign-up", async (req, res) => {
 
 // Protected routes (backend)
 export const ensureAuthenticated = (req, res, next) => {
-    console.log("Ensure Authentication", req.isAuthenticated());
+    console.log("--> Ensure Authentication", req.isAuthenticated());
     if (req.isAuthenticated()) {
-        console.log("Is authentication");
+        console.log("--> Is authentication");
         return next();
     }
     res.status(401).send("Unauthorised");
@@ -57,7 +57,7 @@ export const ensureAuthenticated = (req, res, next) => {
 
 // Check user authentication status (frontend)
 // authRouter.get("/api/login/status", (req, res) => {
-//     console.log("Status Endpoint", req.user ? true : false);
+//     console.log("--> Status Endpoint", req.user ? true : false);
 //     if (req.user) {
 //         return res.status(200).send(true);
 //         // return res.send(true);
@@ -69,7 +69,7 @@ export const ensureAuthenticated = (req, res, next) => {
 // })
 
 authRouter.get("/api/login/status", (req, res) => {
-    console.log("Status Endpoint", req.user ? true : false);
+    console.log("--> Status Endpoint req.user", req.user);
     if (req.user) {
         return res.status(200).send(true);
         // return res.send(true);
@@ -82,7 +82,7 @@ authRouter.get("/api/login/status", (req, res) => {
 
 // Login user with passport
 authRouter.post("/api/login", passport.authenticate("local"), (req, res) => {
-    console.log("Login Endpoint");
+    console.log("--> Login Endpoint");
     return res.status(200).send(req.user);
 })
 
@@ -98,7 +98,7 @@ authRouter.post("/api/login", passport.authenticate("local"), (req, res) => {
 // })
 
 authRouter.post("/api/logout", (req, res) => {
-    console.log("Logout", req.user);
+    console.log("--> Logout", req.user);
 
     if (!req.user) {
         return res.status(401).send("User not found to log out");

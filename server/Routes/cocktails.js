@@ -15,7 +15,7 @@ cocktailRouter.post("/api/create-cocktail", ensureAuthenticated, async (req, res
         );
 
         if (newCocktail.rows[0]) {
-            console.log("New cocktail added ->\n", newCocktail.rows[0]);
+            console.log("--> New cocktail added ->\n", newCocktail.rows[0]);
             res.sendStatus(200);
         }
     } catch (err) {
@@ -27,7 +27,7 @@ cocktailRouter.post("/api/create-cocktail", ensureAuthenticated, async (req, res
 // Get all cocktails
 cocktailRouter.get("/api/cocktails", ensureAuthenticated, async (req, res) => {
     try {
-        console.log("Get All Cocktails");
+        console.log("--> Get All Cocktails");
         const allCocktails = await pool.query("SELECT * FROM cocktails");
 
         res.json(allCocktails.rows);
@@ -42,7 +42,7 @@ cocktailRouter.get("/api/cocktails/:id", ensureAuthenticated, async (req, res) =
     try {
         const { id } = req.params;
         const cocktail = await pool.query("SELECT * FROM cocktails WHERE id = $1", [id]);
-        console.log("Cocktail details");
+        console.log("--> Cocktail details");
 
         res.status(200).json(cocktail.rows);
     } catch (err) {
@@ -54,7 +54,7 @@ cocktailRouter.get("/api/cocktails/:id", ensureAuthenticated, async (req, res) =
 // Update a cocktail
 cocktailRouter.put("/api/cocktail/:id", ensureAuthenticated, async (req, res) => {
     try {
-        console.log("Cocktail Updated");
+        console.log("--> Cocktail Updated");
         const { id } = req.params;
         const updateCocktail = await pool.query("UPDATE cocktails SET name = $1 WHERE id = $2", [req.body.data.name, id]);
 
@@ -69,7 +69,7 @@ cocktailRouter.put("/api/cocktail/:id", ensureAuthenticated, async (req, res) =>
 cocktailRouter.delete("/api/cocktail/:id", ensureAuthenticated, async (req, res) => {
     try {
         const { id } = req.params;
-        console.log("Deletion", id);
+        console.log("--> Deletion", id);
         const deletedCocktail = await pool.query("DELETE FROM cocktails WHERE id = $1", [id]);
 
         res.status(200).send("Deletion successful");

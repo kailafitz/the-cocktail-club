@@ -2,9 +2,7 @@ import pg from "pg";
 const { Pool } = pg;
 import * as dotenv from "dotenv";
 
-if (process.env.NODE_ENV === "development") {
-    dotenv.config();
-}
+dotenv.config();
 
 export const pool = new Pool(process.env.NODE_ENV === "development" ? {
     user: process.env.DB_USER,
@@ -23,10 +21,10 @@ if (process.env.NODE_ENV === "development") {
     pool
         .connect()
         .then(() => {
-            console.log("----> Connected to Postgres database");
+            console.log("--> Connected to Postgres database");
         })
         .catch((err) => {
-            console.error("----> Error connecting to PostgreSQL database", err);
+            console.log("--> Error connecting to PostgreSQL database", err);
         });
 }
 
