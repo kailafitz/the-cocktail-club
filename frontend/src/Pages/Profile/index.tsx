@@ -17,7 +17,7 @@ const Profile = () => {
   const navigate = useNavigate();
   const { data, status } = useQuery(["Get Account Details"], () =>
     axios
-      .get("/api/profile", {
+      .get("api/profile", {
         withCredentials: true,
       })
       .then((res) => {

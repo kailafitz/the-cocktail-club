@@ -13,7 +13,7 @@ const CocktailList = () => {
     ["Get All Cocktails"],
     () =>
       axios
-        .get("/api/cocktails", {
+        .get("api/cocktails", {
           withCredentials: true,
         })
         .then((res) => {

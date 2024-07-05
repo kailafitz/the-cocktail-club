@@ -38,7 +38,7 @@ const CreateCocktailForm = () => {
   const mutation = useMutation({
     mutationFn: (data: CocktailCustomInterface) => {
       return axios.post(
-        "/api/create-cocktail",
+        "api/create-cocktail",
         { data },
         {
           withCredentials: true,

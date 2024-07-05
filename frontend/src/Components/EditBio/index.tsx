@@ -26,14 +26,10 @@ const EditBio = ({ user }: { user: UserInterface }) => {
   const mutation = useMutation({
     mutationFn: (data: string) => {
       return axios.put(
-        "/api/profile/set-bio",
+        "api/profile/set-bio",
         { data },
         {
           withCredentials: true,
-          headers: {
-            "Content-Type": "application/json",
-            "Access-Control-Allow-Origin": "*",
-          },
         }
       );
     },

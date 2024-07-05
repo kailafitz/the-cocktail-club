@@ -12,7 +12,7 @@ export const scrollToResults = () => {
 
 export const useSearch = (props: SearchHookInterface) => {
   let apiDb = `https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=`;
-  let customDb = `/api/cocktails/`;
+  let customDb = `api/cocktails/`;
 
   // console.log("useSearch dbType", props.dbType);
 

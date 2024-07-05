@@ -26,14 +26,10 @@ const EditCocktail = ({ cocktail }: { cocktail: CocktailCustomInterface }) => {
   const mutation = useMutation({
     mutationFn: (data: CocktailCustomInterface) => {
       return axios.put(
-        `/api/cocktail/${cocktail.id}`,
+        `api/cocktail/${cocktail.id}`,
         { data },
         {
           withCredentials: true,
-          headers: {
-            "Content-Type": "application/json",
-            "Access-Control-Allow-Origin": "*",
-          },
         }
       );
     },

@@ -26,7 +26,7 @@ const SignupUser = () => {
   const mutation = useMutation({
     mutationFn: (data: SignUpInterface) => {
       return axios.post(
-        "/api/sign-up",
+        "api/sign-up",
         {
           firstName: data.firstName,
           lastName: data.lastName,

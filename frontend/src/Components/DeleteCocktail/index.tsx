@@ -23,7 +23,7 @@ const DeleteCocktail = ({ cocktailId }: { cocktailId: string }) => {
 
   const mutation = useMutation({
     mutationFn: (id: string) => {
-      return axios.delete(`/api/cocktail/${id}`, {
+      return axios.delete(`api/cocktail/${id}`, {
         withCredentials: true,
       });
     },
