@@ -12,7 +12,7 @@ const app = express();
 // app.use(bodyParser.urlencoded({ extended: false }));
 
 // middleware
-if (process.env.NODE_ENV !== 'production') {
+if (process.env.NODE_ENV === "develoment") {
     dotenv.config();
 }
 
@@ -37,7 +37,7 @@ app.use(routes);
 
 let PORT = process.env.PORT || 5001;
 
-console.log("Process Env", process.env);
+// console.log("Process Env", process.env);
 
 app.listen(PORT, () => {
     console.log("----> Server has started on port 5001")

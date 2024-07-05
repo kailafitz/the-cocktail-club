@@ -2,15 +2,22 @@ import pg from "pg";
 const { Pool } = pg;
 import * as dotenv from "dotenv";
 
-dotenv.config();
+if (process.env.NODE_ENV === "development") {
+    dotenv.config();
+}
 
-export const pool = new Pool({
-    user: process.env.DATABASE_USER,
-    password: process.env.DATABASE_PASSWORD,
-    host: process.env.DATABASE_HOST,
-    port: process.env.DATABASE_PORT,
-    database: process.env.DATABASE_NAME,
-})
+export const pool = new Pool(process.env.NODE_ENV === "development" ? {
+    user: process.env.DB_USER,
+    password: process.env.DB_PASSWORD,
+    host: process.env.DB_HOST,
+    port: process.env.DB_PORT,
+    database: process.env.DB_NAME,
+} : {
+    connectionString: process.env.DB_CONNECTION,
+    ssl: {
+        rejectUnauthorized: false
+    }
+});
 
 if (process.env.NODE_ENV === "development") {
     pool
