@@ -5,7 +5,7 @@ import cookieParser from "cookie-parser";
 import routes from "./Routes/index.js";
 import session from "express-session";
 import passport from "passport";
-import "./Strategies/local-strategy.js";
+import "./strategies/local-strategy.js";
 import * as dotenv from "dotenv";
 
 const app = express();
