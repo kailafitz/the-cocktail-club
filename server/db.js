@@ -12,15 +12,16 @@ export const pool = new Pool({
     database: process.env.DATABASE_NAME,
 })
 
-pool
-    .connect()
-    .then(() => {
-        console.log("----> Connected to Postgres database");
-    })
-    .catch((err) => {
-        console.error("----> Error connecting to PostgreSQL database", err);
-    });
-
+if (process.env.NODE_ENV === "development") {
+    pool
+        .connect()
+        .then(() => {
+            console.log("----> Connected to Postgres database");
+        })
+        .catch((err) => {
+            console.error("----> Error connecting to PostgreSQL database", err);
+        });
+}
 
 // if (!(pool.query("SELECT EXISTS (SELECT 1 FROM pg_catalog.pg_tables WHERE schemaname = 'public' AND tablename = 'users')"))) {
 //     pool.query("CREATE TABLE users (id SERIAL PRIMARY KEY, email VARCHAR(100), password VARCHAR(100), firstName VARCHAR(100), lastName VARCHAR(100), bio VARCHAR(500));")
