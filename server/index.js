@@ -33,6 +33,8 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(routes);
 
-app.listen(5001, () => {
+let port = process.env.PORT || 5001;
+
+app.listen(port, () => {
     console.log("----> Server has started on port 5001")
 });
