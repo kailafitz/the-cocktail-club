@@ -22,7 +22,7 @@ app.use(cors({
 }));
 app.use(express.json());
 app.use(session({
-    secret: "something very secreteive",
+    secret: process.env.SESSION_SECRET,
     saveUninitialized: false,
     resave: false,
     cookie: {
