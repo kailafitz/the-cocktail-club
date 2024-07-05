@@ -23,7 +23,12 @@ app.use(cors({
     credentials: true,
 }));
 
-const redis = new Redis();
+const redis = new Redis(
+    {
+        host: process.env.REDIS_SERVICE_NAME, // Render Redis service name, red-xxxxxxxxxxxxxxxxxxxx
+        port: process.env.REDIS_PORT,
+    }
+);
 
 app.use(session({
     store: new RedisStore({ client: redis }),
