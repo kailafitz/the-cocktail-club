@@ -17,7 +17,7 @@ const Profile = () => {
   const navigate = useNavigate();
   const { data, status } = useQuery(["profile"], () =>
     axios
-      .get("http://localhost:5001/api/profile", {
+      .get("/api/profile", {
         withCredentials: true,
       })
       .then((res) => {

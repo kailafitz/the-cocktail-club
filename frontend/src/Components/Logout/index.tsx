@@ -12,7 +12,7 @@ const Logout = () => {
   const mutation = useMutation({
     mutationFn: () => {
       return axios.post(
-        "http://localhost:5001/api/logout",
+        "/api/logout",
         {},
         {
           withCredentials: true,

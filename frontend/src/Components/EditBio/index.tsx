@@ -26,7 +26,7 @@ const EditBio = ({ user }: { user: UserInterface }) => {
   const mutation = useMutation({
     mutationFn: (data: string) => {
       return axios.put(
-        "http://localhost:5001/api/profile/set-bio",
+        "/api/profile/set-bio",
         { data },
         {
           withCredentials: true,

@@ -24,7 +24,7 @@ const LoginUser = () => {
   const mutation = useMutation({
     mutationFn: (data: LoginInterface) => {
       return axios.post(
-        "http://localhost:5001/api/login",
+        "/api/login",
         {
           email: data.email,
           password: data.password,

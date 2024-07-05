@@ -12,7 +12,7 @@ export const scrollToResults = () => {
 
 export const useSearch = (props: SearchHookInterface) => {
   let apiDb = `https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=`;
-  let customDb = `http://localhost:5001/api/cocktails/`;
+  let customDb = `/api/cocktails/`;
 
   // console.log("useSearch dbType", props.dbType);
 
@@ -77,7 +77,7 @@ export const useAuthentication = () => {
     ["authenticationStatus"],
     () =>
       axios
-        .get("http://localhost:5001/api/login/status", {
+        .get("/api/login/status", {
           withCredentials: true,
         })
         .then((res) => {

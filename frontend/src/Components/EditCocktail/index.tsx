@@ -26,7 +26,7 @@ const EditCocktail = ({ cocktail }: { cocktail: CocktailCustomInterface }) => {
   const mutation = useMutation({
     mutationFn: (data: CocktailCustomInterface) => {
       return axios.put(
-        `http://localhost:5001/api/cocktail/${cocktail.id}`,
+        `/api/cocktail/${cocktail.id}`,
         { data },
         {
           withCredentials: true,
