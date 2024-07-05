@@ -36,7 +36,7 @@ const LoginUser = () => {
     },
     onSuccess() {
       console.log("Redirect");
-      queryClient.invalidateQueries("authenticationStatus");
+      queryClient.invalidateQueries("Authentication Status Check");
       // navigate("/profile");
       setTimeout(() => {
         navigate("/profile");

@@ -22,7 +22,7 @@ const Logout = () => {
     onSuccess(res) {
       console.log("Redirect", res.data);
       navigate("/login");
-      queryClient.invalidateQueries("authenticationStatus");
+      queryClient.invalidateQueries("Authentication Status Check");
     },
     onError: (error: AxiosError) => {
       console.log("Logout error", error);

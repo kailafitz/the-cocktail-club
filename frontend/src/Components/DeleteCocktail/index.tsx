@@ -30,7 +30,7 @@ const DeleteCocktail = ({ cocktailId }: { cocktailId: string }) => {
     onSuccess() {
       console.log("Deletion success");
       handleClose();
-      queryClient.invalidateQueries("all-cocktails");
+      queryClient.invalidateQueries("Get All Cocktails");
     },
     onError: (error: AxiosError) => {
       setErrorMessage(

@@ -15,7 +15,7 @@ import Error from "../../Components/Status/Error";
 
 const Profile = () => {
   const navigate = useNavigate();
-  const { data, status } = useQuery(["profile"], () =>
+  const { data, status } = useQuery(["Get Account Details"], () =>
     axios
       .get("/api/profile", {
         withCredentials: true,

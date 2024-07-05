@@ -16,7 +16,7 @@ export const useSearch = (props: SearchHookInterface) => {
 
   // console.log("useSearch dbType", props.dbType);
 
-  const { data, status } = useQuery(["cocktailDetails", props.id], () =>
+  const { data, status } = useQuery(["Get Cocktail Details", props.id], () =>
     axios
       .get(
         props.dbType === "custom"
@@ -74,7 +74,7 @@ export const useSearch = (props: SearchHookInterface) => {
 
 export const useAuthentication = () => {
   const { data, status } = useQuery(
-    ["authenticationStatus"],
+    ["Authentication Status Check"],
     () =>
       axios
         .get("api/login/status", {

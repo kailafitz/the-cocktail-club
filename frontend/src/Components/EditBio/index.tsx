@@ -39,7 +39,7 @@ const EditBio = ({ user }: { user: UserInterface }) => {
     },
     onSuccess() {
       console.log("Bio updated successfully");
-      queryClient.invalidateQueries("profile");
+      queryClient.invalidateQueries("Get Account Details");
     },
     onError: (error: AxiosError) => {
       setErrorMessage(

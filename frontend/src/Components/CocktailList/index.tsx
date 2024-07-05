@@ -10,7 +10,7 @@ import Error from "../Status/Error";
 
 const CocktailList = () => {
   const { data, status } = useQuery(
-    ["all-cocktails"],
+    ["Get All Cocktails"],
     () =>
       axios
         .get("/api/cocktails", {

@@ -33,7 +33,7 @@ export const Home: React.FC = () => {
   };
 
   const { data, status } = useQuery(
-    ["drinkDetails"],
+    ["Feature Drink"],
     () =>
       wait(500).then(() =>
         axios

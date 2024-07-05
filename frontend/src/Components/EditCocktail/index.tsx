@@ -40,7 +40,7 @@ const EditCocktail = ({ cocktail }: { cocktail: CocktailCustomInterface }) => {
     onSuccess() {
       console.log("Cocktail updated successfully");
       handleClose();
-      queryClient.invalidateQueries("cocktailDetails");
+      queryClient.invalidateQueries("Get Cocktail Details");
     },
     onError: (error: AxiosError) => {
       setErrorMessage(
