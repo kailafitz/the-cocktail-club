@@ -24,7 +24,7 @@ export const useSearch = (props: SearchHookInterface) => {
         props.dbType === "custom"
           ? `${customDb}${props.id}`
           : `${apiDb}${props.id}`,
-      baseURL: props.dbType === "custom" ? process.env.BASE_URL : undefined,
+      baseURL: props.dbType === "custom" ? "http://localhost:5001" : undefined,
       withCredentials: props.dbType === "custom" ? true : false,
     }).then((res) => {
       let ingredients: string[] = [];

@@ -12,13 +12,13 @@ import * as dotenv from "dotenv";
 
 const app = express();
 app.use(express.json());
-// app.use(bodyParser.urlencoded({ extended: false }));
-dotenv.config();
-
 app.use(cors({
     origin: "http://localhost:3000",
     credentials: true,
+    optionsSuccessStatus: 204
 }));
+// app.use(bodyParser.urlencoded({ extended: false }));
+dotenv.config();
 
 const redis = new Redis(
     {
