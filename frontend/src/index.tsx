@@ -6,6 +6,7 @@ import App from "./App";
 import "./Styles/styles.css";
 import { ThemeProvider } from "@mui/material/styles";
 import { responsiveTheme } from "./Styles/Theme";
+import "./axios";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement

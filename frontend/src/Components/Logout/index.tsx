@@ -1,9 +1,10 @@
 import React, { useState } from "react";
-import axios, { AxiosError } from "axios";
+import { AxiosError } from "axios";
 import { useMutation, useQueryClient } from "react-query";
 import FormFeedback from "../Alert";
 import { useNavigate } from "react-router-dom";
 import Button from "@mui/material/Button";
+import { api } from "../../axios";
 
 const Logout = () => {
   const queryClient = useQueryClient();
@@ -11,7 +12,7 @@ const Logout = () => {
   // const [errorMessage, setErrorMessage] = useState("");
   const mutation = useMutation({
     mutationFn: () => {
-      return axios.post(
+      return api.post(
         "api/logout",
         {},
         {

@@ -1,12 +1,13 @@
 import React, { useState } from "react";
 import Button from "@mui/material/Button";
 import { useMutation, useQueryClient } from "react-query";
-import axios, { AxiosError } from "axios";
+import { AxiosError } from "axios";
 import Stack from "@mui/material/Stack";
 import FormFeedback from "../Alert";
 import Dialog from "@mui/material/Dialog";
 import PropTypes from "prop-types";
 import Typography from "@mui/material/Typography";
+import { api } from "../../axios";
 
 const DeleteCocktail = ({ cocktailId }: { cocktailId: string }) => {
   const queryClient = useQueryClient();
@@ -23,7 +24,7 @@ const DeleteCocktail = ({ cocktailId }: { cocktailId: string }) => {
 
   const mutation = useMutation({
     mutationFn: (id: string) => {
-      return axios.delete(`api/cocktail/${id}`, {
+      return api.delete(`api/cocktail/${id}`, {
         withCredentials: true,
       });
     },

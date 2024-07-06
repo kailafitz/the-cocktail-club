@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Stack from "@mui/material/Stack";
 import { CocktailCustomInterface } from "../../Interfaces";
 import { useMutation } from "react-query";
-import axios, { AxiosError } from "axios";
+import { AxiosError } from "axios";
 import { useNavigate } from "react-router-dom";
 import FormFeedback from "../Alert";
 import FormField from "../TextField";
@@ -11,6 +11,7 @@ import Select from "@mui/material/Select";
 import { styled } from "@mui/material/styles";
 import Button from "@mui/material/Button";
 import CloudUploadIcon from "@mui/icons-material/CloudUpload";
+import { api } from "../../axios";
 
 const VisuallyHiddenInput = styled("input")({
   clip: "rect(0 0 0 0)",
@@ -37,7 +38,7 @@ const CreateCocktailForm = () => {
 
   const mutation = useMutation({
     mutationFn: (data: CocktailCustomInterface) => {
-      return axios.post(
+      return api.post(
         "api/create-cocktail",
         { data },
         {

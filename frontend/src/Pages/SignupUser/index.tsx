@@ -6,10 +6,11 @@ import ViewHeightContainer from "../../Components/Layout/ViewHeightContainer";
 import FormField from "../../Components/TextField";
 
 import { useMutation } from "react-query";
-import axios, { AxiosError } from "axios";
+import { AxiosError } from "axios";
 import { useNavigate } from "react-router-dom";
 import Grid from "@mui/material/Unstable_Grid2/Grid2";
 import Button from "@mui/material/Button";
+import { api } from "../../axios";
 
 const SignupUser = () => {
   const navigate = useNavigate();
@@ -25,7 +26,7 @@ const SignupUser = () => {
 
   const mutation = useMutation({
     mutationFn: (data: SignUpInterface) => {
-      return axios.post(
+      return api.post(
         "api/sign-up",
         {
           firstName: data.firstName,

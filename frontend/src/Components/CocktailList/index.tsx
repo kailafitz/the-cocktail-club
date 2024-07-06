@@ -1,5 +1,4 @@
 import React from "react";
-import axios from "axios";
 import { useQuery } from "react-query";
 import Grid from "@mui/material/Unstable_Grid2";
 import { CocktailCustomInterface } from "../../Interfaces";
@@ -7,12 +6,13 @@ import CocktailCard from "../CocktailCard";
 import ViewHeightContainer from "../Layout/ViewHeightContainer";
 import Loading from "../Status/Loading";
 import Error from "../Status/Error";
+import { api } from "../../axios";
 
 const CocktailList = () => {
   const { data, status } = useQuery(
     ["Get All Cocktails"],
     () =>
-      axios
+      api
         .get("api/cocktails", {
           withCredentials: true,
         })

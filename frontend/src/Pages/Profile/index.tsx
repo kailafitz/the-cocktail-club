@@ -1,5 +1,4 @@
 import React from "react";
-import axios from "axios";
 import { useQuery } from "react-query";
 import Typography from "@mui/material/Typography";
 import ViewHeightContainer from "../../Components/Layout/ViewHeightContainer";
@@ -12,11 +11,12 @@ import Loading from "../../Components/Status/Loading";
 import { useNavigate } from "react-router-dom";
 import EditBio from "../../Components/EditBio";
 import Error from "../../Components/Status/Error";
+import { api } from "../../axios";
 
 const Profile = () => {
   const navigate = useNavigate();
   const { data, status } = useQuery(["Get Account Details"], () =>
-    axios
+    api
       .get("api/profile", {
         withCredentials: true,
       })

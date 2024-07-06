@@ -4,12 +4,13 @@ import { LoginInterface } from "../../Interfaces";
 import FormField from "../../Components/TextField";
 
 import ViewHeightContainer from "../../Components/Layout/ViewHeightContainer";
-import axios, { AxiosError } from "axios";
+import { AxiosError } from "axios";
 import { useMutation, useQueryClient } from "react-query";
 import FormFeedback from "../../Components/Alert";
 import { useNavigate } from "react-router-dom";
 import Grid from "@mui/material/Unstable_Grid2/Grid2";
 import Button from "@mui/material/Button";
+import { api } from "../../axios";
 
 const LoginUser = () => {
   const queryClient = useQueryClient();
@@ -23,7 +24,7 @@ const LoginUser = () => {
 
   const mutation = useMutation({
     mutationFn: (data: LoginInterface) => {
-      return axios.post(
+      return api.post(
         "api/login",
         {
           email: data.email,

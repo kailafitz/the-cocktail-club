@@ -3,11 +3,12 @@ import Stack from "@mui/material/Stack";
 import Dialog from "@mui/material/Dialog";
 import { UserInterface } from "../../Interfaces";
 import { useMutation, useQueryClient } from "react-query";
-import axios, { AxiosError } from "axios";
+import { AxiosError } from "axios";
 import FormFeedback from "../Alert";
 import FormField from "../TextField";
 import PropTypes from "prop-types";
 import Button from "@mui/material/Button";
+import { api } from "../../axios";
 
 const EditBio = ({ user }: { user: UserInterface }) => {
   const queryClient = useQueryClient();
@@ -25,7 +26,7 @@ const EditBio = ({ user }: { user: UserInterface }) => {
 
   const mutation = useMutation({
     mutationFn: (data: string) => {
-      return axios.put(
+      return api.put(
         "api/profile/set-bio",
         { data },
         {

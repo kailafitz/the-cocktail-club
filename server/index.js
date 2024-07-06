@@ -7,17 +7,14 @@ import session from "express-session";
 import passport from "passport";
 import Redis from "ioredis";
 import RedisStore from "connect-redis";
-// import connectRedis from "connect-redis";
 import "./testfolder/local-strategy.js";
 import * as dotenv from "dotenv";
 
 const app = express();
 app.use(express.json());
 // app.use(bodyParser.urlencoded({ extended: false }));
-
-// const RedisStore = connectRedis(session);
-
 dotenv.config();
+
 app.use(cors({
     origin: "http://localhost:3000",
     credentials: true,
