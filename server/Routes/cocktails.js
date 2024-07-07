@@ -10,8 +10,8 @@ cocktailRouter.post("/api/create-cocktail", ensureAuthenticated, async (req, res
         const { data } = req.body;
 
         const newCocktail = await pool.query(
-            "INSERT INTO cocktails (name, category, ingredients, instructions) VALUES ($1, $2, $3, $4) RETURNING *",
-            [data.name, data.category, data.ingredients, data.instructions]
+            "INSERT INTO cocktails (name, category, created_by, ingredients, instructions) VALUES ($1, $2, $3, $4, $5) RETURNING *",
+            [data.name, data.category, req.user.id, data.ingredients, data.instructions]
         );
 
         if (newCocktail.rows[0]) {

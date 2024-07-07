@@ -4,7 +4,6 @@ import { SignUpInterface } from "../../Interfaces";
 import FormFeedback from "../../Components/Alert";
 import ViewHeightContainer from "../../Components/Layout/ViewHeightContainer";
 import FormField from "../../Components/TextField";
-
 import { useMutation } from "react-query";
 import { AxiosError } from "axios";
 import { useNavigate } from "react-router-dom";

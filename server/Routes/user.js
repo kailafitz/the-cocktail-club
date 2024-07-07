@@ -8,7 +8,7 @@ const userRouter = express.Router();
 userRouter.get("/api/profile", ensureAuthenticated, async (req, res) => {
     console.log("--> Profile", req.user);
 
-    const userInfo = await pool.query("SELECT id, firstName, lastName, email, bio FROM users WHERE id = $1", [req.user.id]);
+    const userInfo = await pool.query("SELECT id, firstname, lastname, email, bio FROM users WHERE id = $1", [req.user.id]);
     // console.log(userInfo.rows[0]);
 
     res.status(200).send(userInfo.rows[0]);

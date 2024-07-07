@@ -29,7 +29,7 @@ if (process.env.NODE_ENV === "development") {
 }
 
 // if (!(pool.query("SELECT EXISTS (SELECT 1 FROM pg_catalog.pg_tables WHERE schemaname = 'public' AND tablename = 'users')"))) {
-//     pool.query("CREATE TABLE users (id SERIAL PRIMARY KEY, email VARCHAR(100), password VARCHAR(100), firstName VARCHAR(100), lastName VARCHAR(100), bio VARCHAR(500));")
+//     pool.query("CREATE TABLE users (id SERIAL PRIMARY KEY, email VARCHAR(100), password VARCHAR(100), firstname VARCHAR(100), lastname VARCHAR(100), bio VARCHAR(500));")
 // }
 
 // db.query('SELECT * FROM employees', (err, result) => {

@@ -9,7 +9,8 @@ const authRouter = express.Router();
 authRouter.post("/api/sign-up", async (req, res) => {
     console.log("--> Signup Endpoint");
     try {
-        const { firstName, lastName, email, password, confirm_password } = req.body;
+        const { firstName, lastName, email, password, confirmPassword } = req.body;
+        console.log(req.body);
 
         const findUser = await pool.query(
             "SELECT email FROM users WHERE email = $1",
@@ -19,12 +20,12 @@ authRouter.post("/api/sign-up", async (req, res) => {
         if (findUser.rows.length >= 1) {
             return res.status(404).send("User already exists");
         }
-        else if (password !== confirm_password) {
+        else if (password !== confirmPassword) {
             return res.status(404).send("Passwords do not match");
         }
         else {
             const newUser = await pool.query(
-                "INSERT INTO users (firstName, lastName, email, password) VALUES ($1, $2, $3, $4)",
+                "INSERT INTO users (firstname, lastname, email, password) VALUES ($1, $2, $3, $4)",
                 [firstName, lastName, email, hashPassword(password)]
             );
 

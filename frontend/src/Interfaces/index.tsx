@@ -67,7 +67,7 @@ export interface SignUpInterface {
   lastName: string;
   email: string;
   password: string;
-  confirm_password: string;
+  confirmPassword: string;
 }
 
 export interface SearchHookInterface {
