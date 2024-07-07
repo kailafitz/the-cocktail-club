@@ -34,8 +34,6 @@ function App() {
   return (
     <>
       <Navigation />
-      {/* http://localhost:3000/search/cocktail/18/custom/api/cocktails/18 */}
-      {/* api/cocktails/ */}
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/sign-up" element={<SignupUser />} />

@@ -2,6 +2,7 @@ import { useQuery } from "react-query";
 import { SearchHookInterface } from "../Interfaces";
 import { api } from "../axios";
 import axios from "axios";
+import { REACT_APP_BASE_URL } from "../config";
 
 export const scrollToResults = () => {
   setTimeout(function () {
@@ -24,7 +25,7 @@ export const useSearch = (props: SearchHookInterface) => {
         props.dbType === "custom"
           ? `${customDb}${props.id}`
           : `${apiDb}${props.id}`,
-      baseURL: props.dbType === "custom" ? "http://localhost:5001" : undefined,
+      baseURL: props.dbType === "custom" ? REACT_APP_BASE_URL : undefined,
       withCredentials: props.dbType === "custom" ? true : false,
     }).then((res) => {
       let ingredients: string[] = [];

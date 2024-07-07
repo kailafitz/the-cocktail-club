@@ -1,12 +1,13 @@
 import axios from "axios";
+import { REACT_APP_BASE_URL } from "./config";
 // import dotenv from "dotenv";
 
 // dotenv.config();
 
 export const api = axios.create({
-    baseURL: "http://localhost:5001", headers: {
+    baseURL: REACT_APP_BASE_URL, headers: {
         "Content-Type": "application/json",
-        "Access-Control-Allow-Origin": "http://localhost:3000",
+        "Access-Control-Allow-Origin": REACT_APP_BASE_URL,
         "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS, HEAD"
     }
 });

@@ -1,0 +1,1 @@
+export const REACT_APP_BASE_URL = process.env.NODE_ENV === "production" ? "https://the-cocktail-club.onrender.com" : "http://localhost:5001";

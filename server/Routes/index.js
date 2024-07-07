@@ -7,7 +7,7 @@ import userRouter from "./user.js";
 const router = Router();
 
 router.options('*', cors({
-    origin: "http://localhost:3000",
+    origin: process.env.ORIGIN,
     credentials: true,
     optionsSuccessStatus: 204
 }))
