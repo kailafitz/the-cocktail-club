@@ -9,6 +9,9 @@ import Redis from "ioredis";
 import RedisStore from "connect-redis";
 import "./testfolder/local-strategy.js";
 import * as dotenv from "dotenv";
+import { createTables } from "./db.js";
+
+createTables();
 
 const app = express();
 app.use(express.json());

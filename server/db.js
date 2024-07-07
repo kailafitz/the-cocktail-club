@@ -17,35 +17,73 @@ export const pool = new Pool(process.env.NODE_ENV === "development" ? {
     }
 });
 
-if (process.env.NODE_ENV === "development") {
-    pool
-        .connect()
-        .then(() => {
-            console.log("--> Connected to Postgres database");
-        })
-        .catch((err) => {
-            console.log("--> Error connecting to PostgreSQL database", err);
-        });
+export const createTables = async () => {
+    const client = await pool.connect().then(() => {
+        console.log("--> Connected to Postgres database");
+    }).catch((err) => {
+        console.log("--> Error connecting to PostgreSQL database", err);
+    });
+
+    if (client) {
+        try {
+            await client.query(`BEGIN`);
+
+            // Check if the "users" table exists
+            const userTableExists = await client.query(`
+      SELECT EXISTS (
+        SELECT FROM information_schema.tables 
+        WHERE table_schema = 'public' 
+        AND table_name = 'users'
+      );
+    `);
+
+            if (!userTableExists.rows[0].exists) {
+                await client.query(`
+        CREATE TABLE users (
+            id SERIAL PRIMARY KEY,
+            email VARCHAR(100),
+            password VARCHAR(100),
+            first_name VARCHAR(100),
+            last_name VARCHAR(100),
+            bio VARCHAR(500),
+            cocktails_created VARCHAR(255)[],
+            cocktail_saved VARCHAR(255)[]
+        );
+      `);
+                console.log("Created 'users' table");
+            }
+
+            // Check if the "cocktails" table exists
+            const postTableExists = await client.query(`
+      SELECT EXISTS (
+        SELECT FROM information_schema.tables 
+        WHERE table_schema = 'public' 
+        AND table_name = 'cocktails'
+      );
+    `);
+
+            if (!postTableExists.rows[0].exists) {
+                await client.query(`
+        CREATE TABLE cocktails (
+            id SERIAL PRIMARY KEY,
+            name VARCHAR(255),
+            created_by VARCHAR(255),
+            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+            category VARCHAR(100),
+            ingredients VARCHAR(255)[],
+            instructions VARCHAR(255)[],
+            FOREIGN KEY (created_by) REFERENCES users(id)
+        );
+      `);
+                console.log("Created 'cocktails' table");
+            }
+
+            await client.query(`COMMIT`);
+        } catch (error) {
+            await client.query(`ROLLBACK`);
+            console.error("Error setting up database:", error);
+        } finally {
+            client.release();
+        }
+    }
 }
-
-// if (!(pool.query("SELECT EXISTS (SELECT 1 FROM pg_catalog.pg_tables WHERE schemaname = 'public' AND tablename = 'users')"))) {
-//     pool.query("CREATE TABLE users (id SERIAL PRIMARY KEY, email VARCHAR(100), password VARCHAR(100), firstname VARCHAR(100), lastname VARCHAR(100), bio VARCHAR(500));")
-// }
-
-// db.query('SELECT * FROM employees', (err, result) => {
-//     if (err) {
-//         console.error('Error executing query', err);
-//     } else {
-//         console.log('Query result:', result.rows);
-//     }
-
-//     // Close the connection when done
-//     db
-//         .end()
-//         .then(() => {
-//             console.log('Connection to PostgreSQL closed');
-//         })
-//         .catch((err) => {
-//             console.error('Error closing connection', err);
-//         });
-// });
