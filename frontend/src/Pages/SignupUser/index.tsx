@@ -3,13 +3,13 @@ import Stack from "@mui/material/Stack";
 import { SignUpInterface } from "../../Interfaces";
 import FormFeedback from "../../Components/Alert";
 import ViewHeightContainer from "../../Components/Layout/ViewHeightContainer";
-import FormField from "../../Components/TextField";
 import { useMutation, useQueryClient } from "react-query";
 import { AxiosError } from "axios";
 import { useNavigate } from "react-router-dom";
 import Grid from "@mui/material/Unstable_Grid2/Grid2";
 import Button from "@mui/material/Button";
 import { api } from "../../axios";
+import TextField from "@mui/material/TextField";
 
 const SignupUser = () => {
   const queryClient = useQueryClient();
@@ -75,31 +75,33 @@ const SignupUser = () => {
             onSubmit={handleSignup}
             sx={{ div: { mb: 2 } }}
           >
-            <FormField
+            <TextField
               label="First Name"
               onChange={(event) =>
                 setUser({ ...user, firstName: event.target.value })
               }
             />
-            <FormField
+            <TextField
               label="Last Name"
               onChange={(event) =>
                 setUser({ ...user, lastName: event.target.value })
               }
             />
-            <FormField
+            <TextField
               label="Email"
               onChange={(event) =>
                 setUser({ ...user, email: event.target.value })
               }
             />
-            <FormField
+            <TextField
+              type="password"
               label="Password"
               onChange={(event) =>
                 setUser({ ...user, password: event.target.value })
               }
             />
-            <FormField
+            <TextField
+              type="password"
               label="Confirm Password"
               onChange={(event) => {
                 setUser({ ...user, confirmPassword: event.target.value });

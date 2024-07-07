@@ -5,13 +5,13 @@ import { useMutation } from "react-query";
 import { AxiosError } from "axios";
 import { useNavigate } from "react-router-dom";
 import FormFeedback from "../Alert";
-import FormField from "../TextField";
 import MenuItem from "@mui/material/MenuItem";
 import Select from "@mui/material/Select";
 import { styled } from "@mui/material/styles";
 import Button from "@mui/material/Button";
 import CloudUploadIcon from "@mui/icons-material/CloudUpload";
 import { api } from "../../axios";
+import TextField from "@mui/material/TextField";
 
 const VisuallyHiddenInput = styled("input")({
   clip: "rect(0 0 0 0)",
@@ -84,7 +84,7 @@ const CreateCocktailForm = () => {
       {mutation.isError && (
         <FormFeedback severity="error" message={errorMessage} />
       )}
-      <FormField
+      <TextField
         label="Cocktail Name"
         onChange={(event) =>
           setCocktail({ ...cocktail, name: event.target.value })
@@ -102,14 +102,14 @@ const CreateCocktailForm = () => {
         <MenuItem value="Alcoholic">Alcoholic</MenuItem>
         <MenuItem value="Non-alcoholic">Non-alcoholic</MenuItem>
       </Select>
-      <FormField
+      <TextField
         label="Ingredients"
         onChange={(event) => {
           let arr = event.target.value.split(",");
           setCocktail({ ...cocktail, ingredients: arr });
         }}
       />
-      <FormField
+      <TextField
         label="Instructions"
         onChange={(event) => {
           let arr = event.target.value.split(",");
@@ -117,6 +117,7 @@ const CreateCocktailForm = () => {
         }}
       />
       <Button
+        disabled
         component="label"
         role={undefined}
         variant="primary"

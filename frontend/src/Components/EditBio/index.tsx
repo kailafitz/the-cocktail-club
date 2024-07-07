@@ -5,10 +5,10 @@ import { UserInterface } from "../../Interfaces";
 import { useMutation, useQueryClient } from "react-query";
 import { AxiosError } from "axios";
 import FormFeedback from "../Alert";
-import FormField from "../TextField";
 import PropTypes from "prop-types";
 import Button from "@mui/material/Button";
 import { api } from "../../axios";
+import TextField from "@mui/material/TextField";
 
 const EditBio = ({ user }: { user: UserInterface }) => {
   const queryClient = useQueryClient();
@@ -74,7 +74,7 @@ const EditBio = ({ user }: { user: UserInterface }) => {
           {mutation.isError && (
             <FormFeedback severity="error" message={errorMessage} />
           )}
-          <FormField
+          <TextField
             label="Bio"
             value={user.bio}
             onChange={(event) => setUserBio(event.target.value)}

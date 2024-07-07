@@ -28,7 +28,7 @@ cocktailRouter.post("/api/create-cocktail", ensureAuthenticated, async (req, res
 cocktailRouter.get("/api/cocktails", ensureAuthenticated, async (req, res) => {
     try {
         console.log("--> Get All Cocktails");
-        const allCocktails = await pool.query("SELECT * FROM cocktails");
+        const allCocktails = await pool.query("SELECT * FROM cocktails WHERE created_by = $1", [req.user.id]);
 
         res.json(allCocktails.rows);
     } catch (err) {

@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 import Stack from "@mui/material/Stack";
 import { LoginInterface } from "../../Interfaces";
-import FormField from "../../Components/TextField";
 import ViewHeightContainer from "../../Components/Layout/ViewHeightContainer";
 import { AxiosError } from "axios";
 import { useMutation, useQueryClient } from "react-query";
 import FormFeedback from "../../Components/Alert";
 import { useNavigate } from "react-router-dom";
 import Grid from "@mui/material/Unstable_Grid2/Grid2";
+import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import { api } from "../../axios";
 
@@ -73,13 +73,14 @@ const LoginUser = () => {
             onSubmit={handleLogin}
             sx={{ div: { mb: 2 } }}
           >
-            <FormField
+            <TextField
               label="Email"
               onChange={(event) =>
                 setUser({ ...user, email: event.target.value })
               }
             />
-            <FormField
+            <TextField
+              type="password"
               label="Password"
               onChange={(event) =>
                 setUser({ ...user, password: event.target.value })

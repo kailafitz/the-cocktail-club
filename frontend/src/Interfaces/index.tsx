@@ -12,12 +12,6 @@ export interface ViewHeightContainerInterface {
   pt?: boolean;
 }
 
-export interface FormFieldInterface {
-  label: string;
-  value?: string;
-  onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
-}
-
 export interface LinkButtonInterface {
   label: string;
   path: string;

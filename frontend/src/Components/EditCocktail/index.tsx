@@ -5,10 +5,10 @@ import { CocktailCustomInterface } from "../../Interfaces";
 import { useMutation, useQueryClient } from "react-query";
 import { AxiosError } from "axios";
 import FormFeedback from "../Alert";
-import FormField from "../TextField";
 import PropTypes from "prop-types";
 import Button from "@mui/material/Button";
 import { api } from "../../axios";
+import TextField from "@mui/material/TextField";
 
 const EditCocktail = ({ cocktail }: { cocktail: CocktailCustomInterface }) => {
   const queryClient = useQueryClient();
@@ -74,7 +74,7 @@ const EditCocktail = ({ cocktail }: { cocktail: CocktailCustomInterface }) => {
           {mutation.isError && (
             <FormFeedback severity="error" message={errorMessage} />
           )}
-          <FormField
+          <TextField
             label="Cocktail Name"
             value={cocktail.name}
             onChange={(event) =>
