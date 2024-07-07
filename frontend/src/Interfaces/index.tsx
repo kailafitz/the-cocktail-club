@@ -33,6 +33,7 @@ export interface CocktailCardInterface {
   name?: string;
   category?: string;
   db: string;
+  createdBy?: string;
 }
 
 export interface CocktailDbInterface {

@@ -10,7 +10,7 @@ authRouter.post("/api/sign-up", async (req, res) => {
     console.log("--> Signup Endpoint");
     try {
         const { firstName, lastName, email, password, confirmPassword } = req.body;
-        console.log(req.body);
+        console.log("Sign up user body", req.body);
 
         const findUser = await pool.query(
             "SELECT email FROM users WHERE email = $1",
@@ -25,7 +25,7 @@ authRouter.post("/api/sign-up", async (req, res) => {
         }
         else {
             const newUser = await pool.query(
-                "INSERT INTO users (firstname, lastname, email, password) VALUES ($1, $2, $3, $4)",
+                "INSERT INTO users (first_name, last_name, email, password) VALUES ($1, $2, $3, $4)",
                 [firstName, lastName, email, hashPassword(password)]
             );
 

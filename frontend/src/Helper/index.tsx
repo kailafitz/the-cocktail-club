@@ -28,11 +28,12 @@ export const useSearch = (props: SearchHookInterface) => {
       baseURL: props.dbType === "custom" ? REACT_APP_BASE_URL : undefined,
       withCredentials: props.dbType === "custom" ? true : false,
     }).then((res) => {
+      // console.log(res);
       let ingredients: string[] = [];
       let instructions: string[] = [];
 
       let cocktail =
-        props.dbType === "custom" ? res.data[0] : res.data.drinks[0];
+        props.dbType === "custom" ? res.data.cocktail[0] : res.data.drinks[0];
 
       if (props.dbType !== "custom") {
         for (let key in cocktail) {
@@ -52,6 +53,10 @@ export const useSearch = (props: SearchHookInterface) => {
       return {
         id: props.dbType !== "custom" ? cocktail["idDrink"] : cocktail.id,
         name: props.dbType !== "custom" ? cocktail["strDrink"] : cocktail.name,
+        createdBy:
+          props.dbType !== "custom"
+            ? undefined
+            : `${res.data.user.first_name} ${res.data.user.last_name}`,
         img:
           props.dbType !== "custom" ? cocktail["strDrinkThumb"] : cocktail.img,
         category:

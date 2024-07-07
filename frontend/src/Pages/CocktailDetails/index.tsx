@@ -70,6 +70,7 @@ export const CocktailDetails = () => {
       >
         {data?.name}
       </Typography>
+      <Typography variant="body2">{data?.createdBy}</Typography>
       <Typography
         variant="subtitle2"
         sx={{

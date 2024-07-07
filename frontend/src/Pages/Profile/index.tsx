@@ -63,7 +63,7 @@ const Profile = () => {
             >
               <TableCell>Name</TableCell>
               <TableCell>
-                {data.firstName} {data.lastName}
+                {data.first_name} {data.last_name}
               </TableCell>
               <TableCell>{/* <EditBio user={data} /> */}</TableCell>
             </TableRow>

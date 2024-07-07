@@ -4,7 +4,7 @@ import { SignUpInterface } from "../../Interfaces";
 import FormFeedback from "../../Components/Alert";
 import ViewHeightContainer from "../../Components/Layout/ViewHeightContainer";
 import FormField from "../../Components/TextField";
-import { useMutation } from "react-query";
+import { useMutation, useQueryClient } from "react-query";
 import { AxiosError } from "axios";
 import { useNavigate } from "react-router-dom";
 import Grid from "@mui/material/Unstable_Grid2/Grid2";
@@ -12,6 +12,7 @@ import Button from "@mui/material/Button";
 import { api } from "../../axios";
 
 const SignupUser = () => {
+  const queryClient = useQueryClient();
   const navigate = useNavigate();
   const [user, setUser] = useState<SignUpInterface>({
     id: 0,
@@ -19,7 +20,7 @@ const SignupUser = () => {
     firstName: "",
     lastName: "",
     password: "",
-    confirm_password: "",
+    confirmPassword: "",
   });
   const [errorMessage, setErrorMessage] = useState("");
 
@@ -32,13 +33,18 @@ const SignupUser = () => {
           lastName: data.lastName,
           email: data.email,
           password: data.password,
-          confirm_password: data.confirm_password,
+          confirmPassword: data.confirmPassword,
         },
         { withCredentials: true }
       );
     },
     onSuccess() {
-      navigate("/");
+      console.log("Redirect");
+      queryClient.invalidateQueries("Authentication Status Check");
+      // navigate("/profile");
+      setTimeout(() => {
+        navigate("/profile");
+      }, 500);
     },
     onError: (error: AxiosError) => {
       setErrorMessage(
@@ -96,7 +102,7 @@ const SignupUser = () => {
             <FormField
               label="Confirm Password"
               onChange={(event) => {
-                setUser({ ...user, confirm_password: event.target.value });
+                setUser({ ...user, confirmPassword: event.target.value });
               }}
             />
             <Button variant="primary" type="submit">
