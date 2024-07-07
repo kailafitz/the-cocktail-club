@@ -39,6 +39,7 @@ firebase-debug.*.log*
 
 # Firebase cache
 /frontend/.firebase
+/frontend/firebase.json
 
 # Firebase config
 
