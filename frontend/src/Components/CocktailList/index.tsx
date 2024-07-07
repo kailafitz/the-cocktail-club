@@ -44,7 +44,7 @@ const CocktailList = () => {
   }
 
   return (
-    <ViewHeightContainer sx={{ pb: 4 }} center>
+    <ViewHeightContainer sx={{ py: 5 }} center>
       <Grid container spacing={6} justifyContent="center" id="results">
         {data.length > 0 ? (
           data

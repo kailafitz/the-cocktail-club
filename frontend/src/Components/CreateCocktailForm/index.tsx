@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Stack from "@mui/material/Stack";
 import { CocktailCustomInterface } from "../../Interfaces";
-import { useMutation } from "react-query";
+import { useMutation, useQueryClient } from "react-query";
 import { AxiosError } from "axios";
 import { useNavigate } from "react-router-dom";
 import FormFeedback from "../Alert";
@@ -12,6 +12,8 @@ import Button from "@mui/material/Button";
 import CloudUploadIcon from "@mui/icons-material/CloudUpload";
 import { api } from "../../axios";
 import TextField from "@mui/material/TextField";
+import Dialog from "@mui/material/Dialog";
+import Box from "@mui/material/Box";
 
 const VisuallyHiddenInput = styled("input")({
   clip: "rect(0 0 0 0)",
@@ -26,6 +28,7 @@ const VisuallyHiddenInput = styled("input")({
 });
 
 const CreateCocktailForm = () => {
+  const queryClient = useQueryClient();
   const navigate = useNavigate();
   const [errorMessage, setErrorMessage] = useState("");
   const [cocktail, setCocktail] = useState<CocktailCustomInterface>({
@@ -35,6 +38,15 @@ const CreateCocktailForm = () => {
     ingredients: [],
     instructions: [],
   });
+  const [open, setOpen] = useState(false);
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
 
   const mutation = useMutation({
     mutationFn: (data: CocktailCustomInterface) => {
@@ -52,7 +64,7 @@ const CreateCocktailForm = () => {
     },
     onSuccess() {
       console.log("Success");
-      navigate("/my-cocktails");
+      queryClient.invalidateQueries("Get All Cocktails");
     },
     onError: (error: AxiosError) => {
       if (
@@ -71,66 +83,82 @@ const CreateCocktailForm = () => {
   };
 
   return (
-    <Stack
-      component="form"
-      noValidate
-      autoComplete="off"
-      onSubmit={handleCreate}
-      direction="column"
-      spacing={4}
-      width={{ xs: "100%", md: "40%" }}
-      alignSelf="center"
-    >
-      {mutation.isError && (
-        <FormFeedback severity="error" message={errorMessage} />
-      )}
-      <TextField
-        label="Cocktail Name"
-        onChange={(event) =>
-          setCocktail({ ...cocktail, name: event.target.value })
-        }
-      />
-      <Select
-        defaultValue="Alcoholic"
-        onChange={(event) =>
-          setCocktail({
-            ...cocktail,
-            category: event.target.value as "Alcoholic" | "Non-alcoholic",
-          })
-        }
-      >
-        <MenuItem value="Alcoholic">Alcoholic</MenuItem>
-        <MenuItem value="Non-alcoholic">Non-alcoholic</MenuItem>
-      </Select>
-      <TextField
-        label="Ingredients"
-        onChange={(event) => {
-          let arr = event.target.value.split(",");
-          setCocktail({ ...cocktail, ingredients: arr });
-        }}
-      />
-      <TextField
-        label="Instructions"
-        onChange={(event) => {
-          let arr = event.target.value.split(",");
-          setCocktail({ ...cocktail, instructions: arr });
-        }}
-      />
-      <Button
-        disabled
-        component="label"
-        role={undefined}
-        variant="primary"
-        tabIndex={-1}
-        // startIcon={<CloudUploadIcon />}
-      >
-        Upload file
-        <VisuallyHiddenInput type="file" />
-      </Button>
-      <Button variant="primary" type="submit">
-        Add Cocktail
-      </Button>
-    </Stack>
+    <>
+      <Box>
+        <Button
+          variant="primary"
+          onClick={handleClickOpen}
+          data-target="create-cocktail"
+        >
+          Add Cocktail
+        </Button>
+      </Box>
+      <Dialog open={open} id="create-cocktail">
+        <Stack
+          component="form"
+          noValidate
+          autoComplete="off"
+          onSubmit={handleCreate}
+          direction="column"
+          spacing={4}
+          alignSelf="center"
+          p={5}
+        >
+          {mutation.isError && (
+            <FormFeedback severity="error" message={errorMessage} />
+          )}
+          <TextField
+            label="Cocktail Name"
+            onChange={(event) =>
+              setCocktail({ ...cocktail, name: event.target.value })
+            }
+          />
+          <Select
+            defaultValue="Alcoholic"
+            onChange={(event) =>
+              setCocktail({
+                ...cocktail,
+                category: event.target.value as "Alcoholic" | "Non-alcoholic",
+              })
+            }
+          >
+            <MenuItem value="Alcoholic">Alcoholic</MenuItem>
+            <MenuItem value="Non-alcoholic">Non-alcoholic</MenuItem>
+          </Select>
+          <TextField
+            label="Ingredients"
+            onChange={(event) => {
+              let arr = event.target.value.split(",");
+              setCocktail({ ...cocktail, ingredients: arr });
+            }}
+          />
+          <TextField
+            label="Instructions"
+            onChange={(event) => {
+              let arr = event.target.value.split(",");
+              setCocktail({ ...cocktail, instructions: arr });
+            }}
+          />
+          <Button
+            disabled
+            component="label"
+            role={undefined}
+            variant="primary"
+            tabIndex={-1}
+            // startIcon={<CloudUploadIcon />}
+          >
+            Upload file
+            <VisuallyHiddenInput type="file" />
+          </Button>
+          <Button variant="primary" type="submit" onClick={handleClose}>
+            Add Cocktail
+          </Button>
+          <Button variant="primary" onClick={handleClose}>
+            Cancel
+          </Button>
+        </Stack>
+      </Dialog>
+    </>
   );
 };
 

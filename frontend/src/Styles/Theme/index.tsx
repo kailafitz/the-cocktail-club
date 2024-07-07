@@ -110,6 +110,7 @@ const theme = createTheme({
         {
           props: { variant: "primary" },
           style: {
+            // width: "fit-content",
             color: common.dark,
             textAlign: "center",
             transition: "all .3s linear",
@@ -248,6 +249,13 @@ const theme = createTheme({
       styleOverrides: {
         root: {
           backgroundColor: common.dark,
+        },
+      },
+    },
+    MuiDialog: {
+      styleOverrides: {
+        paper: {
+          maxWidth: "unset",
         },
       },
     },

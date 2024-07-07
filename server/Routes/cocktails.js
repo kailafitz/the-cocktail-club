@@ -45,7 +45,6 @@ cocktailRouter.get("/api/cocktails/:id", ensureAuthenticated, async (req, res) =
         const user = await pool.query("SELECT first_name, last_name FROM users WHERE id = $1", [cocktail.rows[0].created_by]);
         console.log("--> Cocktail details", user.rows[0]);
 
-        // res.status(200).json(cocktail.rows);
         res.status(200).send({ cocktail: cocktail.rows, user: user.rows[0] })
     } catch (err) {
         console.log(err);

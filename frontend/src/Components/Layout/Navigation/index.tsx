@@ -29,10 +29,6 @@ const standardRoutes = [
 
 const authRoutes = [
   {
-    href: "/create-cocktail",
-    text: "Create Cocktail",
-  },
-  {
     href: "/search",
     text: "Search",
   },

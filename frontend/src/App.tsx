@@ -48,7 +48,6 @@ function App() {
             path="/search/cocktail/:id/:dbType/details"
             element={<CocktailDetails />}
           />
-          <Route path="/create-cocktail" element={<CreateCocktail />} />
         </Route>
       </Routes>
       <Footer />

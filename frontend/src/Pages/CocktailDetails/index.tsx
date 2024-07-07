@@ -70,7 +70,11 @@ export const CocktailDetails = () => {
       >
         {data?.name}
       </Typography>
-      <Typography variant="body2">{data?.createdBy}</Typography>
+      {dbType === "custom" && (
+        <Typography variant="body2" sx={{ textTransform: "capitalize" }}>
+          Created by: {data?.createdBy}
+        </Typography>
+      )}
       <Typography
         variant="subtitle2"
         sx={{

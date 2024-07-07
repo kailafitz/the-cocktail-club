@@ -111,24 +111,10 @@ export const Home: React.FC = () => {
                   direction={{ xs: "column", md: "row" }}
                   spacing={{ xs: 1, sm: 2 }}
                 >
-                  <Button
-                    variant="primary"
-                    href="/search"
-                    sx={{
-                      display: "block",
-                      fontSize: "1rem",
-                    }}
-                  >
+                  <Button variant="primary" href="/search">
                     Search
                   </Button>
-                  <Button
-                    variant="primary"
-                    href="/"
-                    sx={{
-                      display: "block",
-                      fontSize: "1rem",
-                    }}
-                  >
+                  <Button variant="primary" href="/">
                     Join a masterclass
                   </Button>
                 </Stack>
