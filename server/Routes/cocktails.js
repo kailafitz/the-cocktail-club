@@ -16,7 +16,7 @@ cocktailRouter.post("/api/create-cocktail", ensureAuthenticated, async (req, res
 
         if (newCocktail.rows[0]) {
             console.log("--> New cocktail added ->\n", newCocktail.rows[0]);
-            res.sendStatus(200);
+            res.status(200).send("Success");
         }
     } catch (err) {
         console.log(err.message);

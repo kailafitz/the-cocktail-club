@@ -7,7 +7,6 @@ import Navigation from "./Components/Layout/Navigation";
 import { Footer } from "./Components/Layout/Footer";
 import About from "./Pages/About";
 import ContactUs from "./Pages/Contact Us";
-import CreateCocktail from "./Pages/CreateCocktail";
 import LoginUser from "./Pages/LoginUser";
 import SignupUser from "./Pages/SignupUser";
 import Profile from "./Pages/Profile";

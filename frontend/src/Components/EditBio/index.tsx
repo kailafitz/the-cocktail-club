@@ -76,7 +76,7 @@ const EditBio = ({ user }: { user: UserInterface }) => {
           )}
           <TextField
             label="Bio"
-            value={user.bio}
+            defaultValue={user.bio}
             onChange={(event) => setUserBio(event.target.value)}
           />
           <Button

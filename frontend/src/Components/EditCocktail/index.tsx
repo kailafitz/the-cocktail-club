@@ -76,7 +76,7 @@ const EditCocktail = ({ cocktail }: { cocktail: CocktailCustomInterface }) => {
           )}
           <TextField
             label="Cocktail Name"
-            value={cocktail.name}
+            defaultValue={cocktail.name}
             onChange={(event) =>
               setUpdatedCocktail({ ...cocktail, name: event.target.value })
             }
