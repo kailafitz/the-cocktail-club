@@ -6,7 +6,7 @@ import { useAuthentication } from "../../Helper";
 
 export const ProtectedRoute = ({ children }: { children?: ReactNode }) => {
   const { isAuth, status } = useAuthentication();
-  console.log("Protected route", status);
+  // console.log("Protected route", status);
 
   if (status === "loading") {
     return (
