@@ -10,7 +10,7 @@ import { StyledAppBar, StyledIconButton } from "./styles";
 import { Link as NavLink } from "react-router-dom";
 import Logout from "../../Logout";
 import { useAuthentication } from "../../../Helper";
-import LinkButton from "../../LinkButton";
+import Button from "@mui/material/Button";
 
 const standardRoutes = [
   {
@@ -29,16 +29,16 @@ const standardRoutes = [
 
 const authRoutes = [
   {
-    href: "/search",
-    text: "Search",
-  },
-  {
     href: "/profile",
     text: "My Profile",
   },
   {
     href: "/my-cocktails",
     text: "My Cocktails",
+  },
+  {
+    href: "/search",
+    text: "Search",
   },
 ];
 
@@ -99,6 +99,7 @@ const Navigation = () => {
                           color: "common.black",
                         }}
                         onClick={() => setOpen(false)}
+                        aria-label={`Link to ${link.text} page`}
                       >
                         {link.text}
                       </Link>
@@ -116,6 +117,7 @@ const Navigation = () => {
                         to={link.href}
                         sx={{ color: "common.black" }}
                         onClick={() => setOpen(false)}
+                        aria-label={`Link to ${link.text} page`}
                       >
                         {link.text}
                       </Link>
@@ -127,17 +129,34 @@ const Navigation = () => {
             {isAuth ? (
               <Logout />
             ) : (
-              <Stack direction={{ xs: "column", md: "row" }}>
-                <LinkButton
-                  label="Login"
-                  path="/login"
-                  styles={{ width: "fit-content" }}
-                />
-                <LinkButton
-                  label="Sign up"
-                  path="/sign-up"
-                  styles={{ width: "fit-content" }}
-                />
+              <Stack
+                direction={{ xs: "column", md: "row" }}
+                sx={{
+                  color: "common.black",
+                }}
+              >
+                <Button
+                  variant="primary"
+                  href={"/login"}
+                  sx={{
+                    color: "common.black",
+                  }}
+                  onClick={() => setOpen(false)}
+                  aria-label="Link to Login page"
+                >
+                  Login
+                </Button>
+                <Button
+                  variant="primary"
+                  href="/sign-up"
+                  sx={{
+                    color: "common.black",
+                  }}
+                  onClick={() => setOpen(false)}
+                  aria-label="Link to Sign up page"
+                >
+                  Sign up
+                </Button>
               </Stack>
             )}
           </Toolbar>

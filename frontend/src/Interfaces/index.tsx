@@ -12,15 +12,6 @@ export interface ViewHeightContainerInterface {
   pt?: boolean;
 }
 
-export interface LinkButtonInterface {
-  label: string;
-  path: string;
-  styles: Object;
-  startIcon?: ReactNode;
-  endIcon?: ReactNode;
-  onClick?: () => void | null | undefined;
-}
-
 export interface CocktailCardInterface {
   id: string;
   img: string;
