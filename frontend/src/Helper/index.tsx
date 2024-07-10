@@ -101,7 +101,7 @@ export const useAuthentication = () => {
   // https://stackoverflow.com/questions/75211088/if-staletime-is-bigger-than-cachetime-in-react-query-what-happen
   // ----> staleTime: Infinity, cacheTime: 0. This basically means: Never refetch data if you have cached data, but remove data from the cache as soon as I don't use it anymore
 
-  console.log("Hook", data, status);
+  // console.log("Hook", data, status);
 
   return { isAuth: data, status };
 };
