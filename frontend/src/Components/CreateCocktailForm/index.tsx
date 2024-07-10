@@ -14,6 +14,7 @@ import { api } from "../../axios";
 import TextField from "@mui/material/TextField";
 import Dialog from "@mui/material/Dialog";
 import Box from "@mui/material/Box";
+import Typography from "@mui/material/Typography";
 
 const VisuallyHiddenInput = styled("input")({
   clip: "rect(0 0 0 0)",
@@ -37,6 +38,7 @@ const CreateCocktailForm = () => {
     category: "Alcoholic",
     ingredients: [],
     instructions: [],
+    img: undefined,
   });
   const [open, setOpen] = useState(false);
 
@@ -139,17 +141,33 @@ const CreateCocktailForm = () => {
               setCocktail({ ...cocktail, instructions: arr });
             }}
           />
-          <Button
-            disabled
-            component="label"
-            role={undefined}
-            variant="primary"
-            tabIndex={-1}
-            // startIcon={<CloudUploadIcon />}
+          <Stack
+            direction={{ xs: "column", md: "row" }}
+            spacing={3}
+            alignItems="center"
           >
-            Upload file
-            <VisuallyHiddenInput type="file" />
-          </Button>
+            <Button
+              // disabled
+              component="label"
+              role={undefined}
+              variant="primary"
+              tabIndex={-1}
+              startIcon={<CloudUploadIcon />}
+              fullWidth={false}
+              sx={{ span: { mr: 0 } }}
+            >
+              {/* Upload file */}
+              <VisuallyHiddenInput
+                type="file"
+                onChange={(event) =>
+                  setCocktail({ ...cocktail, img: event.target.value })
+                }
+              />
+            </Button>
+            <Typography variant="body2">
+              File uploaded: {cocktail.img?.toString()}
+            </Typography>
+          </Stack>
           <Button variant="primary" type="submit" onClick={handleClose}>
             Add Cocktail
           </Button>

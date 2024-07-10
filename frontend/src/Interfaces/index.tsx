@@ -35,6 +35,7 @@ export interface CocktailCustomInterface {
   category: "Alcoholic" | "Non-alcoholic";
   ingredients: string[];
   instructions: string[];
+  img: File | undefined | string;
 }
 
 export interface UserInterface extends LoginInterface {

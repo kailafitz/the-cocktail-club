@@ -3,7 +3,6 @@ import ViewHeightContainer from "../../Components/Layout/ViewHeightContainer";
 import CocktailList from "../../Components/CocktailList";
 import Typography from "@mui/material/Typography";
 import CreateCocktailForm from "../../Components/CreateCocktailForm";
-import GetImage from "../../Components/GetImage";
 
 const MyCocktails = () => {
   return (
@@ -18,7 +17,6 @@ const MyCocktails = () => {
       </Typography>
       <CreateCocktailForm />
       <CocktailList />
-      <GetImage />
     </ViewHeightContainer>
   );
 };

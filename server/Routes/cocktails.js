@@ -1,6 +1,17 @@
 import express from "express";
 import { pool } from "../db.js";
 import { ensureAuthenticated } from "./auth.js";
+import { PutObjectCommand, S3Client } from "@aws-sdk/client-s3";
+import { fromCognitoIdentityPool } from "@aws-sdk/credential-providers";
+import { Upload } from "@aws-sdk/lib-storage";
+
+const client = new S3Client({
+    region: "us-east-1",
+    credentials: fromCognitoIdentityPool({
+        clientConfig: { region: process.env.S3_REGION },
+        identityPoolId: process.env.S3_IDENTITY_POOL_ID,
+    }),
+});
 
 const cocktailRouter = express.Router();
 
@@ -8,6 +19,15 @@ const cocktailRouter = express.Router();
 cocktailRouter.post("/api/create-cocktail", ensureAuthenticated, async (req, res) => {
     try {
         const { data } = req.body;
+
+        const command = new PutObjectCommand({
+            Bucket: process.env.S3_BUCKET_NAME,
+            Key: req.user.id.toString(),
+            Body: req.body.img,
+        });
+
+        const response = await client.send(command);
+        console.log("data", data, response);
 
         const newCocktail = await pool.query(
             "INSERT INTO cocktails (name, category, created_by, ingredients, instructions) VALUES ($1, $2, $3, $4, $5) RETURNING *",
