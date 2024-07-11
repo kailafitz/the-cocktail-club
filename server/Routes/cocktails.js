@@ -2,7 +2,7 @@ import express from "express";
 import { pool } from "../db.js";
 import { ensureAuthenticated } from "./auth.js";
 import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
-import { S3Client, PutObjectCommand, GetObjectCommand } from "@aws-sdk/client-s3";
+import { S3Client, PutObjectCommand, GetObjectCommand, DeleteObjectCommand } from "@aws-sdk/client-s3";
 import multer from "multer";
 import crypto from "crypto";
 
@@ -95,7 +95,7 @@ cocktailRouter.put("/api/cocktail/:id", ensureAuthenticated, async (req, res) =>
     try {
         console.log("--> Cocktail Updated");
         const { id } = req.params;
-        const updateCocktail = await pool.query("UPDATE cocktails SET name = $1 WHERE id = $2", [req.body.data.name, id]);
+        await pool.query("UPDATE cocktails SET name = $1 WHERE id = $2", [req.body.data.name, id]);
 
         res.status(200).send("Update successful");
     } catch (err) {
@@ -108,8 +108,22 @@ cocktailRouter.put("/api/cocktail/:id", ensureAuthenticated, async (req, res) =>
 cocktailRouter.delete("/api/cocktail/:id", ensureAuthenticated, async (req, res) => {
     try {
         const { id } = req.params;
+        const cocktail = await pool.query("SELECT * FROM cocktails WHERE id = $1", [id]);
+        console.log(cocktail.rows[0]);
+        if (!cocktail.rows[0]) {
+            res.status(404).send("Cocktail not found!");
+        }
+        else {
+            const params = {
+                Bucket: process.env.S3_BUCKET_NAME,
+                Key: cocktail.rows[0].image_name
+            }
+            const command = new DeleteObjectCommand(params);
+            await client.send(command);
+        }
+
+        await pool.query("DELETE FROM cocktails WHERE id = $1", [id]);
         console.log("--> Deletion", id);
-        const deletedCocktail = await pool.query("DELETE FROM cocktails WHERE id = $1", [id]);
 
         res.status(200).send("Deletion successful");
     } catch (err) {
