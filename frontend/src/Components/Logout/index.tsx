@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { Dispatch, SetStateAction, useState } from "react";
 import { AxiosError } from "axios";
 import { useMutation, useQueryClient } from "react-query";
 import FormFeedback from "../Alert";
@@ -6,7 +6,11 @@ import { useNavigate } from "react-router-dom";
 import Button from "@mui/material/Button";
 import { api } from "../../axios";
 
-const Logout = () => {
+const Logout = ({
+  onClick,
+}: {
+  onClick: Dispatch<SetStateAction<boolean>>;
+}) => {
   const queryClient = useQueryClient();
   const navigate = useNavigate();
   // const [errorMessage, setErrorMessage] = useState("");
@@ -45,7 +49,14 @@ const Logout = () => {
       {/* {mutation.isError && (
         <FormFeedback severity="error" message={errorMessage} />
       )} */}
-      <Button variant="primary" type="submit" onClick={handleLogout}>
+      <Button
+        variant="primary"
+        type="submit"
+        onClick={(e) => {
+          handleLogout(e);
+          onClick(false);
+        }}
+      >
         Logout
       </Button>
     </>

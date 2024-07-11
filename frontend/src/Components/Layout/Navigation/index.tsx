@@ -127,7 +127,7 @@ const Navigation = () => {
             </List>
             {/* status !== "error" */}
             {isAuth ? (
-              <Logout />
+              <Logout onClick={setOpen} />
             ) : (
               <Stack
                 direction={{ xs: "column", md: "row" }}
