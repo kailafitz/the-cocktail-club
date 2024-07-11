@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Stack from "@mui/material/Stack";
 import Dialog from "@mui/material/Dialog";
-import { UserInterface } from "../../Interfaces";
+import { IUser } from "../../Interfaces";
 import { useMutation, useQueryClient } from "react-query";
 import { AxiosError } from "axios";
 import FormFeedback from "../Alert";
@@ -10,7 +10,7 @@ import Button from "@mui/material/Button";
 import { api } from "../../axios";
 import TextField from "@mui/material/TextField";
 
-const EditBio = ({ user }: { user: UserInterface }) => {
+const EditBio = ({ user }: { user: IUser }) => {
   const queryClient = useQueryClient();
   const [userBio, setUserBio] = useState<string>("");
   const [errorMessage, setErrorMessage] = useState("");

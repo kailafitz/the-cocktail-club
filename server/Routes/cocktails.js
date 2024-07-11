@@ -1,41 +1,59 @@
 import express from "express";
 import { pool } from "../db.js";
 import { ensureAuthenticated } from "./auth.js";
-import { PutObjectCommand, S3Client } from "@aws-sdk/client-s3";
-import { fromCognitoIdentityPool } from "@aws-sdk/credential-providers";
-import { Upload } from "@aws-sdk/lib-storage";
-
-const client = new S3Client({
-    region: "us-east-1",
-    credentials: fromCognitoIdentityPool({
-        clientConfig: { region: process.env.S3_REGION },
-        identityPoolId: process.env.S3_IDENTITY_POOL_ID,
-    }),
-});
+import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
+import { S3Client, PutObjectCommand, GetObjectCommand } from "@aws-sdk/client-s3";
+import multer from "multer";
+import crypto from "crypto";
 
 const cocktailRouter = express.Router();
 
+// let s3Config = { region: "us-east-1", credentials: fromCognitoIdentityPool({ clientConfig: { region: process.env.S3_REGION }, identityPoolId: process.env.S3_IDENTITY_POOL_ID }) }
+let s3Config = { region: "us-east-1", credentials: { accessKeyId: process.env.S3_ACCESS_KEY, secretAccessKey: process.env.S3_SECRET_ACCESS_KEY } }
+const client = new S3Client(s3Config);
+
+// Create a storage strategy for multer
+const storage = multer.memoryStorage();
+// Create a multer instance with the storage strategy
+const upload = multer({ storage: storage });
+
+const randomImageName = (bytes = 32) => crypto.randomBytes(bytes).toString("hex");
+
+export function uploadFile(fileName, fileBuffer, mimetype) {
+    const params = {
+        Bucket: process.env.S3_BUCKET_NAME,
+        Key: fileName,
+        Body: fileBuffer,
+        contentType: mimetype
+    }
+
+    return client.send(new PutObjectCommand(params));
+}
+
 // Create cocktail
-cocktailRouter.post("/api/create-cocktail", ensureAuthenticated, async (req, res) => {
+cocktailRouter.post("/api/create-cocktail", ensureAuthenticated, upload.single("data[image]"), async (req, res) => {
     try {
         const { data } = req.body;
 
-        const command = new PutObjectCommand({
-            Bucket: process.env.S3_BUCKET_NAME,
-            Key: req.user.id.toString(),
-            Body: req.body.img,
-        });
+        const imageName = `${randomImageName()}_${req.file.originalname}`;
 
-        const response = await client.send(command);
-        console.log("data", data, response);
+        uploadFile(imageName, req.file.buffer, req.file.mimetype);
+
+        const params = {
+            Bucket: process.env.S3_BUCKET_NAME,
+            Key: imageName,
+        }
+        const command = new GetObjectCommand(params);
+
+        const imageUrl = await getSignedUrl(client, command);
 
         const newCocktail = await pool.query(
-            "INSERT INTO cocktails (name, category, created_by, ingredients, instructions) VALUES ($1, $2, $3, $4, $5) RETURNING *",
-            [data.name, data.category, req.user.id, data.ingredients, data.instructions]
+            "INSERT INTO cocktails (name, category, created_by, ingredients, instructions, image_name, image_url) VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING *",
+            [data.name, data.category, req.user.id, data.ingredients, data.instructions, imageName, imageUrl]
         );
 
         if (newCocktail.rows[0]) {
-            console.log("--> New cocktail added ->\n", newCocktail.rows[0]);
+            // console.log("--> New cocktail added ->\n", newCocktail.rows[0]);
             res.status(200).send("Success");
         }
     } catch (err) {

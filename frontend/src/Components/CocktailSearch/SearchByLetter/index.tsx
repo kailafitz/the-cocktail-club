@@ -2,11 +2,11 @@ import React from "react";
 import Button from "@mui/material/Button";
 import axios from "axios";
 import { StyledContainer } from "./styles";
-import { CocktailDbInterface } from "../../../Interfaces";
+import { ICocktailDb } from "../../../Interfaces";
 import { scrollToResults } from "../../../Helper";
 
 interface SearchByLetterProps {
-  searchByLetter: (data: CocktailDbInterface[]) => void;
+  searchByLetter: (data: ICocktailDb[]) => void;
 }
 
 const SearchByLetter = (props: SearchByLetterProps) => {
@@ -24,10 +24,7 @@ const SearchByLetter = (props: SearchByLetterProps) => {
     let drinks = res !== null ? res.data.drinks : [];
     let sortedDrinks = [];
     if (drinks && drinks.length > 1) {
-      sortedDrinks = drinks.sort(function (
-        a: CocktailDbInterface,
-        b: CocktailDbInterface
-      ) {
+      sortedDrinks = drinks.sort(function (a: ICocktailDb, b: ICocktailDb) {
         if (a.strDrink < b.strDrink) {
           return -1;
         }

@@ -72,7 +72,9 @@ export const createTables = async () => {
                     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
                     category VARCHAR(100),
                     ingredients VARCHAR(255)[],
-                    instructions VARCHAR(255)[]
+                    instructions VARCHAR(255)[],
+                    image_name VARCHAR(500),
+                    image_url VARCHAR(500)
                 );
             `);
             console.log("Created 'cocktails' table");

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Stack from "@mui/material/Stack";
-import { CocktailCustomInterface } from "../../Interfaces";
+import { ICocktailCustom, ICocktailUpload } from "../../Interfaces";
 import { useMutation, useQueryClient } from "react-query";
 import { AxiosError } from "axios";
 import { useNavigate } from "react-router-dom";
@@ -32,13 +32,13 @@ const CreateCocktailForm = () => {
   const queryClient = useQueryClient();
   const navigate = useNavigate();
   const [errorMessage, setErrorMessage] = useState("");
-  const [cocktail, setCocktail] = useState<CocktailCustomInterface>({
+  const [cocktail, setCocktail] = useState<ICocktailUpload>({
     id: 0,
     name: "",
     category: "Alcoholic",
     ingredients: [],
     instructions: [],
-    img: undefined,
+    image: null,
   });
   const [open, setOpen] = useState(false);
 
@@ -51,14 +51,14 @@ const CreateCocktailForm = () => {
   };
 
   const mutation = useMutation({
-    mutationFn: (data: CocktailCustomInterface) => {
+    mutationFn: (data: ICocktailCustom) => {
       return api.post(
         "api/create-cocktail",
         { data },
         {
           withCredentials: true,
           headers: {
-            "Content-Type": "application/json",
+            "Content-Type": "multipart/form-data",
             "Access-Control-Allow-Origin": "*",
           },
         }
@@ -98,6 +98,7 @@ const CreateCocktailForm = () => {
       <Dialog open={open} id="create-cocktail">
         <Stack
           component="form"
+          encType="multipart/form-data"
           noValidate
           autoComplete="off"
           onSubmit={handleCreate}
@@ -159,13 +160,20 @@ const CreateCocktailForm = () => {
               {/* Upload file */}
               <VisuallyHiddenInput
                 type="file"
+                name="image"
                 onChange={(event) =>
-                  setCocktail({ ...cocktail, img: event.target.value })
+                  setCocktail({
+                    ...cocktail,
+                    image: event.target.files ? event.target.files[0] : null,
+                  })
                 }
               />
             </Button>
             <Typography variant="body2">
-              File uploaded: {cocktail.img?.toString()}
+              File uploaded:{" "}
+              {typeof cocktail.image === "object" && cocktail.image
+                ? cocktail.image.name
+                : null}
             </Typography>
           </Stack>
           <Button variant="primary" type="submit" onClick={handleClose}>

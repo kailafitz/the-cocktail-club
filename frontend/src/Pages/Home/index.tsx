@@ -6,7 +6,7 @@ import Error from "../../Components/Status/Error";
 import ViewHeightContainer from "../../Components/Layout/ViewHeightContainer";
 import Typography from "@mui/material/Typography";
 import Stack from "@mui/material/Stack";
-import { CocktailDbInterface } from "../../Interfaces";
+import { ICocktailDb } from "../../Interfaces";
 import { wait } from "@testing-library/user-event/dist/utils";
 import Button from "@mui/material/Button";
 
@@ -69,7 +69,7 @@ export const Home: React.FC = () => {
   return (
     <>
       <Stack pt={10} flexGrow={1} direction="column">
-        {data.map((drink: CocktailDbInterface) => {
+        {data.map((drink: ICocktailDb) => {
           return (
             <React.Fragment key={drink.idDrink}>
               <Stack direction="column" justifyContent="center">

@@ -9,12 +9,12 @@ import Grow from "@mui/material/Grow";
 import Paper from "@mui/material/Paper";
 import Stack from "@mui/material/Stack";
 import Popper from "@mui/material/Popper";
-import { CocktailDbInterface } from "../../../Interfaces";
+import { ICocktailDb } from "../../../Interfaces";
 import { scrollToResults } from "../../../Helper";
 import Button from "@mui/material/Button";
 
 interface SearchByNameProps {
-  searchByName: (data: CocktailDbInterface[]) => void;
+  searchByName: (data: ICocktailDb[]) => void;
 }
 
 const SearchByName = (props: SearchByNameProps) => {

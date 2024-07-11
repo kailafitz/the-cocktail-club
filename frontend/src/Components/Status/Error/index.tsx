@@ -1,9 +1,9 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { Typography } from "@mui/material";
-import { ErrorInterface } from "../../../Interfaces";
+import { IError } from "../../../Interfaces";
 
-const Error = (props: ErrorInterface) => {
+const Error = (props: IError) => {
   return (
     <>
       <Typography variant="h3" align="center">

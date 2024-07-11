@@ -1,5 +1,5 @@
 import { useQuery } from "react-query";
-import { SearchHookInterface } from "../Interfaces";
+import { ISearchHook } from "../Interfaces";
 import { api } from "../axios";
 import axios from "axios";
 import { REACT_APP_BASE_URL } from "../config";
@@ -12,7 +12,7 @@ export const scrollToResults = () => {
   }, 1000);
 };
 
-export const useSearch = (props: SearchHookInterface) => {
+export const useSearch = (props: ISearchHook) => {
   let apiDb = `https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=`;
   let customDb = `api/cocktails/`;
 
@@ -57,8 +57,10 @@ export const useSearch = (props: SearchHookInterface) => {
           props.dbType !== "custom"
             ? undefined
             : `${res.data.user.first_name} ${res.data.user.last_name}`,
-        img:
-          props.dbType !== "custom" ? cocktail["strDrinkThumb"] : cocktail.img,
+        image:
+          props.dbType !== "custom"
+            ? cocktail["strDrinkThumb"]
+            : cocktail.image_url,
         category:
           props.dbType !== "custom"
             ? cocktail["strAlcoholic"]
