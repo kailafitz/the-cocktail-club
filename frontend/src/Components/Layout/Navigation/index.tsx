@@ -74,7 +74,7 @@ const Navigation = () => {
           zIndex: 7,
           transform: open
             ? "none"
-            : { xs: "translateY(-350px)", md: "translateY(-120px)" },
+            : { xs: "translateY(-410px)", md: "translateY(-120px)" },
           transition: "transform .6s ease-in-out",
         }}
       >
@@ -84,7 +84,7 @@ const Navigation = () => {
           sx={{
             minHeight: "98px",
             justifyContent: "center",
-            pb: { xs: 1, md: 0 },
+            pb: { xs: 5, md: 0 },
           }}
         >
           <Toolbar
@@ -102,9 +102,9 @@ const Navigation = () => {
                 flexDirection: { xs: "column", md: "row" },
                 alignItems: "center",
                 ml: { xs: 0, md: 5 },
-                "a:not(:last-child)": {
+                a: {
                   mb: { xs: 3, md: 0 },
-                  "&:after": {
+                  "&:not(:last-child):after": {
                     content: { xs: "''", md: "'|'" },
                     mx: { xs: 0, md: 1 },
                     opacity: 0.3,
