@@ -43,6 +43,7 @@ const theme = createTheme({
     },
     h3: {
       fontFamily: "Work Sans",
+      fontWeight: 300,
     },
     h4: {
       fontFamily: "Work Sans",
@@ -58,7 +59,7 @@ const theme = createTheme({
       fontFamily: "Work Sans",
     },
     body2: {
-      fontFamily: "Work Sans",
+      fontFamily: "'Cinzel Decorative', serif",
     },
     subtitle1: {
       fontFamily: "Work Sans",
@@ -148,6 +149,21 @@ const theme = createTheme({
               "&:before": {
                 width: "100%",
               },
+            },
+          },
+        },
+        {
+          props: { variant: "minimal" },
+          style: {
+            textTransform: "inherit",
+            color: "#EBD69C",
+            fontFamily: "'Work Sans'",
+            fontWeight: 300,
+            fontSize: "2rem",
+            padding: 0,
+            "span svg": {
+              fontSize: "2rem !important",
+              marginLeft: "5px !important",
             },
           },
         },

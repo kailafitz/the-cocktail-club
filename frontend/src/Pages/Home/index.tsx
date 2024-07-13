@@ -6,21 +6,24 @@ import Error from "../../Components/Status/Error";
 import ViewHeightContainer from "../../Components/Layout/ViewHeightContainer";
 import Typography from "@mui/material/Typography";
 import Stack from "@mui/material/Stack";
-import { ICocktailDb } from "../../Interfaces";
+import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import { wait } from "@testing-library/user-event/dist/utils";
 import Button from "@mui/material/Button";
+import Lights from "../../Components/Lights";
+import Box from "@mui/material/Box";
+import { ICocktailDb } from "../../Interfaces";
 
 const dailyDrinks = [
-  "12130",
+  // "12130",
   "12756",
   "11149",
-  "13024",
-  "13847",
+  // "13024",
+  // "13847",
   "178350",
   "15743",
   "12162",
-  "16985",
-  "12107",
+  // "16985",
+  // "12107",
   "178354",
   "11602",
   "17252",
@@ -68,75 +71,88 @@ export const Home: React.FC = () => {
 
   return (
     <>
-      <ViewHeightContainer pt>
-        <Stack direction="column" justifyContent="center">
+      <ViewHeightContainer
+        pt
+        sx={{ justifyContent: "space-between", flexDirection: "column" }}
+      >
+        <Stack direction="column">
           <Typography
             variant="h1"
             align="left"
             sx={{
-              fontSize: { xs: "3rem", md: "8rem" },
+              fontSize: { xs: "3rem", md: "9rem" },
             }}
             className="onLoadAnimation"
           >
-            Indulge in the mastery
+            Indulge in
+            <br />
+            the mastery
           </Typography>
         </Stack>
-        <Typography
-          variant="body1"
-          align="left"
-          mb={1}
-          sx={
-            {
-              // fontSize: { xs: "1.2rem" },
-              // opacity: 0,
-            }
-          }
-        >
-          Curating the careful craft of cocktails since 1898
-        </Typography>
-        <Typography
-          variant="body1"
-          color="white"
-          align="left"
-          mb={2}
-          // sx={{ opacity: 0 }}
-        >
-          Search our extensive range of luxury cocktails
-        </Typography>
+        <div>
+          <Typography variant="h4" align="left" mb={5}>
+            Curating the careful craft of cocktails since 1898
+          </Typography>
+          <Stack direction="row" alignItems="center" spacing={4}>
+            <Stack direction="row" alignItems="center" spacing={1}>
+              <img src="/laurel.png" alt="Award Icon" />
+              <Typography variant="body2">
+                2024 Bartender Spirits awards
+              </Typography>
+            </Stack>
+            <Stack direction="row" alignItems="center" spacing={1}>
+              <img src="/laurel.png" alt="Award Icon" />
+              <Typography variant="body2">
+                2024 Bartender Spirits awards
+              </Typography>
+            </Stack>
+          </Stack>
+        </div>
         <Stack
           direction={{ xs: "column", md: "row" }}
-          spacing={{ xs: 1, sm: 2 }}
+          spacing={{ xs: 1, sm: 5 }}
         >
-          <Button variant="primary" href="/search">
-            Search
+          <Button
+            variant="minimal"
+            href="/search"
+            endIcon={<ArrowForwardIcon />}
+          >
+            Find a cocktail
           </Button>
-          <Button variant="primary" href="/">
+          <Button variant="minimal" href="/" endIcon={<ArrowForwardIcon />}>
             Join a masterclass
           </Button>
         </Stack>
-        {data.map((drink: ICocktailDb) => {
-          return (
-            <React.Fragment key={drink.idDrink}>
-              {/* <FlexboxColumn sx={{ padding: 3 }}>
-                    <ImageContainer>
-                      <img src={drink.strDrinkThumb} alt="Drink of the Day" />
-                    </ImageContainer>
-                    <Button
-                      // noWrap
-                      sx={{
-                        textTransform: "capitalize",
-                        marginTop: { xs: "-5rem", md: "-7rem" },
-                        fontSize: { xs: "2.5rem", lg: "4rem" },
-                      }}
-                      href={`drink/${drink.idDrink}/details`}
-                    >
-                      {drink.strDrink}
-                    </Button>
-                  </FlexboxColumn> */}
-            </React.Fragment>
-          );
-        })}
+        <Lights />
       </ViewHeightContainer>
+      {data.map((drink: ICocktailDb) => {
+        return (
+          <React.Fragment key={drink.idDrink}>
+            <Box
+              sx={{
+                background: `url(${drink.strDrinkThumb}) no-repeat center / cover`,
+                position: "absolute",
+                top: 0,
+                right: 0,
+                height: "100%",
+                width: "20%",
+                zIndex: -1,
+              }}
+            />
+            {/* <Button
+                  // noWrap
+                  sx={{
+                    textTransform: "capitalize",
+                    marginTop: { xs: "-5rem", md: "-7rem" },
+                    fontSize: { xs: "2.5rem", lg: "4rem" },
+                  }}
+                  href={`drink/${drink.idDrink}/details`}
+                >
+                  {drink.strDrink}
+                </Button> */}
+          </React.Fragment>
+        );
+      })}
     </>
   );
 };
