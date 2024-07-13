@@ -19,6 +19,8 @@ CREATE TABLE cocktails (
     category VARCHAR(50),
     ingredients VARCHAR(50)[],
     instructions VARCHAR(255)[],
+    image_name VARCHAR(500),
+    image_url VARCHAR(500),
     FOREIGN KEY (created_by) REFERENCES users(id)
 );
 

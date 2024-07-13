@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Stack from "@mui/material/Stack";
-import { SignUpInterface } from "../../Interfaces";
+import { ISignUp } from "../../Interfaces";
 import FormFeedback from "../../Components/Alert";
 import ViewHeightContainer from "../../Components/Layout/ViewHeightContainer";
 import { useMutation, useQueryClient } from "react-query";
@@ -14,7 +14,7 @@ import TextField from "@mui/material/TextField";
 const SignupUser = () => {
   const queryClient = useQueryClient();
   const navigate = useNavigate();
-  const [user, setUser] = useState<SignUpInterface>({
+  const [user, setUser] = useState<ISignUp>({
     id: 0,
     email: "",
     firstName: "",
@@ -25,7 +25,7 @@ const SignupUser = () => {
   const [errorMessage, setErrorMessage] = useState("");
 
   const mutation = useMutation({
-    mutationFn: (data: SignUpInterface) => {
+    mutationFn: (data: ISignUp) => {
       return api.post(
         "api/sign-up",
         {

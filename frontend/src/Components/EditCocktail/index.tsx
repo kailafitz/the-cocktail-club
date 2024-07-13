@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Stack from "@mui/material/Stack";
 import Dialog from "@mui/material/Dialog";
-import { CocktailCustomInterface } from "../../Interfaces";
+import { ICocktailCustom } from "../../Interfaces";
 import { useMutation, useQueryClient } from "react-query";
 import { AxiosError } from "axios";
 import FormFeedback from "../Alert";
@@ -10,7 +10,7 @@ import Button from "@mui/material/Button";
 import { api } from "../../axios";
 import TextField from "@mui/material/TextField";
 
-const EditCocktail = ({ cocktail }: { cocktail: CocktailCustomInterface }) => {
+const EditCocktail = ({ cocktail }: { cocktail: ICocktailCustom }) => {
   const queryClient = useQueryClient();
   const [updatedCocktail, setUpdatedCocktail] = useState(cocktail);
   const [errorMessage, setErrorMessage] = useState("");
@@ -25,7 +25,7 @@ const EditCocktail = ({ cocktail }: { cocktail: CocktailCustomInterface }) => {
   };
 
   const mutation = useMutation({
-    mutationFn: (data: CocktailCustomInterface) => {
+    mutationFn: (data: ICocktailCustom) => {
       return api.put(
         `api/cocktail/${cocktail.id}`,
         { data },

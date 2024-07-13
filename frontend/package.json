@@ -4,6 +4,9 @@
   "proxy": "http://127.0.0.1:5001",
   "private": true,
   "dependencies": {
+    "@aws-sdk/client-s3": "^3.613.0",
+    "@aws-sdk/credential-providers": "^3.613.0",
+    "@aws-sdk/s3-request-presigner": "^3.613.0",
     "@emotion/react": "^11.10.5",
     "@emotion/styled": "^11.10.5",
     "@mui/icons-material": "^5.11.0",

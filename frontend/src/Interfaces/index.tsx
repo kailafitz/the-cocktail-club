@@ -1,10 +1,10 @@
 import { ReactNode } from "react";
 
-export interface ErrorInterface {
+export interface IError {
   message: string;
 }
 
-export interface ViewHeightContainerInterface {
+export interface IViewHeightContainer {
   children?: React.ReactNode | string;
   vh?: boolean;
   sx?: Object;
@@ -12,16 +12,7 @@ export interface ViewHeightContainerInterface {
   pt?: boolean;
 }
 
-export interface CocktailCardInterface {
-  id: string;
-  img: string;
-  name?: string;
-  category?: string;
-  db: string;
-  createdBy?: string;
-}
-
-export interface CocktailDbInterface {
+export interface ICocktailDb {
   [key: string]: string;
   idDrink: string;
   strDrinkThumb: string;
@@ -29,25 +20,42 @@ export interface CocktailDbInterface {
   strAlcoholic: string;
 }
 
-export interface CocktailCustomInterface {
+export interface ICocktailCustom {
   id: number;
   name: string;
+  createdBy?: string;
   category: "Alcoholic" | "Non-alcoholic";
   ingredients: string[];
   instructions: string[];
 }
 
-export interface UserInterface extends LoginInterface {
+export interface ICocktailUpload extends ICocktailCustom {
+  image: File | null;
+}
+
+export interface ICocktailDownload extends ICocktailCustom {
+  image_url: string;
+}
+
+export interface ICocktailCard {
+  id: string;
+  name: string;
+  image: string;
+  category?: string;
+  db: string;
+}
+
+export interface IUser extends ILogin {
   bio: string;
 }
 
-export interface LoginInterface {
+export interface ILogin {
   id: number;
   email: string;
   password: string;
 }
 
-export interface SignUpInterface {
+export interface ISignUp {
   id: number;
   firstName: string;
   lastName: string;
@@ -56,12 +64,12 @@ export interface SignUpInterface {
   confirmPassword: string;
 }
 
-export interface SearchHookInterface {
+export interface ISearchHook {
   id: string;
   dbType: "custom" | "apidb";
 }
 
-export interface AuthState {
+export interface IAuthState {
   user: {} | null;
   isAuthenticated: boolean;
   loading: boolean;
