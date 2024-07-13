@@ -33,12 +33,10 @@ export const Search = () => {
           <MenuItem value="letter">Search By Letter</MenuItem>
         </Select>
         {searchMethod === "ingredient" && (
-          <SearchByIngredient searchByIngredient={setResults} />
+          <SearchByIngredient searchBy={setResults} />
         )}
-        {searchMethod === "name" && <SearchByName searchByName={setResults} />}
-        {searchMethod === "letter" && (
-          <SearchByLetter searchByLetter={setResults} />
-        )}
+        {searchMethod === "name" && <SearchByName searchBy={setResults} />}
+        {searchMethod === "letter" && <SearchByLetter searchBy={setResults} />}
         <ScrollTop />
 
         <Stack

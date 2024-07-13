@@ -1,7 +1,15 @@
-import { ReactNode } from "react";
+import { Dispatch, ReactNode, SetStateAction } from "react";
 
 export interface IError {
   message: string;
+}
+
+export interface ILogout {
+  onClick: Dispatch<SetStateAction<boolean>>;
+}
+
+export interface ISearchBy {
+  searchBy: (data: ICocktailDb[]) => void;
 }
 
 export interface IViewHeightContainer {

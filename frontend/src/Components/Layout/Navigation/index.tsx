@@ -43,8 +43,10 @@ const authRoutes = [
 ];
 
 const Navigation = () => {
-  const { isAuth, status } = useAuthentication();
+  const { isAuth } = useAuthentication();
   const [open, setOpen] = useState(false);
+
+  console.log(open);
 
   return (
     <>

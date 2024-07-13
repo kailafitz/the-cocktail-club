@@ -1,7 +1,7 @@
 import React from "react";
 import { useQuery } from "react-query";
 import Grid from "@mui/material/Unstable_Grid2";
-import { ICocktailCustom, ICocktailDownload } from "../../Interfaces";
+import { ICocktailDownload } from "../../Interfaces";
 import CocktailCard from "../CocktailCard";
 import ViewHeightContainer from "../Layout/ViewHeightContainer";
 import Loading from "../Status/Loading";

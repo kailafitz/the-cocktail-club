@@ -2,14 +2,11 @@ import React from "react";
 import Button from "@mui/material/Button";
 import axios from "axios";
 import { StyledContainer } from "./styles";
-import { ICocktailDb } from "../../../Interfaces";
+import { ICocktailDb, ISearchBy } from "../../../Interfaces";
 import { scrollToResults } from "../../../Helper";
+import PropTypes from "prop-types";
 
-interface SearchByLetterProps {
-  searchByLetter: (data: ICocktailDb[]) => void;
-}
-
-const SearchByLetter = (props: SearchByLetterProps) => {
+const SearchByLetter = (props: ISearchBy) => {
   let letters: string[] = [];
 
   for (let i = 65; i < 91; i++) {
@@ -34,7 +31,7 @@ const SearchByLetter = (props: SearchByLetterProps) => {
         return 0;
       });
     }
-    props.searchByLetter(sortedDrinks);
+    props.searchBy(sortedDrinks);
   };
 
   return (
@@ -67,6 +64,10 @@ const SearchByLetter = (props: SearchByLetterProps) => {
       ))}
     </StyledContainer>
   );
+};
+
+SearchByLetter.propTypes = {
+  searchBy: PropTypes.func,
 };
 
 export default SearchByLetter;

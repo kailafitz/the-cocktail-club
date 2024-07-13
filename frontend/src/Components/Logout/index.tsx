@@ -1,19 +1,18 @@
-import React, { Dispatch, SetStateAction, useState } from "react";
+import React from "react";
 import { AxiosError } from "axios";
 import { useMutation, useQueryClient } from "react-query";
-import FormFeedback from "../Alert";
+// import FormFeedback from "../Alert";
 import { useNavigate } from "react-router-dom";
 import Button from "@mui/material/Button";
 import { api } from "../../axios";
+import PropTypes from "prop-types";
+import { ILogout } from "../../Interfaces";
 
-const Logout = ({
-  onClick,
-}: {
-  onClick: Dispatch<SetStateAction<boolean>>;
-}) => {
+const Logout = (props: ILogout) => {
   const queryClient = useQueryClient();
   const navigate = useNavigate();
   // const [errorMessage, setErrorMessage] = useState("");
+
   const mutation = useMutation({
     mutationFn: () => {
       return api.post(
@@ -54,13 +53,17 @@ const Logout = ({
         type="submit"
         onClick={(e) => {
           handleLogout(e);
-          onClick(false);
+          props.onClick(false);
         }}
       >
         Logout
       </Button>
     </>
   );
+};
+
+Logout.propTypes = {
+  onClick: PropTypes.func,
 };
 
 export default Logout;
