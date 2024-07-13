@@ -8,14 +8,14 @@ import CocktailCard from "../../Components/CocktailCard";
 import SearchByIngredient from "../../Components/CocktailSearch/SearchByIngredient";
 import ViewHeightContainer from "../../Components/Layout/ViewHeightContainer";
 import Loading from "../../Components/Status/Loading";
-import { CocktailDbInterface } from "../../Interfaces";
+import { ICocktailDb } from "../../Interfaces";
 import ScrollTop from "../../Components/ScrollToTop";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
 import SearchByName from "../../Components/CocktailSearch/SearchByName";
 
 export const Search = () => {
-  const [results, setResults] = useState<CocktailDbInterface[]>([]);
+  const [results, setResults] = useState<ICocktailDb[]>([]);
   const [searchMethod, setSearchMethod] = useState("ingredient");
 
   const handleChange = (event: SelectChangeEvent) => {
@@ -33,12 +33,10 @@ export const Search = () => {
           <MenuItem value="letter">Search By Letter</MenuItem>
         </Select>
         {searchMethod === "ingredient" && (
-          <SearchByIngredient searchByIngredient={setResults} />
+          <SearchByIngredient searchBy={setResults} />
         )}
-        {searchMethod === "name" && <SearchByName searchByName={setResults} />}
-        {searchMethod === "letter" && (
-          <SearchByLetter searchByLetter={setResults} />
-        )}
+        {searchMethod === "name" && <SearchByName searchBy={setResults} />}
+        {searchMethod === "letter" && <SearchByLetter searchBy={setResults} />}
         <ScrollTop />
 
         <Stack
@@ -50,14 +48,14 @@ export const Search = () => {
         >
           {results.length >= 1 ? (
             <Grid container spacing={6} justifyContent="center">
-              {results.map((drink: CocktailDbInterface, i: number) => {
+              {results.map((drink: ICocktailDb, i: number) => {
                 return (
                   <>
                     {drink.idDrink ? (
                       <CocktailCard
                         key={drink.idDrink}
                         id={drink.idDrink}
-                        img={drink.strDrinkThumb}
+                        image={drink.strDrinkThumb}
                         name={drink.strDrink}
                         category={drink.strAlcoholic}
                         db="api"

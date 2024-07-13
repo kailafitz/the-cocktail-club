@@ -7,18 +7,18 @@ import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Unstable_Grid2"; // Grid version 2
 import { StyledNameTypography, StyledCardContent } from "./styles";
 import PropTypes from "prop-types";
-import { CocktailCardInterface } from "../../Interfaces";
+import { ICocktailCard } from "../../Interfaces";
 import DeleteCocktail from "../DeleteCocktail";
 import Button from "@mui/material/Button";
 
-const CocktailCard = (props: CocktailCardInterface) => {
+const CocktailCard = (props: ICocktailCard) => {
   return (
     <Grid xs={12} sm={5} md={4}>
       <Card sx={{ position: "relative", minHeight: "348px" }} elevation={0}>
         <CardMedia
           component="img"
           height="100%"
-          image={props.img}
+          image={props.image}
           alt={props.name}
         />
         <StyledCardContent sx={{ p: 3 }}>
@@ -46,7 +46,7 @@ const CocktailCard = (props: CocktailCardInterface) => {
 
 CocktailCard.propTypes = {
   id: PropTypes.string.isRequired,
-  img: PropTypes.string.isRequired,
+  image: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
   category: PropTypes.string.isRequired,
   db: PropTypes.string.isRequired,

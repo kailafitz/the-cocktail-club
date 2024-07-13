@@ -2,8 +2,6 @@ import React from "react";
 import { Box, Link, Typography } from "@mui/material";
 import ViewHeightContainer from "../../Components/Layout/ViewHeightContainer";
 
-type Props = {};
-
 const images = [
   "https://images.unsplash.com/photo-1712025852300-489332162a38?q=80&w=2787&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
   "https://images.unsplash.com/photo-1594401788682-bd51cc049fb0?q=80&w=2656&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
@@ -12,7 +10,7 @@ const images = [
   "https://images.unsplash.com/photo-1666307587360-4c7a074199cd?q=80&w=2787&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
 ];
 
-const About = (props: Props) => {
+const About = () => {
   return (
     <>
       <ViewHeightContainer pt sx={{ pb: { xs: 10, sm: 0 } }}>

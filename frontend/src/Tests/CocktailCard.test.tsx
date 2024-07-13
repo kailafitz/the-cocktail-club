@@ -6,7 +6,7 @@ describe("CocktailCard", () => {
     render(
       <CocktailCard
         id="testId"
-        img="https://www.thecocktaildb.com/images/media/drink/vrwquq1478252802.jpg/preview"
+        image="https://www.thecocktaildb.com/images/media/drink/vrwquq1478252802.jpg/preview"
         name="testName"
         db="api"
       />

@@ -9,15 +9,12 @@ import Grow from "@mui/material/Grow";
 import Paper from "@mui/material/Paper";
 import Stack from "@mui/material/Stack";
 import Popper from "@mui/material/Popper";
-import { CocktailDbInterface } from "../../../Interfaces";
+import { ISearchBy } from "../../../Interfaces";
 import { scrollToResults } from "../../../Helper";
 import Button from "@mui/material/Button";
+import PropTypes from "prop-types";
 
-interface SearchByNameProps {
-  searchByName: (data: CocktailDbInterface[]) => void;
-}
-
-const SearchByName = (props: SearchByNameProps) => {
+const SearchByName = (props: ISearchBy) => {
   const [open, setOpen] = useState(false);
   const anchorRef = useRef<HTMLButtonElement>(null);
 
@@ -44,8 +41,8 @@ const SearchByName = (props: SearchByNameProps) => {
     );
     let drinks = res !== null ? res.data.drinks : [];
     setInput(name);
-    // console.log("drinks", drinks);
-    props.searchByName(drinks);
+    console.log("drinks", drinks);
+    props.searchBy(drinks);
   };
 
   useEffect(() => {
@@ -148,6 +145,10 @@ const SearchByName = (props: SearchByNameProps) => {
       </Popper>
     </>
   );
+};
+
+SearchByName.propTypes = {
+  searchBy: PropTypes.func,
 };
 
 export default SearchByName;

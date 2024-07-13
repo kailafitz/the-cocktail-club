@@ -1,9 +1,9 @@
 import React from "react";
 import { Container } from "@mui/material";
-import { ViewHeightContainerInterface } from "../../../Interfaces";
+import { IViewHeightContainer } from "../../../Interfaces";
 import PropTypes from "prop-types";
 
-const ViewHeightContainer = (props: ViewHeightContainerInterface) => {
+const ViewHeightContainer = (props: IViewHeightContainer) => {
   return (
     <Container
       sx={{

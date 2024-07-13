@@ -2,9 +2,7 @@ import React from "react";
 import ViewHeightContainer from "../../Components/Layout/ViewHeightContainer";
 import { Typography } from "@mui/material";
 
-type Props = {};
-
-const ContactUs = (props: Props) => {
+const ContactUs = () => {
   return (
     <ViewHeightContainer pt>
       <Typography

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Stack from "@mui/material/Stack";
-import { CocktailCustomInterface } from "../../Interfaces";
+import { ICocktailCustom, ICocktailUpload } from "../../Interfaces";
 import { useMutation, useQueryClient } from "react-query";
 import { AxiosError } from "axios";
 import { useNavigate } from "react-router-dom";
@@ -14,6 +14,7 @@ import { api } from "../../axios";
 import TextField from "@mui/material/TextField";
 import Dialog from "@mui/material/Dialog";
 import Box from "@mui/material/Box";
+import Typography from "@mui/material/Typography";
 
 const VisuallyHiddenInput = styled("input")({
   clip: "rect(0 0 0 0)",
@@ -31,12 +32,13 @@ const CreateCocktailForm = () => {
   const queryClient = useQueryClient();
   const navigate = useNavigate();
   const [errorMessage, setErrorMessage] = useState("");
-  const [cocktail, setCocktail] = useState<CocktailCustomInterface>({
+  const [cocktail, setCocktail] = useState<ICocktailUpload>({
     id: 0,
     name: "",
     category: "Alcoholic",
     ingredients: [],
     instructions: [],
+    image: null,
   });
   const [open, setOpen] = useState(false);
 
@@ -49,14 +51,14 @@ const CreateCocktailForm = () => {
   };
 
   const mutation = useMutation({
-    mutationFn: (data: CocktailCustomInterface) => {
+    mutationFn: (data: ICocktailCustom) => {
       return api.post(
         "api/create-cocktail",
         { data },
         {
           withCredentials: true,
           headers: {
-            "Content-Type": "application/json",
+            "Content-Type": "multipart/form-data",
             "Access-Control-Allow-Origin": "*",
           },
         }
@@ -96,6 +98,7 @@ const CreateCocktailForm = () => {
       <Dialog open={open} id="create-cocktail">
         <Stack
           component="form"
+          encType="multipart/form-data"
           noValidate
           autoComplete="off"
           onSubmit={handleCreate}
@@ -139,17 +142,40 @@ const CreateCocktailForm = () => {
               setCocktail({ ...cocktail, instructions: arr });
             }}
           />
-          <Button
-            disabled
-            component="label"
-            role={undefined}
-            variant="primary"
-            tabIndex={-1}
-            // startIcon={<CloudUploadIcon />}
+          <Stack
+            direction={{ xs: "column", md: "row" }}
+            spacing={3}
+            alignItems="center"
           >
-            Upload file
-            <VisuallyHiddenInput type="file" />
-          </Button>
+            <Button
+              // disabled
+              component="label"
+              role={undefined}
+              variant="primary"
+              tabIndex={-1}
+              startIcon={<CloudUploadIcon />}
+              fullWidth={false}
+              sx={{ span: { mr: 0 } }}
+            >
+              {/* Upload file */}
+              <VisuallyHiddenInput
+                type="file"
+                name="image"
+                onChange={(event) =>
+                  setCocktail({
+                    ...cocktail,
+                    image: event.target.files ? event.target.files[0] : null,
+                  })
+                }
+              />
+            </Button>
+            <Typography variant="body2">
+              File uploaded:{" "}
+              {typeof cocktail.image === "object" && cocktail.image
+                ? cocktail.image.name
+                : null}
+            </Typography>
+          </Stack>
           <Button variant="primary" type="submit" onClick={handleClose}>
             Add Cocktail
           </Button>

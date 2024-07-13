@@ -2,14 +2,11 @@ import React from "react";
 import Button from "@mui/material/Button";
 import axios from "axios";
 import { StyledContainer } from "./styles";
-import { CocktailDbInterface } from "../../../Interfaces";
+import { ICocktailDb, ISearchBy } from "../../../Interfaces";
 import { scrollToResults } from "../../../Helper";
+import PropTypes from "prop-types";
 
-interface SearchByLetterProps {
-  searchByLetter: (data: CocktailDbInterface[]) => void;
-}
-
-const SearchByLetter = (props: SearchByLetterProps) => {
+const SearchByLetter = (props: ISearchBy) => {
   let letters: string[] = [];
 
   for (let i = 65; i < 91; i++) {
@@ -24,10 +21,7 @@ const SearchByLetter = (props: SearchByLetterProps) => {
     let drinks = res !== null ? res.data.drinks : [];
     let sortedDrinks = [];
     if (drinks && drinks.length > 1) {
-      sortedDrinks = drinks.sort(function (
-        a: CocktailDbInterface,
-        b: CocktailDbInterface
-      ) {
+      sortedDrinks = drinks.sort(function (a: ICocktailDb, b: ICocktailDb) {
         if (a.strDrink < b.strDrink) {
           return -1;
         }
@@ -37,7 +31,7 @@ const SearchByLetter = (props: SearchByLetterProps) => {
         return 0;
       });
     }
-    props.searchByLetter(sortedDrinks);
+    props.searchBy(sortedDrinks);
   };
 
   return (
@@ -70,6 +64,10 @@ const SearchByLetter = (props: SearchByLetterProps) => {
       ))}
     </StyledContainer>
   );
+};
+
+SearchByLetter.propTypes = {
+  searchBy: PropTypes.func,
 };
 
 export default SearchByLetter;

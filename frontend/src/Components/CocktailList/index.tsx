@@ -1,7 +1,7 @@
 import React from "react";
 import { useQuery } from "react-query";
 import Grid from "@mui/material/Unstable_Grid2";
-import { CocktailCustomInterface } from "../../Interfaces";
+import { ICocktailDownload } from "../../Interfaces";
 import CocktailCard from "../CocktailCard";
 import ViewHeightContainer from "../Layout/ViewHeightContainer";
 import Loading from "../Status/Loading";
@@ -43,25 +43,22 @@ const CocktailList = () => {
     );
   }
 
+  console.log(data);
+
   return (
     <ViewHeightContainer sx={{ py: 5 }} center>
       <Grid container spacing={6} justifyContent="center" id="results">
         {data.length > 0 ? (
           data
-            .sort(
-              (a: CocktailCustomInterface, b: CocktailCustomInterface) =>
-                b.id - a.id
-            )
-            .map((cocktail: CocktailCustomInterface, i: number) => {
+            .sort((a: ICocktailDownload, b: ICocktailDownload) => b.id - a.id)
+            .map((cocktail: ICocktailDownload) => {
               return (
                 <CocktailCard
                   key={cocktail.id}
                   id={cocktail.id.toString()}
                   name={cocktail.name}
                   category={cocktail.category}
-                  img={
-                    "https://images.unsplash.com/photo-1560512823-829485b8bf24?q=80&w=2787&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-                  }
+                  image={cocktail.image_url}
                   db="custom"
                 />
               );

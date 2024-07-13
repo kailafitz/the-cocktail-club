@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Stack from "@mui/material/Stack";
-import { LoginInterface } from "../../Interfaces";
+import { ILogin } from "../../Interfaces";
 import ViewHeightContainer from "../../Components/Layout/ViewHeightContainer";
 import { AxiosError } from "axios";
 import { useMutation, useQueryClient } from "react-query";
@@ -14,7 +14,7 @@ import { api } from "../../axios";
 const LoginUser = () => {
   const queryClient = useQueryClient();
   const navigate = useNavigate();
-  const [user, setUser] = useState<LoginInterface>({
+  const [user, setUser] = useState<ILogin>({
     id: 0,
     email: "",
     password: "",
@@ -22,7 +22,7 @@ const LoginUser = () => {
   const [errorMessage, setErrorMessage] = useState("");
 
   const mutation = useMutation({
-    mutationFn: (data: LoginInterface) => {
+    mutationFn: (data: ILogin) => {
       return api.post(
         "api/login",
         {

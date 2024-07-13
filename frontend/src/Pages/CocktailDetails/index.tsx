@@ -130,7 +130,7 @@ export const CocktailDetails = () => {
         </Grid>
       </Grid>
       <StyledDivider />
-      <StyledImage src={data?.img} alt="drink image" />
+      <StyledImage src={data?.image} alt="drink image" />
     </ViewHeightContainer>
   );
 };

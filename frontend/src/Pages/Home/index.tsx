@@ -6,7 +6,7 @@ import Error from "../../Components/Status/Error";
 import ViewHeightContainer from "../../Components/Layout/ViewHeightContainer";
 import Typography from "@mui/material/Typography";
 import Stack from "@mui/material/Stack";
-import { CocktailDbInterface } from "../../Interfaces";
+import { ICocktailDb } from "../../Interfaces";
 import { wait } from "@testing-library/user-event/dist/utils";
 import Button from "@mui/material/Button";
 
@@ -74,20 +74,35 @@ export const Home: React.FC = () => {
             variant="h1"
             align="left"
             sx={{
-              fontSize: { xs: "3rem", md: "9rem" },
+              fontSize: { xs: "3rem", md: "8rem" },
             }}
             className="onLoadAnimation"
           >
-            Indulge in
-            <br /> the mastery
+            Indulge in the mastery
           </Typography>
         </Stack>
-        <Typography variant="h4" align="left" mb={1}>
+        <Typography
+          variant="body1"
+          align="left"
+          mb={1}
+          sx={
+            {
+              // fontSize: { xs: "1.2rem" },
+              // opacity: 0,
+            }
+          }
+        >
           Curating the careful craft of cocktails since 1898
         </Typography>
-        <Stack direction="row">
-          <img src="" />
-        </Stack>
+        <Typography
+          variant="body1"
+          color="white"
+          align="left"
+          mb={2}
+          // sx={{ opacity: 0 }}
+        >
+          Search our extensive range of luxury cocktails
+        </Typography>
         <Stack
           direction={{ xs: "column", md: "row" }}
           spacing={{ xs: 1, sm: 2 }}
