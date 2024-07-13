@@ -33,10 +33,10 @@ const About = () => {
           database created by users.
           <br />
           This is a Node.js application with a React frontend. I'm using
-          React-Query to fetch and post data. A PostgreSQL database is hosted on
-          Render to allow for user custom creations. Passport.js authentication
-          is also utilised for users to sign up and start creating their own
-          library of custom cocktails.
+          React-Query to fetch and post data. A PostgreSQL database to allow for
+          user custom creations. Passport.js authentication is also utilised for
+          users to sign up and start creating their own library of custom
+          cocktails.
           <br />
           The data is not always of high quality from the CocktailDb API so
           there are caveats with formatting as you will see.
