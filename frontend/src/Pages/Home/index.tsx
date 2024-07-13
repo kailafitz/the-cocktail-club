@@ -75,7 +75,10 @@ export const Home: React.FC = () => {
     <>
       <ViewHeightContainer
         pt
-        sx={{ justifyContent: "space-between", flexDirection: "column" }}
+        sx={{
+          justifyContent: "space-between",
+          flexDirection: "column",
+        }}
       >
         <Stack direction="column">
           <Typography
@@ -90,7 +93,7 @@ export const Home: React.FC = () => {
             <br className="break" /> the mastery
           </Typography>
         </Stack>
-        <div>
+        <Box className="onLoadAnimation-2" sx={{ opacity: 0 }}>
           <Typography variant="h4" align="left" mb={2}>
             Curating the careful craft of cocktails since 1898
           </Typography>
@@ -108,8 +111,10 @@ export const Home: React.FC = () => {
               </Typography>
             </Stack>
           </Stack>
-        </div>
+        </Box>
         <Stack
+          className="onLoadAnimation-3"
+          sx={{ opacity: 0 }}
           direction={{ xs: "column", md: "row" }}
           spacing={{ xs: 1, sm: 5 }}
         >
@@ -131,17 +136,25 @@ export const Home: React.FC = () => {
           <React.Fragment key={drink.idDrink}>
             <Box
               sx={{
-                display: { xs: "none", md: "block" },
-                background: `url(${drink.strDrinkThumb}) no-repeat center / cover`,
+                borderLeft: `2px solid ${theme.palette.primary.main}`,
                 position: "absolute",
+                display: { xs: "none", md: "block" },
                 top: 0,
                 right: 0,
                 height: "100%",
                 width: "10%",
                 zIndex: -1,
-                borderLeft: `2px solid ${theme.palette.primary.main}`,
               }}
-            />
+            >
+              <Box
+                className="onLoadImageAnimation"
+                sx={{
+                  height: "100%",
+                  transform: "translateY(-1000px)",
+                  background: `url(${drink.strDrinkThumb}) no-repeat center / cover`,
+                }}
+              />
+            </Box>
             {/* <Button
                   // noWrap
                   sx={{
