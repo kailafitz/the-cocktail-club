@@ -12,7 +12,7 @@ const ViewHeightContainer = (props: IViewHeightContainer) => {
         flexGrow: 1,
         flexDirection: "column",
         justifyContent: props.center ? "center" : "unset",
-        pt: props.pt ? 10 : 0,
+        pt: props.pt ? 15 : 0,
         ...props.sx,
       }}
     >

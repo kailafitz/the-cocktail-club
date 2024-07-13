@@ -12,14 +12,15 @@ import Button from "@mui/material/Button";
 import Lights from "../../Components/Lights";
 import Box from "@mui/material/Box";
 import { ICocktailDb } from "../../Interfaces";
+import { useTheme } from "@mui/material";
 
 const dailyDrinks = [
   // "12130",
   "12756",
-  "11149",
+  // "11149",
   // "13024",
   // "13847",
-  "178350",
+  // "178350",
   "15743",
   "12162",
   // "16985",
@@ -30,6 +31,7 @@ const dailyDrinks = [
 ];
 
 export const Home: React.FC = () => {
+  const theme = useTheme();
   const randomInt = (max: number, min: number) => {
     let randomNumber = Math.round(Math.random() * (max - min)) + min;
     return randomNumber;
@@ -130,6 +132,7 @@ export const Home: React.FC = () => {
           <React.Fragment key={drink.idDrink}>
             <Box
               sx={{
+                display: { xs: "none", md: "block" },
                 background: `url(${drink.strDrinkThumb}) no-repeat center / cover`,
                 position: "absolute",
                 top: 0,
@@ -137,6 +140,7 @@ export const Home: React.FC = () => {
                 height: "100%",
                 width: "20%",
                 zIndex: -1,
+                borderLeft: `2px solid ${theme.palette.primary.main}`,
               }}
             />
             {/* <Button

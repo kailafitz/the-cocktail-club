@@ -7,9 +7,9 @@ export const StyledAppBar = styled(AppBar)(
     display: flex;
     flex-direction: column;
     justify-content: center;
-    height: 64px;
     position: absolute;
     z-index: 1;
+    padding-top: 16px;
 `
 );
 

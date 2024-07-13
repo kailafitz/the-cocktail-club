@@ -11,6 +11,7 @@ import { Link as NavLink } from "react-router-dom";
 import Logout from "../../Logout";
 import { useAuthentication } from "../../../Helper";
 import Button from "@mui/material/Button";
+import Logo from "../../Logo";
 
 const standardRoutes = [
   {
@@ -61,31 +62,47 @@ const Navigation = () => {
           zIndex: 9,
           transition: "color .6s ease",
           p: 0,
-          pt: 1,
+          pt: 3,
           pl: 2,
         }}
       >
-        <Hamburger toggled={open} toggle={setOpen} size={20} />
+        <Hamburger toggled={open} toggle={setOpen} size={25} />
       </StyledIconButton>
       <Box
         sx={{
           bgcolor: "common.black",
           zIndex: 7,
-          transform: open ? "none" : "translateY(-80px)",
+          transform: open ? "none" : "translateY(-120px)",
           transition: "transform .6s ease-in-out",
         }}
       >
-        <AppBar position="fixed" elevation={0}>
-          <Toolbar sx={{ justifyContent: "space-between" }}>
+        <AppBar
+          position="fixed"
+          elevation={0}
+          sx={{ minHeight: "98px", justifyContent: "center" }}
+        >
+          <Toolbar
+            sx={{
+              justifyContent: "space-between",
+              display: "flex",
+              flexDirection: { xs: "column", md: "row" },
+              pt: { xs: "4rem", md: 0 },
+            }}
+          >
             <List
               sx={{
                 display: "flex",
+                width: { xs: "100%", md: "fit-content" },
+                flexDirection: { xs: "column", md: "row" },
                 alignItems: "center",
-                ml: 5,
-                "a:not(:last-child):after": {
-                  content: "'|'",
-                  mx: 1,
-                  opacity: 0.3,
+                ml: { xs: 0, md: 5 },
+                "a:not(:last-child)": {
+                  mb: { xs: 1, md: 0 },
+                  "&:after": {
+                    content: { xs: "''", md: "'|'" },
+                    mx: { xs: 0, md: 1 },
+                    opacity: 0.3,
+                  },
                 },
               }}
             >
@@ -178,7 +195,7 @@ const Navigation = () => {
           href="/"
           underline="none"
         >
-          The Cocktail Club
+          <Logo />
         </Link>
       </StyledAppBar>
     </>
