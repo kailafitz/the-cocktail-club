@@ -125,7 +125,7 @@ const Navigation = () => {
                         }}
                         onClick={() => setOpen(false)}
                         aria-label={`Link to ${link.text} page`}
-                        fontSize={{ xs: "1.5rem" }}
+                        fontSize={{ xs: "1.5rem", md: "inherit" }}
                       >
                         {link.text}
                       </Link>
@@ -144,7 +144,7 @@ const Navigation = () => {
                         sx={{ color: "common.black" }}
                         onClick={() => setOpen(false)}
                         aria-label={`Link to ${link.text} page`}
-                        fontSize={{ xs: "1.5rem" }}
+                        fontSize={{ xs: "1.5rem", md: "inherit" }}
                       >
                         {link.text}
                       </Link>
@@ -167,7 +167,7 @@ const Navigation = () => {
                   variant="primaryLight"
                   href={"/login"}
                   sx={{
-                    fontSize: { xs: "1.5rem" },
+                    fontSize: { xs: "1.5rem", md: "inherit" },
                   }}
                   onClick={() => setOpen(false)}
                   aria-label="Link to Login page"
@@ -178,7 +178,7 @@ const Navigation = () => {
                   variant="primaryLight"
                   href="/sign-up"
                   sx={{
-                    fontSize: { xs: "1.5rem" },
+                    fontSize: { xs: "1.5rem", md: "inherit" },
                   }}
                   onClick={() => setOpen(false)}
                   aria-label="Link to Sign up page"

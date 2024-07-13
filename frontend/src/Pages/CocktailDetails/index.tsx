@@ -71,7 +71,7 @@ export const CocktailDetails = () => {
         {data?.name}
       </Typography>
       {dbType === "custom" && (
-        <Typography variant="body2" sx={{ textTransform: "capitalize" }}>
+        <Typography variant="body1" sx={{ textTransform: "capitalize" }}>
           Created by: {data?.createdBy}
         </Typography>
       )}
@@ -130,7 +130,7 @@ export const CocktailDetails = () => {
         </Grid>
       </Grid>
       <StyledDivider />
-      <StyledImage src={data?.image} alt="drink image" />
+      <StyledImage src={data?.image} alt="Cocktail image" />
     </ViewHeightContainer>
   );
 };

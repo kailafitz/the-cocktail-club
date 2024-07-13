@@ -294,6 +294,7 @@ const theme = createTheme({
           paddingLeft: 0,
           color: "#EBD69C",
           borderBottom: "1px solid #EBD69C",
+          fontFamily: "'Work Sans'",
         },
       },
     },
@@ -309,6 +310,13 @@ const theme = createTheme({
       styleOverrides: {
         root: {
           backgroundColor: common.dark,
+        },
+      },
+    },
+    MuiListItemText: {
+      styleOverrides: {
+        root: {
+          fontFamily: "'Work Sans'",
         },
       },
     },

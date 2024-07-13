@@ -91,7 +91,7 @@ export const Home: React.FC = () => {
           </Typography>
         </Stack>
         <div>
-          <Typography variant="h4" align="left" mb={5}>
+          <Typography variant="h4" align="left" mb={2}>
             Curating the careful craft of cocktails since 1898
           </Typography>
           <Stack direction="row" alignItems="center" spacing={4}>

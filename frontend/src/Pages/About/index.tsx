@@ -23,16 +23,23 @@ const About = () => {
           About The Cocktail Club
         </Typography>
         <Typography variant="body1">
-          This website is using the React-Query library to fetch data from the
-          TheCocktailDB API found{" "}
+          This web app is a passion project as like many others, I do love a
+          cocktail. I've created a space specifically for the art of mixology by
+          taking the online{" "}
           <Link href="https://www.thecocktaildb.com/api.php" target="_blank">
-            here
-          </Link>
-          . Displaying certain information on the cocktails, such as the
-          "instructions", has been a challenge regarding formatting. This has
-          more to do with how the data was originally saved into the "database"
-          so to speak but you will see that I have tried to capture the
-          information as best as I can.
+            CocktailDb API
+          </Link>{" "}
+          as an "official" library of cocktails and combined it with a cocktail
+          database created by users.
+          <br />
+          This is a Node.js application with a React frontend. I'm using
+          React-Query to fetch and post data. A PostgreSQL database is hosted on
+          Render to allow for user custom creations. Passport.js authentication
+          is also utilised for users to sign up and start creating their own
+          library of custom cocktails.
+          <br />
+          The data is not always of high quality from the CocktailDb API so
+          there are caveats with formatting as you will see.
         </Typography>
       </ViewHeightContainer>
       <Box display="flex" flexDirection={{ xs: "column", sm: "row" }}>
