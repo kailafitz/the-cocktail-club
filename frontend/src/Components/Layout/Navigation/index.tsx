@@ -72,7 +72,9 @@ const Navigation = () => {
         sx={{
           bgcolor: "common.black",
           zIndex: 7,
-          transform: open ? "none" : "translateY(-120px)",
+          transform: open
+            ? "none"
+            : { xs: "translateY(-240px)", md: "translateY(-120px)" },
           transition: "transform .6s ease-in-out",
         }}
       >

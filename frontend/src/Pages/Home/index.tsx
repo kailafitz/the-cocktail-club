@@ -16,18 +16,18 @@ import { useTheme } from "@mui/material";
 
 const dailyDrinks = [
   // "12130",
-  "12756",
+  // "12756",
   // "11149",
-  // "13024",
+  "13024",
   // "13847",
   // "178350",
-  "15743",
-  "12162",
+  // "15743",
+  // "12162",
   // "16985",
   // "12107",
-  "178354",
-  "11602",
-  "17252",
+  // "178354",
+  // "11602",
+  // "17252",
 ];
 
 export const Home: React.FC = () => {
@@ -82,13 +82,12 @@ export const Home: React.FC = () => {
             variant="h1"
             align="left"
             sx={{
-              fontSize: { xs: "3rem", md: "9rem" },
+              fontSize: { xs: "4rem", md: "9rem" },
             }}
             className="onLoadAnimation"
           >
             Indulge in
-            <br />
-            the mastery
+            <br className="break" /> the mastery
           </Typography>
         </Stack>
         <div>
