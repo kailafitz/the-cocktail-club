@@ -24,8 +24,8 @@ const SearchByName = (props: SearchByNameProps) => {
   const [input, setInput] = useState<string>("");
   const [options, setOptions] = useState<string[]>([]);
 
-  console.log(input, "input");
-  console.log(options, "options");
+  // console.log(input, "input");
+  // console.log(options, "options");
 
   const getOptions = async () => {
     let arr: string[] = [];
@@ -44,7 +44,7 @@ const SearchByName = (props: SearchByNameProps) => {
     );
     let drinks = res !== null ? res.data.drinks : [];
     setInput(name);
-    console.log("drinks", drinks);
+    // console.log("drinks", drinks);
     props.searchByName(drinks);
   };
 

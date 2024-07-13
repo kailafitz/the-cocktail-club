@@ -60,7 +60,7 @@ export const Home: React.FC = () => {
 
   if (status === "error" || (status === "success" && data === null)) {
     return (
-      <ViewHeightContainer vh center>
+      <ViewHeightContainer center>
         <Error message="Apologies but something has gone wrong. Please check back later or report this to our support team at support@thecocktailclub.com. We apologise for this inconvenience and hope to back up shortly!" />
       </ViewHeightContainer>
     );
@@ -68,57 +68,40 @@ export const Home: React.FC = () => {
 
   return (
     <>
-      <Stack pt={10} flexGrow={1} direction="column">
-        {data.map((drink: CocktailDbInterface) => {
+      <ViewHeightContainer pt>
+        <Stack direction="column" justifyContent="center">
+          <Typography
+            variant="h1"
+            align="left"
+            sx={{
+              fontSize: { xs: "3rem", md: "9rem" },
+            }}
+            className="onLoadAnimation"
+          >
+            Indulge in
+            <br /> the mastery
+          </Typography>
+        </Stack>
+        <Typography variant="h4" align="left" mb={1}>
+          Curating the careful craft of cocktails since 1898
+        </Typography>
+        <Stack direction="row">
+          <img src="" />
+        </Stack>
+        <Stack
+          direction={{ xs: "column", md: "row" }}
+          spacing={{ xs: 1, sm: 2 }}
+        >
+          <Button variant="primary" href="/search">
+            Search
+          </Button>
+          <Button variant="primary" href="/">
+            Join a masterclass
+          </Button>
+        </Stack>
+        {data.map((drink: ICocktailDb) => {
           return (
             <React.Fragment key={drink.idDrink}>
-              <Stack direction="column" justifyContent="center">
-                <Typography
-                  variant="h1"
-                  align="left"
-                  sx={{
-                    fontSize: { xs: "3rem", md: "8rem" },
-                  }}
-                  className="onLoadAnimation"
-                >
-                  Indulge in the mastery
-                </Typography>
-              </Stack>
-              <Stack direction="column" justifyContent="center" p={5}>
-                <Typography
-                  variant="body1"
-                  align="left"
-                  mb={1}
-                  sx={
-                    {
-                      // fontSize: { xs: "1.2rem" },
-                      // opacity: 0,
-                    }
-                  }
-                >
-                  Curating the careful craft of cocktails since 1898
-                </Typography>
-                <Typography
-                  variant="body1"
-                  color="white"
-                  align="left"
-                  mb={2}
-                  // sx={{ opacity: 0 }}
-                >
-                  Search our extensive range of luxury cocktails
-                </Typography>
-                <Stack
-                  direction={{ xs: "column", md: "row" }}
-                  spacing={{ xs: 1, sm: 2 }}
-                >
-                  <Button variant="primary" href="/search">
-                    Search
-                  </Button>
-                  <Button variant="primary" href="/">
-                    Join a masterclass
-                  </Button>
-                </Stack>
-              </Stack>
               {/* <FlexboxColumn sx={{ padding: 3 }}>
                     <ImageContainer>
                       <img src={drink.strDrinkThumb} alt="Drink of the Day" />
@@ -138,7 +121,7 @@ export const Home: React.FC = () => {
             </React.Fragment>
           );
         })}
-      </Stack>
+      </ViewHeightContainer>
     </>
   );
 };
