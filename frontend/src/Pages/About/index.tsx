@@ -22,9 +22,7 @@ const About = () => {
         >
           About The Cocktail Club
         </Typography>
-
-        <Typography variant="body2">Well I certainly do!</Typography>
-        <Typography variant="body2">
+        <Typography variant="body1">
           This website is using the React-Query library to fetch data from the
           TheCocktailDB API found{" "}
           <Link href="https://www.thecocktaildb.com/api.php" target="_blank">

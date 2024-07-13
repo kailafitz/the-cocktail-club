@@ -74,14 +74,18 @@ const Navigation = () => {
           zIndex: 7,
           transform: open
             ? "none"
-            : { xs: "translateY(-240px)", md: "translateY(-120px)" },
+            : { xs: "translateY(-350px)", md: "translateY(-120px)" },
           transition: "transform .6s ease-in-out",
         }}
       >
         <AppBar
           position="fixed"
           elevation={0}
-          sx={{ minHeight: "98px", justifyContent: "center" }}
+          sx={{
+            minHeight: "98px",
+            justifyContent: "center",
+            pb: { xs: 1, md: 0 },
+          }}
         >
           <Toolbar
             sx={{
@@ -99,7 +103,7 @@ const Navigation = () => {
                 alignItems: "center",
                 ml: { xs: 0, md: 5 },
                 "a:not(:last-child)": {
-                  mb: { xs: 1, md: 0 },
+                  mb: { xs: 3, md: 0 },
                   "&:after": {
                     content: { xs: "''", md: "'|'" },
                     mx: { xs: 0, md: 1 },
@@ -121,6 +125,7 @@ const Navigation = () => {
                         }}
                         onClick={() => setOpen(false)}
                         aria-label={`Link to ${link.text} page`}
+                        fontSize={{ xs: "1.5rem" }}
                       >
                         {link.text}
                       </Link>
@@ -139,6 +144,7 @@ const Navigation = () => {
                         sx={{ color: "common.black" }}
                         onClick={() => setOpen(false)}
                         aria-label={`Link to ${link.text} page`}
+                        fontSize={{ xs: "1.5rem" }}
                       >
                         {link.text}
                       </Link>
@@ -155,12 +161,13 @@ const Navigation = () => {
                 sx={{
                   color: "common.black",
                 }}
+                spacing={2}
               >
                 <Button
-                  variant="primary"
+                  variant="primaryLight"
                   href={"/login"}
                   sx={{
-                    color: "common.black",
+                    fontSize: { xs: "1.5rem" },
                   }}
                   onClick={() => setOpen(false)}
                   aria-label="Link to Login page"
@@ -168,10 +175,10 @@ const Navigation = () => {
                   Login
                 </Button>
                 <Button
-                  variant="primary"
+                  variant="primaryLight"
                   href="/sign-up"
                   sx={{
-                    color: "common.black",
+                    fontSize: { xs: "1.5rem" },
                   }}
                   onClick={() => setOpen(false)}
                   aria-label="Link to Sign up page"

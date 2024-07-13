@@ -107,7 +107,7 @@ const SignupUser = () => {
                 setUser({ ...user, confirmPassword: event.target.value });
               }}
             />
-            <Button variant="primary" type="submit">
+            <Button variant="primaryDark" type="submit">
               Sign up
             </Button>
           </Stack>

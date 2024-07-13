@@ -56,7 +56,7 @@ const EditCocktail = ({ cocktail }: { cocktail: ICocktailCustom }) => {
   return (
     <div>
       <Button
-        variant="primary"
+        variant="primaryDark"
         onClick={handleClickOpen}
         data-target={cocktail.id}
       >
@@ -82,7 +82,7 @@ const EditCocktail = ({ cocktail }: { cocktail: ICocktailCustom }) => {
             }
           />
           <Button
-            variant="primary"
+            variant="primaryDark"
             fullWidth
             onClick={(event) => {
               updateCocktail(event);
@@ -90,7 +90,7 @@ const EditCocktail = ({ cocktail }: { cocktail: ICocktailCustom }) => {
           >
             Update
           </Button>
-          <Button variant="primary" fullWidth onClick={handleClose}>
+          <Button variant="primaryDark" fullWidth onClick={handleClose}>
             Close
           </Button>
         </Stack>

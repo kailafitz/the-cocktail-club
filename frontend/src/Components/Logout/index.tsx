@@ -49,7 +49,10 @@ const Logout = (props: ILogout) => {
         <FormFeedback severity="error" message={errorMessage} />
       )} */}
       <Button
-        variant="primary"
+        variant="primaryLight"
+        sx={{
+          fontSize: { xs: "1.5rem" },
+        }}
         type="submit"
         onClick={(e) => {
           handleLogout(e);

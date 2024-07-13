@@ -49,7 +49,7 @@ export const CocktailDetails = () => {
     <ViewHeightContainer pt>
       <Stack direction={{ xs: "column", md: "row" }} spacing={3}>
         <Button
-          variant="primary"
+          variant="primaryDark"
           onClick={() => navigate(-1)}
           startIcon={<ArrowBack />}
         >

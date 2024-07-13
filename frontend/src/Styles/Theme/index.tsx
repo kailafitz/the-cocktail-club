@@ -109,7 +109,7 @@ const theme = createTheme({
     MuiButton: {
       variants: [
         {
-          props: { variant: "primary" },
+          props: { variant: "primaryDark" },
           style: {
             // width: "fit-content",
             color: common.dark,
@@ -146,6 +146,50 @@ const theme = createTheme({
             "&:hover": {
               border: `#EBD69C solid 2px`,
               color: "#EBD69C",
+              "&:before": {
+                width: "100%",
+              },
+            },
+          },
+        },
+        {
+          props: { variant: "primaryLight" },
+          style: {
+            // width: "fit-content",
+            color: "#EBD69C",
+            textAlign: "center",
+            transition: "all .3s linear",
+            borderRadius: 0,
+            position: "relative",
+            overflow: "hidden",
+            zIndex: 1,
+            border: `${common.dark} solid 2px`,
+            "&:after": {
+              content: '""',
+              position: "absolute",
+              bottom: 0,
+              left: 0,
+              width: "100%",
+              height: "100%",
+              backgroundColor: common.dark,
+              zIndex: -2,
+            },
+
+            "&:before": {
+              content: '""',
+              position: "absolute",
+              bottom: 0,
+              left: 0,
+              width: "0%",
+              height: "100%",
+              backgroundColor: "#EBD69C",
+              transition: "all .3s",
+              zIndex: -1,
+            },
+
+            "&:hover": {
+              border: `${common.dark} solid 2px`,
+              color: common.dark,
               "&:before": {
                 width: "100%",
               },

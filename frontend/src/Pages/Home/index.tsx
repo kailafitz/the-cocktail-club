@@ -137,7 +137,7 @@ export const Home: React.FC = () => {
                 top: 0,
                 right: 0,
                 height: "100%",
-                width: "20%",
+                width: "10%",
                 zIndex: -1,
                 borderLeft: `2px solid ${theme.palette.primary.main}`,
               }}

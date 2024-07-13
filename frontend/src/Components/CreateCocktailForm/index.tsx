@@ -88,7 +88,7 @@ const CreateCocktailForm = () => {
     <>
       <Box>
         <Button
-          variant="primary"
+          variant="primaryDark"
           onClick={handleClickOpen}
           data-target="create-cocktail"
         >
@@ -151,7 +151,7 @@ const CreateCocktailForm = () => {
               // disabled
               component="label"
               role={undefined}
-              variant="primary"
+              variant="primaryDark"
               tabIndex={-1}
               startIcon={<CloudUploadIcon />}
               fullWidth={false}
@@ -176,10 +176,10 @@ const CreateCocktailForm = () => {
                 : null}
             </Typography>
           </Stack>
-          <Button variant="primary" type="submit" onClick={handleClose}>
+          <Button variant="primaryDark" type="submit" onClick={handleClose}>
             Add Cocktail
           </Button>
-          <Button variant="primary" onClick={handleClose}>
+          <Button variant="primaryDark" onClick={handleClose}>
             Cancel
           </Button>
         </Stack>

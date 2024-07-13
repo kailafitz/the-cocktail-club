@@ -55,7 +55,7 @@ const EditBio = ({ user }: { user: IUser }) => {
   return (
     <>
       <Button
-        variant="primary"
+        variant="primaryDark"
         fullWidth
         onClick={handleClickOpen}
         data-target={user.id.toString()}
@@ -80,7 +80,7 @@ const EditBio = ({ user }: { user: IUser }) => {
             onChange={(event) => setUserBio(event.target.value)}
           />
           <Button
-            variant="primary"
+            variant="primaryDark"
             fullWidth
             onClick={(event) => {
               updateBio(event);
@@ -88,7 +88,7 @@ const EditBio = ({ user }: { user: IUser }) => {
           >
             Update
           </Button>
-          <Button variant="primary" fullWidth onClick={handleClose}>
+          <Button variant="primaryDark" fullWidth onClick={handleClose}>
             Close
           </Button>
         </Stack>

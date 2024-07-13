@@ -38,7 +38,7 @@ const SearchByLetter = (props: ISearchBy) => {
     <StyledContainer>
       {letters.map((letter, index) => (
         <Button
-          variant="primary"
+          variant="primaryDark"
           key={index}
           href={""}
           onClick={() => {

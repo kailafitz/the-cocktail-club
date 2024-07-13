@@ -86,7 +86,7 @@ const LoginUser = () => {
                 setUser({ ...user, password: event.target.value })
               }
             />
-            <Button variant="primary" type="submit">
+            <Button variant="primaryDark" type="submit">
               Login
             </Button>
           </Stack>

@@ -30,7 +30,7 @@ const CocktailCard = (props: ICocktailCard) => {
           </Typography>
           <CardActions sx={{ p: 0, mt: 3, position: "relative" }}>
             <Button
-              variant="primary"
+              variant="primaryDark"
               endIcon={<ArrowForwardIcon />}
               href={`/search/cocktail/${props.id}/${props.db}/details`}
             >

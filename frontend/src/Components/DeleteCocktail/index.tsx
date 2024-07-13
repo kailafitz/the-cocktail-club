@@ -50,7 +50,7 @@ const DeleteCocktail = ({ cocktailId }: { cocktailId: string }) => {
   return (
     <>
       <Button
-        variant="primary"
+        variant="primaryDark"
         onClick={handleOpen}
         data-target={cocktailId.toString()}
       >
@@ -64,10 +64,10 @@ const DeleteCocktail = ({ cocktailId }: { cocktailId: string }) => {
           <Typography variant="body2">
             Are you sure you wish to delete?
           </Typography>
-          <Button variant="primary" fullWidth onClick={deleteCocktail}>
+          <Button variant="primaryDark" fullWidth onClick={deleteCocktail}>
             Delete
           </Button>
-          <Button variant="primary" fullWidth onClick={handleClose}>
+          <Button variant="primaryDark" fullWidth onClick={handleClose}>
             Close
           </Button>
         </Stack>

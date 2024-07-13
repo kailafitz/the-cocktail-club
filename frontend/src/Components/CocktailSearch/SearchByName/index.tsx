@@ -67,7 +67,7 @@ const SearchByName = (props: ISearchBy) => {
     <>
       <Stack direction="row" spacing={4} mb={5}>
         <Button
-          variant="primary"
+          variant="primaryDark"
           endIcon={<SearchIcon />}
           onClick={() => {
             scrollToResults();
