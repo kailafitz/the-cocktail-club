@@ -71,7 +71,7 @@ const LoginUser = () => {
             noValidate
             autoComplete="off"
             onSubmit={handleLogin}
-            sx={{ div: { mb: 2 } }}
+            spacing={3}
           >
             <TextField
               label="Email"

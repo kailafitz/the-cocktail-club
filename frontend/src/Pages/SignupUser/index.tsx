@@ -78,7 +78,7 @@ const SignupUser = () => {
             <Stack
               direction={{ xs: "column", md: "row" }}
               justifyContent="space-between"
-              spacing={2}
+              spacing={3}
             >
               <TextField
                 sx={{ width: "-webkit-fill-available" }}

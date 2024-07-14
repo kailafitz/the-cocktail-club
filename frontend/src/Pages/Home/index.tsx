@@ -87,13 +87,13 @@ export const Home: React.FC = () => {
             sx={{
               fontSize: { xs: "4rem", md: "9rem" },
             }}
-            className="onLoadAnimation"
+            className="on-load-animation"
           >
             Indulge in
             <br className="break" /> the mastery
           </Typography>
         </Stack>
-        <Box className="onLoadAnimation-2" sx={{ opacity: 0 }}>
+        <Box className="on-load-animation-2" sx={{ opacity: 0 }}>
           <Typography variant="h4" align="left" mb={2}>
             Curating the careful craft of cocktails since 1898
           </Typography>
@@ -113,7 +113,7 @@ export const Home: React.FC = () => {
           </Stack>
         </Box>
         <Stack
-          className="onLoadAnimation-3"
+          className="on-load-animation-3"
           sx={{ opacity: 0 }}
           direction={{ xs: "column", md: "row" }}
           spacing={{ xs: 1, sm: 5 }}
@@ -147,7 +147,7 @@ export const Home: React.FC = () => {
               }}
             >
               <Box
-                className="onLoadImageAnimation"
+                className="on-load-image-animation"
                 sx={{
                   height: "100%",
                   transform: "translateY(-1000px)",

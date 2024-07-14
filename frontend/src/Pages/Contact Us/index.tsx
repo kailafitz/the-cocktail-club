@@ -49,14 +49,14 @@ const ContactUs = () => {
               // referrerpolicy="no-referrer-when-downgrade"
             ></iframe>
           </Stack>
-          <Stack sx={{ width: { xs: "100%", md: "40%" } }}>
-            <Typography variant="body1" mb={5}>
+          <Stack sx={{ width: { xs: "100%", md: "40%" } }} spacing={3}>
+            <Typography variant="body1">
               Send us a message and our team will be back to you as soon as
               possible!
             </Typography>
-            <TextField sx={{ mb: 5 }} label="Name" />
-            <TextField sx={{ mb: 5 }} label="Email" />
-            <TextField sx={{ mb: 5 }} label="Message" multiline />
+            <TextField label="Name" />
+            <TextField label="Email" />
+            <TextField label="Message" multiline rows={3} />
             <Button variant="primaryDark">Submit</Button>
           </Stack>
         </Stack>
