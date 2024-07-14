@@ -73,20 +73,28 @@ const SignupUser = () => {
             noValidate
             autoComplete="off"
             onSubmit={handleSignup}
-            sx={{ div: { mb: 2 } }}
+            spacing={3}
           >
-            <TextField
-              label="First Name"
-              onChange={(event) =>
-                setUser({ ...user, firstName: event.target.value })
-              }
-            />
-            <TextField
-              label="Last Name"
-              onChange={(event) =>
-                setUser({ ...user, lastName: event.target.value })
-              }
-            />
+            <Stack
+              direction={{ xs: "column", md: "row" }}
+              justifyContent="space-between"
+              spacing={2}
+            >
+              <TextField
+                sx={{ width: "-webkit-fill-available" }}
+                label="First Name"
+                onChange={(event) =>
+                  setUser({ ...user, firstName: event.target.value })
+                }
+              />
+              <TextField
+                sx={{ width: "-webkit-fill-available" }}
+                label="Last Name"
+                onChange={(event) =>
+                  setUser({ ...user, lastName: event.target.value })
+                }
+              />
+            </Stack>
             <TextField
               label="Email"
               onChange={(event) =>
