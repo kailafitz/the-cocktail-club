@@ -17,9 +17,9 @@ const CocktailCard = (props: ICocktailCard) => {
         display: "flex",
         flexDirection: "column",
         justifyContent: "flex-end",
-        height: "300px",
-        width: "200px",
-        background: `url('${props.image}') no-repeat center / cover`,
+        height: "400px",
+        width: "30%",
+        background: `url('${props.image_url}') no-repeat center / cover`,
       }}
       elevation={0}
     >
@@ -55,7 +55,7 @@ const CocktailCard = (props: ICocktailCard) => {
 
 CocktailCard.propTypes = {
   id: PropTypes.string.isRequired,
-  image: PropTypes.string.isRequired,
+  image_url: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
   category: PropTypes.string.isRequired,
   db: PropTypes.string.isRequired,

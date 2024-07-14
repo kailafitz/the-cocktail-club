@@ -55,7 +55,7 @@ export const Search = () => {
                       <CocktailCard
                         key={drink.idDrink}
                         id={drink.idDrink}
-                        image={drink.strDrinkThumb}
+                        image_url={drink.strDrinkThumb}
                         name={drink.strDrink}
                         category={drink.strAlcoholic}
                         db="api"

@@ -81,18 +81,20 @@ const EditBio = ({ user }: { user: IUser }) => {
             defaultValue={user.bio}
             onChange={(event) => setUserBio(event.target.value)}
           />
-          <Button
-            variant="primaryDark"
-            fullWidth
-            onClick={(event) => {
-              updateBio(event);
-            }}
-          >
-            Update
-          </Button>
-          <Button variant="primaryDark" fullWidth onClick={handleClose}>
-            Close
-          </Button>
+          <Stack direction={{ xs: "column", md: "row" }} spacing={3}>
+            <Button
+              variant="primaryDark"
+              fullWidth
+              onClick={(event) => {
+                updateBio(event);
+              }}
+            >
+              Update
+            </Button>
+            <Button variant="primaryLight" fullWidth onClick={handleClose}>
+              Close
+            </Button>
+          </Stack>
         </Stack>
       </Dialog>
     </>

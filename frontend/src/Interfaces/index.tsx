@@ -48,7 +48,7 @@ export interface ICocktailDownload extends ICocktailCustom {
 export interface ICocktailCard {
   id: string;
   name: string;
-  image: string;
+  image_url: string;
   category?: string;
   db: string;
 }

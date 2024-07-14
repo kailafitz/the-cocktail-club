@@ -81,18 +81,20 @@ const EditCocktail = ({ cocktail }: { cocktail: ICocktailCustom }) => {
               setUpdatedCocktail({ ...cocktail, name: event.target.value })
             }
           />
-          <Button
-            variant="primaryDark"
-            fullWidth
-            onClick={(event) => {
-              updateCocktail(event);
-            }}
-          >
-            Update
-          </Button>
-          <Button variant="primaryDark" fullWidth onClick={handleClose}>
-            Close
-          </Button>
+          <Stack direction={{ xs: "column", md: "row" }} spacing={3}>
+            <Button
+              variant="primaryDark"
+              fullWidth
+              onClick={(event) => {
+                updateCocktail(event);
+              }}
+            >
+              Update
+            </Button>
+            <Button variant="primaryLight" fullWidth onClick={handleClose}>
+              Close
+            </Button>
+          </Stack>
         </Stack>
       </Dialog>
     </div>

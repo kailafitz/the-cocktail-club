@@ -63,7 +63,7 @@ const CocktailList = () => {
                   id={cocktail.id.toString()}
                   name={cocktail.name}
                   category={cocktail.category}
-                  image={cocktail.image_url}
+                  image_url={cocktail.image_url}
                   db="custom"
                 />
               );

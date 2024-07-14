@@ -9,8 +9,9 @@ import Error from "../../Components/Status/Error";
 import { api } from "../../axios";
 import Stack from "@mui/material/Stack";
 import Box from "@mui/material/Box";
-import CocktailList from "../../Components/CocktailList";
 import Button from "@mui/material/Button";
+import CocktailCard from "../../Components/CocktailCard";
+import { ICocktailCard } from "../../Interfaces";
 
 const Profile = () => {
   const navigate = useNavigate();
@@ -20,7 +21,6 @@ const Profile = () => {
         withCredentials: true,
       })
       .then((res) => {
-        // console.log("res", res.data);
         return res.data;
       })
   );
@@ -47,8 +47,8 @@ const Profile = () => {
       <Stack
         direction={{ xs: "column", md: "row" }}
         justifyContent={{ xs: "center", md: "space-between" }}
-        spacing={7}
-        alignItems={{ md: "flex-start" }}
+        spacing={3}
+        // alignItems={{ md: "flex-start" }}
       >
         <Stack
           direction="column"
@@ -57,11 +57,11 @@ const Profile = () => {
           sx={{
             width: "330px",
             p: 3,
-            border: 1,
+            border: 2,
             borderColor: "primary.main",
-            borderWidth: "2px",
-            borderRadius: "16px",
+            borderRadius: 2,
           }}
+          justifyContent={{ md: "space-between" }}
         >
           <Box
             sx={{
@@ -72,21 +72,46 @@ const Profile = () => {
             }}
           />
           <Typography variant="body1" sx={{ textTransform: "capitalize" }}>
-            {data.first_name} {data.last_name}
+            {data.user.first_name} {data.user.last_name}
           </Typography>
           <Typography variant="body1" sx={{ textAlign: "center" }}>
-            {data.bio}
+            {data.user.bio}
           </Typography>
-          <EditBio user={data} />
+          <EditBio user={data.user} />
         </Stack>
-        <Box sx={{ width: "-webkit-fill-available" }}>
+        <Box
+          sx={{
+            width: "-webkit-fill-available",
+            border: 2,
+            borderColor: "primary.main",
+            borderRadius: 2,
+          }}
+          p={3}
+        >
           <Stack direction="row" justifyContent="space-between">
-            <Typography variant="body1">My Cocktails</Typography>
+            <Typography variant="body1">Latest Cocktail Creations</Typography>
             <Button variant="primaryDark" href="/my-cocktails">
               View all
             </Button>
           </Stack>
-          <CocktailList />
+          <Stack
+            direction={{ xs: "row" }}
+            justifyContent="space-between"
+            spacing={3}
+          >
+            {data.cocktails.map((c: ICocktailCard, i: number) => {
+              return (
+                <CocktailCard
+                  key={i}
+                  id={c.id.toString()}
+                  image_url={c.image_url}
+                  name={c.name}
+                  category={c.category}
+                  db="custom"
+                />
+              );
+            })}
+          </Stack>
         </Box>
       </Stack>
     </ViewHeightContainer>
