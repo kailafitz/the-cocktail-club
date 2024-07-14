@@ -312,6 +312,13 @@ const theme = createTheme({
         },
       },
     },
+    MuiAlert: {
+      styleOverrides: {
+        message: {
+          fontFamily: "'Work Sans'",
+        },
+      },
+    },
     MuiDialog: {
       styleOverrides: {
         paper: {
