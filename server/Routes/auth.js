@@ -53,7 +53,7 @@ export const ensureAuthenticated = (req, res, next) => {
         return next();
     }
     res.status(401).send("Unauthorised");
-    // res.redirect('/login');
+    // res.redirect("/login");
 }
 
 // Check user authentication status (frontend)
@@ -82,21 +82,21 @@ authRouter.get("/api/login/status", (req, res) => {
 })
 
 // Login user with passport
-authRouter.post("/api/login", passport.authenticate("local"), (req, res) => {
-    console.log("--> Login Endpoint");
-    return res.status(200).send(req.user);
-})
-
-// authRouter.post("/api/login", (req, res) => {
-//     passport.authenticate('local', function (err, user, info) {
-//         if (err) { return next(err); }
-//         if (!user) { return res.redirect('/login'); }
-//         req.logIn(user, function (err) {
-//             if (err) { return next(err); }
-//             return res.redirect('/users/' + user.username);
-//         });
-//     })(req, res, next);
+// authRouter.post("/api/login", passport.authenticate("local", { failureRedirect: "/login", failureMessage: "true" }), (req, res) => {
+//     console.log("--> Login Endpoint");
+//     return res.status(200).send(req.user);
 // })
+
+authRouter.post("/api/login", (req, res, next) => {
+    passport.authenticate("local", function (err, user, info) {
+        if (err) { return next(err); }
+        if (!user) { return res.status(401).json(info.message); }
+        req.logIn(user, function (err) {
+            if (err) { return next(err); }
+            return res.status(200).send("Login successful");
+        });
+    })(req, res, next);
+})
 
 authRouter.post("/api/logout", (req, res) => {
     console.log("--> Logout", req.user);

@@ -32,17 +32,37 @@ export default passport.use(
             const findUser = await pool.query("SELECT id, email, password FROM users WHERE email = $1", [username]);
             if (!findUser.rows[0]) {
                 console.log("--> User does not exist");
-                done(null, false);
+                return done(null, false, { message: "User not found" });
             }
             if (!(comparePasswords(password, findUser.rows[0]["password"]))) {
                 console.log("--> Passwords do not match");
-                done(null, false);
+                return done(null, false, { message: "Username or Password does not match" });
             }
             console.log("--> findUser", findUser.rows[0]);
-            done(null, findUser.rows[0]);
+            return done(null, findUser.rows[0]);
         }
         catch (err) {
             done(err, null);
         }
     })
 )
+
+// passport.use(new LocalStrategy(async function verify(username, password, done) {
+//     console.log("--> Passport Login Endpoint", username, password);
+//     try {
+//         const findUser = await pool.query("SELECT id, email, password FROM users WHERE email = $1", [username]);
+//         if (!findUser.rows[0]) {
+//             console.log("--> User does not exist");
+//             done(null, false, { message: "User does not exist." });
+//         }
+//         if (!(comparePasswords(password, findUser.rows[0]["password"]))) {
+//             console.log("--> Passwords do not match");
+//             done(null, false, "info");
+//         }
+//         console.log("--> findUser", findUser.rows[0]);
+//         done(null, findUser.rows[0]);
+//     }
+//     catch (err) {
+//         done(err, null);
+//     }
+// }))
