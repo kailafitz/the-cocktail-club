@@ -66,10 +66,18 @@ body {
     animation-fill-mode: forwards;
 }
 
-.onLoadImageAnimation {
+.no-webp .onLoadImageAnimation {
     animation: fadeInImgAnimation ease 2s .4s;
     animation-iteration-count: 1;
     animation-fill-mode: forwards;
+    background: url("../../public/cocktail.png") no-repeat center / cover;
+}
+
+.webp .onLoadImageAnimation {
+    animation: fadeInImgAnimation ease 2s .4s;
+    animation-iteration-count: 1;
+    animation-fill-mode: forwards;
+    background: url("../../public/cocktail.webp") no-repeat center / cover;
 }
 
 @keyframes fadeInAnimation {

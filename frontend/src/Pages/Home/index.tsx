@@ -151,7 +151,7 @@ export const Home: React.FC = () => {
                 sx={{
                   height: "100%",
                   transform: "translateY(-1000px)",
-                  background: `url('/cocktail.png') no-repeat center / cover`,
+                  // background: `url('/cocktail.webp') no-repeat center / cover, url('/cocktail.png') no-repeat center / cover`,
                 }}
               />
             </Box>
