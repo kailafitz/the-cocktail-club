@@ -47,8 +47,6 @@ const Navigation = () => {
   const { isAuth } = useAuthentication();
   const [open, setOpen] = useState(false);
 
-  console.log(open);
-
   return (
     <>
       <StyledIconButton
@@ -167,7 +165,7 @@ const Navigation = () => {
                   variant="primaryLight"
                   href={"/login"}
                   sx={{
-                    fontSize: { xs: "1.5rem", md: "inherit" },
+                    fontSize: { xs: "1.5rem", md: "revert" },
                   }}
                   onClick={() => setOpen(false)}
                   aria-label="Link to Login page"
@@ -178,7 +176,7 @@ const Navigation = () => {
                   variant="primaryLight"
                   href="/sign-up"
                   sx={{
-                    fontSize: { xs: "1.5rem", md: "inherit" },
+                    fontSize: { xs: "1.5rem", md: "revert" },
                   }}
                   onClick={() => setOpen(false)}
                   aria-label="Link to Sign up page"

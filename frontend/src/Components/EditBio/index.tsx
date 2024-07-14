@@ -65,7 +65,7 @@ const EditBio = ({ user }: { user: IUser }) => {
       <Dialog open={open} id={user.id.toString()}>
         <Stack
           direction="column"
-          spacing={4}
+          spacing={2}
           component="form"
           noValidate
           autoComplete="off"
@@ -76,6 +76,8 @@ const EditBio = ({ user }: { user: IUser }) => {
           )}
           <TextField
             label="Bio"
+            multiline
+            rows={4}
             defaultValue={user.bio}
             onChange={(event) => setUserBio(event.target.value)}
           />

@@ -12,6 +12,8 @@ import { useNavigate } from "react-router-dom";
 import EditBio from "../../Components/EditBio";
 import Error from "../../Components/Status/Error";
 import { api } from "../../axios";
+import Stack from "@mui/material/Stack";
+import Box from "@mui/material/Box";
 
 const Profile = () => {
   const navigate = useNavigate();
@@ -52,42 +54,37 @@ const Profile = () => {
       >
         My Profile
       </Typography>
-      <TableContainer sx={{ width: { md: "50%", lg: "50%" }, m: "0 auto" }}>
-        <Table aria-label="profile table">
-          <TableBody>
-            <TableRow
-              key={data.name}
-              sx={{
-                "&:last-child td, &:last-child th": { border: 0 },
-              }}
-            >
-              <TableCell>Name</TableCell>
-              <TableCell>
-                {data.first_name} {data.last_name}
-              </TableCell>
-              <TableCell>{/* <EditBio user={data} /> */}</TableCell>
-            </TableRow>
-            <TableRow
-              key={data.email}
-              sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-            >
-              <TableCell>Email</TableCell>
-              <TableCell>{data.email}</TableCell>
-              <TableCell>{/* <EditBio user={data} /> */}</TableCell>
-            </TableRow>
-            <TableRow
-              key={data.bio}
-              sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-            >
-              <TableCell>Bio</TableCell>
-              <TableCell>{data.bio}</TableCell>
-              <TableCell>
-                <EditBio user={data} />
-              </TableCell>
-            </TableRow>
-          </TableBody>
-        </Table>
-      </TableContainer>
+      <Stack direction={{ xs: "column", md: "row" }}>
+        <Stack
+          direction="column"
+          alignItems="center"
+          spacing={3}
+          sx={{
+            width: "250px",
+            p: 3,
+            border: 1,
+            borderColor: "primary.main",
+            borderWidth: "2px",
+            borderRadius: "16px",
+          }}
+        >
+          <Box
+            sx={{
+              background: "url('/cocktail.webp') no-repeat center / cover",
+              borderRadius: "500px",
+              width: "150px",
+              height: "150px",
+            }}
+          />
+          <Typography variant="body1" sx={{ textTransform: "capitalize" }}>
+            {data.first_name} {data.last_name}
+          </Typography>
+          <Typography variant="body1" sx={{ textAlign: "center" }}>
+            {data.bio}
+          </Typography>
+          <EditBio user={data} />
+        </Stack>
+      </Stack>
     </ViewHeightContainer>
   );
 };
