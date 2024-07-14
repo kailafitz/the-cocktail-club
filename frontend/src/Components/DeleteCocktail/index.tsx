@@ -63,15 +63,25 @@ const DeleteCocktail = ({ cocktailId }: { cocktailId: string }) => {
           {mutation.isError && (
             <FormFeedback severity="error" message={errorMessage} />
           )}
-          <Typography variant="body2">
+          <Typography variant="body1">
             Are you sure you wish to delete?
           </Typography>
-          <Button variant="primaryDark" fullWidth onClick={deleteCocktail}>
-            Delete
-          </Button>
-          <Button variant="primaryDark" fullWidth onClick={handleClose}>
-            Close
-          </Button>
+          <Stack direction={{ xs: "column", md: "row" }} spacing={3}>
+            <Button
+              variant="primaryDark"
+              onClick={deleteCocktail}
+              sx={{ width: "-webkit-fill-available" }}
+            >
+              Delete
+            </Button>
+            <Button
+              variant="primaryLight"
+              onClick={handleClose}
+              sx={{ width: "-webkit-fill-available" }}
+            >
+              Close
+            </Button>
+          </Stack>
         </Stack>
       </Dialog>
     </>

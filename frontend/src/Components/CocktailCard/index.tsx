@@ -18,7 +18,7 @@ const CocktailCard = (props: ICocktailCard) => {
         flexDirection: "column",
         justifyContent: "flex-end",
         height: "400px",
-        width: "30%",
+        width: { xs: "100%", md: "40%", lg: "30%" },
         background: `url('${props.image_url}') no-repeat center / cover`,
       }}
       elevation={0}

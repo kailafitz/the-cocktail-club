@@ -48,14 +48,15 @@ const Profile = () => {
         direction={{ xs: "column", md: "row" }}
         justifyContent={{ xs: "center", md: "space-between" }}
         spacing={3}
-        // alignItems={{ md: "flex-start" }}
+        alignItems={{ md: "flex-start" }}
       >
         <Stack
           direction="column"
           alignItems="center"
           spacing={3}
           sx={{
-            width: "330px",
+            width: { xs: "-webkit-fill-available", md: "330px" },
+            maxWidth: "330px",
             p: 3,
             border: 2,
             borderColor: "primary.main",
@@ -88,16 +89,19 @@ const Profile = () => {
           }}
           p={3}
         >
-          <Stack direction="row" justifyContent="space-between">
+          <Stack direction="row" justifyContent="space-between" mb={3}>
             <Typography variant="body1">Latest Cocktail Creations</Typography>
             <Button variant="primaryDark" href="/my-cocktails">
               View all
             </Button>
           </Stack>
           <Stack
-            direction={{ xs: "row" }}
-            justifyContent="space-between"
+            direction={{ xs: "column", md: "row" }}
+            justifyContent={
+              data.cocktails.length > 3 ? "space-between" : "flex-start"
+            }
             spacing={3}
+            flexWrap="wrap"
           >
             {data.cocktails.map((c: ICocktailCard, i: number) => {
               return (

@@ -14,7 +14,9 @@ userRouter.get("/api/profile", ensureAuthenticated, async (req, res) => {
     let arr = [];
 
     for (let i = 0; i < 3; i++) {
-        arr.push(latestCocktails.rows[i])
+        if (latestCocktails.rows[i]) {
+            arr.push(latestCocktails.rows[i]);
+        }
     }
 
     // console.log(userInfo.rows[0]);
