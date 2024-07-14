@@ -2,11 +2,6 @@ import React from "react";
 import { useQuery } from "react-query";
 import Typography from "@mui/material/Typography";
 import ViewHeightContainer from "../../Components/Layout/ViewHeightContainer";
-import Table from "@mui/material/Table";
-import TableBody from "@mui/material/TableBody";
-import TableCell from "@mui/material/TableCell";
-import TableContainer from "@mui/material/TableContainer";
-import TableRow from "@mui/material/TableRow";
 import Loading from "../../Components/Status/Loading";
 import { useNavigate } from "react-router-dom";
 import EditBio from "../../Components/EditBio";
@@ -14,6 +9,8 @@ import Error from "../../Components/Status/Error";
 import { api } from "../../axios";
 import Stack from "@mui/material/Stack";
 import Box from "@mui/material/Box";
+import CocktailList from "../../Components/CocktailList";
+import Button from "@mui/material/Button";
 
 const Profile = () => {
   const navigate = useNavigate();
@@ -46,21 +43,19 @@ const Profile = () => {
 
   return (
     <ViewHeightContainer pt>
-      <Typography
-        variant="pageHeading"
-        sx={{
-          fontSize: { lg: "6rem" },
-        }}
+      <Typography variant="pageHeading">My Profile</Typography>
+      <Stack
+        direction={{ xs: "column", md: "row" }}
+        justifyContent={{ xs: "center", md: "space-between" }}
+        spacing={7}
+        alignItems={{ md: "flex-start" }}
       >
-        My Profile
-      </Typography>
-      <Stack direction={{ xs: "column", md: "row" }}>
         <Stack
           direction="column"
           alignItems="center"
           spacing={3}
           sx={{
-            width: "250px",
+            width: "330px",
             p: 3,
             border: 1,
             borderColor: "primary.main",
@@ -84,6 +79,15 @@ const Profile = () => {
           </Typography>
           <EditBio user={data} />
         </Stack>
+        <Box sx={{ width: "-webkit-fill-available" }}>
+          <Stack direction="row" justifyContent="space-between">
+            <Typography variant="body1">My Cocktails</Typography>
+            <Button variant="primaryDark" href="/my-cocktails">
+              View all
+            </Button>
+          </Stack>
+          <CocktailList />
+        </Box>
       </Stack>
     </ViewHeightContainer>
   );

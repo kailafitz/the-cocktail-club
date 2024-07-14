@@ -9,7 +9,7 @@ import MenuItem from "@mui/material/MenuItem";
 import Select from "@mui/material/Select";
 import { styled } from "@mui/material/styles";
 import Button from "@mui/material/Button";
-import CloudUploadIcon from "@mui/icons-material/CloudUpload";
+import FileUploadIcon from "@mui/icons-material/FileUpload";
 import { api } from "../../axios";
 import TextField from "@mui/material/TextField";
 import Dialog from "@mui/material/Dialog";
@@ -106,6 +106,7 @@ const CreateCocktailForm = () => {
           spacing={4}
           alignSelf="center"
           p={5}
+          sx={{ width: "-webkit-fill-available" }}
         >
           {mutation.isError && (
             <FormFeedback severity="error" message={errorMessage} />
@@ -142,21 +143,16 @@ const CreateCocktailForm = () => {
               setCocktail({ ...cocktail, instructions: arr });
             }}
           />
-          <Stack
-            direction={{ xs: "column", md: "row" }}
-            spacing={3}
-            alignItems="center"
-          >
+          <Stack direction="row" spacing={3} alignItems="center">
             <Button
               // disabled
               component="label"
               role={undefined}
               variant="primaryDark"
               tabIndex={-1}
-              startIcon={<CloudUploadIcon />}
               fullWidth={false}
-              sx={{ span: { mr: 0 } }}
             >
+              <FileUploadIcon />
               {/* Upload file */}
               <VisuallyHiddenInput
                 type="file"
@@ -169,19 +165,30 @@ const CreateCocktailForm = () => {
                 }
               />
             </Button>
-            <Typography variant="body2">
+            <Typography variant="body1">
               File uploaded:{" "}
               {typeof cocktail.image === "object" && cocktail.image
                 ? cocktail.image.name
                 : null}
             </Typography>
           </Stack>
-          <Button variant="primaryDark" type="submit" onClick={handleClose}>
-            Add Cocktail
-          </Button>
-          <Button variant="primaryDark" onClick={handleClose}>
-            Cancel
-          </Button>
+          <Stack direction={{ xs: "column", md: "row" }} spacing={3}>
+            <Button
+              variant="primaryDark"
+              type="submit"
+              onClick={handleClose}
+              sx={{ width: "-webkit-fill-available" }}
+            >
+              Add Cocktail
+            </Button>
+            <Button
+              variant="primaryLight"
+              onClick={handleClose}
+              sx={{ width: "-webkit-fill-available" }}
+            >
+              Cancel
+            </Button>
+          </Stack>
         </Stack>
       </Dialog>
     </>

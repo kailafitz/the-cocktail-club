@@ -19,6 +19,8 @@ const common = {
   dark: "#151514",
 };
 
+const defaultTheme = createTheme();
+
 const theme = createTheme({
   palette: {
     primary: {
@@ -69,7 +71,6 @@ const theme = createTheme({
     },
     pageHeading: {
       fontFamily: "Work Sans",
-      fontSize: "4rem",
       marginBottom: "4rem",
       fontWeight: 300,
     },
@@ -86,6 +87,17 @@ const theme = createTheme({
           color: "#EBD69C",
         },
       },
+      variants: [
+        {
+          props: { variant: "pageHeading" },
+          style: {
+            fontSize: "4rem",
+            [defaultTheme.breakpoints.up("lg")]: {
+              fontSize: "6rem",
+            },
+          },
+        },
+      ],
     },
     MuiMenuItem: {
       styleOverrides: {
@@ -163,7 +175,7 @@ const theme = createTheme({
             position: "relative",
             overflow: "hidden",
             zIndex: 1,
-            border: `${common.dark} solid 2px`,
+            border: `#EBD69C solid 2px`,
             "&:after": {
               content: '""',
               position: "absolute",
@@ -212,6 +224,11 @@ const theme = createTheme({
           },
         },
       ],
+      styleOverrides: {
+        root: {
+          minWidth: "10px",
+        },
+      },
     },
     MuiButtonBase: {
       defaultProps: {
@@ -331,6 +348,10 @@ const theme = createTheme({
       styleOverrides: {
         paper: {
           maxWidth: "unset",
+          width: "90%",
+          [defaultTheme.breakpoints.up("lg")]: {
+            width: "50%",
+          },
         },
       },
     },

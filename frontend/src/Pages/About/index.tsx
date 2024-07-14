@@ -9,14 +9,7 @@ const About = () => {
   return (
     <>
       <ViewHeightContainer pt sx={{ pb: { xs: 10, sm: 0 } }}>
-        <Typography
-          variant="pageHeading"
-          sx={{
-            fontSize: { lg: "6rem" },
-          }}
-        >
-          About The Cocktail Club
-        </Typography>
+        <Typography variant="pageHeading">About The Cocktail Club</Typography>
         <Stack direction={{ xs: "column", md: "row" }} spacing={8}>
           <Box sx={{ width: "50%" }}>
             <Typography variant="body1">

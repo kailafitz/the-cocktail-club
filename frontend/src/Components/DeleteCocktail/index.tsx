@@ -7,6 +7,7 @@ import FormFeedback from "../Alert";
 import Dialog from "@mui/material/Dialog";
 import PropTypes from "prop-types";
 import Typography from "@mui/material/Typography";
+import DeleteIcon from "@mui/icons-material/Delete";
 import { api } from "../../axios";
 
 const DeleteCocktail = ({ cocktailId }: { cocktailId: string }) => {
@@ -50,11 +51,12 @@ const DeleteCocktail = ({ cocktailId }: { cocktailId: string }) => {
   return (
     <>
       <Button
+        sx={{ px: "6px" }}
         variant="primaryDark"
         onClick={handleOpen}
         data-target={cocktailId.toString()}
       >
-        Delete
+        <DeleteIcon />
       </Button>
       <Dialog open={open} id={cocktailId.toString()}>
         <Stack p={5} spacing={4} component="form" noValidate autoComplete="off">

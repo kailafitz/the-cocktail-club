@@ -11,14 +11,7 @@ import Button from "@mui/material/Button";
 const ContactUs = () => {
   return (
     <ViewHeightContainer pt>
-      <Typography
-        variant="pageHeading"
-        sx={{
-          fontSize: { lg: "6rem" },
-        }}
-      >
-        Get in Touch
-      </Typography>
+      <Typography variant="pageHeading">Get in Touch</Typography>
       <ViewHeightContainer>
         <Stack
           direction={{ xs: "column", md: "row" }}
