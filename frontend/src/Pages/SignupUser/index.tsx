@@ -10,10 +10,12 @@ import Grid from "@mui/material/Unstable_Grid2/Grid2";
 import Button from "@mui/material/Button";
 import { api } from "../../axios";
 import TextField from "@mui/material/TextField";
+import Loading from "../../Components/Status/Loading";
 
 const SignupUser = () => {
   const queryClient = useQueryClient();
   const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
   const [user, setUser] = useState<ISignUp>({
     id: 0,
     email: "",
@@ -41,12 +43,13 @@ const SignupUser = () => {
     onSuccess() {
       console.log("Redirect");
       queryClient.invalidateQueries("Authentication Status Check");
-      // navigate("/profile");
+      setLoading(false);
       setTimeout(() => {
         navigate("/profile");
       }, 500);
     },
     onError: (error: AxiosError) => {
+      setLoading(false);
       setErrorMessage(
         typeof error.response?.data === "string"
           ? `${error.response?.data}`
@@ -57,6 +60,7 @@ const SignupUser = () => {
 
   const handleSignup = (e: any) => {
     e.preventDefault();
+    setLoading(true);
     mutation.mutate(user);
   };
 
@@ -67,58 +71,64 @@ const SignupUser = () => {
           {mutation.isError && (
             <FormFeedback severity="error" message={errorMessage} />
           )}
-          <Stack
-            direction="column"
-            component="form"
-            noValidate
-            autoComplete="off"
-            onSubmit={handleSignup}
-            spacing={3}
-          >
-            <Stack
-              direction={{ xs: "column", md: "row" }}
-              justifyContent="space-between"
-              spacing={3}
-            >
-              <TextField
-                sx={{ width: "-webkit-fill-available" }}
-                label="First Name"
-                onChange={(event) =>
-                  setUser({ ...user, firstName: event.target.value })
-                }
-              />
-              <TextField
-                sx={{ width: "-webkit-fill-available" }}
-                label="Last Name"
-                onChange={(event) =>
-                  setUser({ ...user, lastName: event.target.value })
-                }
-              />
-            </Stack>
-            <TextField
-              label="Email"
-              onChange={(event) =>
-                setUser({ ...user, email: event.target.value })
-              }
-            />
-            <TextField
-              type="password"
-              label="Password"
-              onChange={(event) =>
-                setUser({ ...user, password: event.target.value })
-              }
-            />
-            <TextField
-              type="password"
-              label="Confirm Password"
-              onChange={(event) => {
-                setUser({ ...user, confirmPassword: event.target.value });
-              }}
-            />
-            <Button variant="primaryDark" type="submit">
-              Sign up
-            </Button>
-          </Stack>
+          {loading ? (
+            <Loading color="light" />
+          ) : (
+            <>
+              <Stack
+                direction="column"
+                component="form"
+                noValidate
+                autoComplete="off"
+                onSubmit={handleSignup}
+                spacing={3}
+              >
+                <Stack
+                  direction={{ xs: "column", md: "row" }}
+                  justifyContent="space-between"
+                  spacing={3}
+                >
+                  <TextField
+                    sx={{ width: "-webkit-fill-available" }}
+                    label="First Name"
+                    onChange={(event) =>
+                      setUser({ ...user, firstName: event.target.value })
+                    }
+                  />
+                  <TextField
+                    sx={{ width: "-webkit-fill-available" }}
+                    label="Last Name"
+                    onChange={(event) =>
+                      setUser({ ...user, lastName: event.target.value })
+                    }
+                  />
+                </Stack>
+                <TextField
+                  label="Email"
+                  onChange={(event) =>
+                    setUser({ ...user, email: event.target.value })
+                  }
+                />
+                <TextField
+                  type="password"
+                  label="Password"
+                  onChange={(event) =>
+                    setUser({ ...user, password: event.target.value })
+                  }
+                />
+                <TextField
+                  type="password"
+                  label="Confirm Password"
+                  onChange={(event) => {
+                    setUser({ ...user, confirmPassword: event.target.value });
+                  }}
+                />
+                <Button variant="primaryDark" type="submit">
+                  Sign up
+                </Button>
+              </Stack>
+            </>
+          )}
         </Grid>
       </Grid>
     </ViewHeightContainer>
