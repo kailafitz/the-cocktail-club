@@ -1,15 +1,16 @@
 import express from "express";
 import { pool } from "../db.js";
 import { ensureAuthenticated } from "./auth.js";
-import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
+// import { getSignedUrl } from "@aws-sdk/s3-request-presigner"; // Private bucket
+import { fromCognitoIdentityPool } from "@aws-sdk/credential-providers"; // Public bucket
 import { S3Client, PutObjectCommand, GetObjectCommand, DeleteObjectCommand } from "@aws-sdk/client-s3";
 import multer from "multer";
 import crypto from "crypto";
 
 const cocktailRouter = express.Router();
 
-// let s3Config = { region: "us-east-1", credentials: fromCognitoIdentityPool({ clientConfig: { region: process.env.S3_REGION }, identityPoolId: process.env.S3_IDENTITY_POOL_ID }) }
-let s3Config = { region: "us-east-1", credentials: { accessKeyId: process.env.S3_ACCESS_KEY, secretAccessKey: process.env.S3_SECRET_ACCESS_KEY } }
+let s3Config = { region: "us-east-1", credentials: fromCognitoIdentityPool({ clientConfig: { region: process.env.S3_REGION }, identityPoolId: process.env.S3_IDENTITY_POOL_ID }) } // Public bucket
+// let s3Config = { region: "us-east-1", credentials: { accessKeyId: process.env.S3_ACCESS_KEY, secretAccessKey: process.env.S3_SECRET_ACCESS_KEY } } // Private bucket
 const client = new S3Client(s3Config);
 
 // Create a storage strategy for multer
@@ -39,13 +40,19 @@ cocktailRouter.post("/api/create-cocktail", ensureAuthenticated, upload.single("
 
         uploadFile(imageName, req.file.buffer, req.file.mimetype);
 
-        const params = {
-            Bucket: process.env.S3_BUCKET_NAME,
-            Key: imageName,
-        }
-        const command = new GetObjectCommand(params);
+        // const params = {
+        //     Bucket: process.env.S3_BUCKET_NAME,
+        //     Key: "0f12b1371fc08f77033a7c2e8372d5f12e7348c5ef006c63316c8f3313a8e3a5_cocktail.webp",
+        // }
+        // const command = new GetObjectCommand(params);
 
-        const imageUrl = await getSignedUrl(client, command);
+        // const imageUrl = await getSignedUrl(client, command);
+
+        // const response = await client.send(command);
+        // const str = await response.Body;
+
+        const imageUrl = `https://${process.env.S3_BUCKET_NAME}.s3.amazonaws.com/${imageName}`;
+        console.log("imageUrl", imageUrl);
 
         const newCocktail = await pool.query(
             "INSERT INTO cocktails (name, category, created_by, ingredients, instructions, image_name, image_url) VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING *",
@@ -53,7 +60,7 @@ cocktailRouter.post("/api/create-cocktail", ensureAuthenticated, upload.single("
         );
 
         if (newCocktail.rows[0]) {
-            // console.log("--> New cocktail added ->\n", newCocktail.rows[0]);
+            console.log("--> New cocktail added ->\n", newCocktail.rows[0]);
             res.status(200).send("Success");
         }
     } catch (err) {

@@ -3,7 +3,6 @@ import Stack from "@mui/material/Stack";
 import { ICocktailCustom, ICocktailUpload } from "../../Interfaces";
 import { useMutation, useQueryClient } from "react-query";
 import { AxiosError } from "axios";
-import { useNavigate } from "react-router-dom";
 import FormFeedback from "../Alert";
 import MenuItem from "@mui/material/MenuItem";
 import Select from "@mui/material/Select";
@@ -15,6 +14,7 @@ import TextField from "@mui/material/TextField";
 import Dialog from "@mui/material/Dialog";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
+import Loading from "../Status/Loading";
 
 const VisuallyHiddenInput = styled("input")({
   clip: "rect(0 0 0 0)",
@@ -30,7 +30,7 @@ const VisuallyHiddenInput = styled("input")({
 
 const CreateCocktailForm = () => {
   const queryClient = useQueryClient();
-  const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const [cocktail, setCocktail] = useState<ICocktailUpload>({
     id: 0,
@@ -41,7 +41,6 @@ const CreateCocktailForm = () => {
     image: null,
   });
   const [open, setOpen] = useState(false);
-
   const handleClickOpen = () => {
     setOpen(true);
   };
@@ -66,20 +65,23 @@ const CreateCocktailForm = () => {
     },
     onSuccess() {
       console.log("Success");
+      setLoading(false);
       queryClient.invalidateQueries("Get All Cocktails");
+      handleClose();
     },
     onError: (error: AxiosError) => {
+      setLoading(false);
       if (
         typeof error.response?.data === "string" &&
         error.response?.data !== "Unauthorised"
       ) {
         setErrorMessage(error.response?.data);
       }
-      navigate("/login");
     },
   });
 
   const handleCreate = async (event: any) => {
+    setLoading(true);
     event.preventDefault();
     mutation.mutate(cocktail);
   };
@@ -111,84 +113,93 @@ const CreateCocktailForm = () => {
           {mutation.isError && (
             <FormFeedback severity="error" message={errorMessage} />
           )}
-          <TextField
-            label="Cocktail Name"
-            onChange={(event) =>
-              setCocktail({ ...cocktail, name: event.target.value })
-            }
-          />
-          <Select
-            defaultValue="Alcoholic"
-            onChange={(event) =>
-              setCocktail({
-                ...cocktail,
-                category: event.target.value as "Alcoholic" | "Non-alcoholic",
-              })
-            }
-          >
-            <MenuItem value="Alcoholic">Alcoholic</MenuItem>
-            <MenuItem value="Non-alcoholic">Non-alcoholic</MenuItem>
-          </Select>
-          <TextField
-            label="Ingredients"
-            onChange={(event) => {
-              let arr = event.target.value.split(",");
-              setCocktail({ ...cocktail, ingredients: arr });
-            }}
-          />
-          <TextField
-            label="Instructions"
-            onChange={(event) => {
-              let arr = event.target.value.split(",");
-              setCocktail({ ...cocktail, instructions: arr });
-            }}
-          />
-          <Stack direction="row" spacing={3} alignItems="center">
-            <Button
-              // disabled
-              component="label"
-              role={undefined}
-              variant="primaryDark"
-              tabIndex={-1}
-              fullWidth={false}
-            >
-              <FileUploadIcon />
-              {/* Upload file */}
-              <VisuallyHiddenInput
-                type="file"
-                name="image"
+          {loading ? (
+            <Loading color="light" />
+          ) : (
+            <>
+              <TextField
+                label="Cocktail Name"
+                onChange={(event) =>
+                  setCocktail({ ...cocktail, name: event.target.value })
+                }
+              />
+              <Select
+                defaultValue="Alcoholic"
                 onChange={(event) =>
                   setCocktail({
                     ...cocktail,
-                    image: event.target.files ? event.target.files[0] : null,
+                    category: event.target.value as
+                      | "Alcoholic"
+                      | "Non-alcoholic",
                   })
                 }
+              >
+                <MenuItem value="Alcoholic">Alcoholic</MenuItem>
+                <MenuItem value="Non-alcoholic">Non-alcoholic</MenuItem>
+              </Select>
+              <TextField
+                label="Ingredients"
+                onChange={(event) => {
+                  let arr = event.target.value.split(",");
+                  setCocktail({ ...cocktail, ingredients: arr });
+                }}
               />
-            </Button>
-            <Typography variant="body1">
-              File uploaded:{" "}
-              {typeof cocktail.image === "object" && cocktail.image
-                ? cocktail.image.name
-                : null}
-            </Typography>
-          </Stack>
-          <Stack direction={{ xs: "column", md: "row" }} spacing={3}>
-            <Button
-              variant="primaryDark"
-              type="submit"
-              onClick={handleClose}
-              sx={{ width: "-webkit-fill-available" }}
-            >
-              Add Cocktail
-            </Button>
-            <Button
-              variant="primaryLight"
-              onClick={handleClose}
-              sx={{ width: "-webkit-fill-available" }}
-            >
-              Cancel
-            </Button>
-          </Stack>
+              <TextField
+                label="Instructions"
+                onChange={(event) => {
+                  let arr = event.target.value.split(",");
+                  setCocktail({ ...cocktail, instructions: arr });
+                }}
+              />
+              <Stack direction="row" spacing={3} alignItems="center">
+                <Button
+                  // disabled
+                  component="label"
+                  role={undefined}
+                  variant="primaryDark"
+                  tabIndex={-1}
+                  fullWidth={false}
+                >
+                  <FileUploadIcon />
+                  {/* Upload file */}
+                  <VisuallyHiddenInput
+                    type="file"
+                    name="image"
+                    onChange={(event) =>
+                      setCocktail({
+                        ...cocktail,
+                        image: event.target.files
+                          ? event.target.files[0]
+                          : null,
+                      })
+                    }
+                  />
+                </Button>
+                <Typography variant="body1">
+                  File uploaded:{" "}
+                  {typeof cocktail.image === "object" && cocktail.image
+                    ? cocktail.image.name
+                    : null}
+                </Typography>
+              </Stack>
+              <Stack direction={{ xs: "column", md: "row" }} spacing={3}>
+                <Button
+                  variant="primaryDark"
+                  type="submit"
+                  sx={{ width: "-webkit-fill-available" }}
+                >
+                  Add Cocktail
+                </Button>
+                <Button
+                  variant="primaryLight"
+                  onClick={handleClose}
+                  sx={{ width: "-webkit-fill-available" }}
+                >
+                  Cancel
+                </Button>
+              </Stack>
+            </>
+          )}
         </Stack>
       </Dialog>
     </>
