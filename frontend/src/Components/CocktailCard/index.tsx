@@ -17,9 +17,11 @@ const CocktailCard = (props: ICocktailCard) => {
         display: "flex",
         flexDirection: "column",
         justifyContent: "flex-end",
-        height: "400px",
-        width: { xs: "100%", md: "40%", lg: "30%" },
-        background: `url('${props.image_url}') no-repeat center / cover`,
+        height: "300px",
+        width: { xs: "100%", md: "47%", lg: "30%" },
+        minWidth: { md: "300px" },
+        background: `url('cocktail.webp') no-repeat center / cover`,
+        // background: `url('${props.image_url}') no-repeat center / cover`,
       }}
       elevation={0}
     >

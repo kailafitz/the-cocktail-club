@@ -76,45 +76,18 @@ const theme = createTheme({
     },
   },
   components: {
-    MuiTypography: {
-      defaultProps: {
-        variantMapping: {
-          pageHeading: "h2",
-        },
-      },
+    MuiAlert: {
       styleOverrides: {
-        root: {
-          color: "#EBD69C",
+        message: {
+          fontFamily: "'Work Sans'",
         },
       },
-      variants: [
-        {
-          props: { variant: "pageHeading" },
-          style: {
-            fontSize: "4rem",
-            [defaultTheme.breakpoints.up("lg")]: {
-              fontSize: "6rem",
-            },
-          },
-        },
-      ],
     },
-    MuiMenuItem: {
+    MuiBackdrop: {
       styleOverrides: {
         root: {
-          color: "#EBD69C",
-          "&.Mui-selected": {
-            "&:hover": {
-              backgroundColor: "#EBD69C",
-              color: common.dark,
-            },
-            backgroundColor: "#EBD69C !important",
-            color: common.dark,
-          },
-          "&:hover": {
-            backgroundColor: "#EBD69C",
-            color: common.dark,
-          },
+          backgroundColor: "#ebd69cb3",
+          // backgroundColor: "rgba(0, 0, 0, 0.80)",
         },
       },
     },
@@ -239,16 +212,18 @@ const theme = createTheme({
       styleOverrides: {
         root: {
           fontFamily: "Work Sans",
+          textTransform: "capitalize",
         },
       },
     },
-    MuiLink: {
-      defaultProps: {
-        component: LinkBehavior,
-      } as LinkProps,
+    MuiDialog: {
       styleOverrides: {
-        root: {
-          fontFamily: "Work Sans",
+        paper: {
+          maxWidth: "unset",
+          width: "90%",
+          [defaultTheme.breakpoints.up("lg")]: {
+            width: "50%",
+          },
         },
       },
     },
@@ -281,11 +256,54 @@ const theme = createTheme({
         },
       },
     },
+    MuiLink: {
+      defaultProps: {
+        component: LinkBehavior,
+      } as LinkProps,
+      styleOverrides: {
+        root: {
+          fontFamily: "Work Sans",
+        },
+      },
+    },
+    MuiListItemText: {
+      styleOverrides: {
+        root: {
+          fontFamily: "'Work Sans'",
+        },
+      },
+    },
+    MuiMenuItem: {
+      styleOverrides: {
+        root: {
+          color: "#EBD69C",
+          "&.Mui-selected": {
+            "&:hover": {
+              backgroundColor: "#EBD69C",
+              color: common.dark,
+            },
+            backgroundColor: "#EBD69C !important",
+            color: common.dark,
+          },
+          "&:hover": {
+            backgroundColor: "#EBD69C",
+            color: common.dark,
+          },
+        },
+      },
+    },
     MuiOutlinedInput: {
       styleOverrides: {
         notchedOutline: {
           borderWidth: "2px",
           borderColor: "#EBD69C",
+        },
+      },
+    },
+    MuiPaper: {
+      styleOverrides: {
+        root: {
+          backgroundColor: common.dark,
         },
       },
     },
@@ -315,45 +333,28 @@ const theme = createTheme({
         },
       },
     },
-    MuiBackdrop: {
+    MuiTypography: {
+      defaultProps: {
+        variantMapping: {
+          pageHeading: "h2",
+        },
+      },
       styleOverrides: {
         root: {
-          backgroundColor: "#ebd69cb3",
-          // backgroundColor: "rgba(0, 0, 0, 0.80)",
+          color: "#EBD69C",
         },
       },
-    },
-    MuiPaper: {
-      styleOverrides: {
-        root: {
-          backgroundColor: common.dark,
-        },
-      },
-    },
-    MuiAlert: {
-      styleOverrides: {
-        message: {
-          fontFamily: "'Work Sans'",
-        },
-      },
-    },
-    MuiListItemText: {
-      styleOverrides: {
-        root: {
-          fontFamily: "'Work Sans'",
-        },
-      },
-    },
-    MuiDialog: {
-      styleOverrides: {
-        paper: {
-          maxWidth: "unset",
-          width: "90%",
-          [defaultTheme.breakpoints.up("lg")]: {
-            width: "50%",
+      variants: [
+        {
+          props: { variant: "pageHeading" },
+          style: {
+            fontSize: "4rem",
+            [defaultTheme.breakpoints.up("lg")]: {
+              fontSize: "6rem",
+            },
           },
         },
-      },
+      ],
     },
   },
 });

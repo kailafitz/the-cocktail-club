@@ -3,7 +3,6 @@ import { useQuery } from "react-query";
 import Typography from "@mui/material/Typography";
 import ViewHeightContainer from "../../Components/Layout/ViewHeightContainer";
 import Loading from "../../Components/Status/Loading";
-import { useNavigate } from "react-router-dom";
 import EditBio from "../../Components/EditBio";
 import Error from "../../Components/Status/Error";
 import { api } from "../../axios";
@@ -14,7 +13,6 @@ import CocktailCard from "../../Components/CocktailCard";
 import { ICocktailCard } from "../../Interfaces";
 
 const Profile = () => {
-  const navigate = useNavigate();
   const { data, status } = useQuery(["Get Account Details"], () =>
     api
       .get("api/profile", {
@@ -48,15 +46,16 @@ const Profile = () => {
         direction={{ xs: "column", md: "row" }}
         justifyContent={{ xs: "center", md: "space-between" }}
         spacing={3}
-        alignItems={{ md: "flex-start" }}
       >
+        {/* Profile Card */}
         <Stack
           direction="column"
           alignItems="center"
           spacing={3}
           sx={{
             width: { xs: "-webkit-fill-available", md: "330px" },
-            maxWidth: "330px",
+            // maxWidth: "330px",
+            margin: "0 auto",
             p: 3,
             border: 2,
             borderColor: "primary.main",
@@ -80,7 +79,10 @@ const Profile = () => {
           </Typography>
           <EditBio user={data.user} />
         </Stack>
-        <Box
+        {/* Latest creations */}
+        <Stack
+          direction="column"
+          justifyContent="space-between"
           sx={{
             width: "-webkit-fill-available",
             border: 2,
@@ -90,18 +92,17 @@ const Profile = () => {
           p={3}
         >
           <Stack direction="row" justifyContent="space-between" mb={3}>
-            <Typography variant="body1">Latest Cocktail Creations</Typography>
+            <Typography variant="body1">Latest Creations</Typography>
             <Button variant="primaryDark" href="/my-cocktails">
               View all
             </Button>
           </Stack>
           <Stack
-            direction={{ xs: "column", md: "row" }}
+            direction={{ xs: "column", sm: "row" }}
             justifyContent={
-              data.cocktails.length > 3 ? "space-between" : "flex-start"
+              data.cocktails.length > 3 ? "space-between" : "space-evenly"
             }
             spacing={3}
-            flexWrap="wrap"
           >
             {data.cocktails.map((c: ICocktailCard, i: number) => {
               return (
@@ -116,7 +117,7 @@ const Profile = () => {
               );
             })}
           </Stack>
-        </Box>
+        </Stack>
       </Stack>
     </ViewHeightContainer>
   );
