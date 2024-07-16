@@ -17,6 +17,16 @@ import Typography from "@mui/material/Typography";
 import Loading from "../Status/Loading";
 import AddIcon from "@mui/icons-material/Add";
 import { useLocation } from "react-router-dom";
+import { z } from "zod";
+
+const Cocktail = z.object({
+  username: z.string(),
+  name: z.string(),
+  category: z.string(),
+  // ingredients: [],
+  // instructions: [],
+  // image: null,
+});
 
 const VisuallyHiddenInput = styled("input")({
   clip: "rect(0 0 0 0)",
