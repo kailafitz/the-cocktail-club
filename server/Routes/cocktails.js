@@ -40,19 +40,7 @@ cocktailRouter.post("/api/create-cocktail", ensureAuthenticated, upload.single("
 
         uploadFile(imageName, req.file.buffer, req.file.mimetype);
 
-        // const params = {
-        //     Bucket: process.env.S3_BUCKET_NAME,
-        //     Key: "0f12b1371fc08f77033a7c2e8372d5f12e7348c5ef006c63316c8f3313a8e3a5_cocktail.webp",
-        // }
-        // const command = new GetObjectCommand(params);
-
-        // const imageUrl = await getSignedUrl(client, command);
-
-        // const response = await client.send(command);
-        // const str = await response.Body;
-
         const imageUrl = `https://${process.env.S3_BUCKET_NAME}.s3.amazonaws.com/${imageName}`;
-        console.log("imageUrl", imageUrl);
 
         const newCocktail = await pool.query(
             "INSERT INTO cocktails (name, category, created_by, ingredients, instructions, image_name, image_url) VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING *",
