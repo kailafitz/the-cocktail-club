@@ -99,18 +99,19 @@ authRouter.post("/api/login", (req, res, next) => {
 })
 
 authRouter.post("/api/logout", (req, res) => {
-    console.log("--> Logout", req.user);
+    return res.status(401).send("User not found to log out");
+    // console.log("--> Logout", req.user);
 
-    if (!req.user) {
-        return res.status(401).send("User not found to log out");
-    }
+    // if (!req.user) {
+    //     return res.status(401).send("User not found to log out");
+    // }
 
-    req.logout((err) => {
-        if (err) {
-            return res.status(400).send("Unable to logout due to an error");
-        }
-        return res.status(200).send("Logout successful");
-    })
+    // req.logout((err) => {
+    //     if (err) {
+    //         return res.status(400).send("Unable to logout due to an error");
+    //     }
+    //     return res.status(200).send("Logout successful");
+    // })
 });
 
 export default authRouter;

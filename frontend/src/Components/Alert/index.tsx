@@ -11,7 +11,7 @@ const FormFeedback = ({
   mb?: boolean;
 }) => {
   return (
-    <Alert severity={severity} sx={{ mb: mb ? 2 : 0 }}>
+    <Alert variant="filled" severity={severity} sx={{ mb: mb ? 2 : 0 }}>
       {message}
     </Alert>
   );

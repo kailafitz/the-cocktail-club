@@ -12,11 +12,12 @@ import TextField from "@mui/material/TextField";
 
 const EditCocktail = ({ cocktail }: { cocktail: ICocktailCustom }) => {
   const queryClient = useQueryClient();
+  const [loading, setLoading] = useState(false);
   const [updatedCocktail, setUpdatedCocktail] = useState(cocktail);
   const [errorMessage, setErrorMessage] = useState("");
   const [open, setOpen] = useState(false);
 
-  const handleClickOpen = () => {
+  const handleOpen = () => {
     setOpen(true);
   };
 
@@ -36,10 +37,12 @@ const EditCocktail = ({ cocktail }: { cocktail: ICocktailCustom }) => {
     },
     onSuccess() {
       console.log("Cocktail updated successfully");
+      setLoading(false);
       handleClose();
       queryClient.invalidateQueries("Get Cocktail Details");
     },
     onError: (error: AxiosError) => {
+      setLoading(false);
       setErrorMessage(
         typeof error.response?.data === "string"
           ? `${error.response?.data}`
@@ -48,8 +51,9 @@ const EditCocktail = ({ cocktail }: { cocktail: ICocktailCustom }) => {
     },
   });
 
-  const updateCocktail = async (event: any) => {
+  const handleSubmit = async (event: any) => {
     event.preventDefault();
+    setLoading(true);
     mutation.mutate(updatedCocktail);
   };
 
@@ -57,7 +61,7 @@ const EditCocktail = ({ cocktail }: { cocktail: ICocktailCustom }) => {
     <div>
       <Button
         variant="primaryDark"
-        onClick={handleClickOpen}
+        onClick={handleOpen}
         data-target={cocktail.id}
       >
         Edit
@@ -69,6 +73,7 @@ const EditCocktail = ({ cocktail }: { cocktail: ICocktailCustom }) => {
           component="form"
           noValidate
           autoComplete="off"
+          onSubmit={handleSubmit}
           p={5}
         >
           {mutation.isError && (
@@ -82,13 +87,7 @@ const EditCocktail = ({ cocktail }: { cocktail: ICocktailCustom }) => {
             }
           />
           <Stack direction={{ xs: "column", md: "row" }} spacing={3}>
-            <Button
-              variant="primaryDark"
-              fullWidth
-              onClick={(event) => {
-                updateCocktail(event);
-              }}
-            >
+            <Button variant="primaryDark" fullWidth type="submit">
               Update
             </Button>
             <Button variant="primaryLight" fullWidth onClick={handleClose}>

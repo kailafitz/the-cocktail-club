@@ -9,14 +9,16 @@ import PropTypes from "prop-types";
 import Button from "@mui/material/Button";
 import { api } from "../../axios";
 import TextField from "@mui/material/TextField";
+import Loading from "../Status/Loading";
 
 const EditBio = ({ user }: { user: IUser }) => {
   const queryClient = useQueryClient();
+  const [loading, setLoading] = useState(false);
   const [userBio, setUserBio] = useState<string>("");
   const [errorMessage, setErrorMessage] = useState("");
   const [open, setOpen] = useState(false);
 
-  const handleClickOpen = () => {
+  const handleOpen = () => {
     setOpen(true);
   };
 
@@ -36,9 +38,12 @@ const EditBio = ({ user }: { user: IUser }) => {
     },
     onSuccess() {
       console.log("Bio updated successfully");
+      setLoading(false);
       queryClient.invalidateQueries("Get Account Details");
+      handleClose();
     },
     onError: (error: AxiosError) => {
+      setLoading(false);
       setErrorMessage(
         typeof error.response?.data === "string"
           ? `${error.response?.data}`
@@ -47,7 +52,8 @@ const EditBio = ({ user }: { user: IUser }) => {
     },
   });
 
-  const updateBio = async (event: any) => {
+  const handleSubmit = async (event: any) => {
+    setLoading(true);
     event.preventDefault();
     mutation.mutate(userBio);
   };
@@ -57,7 +63,7 @@ const EditBio = ({ user }: { user: IUser }) => {
       <Button
         variant="primaryDark"
         fullWidth
-        onClick={handleClickOpen}
+        onClick={handleOpen}
         data-target={user.id.toString()}
       >
         Edit
@@ -69,32 +75,33 @@ const EditBio = ({ user }: { user: IUser }) => {
           component="form"
           noValidate
           autoComplete="off"
+          onSubmit={handleSubmit}
           p={5}
         >
           {mutation.isError && (
             <FormFeedback severity="error" message={errorMessage} />
           )}
-          <TextField
-            label="Bio"
-            multiline
-            rows={4}
-            defaultValue={user.bio}
-            onChange={(event) => setUserBio(event.target.value)}
-          />
-          <Stack direction={{ xs: "column", md: "row" }} spacing={3}>
-            <Button
-              variant="primaryDark"
-              fullWidth
-              onClick={(event) => {
-                updateBio(event);
-              }}
-            >
-              Update
-            </Button>
-            <Button variant="primaryLight" fullWidth onClick={handleClose}>
-              Close
-            </Button>
-          </Stack>
+          {loading ? (
+            <Loading color="light" />
+          ) : (
+            <>
+              <TextField
+                label="Bio"
+                multiline
+                rows={4}
+                defaultValue={user.bio}
+                onChange={(event) => setUserBio(event.target.value)}
+              />
+              <Stack direction={{ xs: "column", md: "row" }} spacing={3}>
+                <Button variant="primaryDark" fullWidth type="submit">
+                  Update
+                </Button>
+                <Button variant="primaryLight" fullWidth onClick={handleClose}>
+                  Cancel
+                </Button>
+              </Stack>{" "}
+            </>
+          )}
         </Stack>
       </Dialog>
     </>
