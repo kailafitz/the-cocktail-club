@@ -10,10 +10,12 @@ import Grid from "@mui/material/Unstable_Grid2/Grid2";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import { api } from "../../axios";
+import Loading from "../../Components/Status/Loading";
 
 const LoginUser = () => {
   const queryClient = useQueryClient();
   const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
   const [user, setUser] = useState<ILogin>({
     id: 0,
     email: "",
@@ -36,13 +38,14 @@ const LoginUser = () => {
     },
     onSuccess() {
       console.log("Redirect");
+      setLoading(false);
       queryClient.invalidateQueries("Authentication Status Check");
-      // navigate("/profile");
       setTimeout(() => {
         navigate("/profile");
       }, 500);
     },
     onError: (error: AxiosError) => {
+      setLoading(false);
       setErrorMessage(
         typeof error.response?.data === "string"
           ? error.response?.status === 500
@@ -55,6 +58,7 @@ const LoginUser = () => {
 
   const handleLogin = async (e: any) => {
     e.preventDefault();
+    setLoading(true);
     mutation.mutate(user);
   };
 
@@ -73,22 +77,28 @@ const LoginUser = () => {
             onSubmit={handleLogin}
             spacing={3}
           >
-            <TextField
-              label="Email"
-              onChange={(event) =>
-                setUser({ ...user, email: event.target.value })
-              }
-            />
-            <TextField
-              type="password"
-              label="Password"
-              onChange={(event) =>
-                setUser({ ...user, password: event.target.value })
-              }
-            />
-            <Button variant="primaryDark" type="submit">
-              Login
-            </Button>
+            {loading ? (
+              <Loading color="light" />
+            ) : (
+              <>
+                <TextField
+                  label="Email"
+                  onChange={(event) =>
+                    setUser({ ...user, email: event.target.value })
+                  }
+                />
+                <TextField
+                  type="password"
+                  label="Password"
+                  onChange={(event) =>
+                    setUser({ ...user, password: event.target.value })
+                  }
+                />
+                <Button variant="primaryDark" type="submit">
+                  Login
+                </Button>
+              </>
+            )}
           </Stack>
         </Grid>
       </Grid>
