@@ -3,7 +3,7 @@ import { pool } from "../db.js";
 import { ensureAuthenticated } from "./auth.js";
 // import { getSignedUrl } from "@aws-sdk/s3-request-presigner"; // Private bucket
 import { fromCognitoIdentityPool } from "@aws-sdk/credential-providers"; // Public bucket
-import { S3Client, PutObjectCommand, GetObjectCommand, DeleteObjectCommand } from "@aws-sdk/client-s3";
+import { S3Client, PutObjectCommand, DeleteObjectCommand } from "@aws-sdk/client-s3";
 import multer from "multer";
 import crypto from "crypto";
 
@@ -19,6 +19,12 @@ const storage = multer.memoryStorage();
 const upload = multer({ storage: storage });
 
 const randomImageName = (bytes = 32) => crypto.randomBytes(bytes).toString("hex");
+
+const getFileExtension = (fileName) => {
+    let breakdown = fileName.split(".");
+
+    return `.${breakdown[breakdown.length - 1]}`
+}
 
 export function uploadFile(fileName, fileBuffer, mimetype) {
     const params = {
@@ -36,7 +42,8 @@ cocktailRouter.post("/api/create-cocktail", ensureAuthenticated, upload.single("
     try {
         const { data } = req.body;
 
-        const imageName = `${randomImageName()}_${req.file.originalname}`;
+        let fileType = getFileExtension(req.file.originalname);
+        const imageName = `${randomImageName()}${fileType}`;
 
         uploadFile(imageName, req.file.buffer, req.file.mimetype);
 
