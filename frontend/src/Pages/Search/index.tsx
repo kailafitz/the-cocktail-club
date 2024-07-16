@@ -52,14 +52,16 @@ export const Search = () => {
                 return (
                   <>
                     {drink.idDrink ? (
-                      <CocktailCard
-                        key={drink.idDrink}
-                        id={drink.idDrink}
-                        image_url={drink.strDrinkThumb}
-                        name={drink.strDrink}
-                        category={drink.strAlcoholic}
-                        db="api"
-                      />
+                      <Grid xs={12} sm={5} md={4}>
+                        <CocktailCard
+                          key={drink.idDrink}
+                          id={drink.idDrink}
+                          image_url={drink.strDrinkThumb}
+                          name={drink.strDrink}
+                          category={drink.strAlcoholic}
+                          db="api"
+                        />
+                      </Grid>
                     ) : (
                       <Skeleton
                         key={i}

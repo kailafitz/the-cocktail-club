@@ -47,10 +47,7 @@ const CocktailList = () => {
     <ViewHeightContainer pt center>
       <Stack
         direction={{ xs: "column", md: "row" }}
-        justifyContent={{
-          xs: "center",
-          md: data.length < 3 ? "flex-start" : "space-between",
-        }}
+        justifyContent="center"
         id="results"
       >
         {data.length > 0 ? (
