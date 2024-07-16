@@ -11,6 +11,7 @@ import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import CocktailCard from "../../Components/CocktailCard";
 import { ICocktailCard } from "../../Interfaces";
+import CreateCocktailForm from "../../Components/CreateCocktailForm";
 
 const Profile = () => {
   const { data, status } = useQuery(["Get Account Details"], () =>
@@ -82,7 +83,7 @@ const Profile = () => {
         {/* Latest creations */}
         <Stack
           direction="column"
-          justifyContent="space-between"
+          // justifyContent="space-between"
           sx={{
             width: "-webkit-fill-available",
             border: 2,
@@ -103,6 +104,7 @@ const Profile = () => {
               data.cocktails.length > 3 ? "space-between" : "space-evenly"
             }
             spacing={3}
+            flexGrow={1}
           >
             {data.cocktails.map((c: ICocktailCard, i: number) => {
               return (
@@ -116,6 +118,17 @@ const Profile = () => {
                 />
               );
             })}
+            {data.cocktails.length === 0 && (
+              <Stack
+                direction="column"
+                justifyContent="center"
+                spacing={3}
+                alignItems="center"
+              >
+                <Typography variant="body1">No cocktails created.</Typography>
+                <CreateCocktailForm />
+              </Stack>
+            )}
           </Stack>
         </Stack>
       </Stack>

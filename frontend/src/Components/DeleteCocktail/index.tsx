@@ -10,8 +10,10 @@ import Typography from "@mui/material/Typography";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { api } from "../../axios";
 import Loading from "../Status/Loading";
+import { useLocation } from "react-router-dom";
 
 const DeleteCocktail = ({ cocktailId }: { cocktailId: string }) => {
+  const location = useLocation();
   const queryClient = useQueryClient();
   const [errorMessage, setErrorMessage] = useState("");
   const [loading, setLoading] = useState(false);
@@ -35,7 +37,11 @@ const DeleteCocktail = ({ cocktailId }: { cocktailId: string }) => {
       console.log("Deletion success");
       handleClose();
       setLoading(false);
-      queryClient.invalidateQueries("Get All Cocktails");
+      if (location.pathname === "/profile") {
+        queryClient.invalidateQueries("Get Account Details");
+      } else {
+        queryClient.invalidateQueries("Get All Cocktails");
+      }
     },
     onError: (error: AxiosError) => {
       setLoading(false);

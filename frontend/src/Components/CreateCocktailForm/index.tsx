@@ -15,6 +15,8 @@ import Dialog from "@mui/material/Dialog";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Loading from "../Status/Loading";
+import AddIcon from "@mui/icons-material/Add";
+import { useLocation } from "react-router-dom";
 
 const VisuallyHiddenInput = styled("input")({
   clip: "rect(0 0 0 0)",
@@ -29,6 +31,7 @@ const VisuallyHiddenInput = styled("input")({
 });
 
 const CreateCocktailForm = () => {
+  const location = useLocation();
   const queryClient = useQueryClient();
   const [loading, setLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
@@ -66,7 +69,11 @@ const CreateCocktailForm = () => {
     onSuccess() {
       console.log("Success");
       setLoading(false);
-      queryClient.invalidateQueries("Get All Cocktails");
+      if (location.pathname === "/profile") {
+        queryClient.invalidateQueries("Get Account Details");
+      } else {
+        queryClient.invalidateQueries("Get All Cocktails");
+      }
       handleClose();
     },
     onError: (error: AxiosError) => {
@@ -93,6 +100,7 @@ const CreateCocktailForm = () => {
           variant="primaryDark"
           onClick={handleClickOpen}
           data-target="create-cocktail"
+          startIcon={<AddIcon />}
         >
           Add Cocktail
         </Button>
