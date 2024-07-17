@@ -51,7 +51,6 @@ const CreateCocktailForm = () => {
   const {
     control,
     handleSubmit,
-    getValues,
     clearErrors,
     reset,
     formState: { errors },
@@ -69,8 +68,6 @@ const CreateCocktailForm = () => {
     reset();
     setOpen(false);
   };
-
-  const values = getValues();
 
   const mutation = useMutation({
     mutationFn: (data: ICocktailCustom) => {
@@ -112,11 +109,6 @@ const CreateCocktailForm = () => {
     setLoading(true);
     mutation.mutate(cocktail);
   };
-
-  console.log("errors", errors);
-  console.log("values", values);
-
-  console.log("cocktail", cocktail);
 
   return (
     <>
