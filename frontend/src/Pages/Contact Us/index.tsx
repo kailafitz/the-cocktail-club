@@ -32,14 +32,12 @@ const ContactUs = () => {
               </Link>
             </Stack>
             <iframe
+              title="map"
               src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3724.0138008856534!2d105.84563647523098!3d21.03213378766275!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3135ab000fac8763%3A0x35043f84a0316a27!2sRandom%20Vietnamese%20Cat%2C%2014%20Hang%20Manh%20Street!5e0!3m2!1sen!2s!4v1720889011321!5m2!1sen!2s"
               width="400"
               height="300"
               className="map"
-              // style="border:0;"
-              // allowfullscreen=""
               loading="lazy"
-              // referrerpolicy="no-referrer-when-downgrade"
             ></iframe>
           </Stack>
           <Stack sx={{ width: { xs: "100%", md: "40%" } }} spacing={3}>

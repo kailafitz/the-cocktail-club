@@ -9,6 +9,7 @@
     "@aws-sdk/s3-request-presigner": "^3.613.0",
     "@emotion/react": "^11.10.5",
     "@emotion/styled": "^11.10.5",
+    "@hookform/resolvers": "^3.9.0",
     "@mui/icons-material": "^5.11.0",
     "@mui/material": "^5.11.5",
     "@testing-library/react": "^13.4.0",
