@@ -42,8 +42,6 @@ cocktailRouter.post("/api/create-cocktail", ensureAuthenticated, upload.single("
     try {
         const { data } = req.body;
 
-        console.log(req.body, req.file);
-
         let fileType = getFileExtension(req.file.originalname);
         const imageName = `${randomImageName()}${fileType}`;
 

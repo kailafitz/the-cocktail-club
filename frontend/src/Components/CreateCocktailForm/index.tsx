@@ -60,8 +60,6 @@ const CreateCocktailForm = () => {
     resolver: zodResolver(CocktailSchema),
   });
 
-  const values = getValues();
-
   const handleOpen = () => {
     reset();
     clearErrors();
@@ -111,11 +109,6 @@ const CreateCocktailForm = () => {
       }, 1500);
     },
   });
-
-  // console.log("values", values);
-  // console.log("errors", errors);
-  console.log("cocktail", cocktail);
-  // console.log("error", mutation.error);
 
   const onSubmit: SubmitHandler<ICocktailUpload> = async () => {
     setLoading(true);
