@@ -81,6 +81,9 @@ const CreateCocktailForm = () => {
         { data },
         {
           withCredentials: true,
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
         }
       );
     },
@@ -274,6 +277,7 @@ const CreateCocktailForm = () => {
                     render={({ field: { onChange } }) => (
                       <VisuallyHiddenInput
                         type="file"
+                        name="image"
                         onChange={(event) => {
                           console.log(
                             event.target.files ? event.target.files[0] : null
@@ -288,7 +292,7 @@ const CreateCocktailForm = () => {
                             event.target.files ? event.target.files[0] : null
                           );
                         }}
-                        // accept="image/png, image/jpeg, image/webp"
+                        accept=".png, .jpeg, .jpg, .webp"
                         required
                       />
                     )}

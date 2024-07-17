@@ -45,6 +45,7 @@ export const CocktailDetails = () => {
       </ViewHeightContainer>
     );
   }
+
   return (
     <ViewHeightContainer pt>
       <Stack direction={{ xs: "column", md: "row" }} spacing={3}>
