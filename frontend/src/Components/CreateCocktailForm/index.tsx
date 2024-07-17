@@ -59,7 +59,7 @@ const CreateCocktailForm = () => {
     resolver: zodResolver(CocktailSchema),
   });
 
-  const handleClickOpen = () => {
+  const handleOpen = () => {
     setOpen(true);
   };
 
@@ -76,36 +76,35 @@ const CreateCocktailForm = () => {
         { data },
         {
           withCredentials: true,
-          headers: {
-            "Content-Type": "multipart/form-data",
-            "Access-Control-Allow-Origin": "*",
-          },
         }
       );
     },
     onSuccess() {
       console.log("Success");
-      setLoading(false);
-      if (location.pathname === "/profile") {
-        queryClient.invalidateQueries("Get Account Details");
-      } else {
-        queryClient.invalidateQueries("Get All Cocktails");
-      }
-      handleClose();
+      setTimeout(() => {
+        setLoading(false);
+        if (location.pathname === "/profile") {
+          queryClient.invalidateQueries("Get Account Details");
+        } else {
+          queryClient.invalidateQueries("Get All Cocktails");
+        }
+        handleClose();
+      }, 1500);
     },
     onError: (error: AxiosError) => {
-      setLoading(false);
-      if (
-        typeof error.response?.data === "string" &&
-        error.response?.data !== "Unauthorised"
-      ) {
-        setErrorMessage(error.response?.data);
-      }
+      setTimeout(() => {
+        setLoading(false);
+        if (
+          typeof error.response?.data === "string" &&
+          error.response?.data !== "Unauthorised"
+        ) {
+          setErrorMessage(error.response?.data);
+        }
+      }, 1500);
     },
   });
 
   const onSubmit: SubmitHandler<ICocktailUpload> = async (event: any) => {
-    console.log("Hi");
     setLoading(true);
     mutation.mutate(cocktail);
   };
@@ -115,7 +114,7 @@ const CreateCocktailForm = () => {
       <Box>
         <Button
           variant="primaryDark"
-          onClick={handleClickOpen}
+          onClick={handleOpen}
           data-target="create-cocktail"
           startIcon={<AddIcon />}
         >
