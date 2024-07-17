@@ -53,6 +53,7 @@ const CreateCocktailForm = () => {
     handleSubmit,
     getValues,
     clearErrors,
+    reset,
     formState: { errors },
   } = useForm<ICocktailUpload>({
     defaultValues: initialState,
@@ -65,6 +66,7 @@ const CreateCocktailForm = () => {
 
   const handleClose = () => {
     clearErrors();
+    reset();
     setOpen(false);
   };
 
