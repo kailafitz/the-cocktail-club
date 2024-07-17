@@ -9,6 +9,7 @@ import PropTypes from "prop-types";
 import Button from "@mui/material/Button";
 import { api } from "../../axios";
 import TextField from "@mui/material/TextField";
+import Loading from "../Status/Loading";
 
 const EditCocktail = ({ cocktail }: { cocktail: ICocktailCustom }) => {
   const queryClient = useQueryClient();
@@ -79,21 +80,27 @@ const EditCocktail = ({ cocktail }: { cocktail: ICocktailCustom }) => {
           {mutation.isError && (
             <FormFeedback severity="error" message={errorMessage} />
           )}
-          <TextField
-            label="Cocktail Name"
-            defaultValue={cocktail.name}
-            onChange={(event) =>
-              setUpdatedCocktail({ ...cocktail, name: event.target.value })
-            }
-          />
-          <Stack direction={{ xs: "column", md: "row" }} spacing={3}>
-            <Button variant="primaryDark" fullWidth type="submit">
-              Update
-            </Button>
-            <Button variant="primaryLight" fullWidth onClick={handleClose}>
-              Close
-            </Button>
-          </Stack>
+          {loading ? (
+            <Loading color="light" />
+          ) : (
+            <>
+              <TextField
+                label="Cocktail Name"
+                defaultValue={cocktail.name}
+                onChange={(event) =>
+                  setUpdatedCocktail({ ...cocktail, name: event.target.value })
+                }
+              />
+              <Stack direction={{ xs: "column", md: "row" }} spacing={3}>
+                <Button variant="primaryDark" fullWidth type="submit">
+                  Update
+                </Button>
+                <Button variant="primaryLight" fullWidth onClick={handleClose}>
+                  Close
+                </Button>
+              </Stack>
+            </>
+          )}
         </Stack>
       </Dialog>
     </div>
