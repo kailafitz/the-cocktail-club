@@ -43,8 +43,8 @@ const CreateCocktailForm = () => {
     id: 0,
     name: "",
     category: "Alcoholic",
-    ingredients: [""],
-    instructions: [""],
+    ingredients: [],
+    instructions: [],
     image: undefined,
   };
   const [cocktail, setCocktail] = useState(initialState);
@@ -52,6 +52,7 @@ const CreateCocktailForm = () => {
     control,
     handleSubmit,
     getValues,
+    clearErrors,
     formState: { errors },
   } = useForm<ICocktailUpload>({
     defaultValues: initialState,
@@ -63,6 +64,7 @@ const CreateCocktailForm = () => {
   };
 
   const handleClose = () => {
+    clearErrors();
     setOpen(false);
   };
 
@@ -164,9 +166,7 @@ const CreateCocktailForm = () => {
                 )}
               />
               {errors.name?.message && (
-                <Typography variant="body1" sx={{ my: 3 }}>
-                  {errors.name?.message}
-                </Typography>
+                <FormFeedback message={errors.name?.message} severity="error" />
               )}
               <Controller
                 name="category"
@@ -192,9 +192,10 @@ const CreateCocktailForm = () => {
                 )}
               />
               {errors.category?.message && (
-                <Typography variant="body1" sx={{ my: 3 }}>
-                  {errors.name?.message}
-                </Typography>
+                <FormFeedback
+                  message={errors.category?.message}
+                  severity="error"
+                />
               )}
               <Controller
                 name="ingredients"
@@ -213,9 +214,10 @@ const CreateCocktailForm = () => {
                 )}
               />
               {errors.ingredients?.message && (
-                <Typography variant="body1" sx={{ my: 3 }}>
-                  {errors.name?.message}
-                </Typography>
+                <FormFeedback
+                  message={errors.ingredients?.message}
+                  severity="error"
+                />
               )}
               <Controller
                 name="instructions"
@@ -234,9 +236,10 @@ const CreateCocktailForm = () => {
                 )}
               />
               {errors.instructions?.message && (
-                <Typography variant="body1" sx={{ my: 3 }}>
-                  {errors.name?.message}
-                </Typography>
+                <FormFeedback
+                  message={errors.instructions?.message}
+                  severity="error"
+                />
               )}
               <Stack direction="row" spacing={3} alignItems="center">
                 <Button
@@ -283,9 +286,10 @@ const CreateCocktailForm = () => {
                 </Typography>
               </Stack>
               {errors.image?.message && (
-                <Typography variant="body1" sx={{ my: 3 }}>
-                  {errors.image?.message}
-                </Typography>
+                <FormFeedback
+                  message={errors.image?.message}
+                  severity="error"
+                />
               )}
               <Stack direction={{ xs: "column", md: "row" }} spacing={3}>
                 <Button
