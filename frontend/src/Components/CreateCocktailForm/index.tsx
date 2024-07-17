@@ -132,7 +132,7 @@ const CreateCocktailForm = () => {
           encType="multipart/form-data"
           noValidate
           autoComplete="off"
-          onSubmit={() => handleSubmit(onSubmit)}
+          onSubmit={handleSubmit(onSubmit)}
           direction="column"
           spacing={4}
           alignSelf="center"
@@ -275,7 +275,6 @@ const CreateCocktailForm = () => {
                     )}
                   />
                 </Button>
-
                 <Typography variant="body1">
                   File uploaded:{" "}
                   {typeof cocktail.image === "object" && cocktail.image
@@ -285,7 +284,7 @@ const CreateCocktailForm = () => {
               </Stack>
               {errors.image?.message && (
                 <Typography variant="body1" sx={{ my: 3 }}>
-                  {errors.name?.message}
+                  {errors.image?.message}
                 </Typography>
               )}
               <Stack direction={{ xs: "column", md: "row" }} spacing={3}>
