@@ -38,7 +38,7 @@ export interface ICocktailCustom {
 }
 
 export interface ICocktailUpload extends ICocktailCustom {
-  image: File | undefined;
+  image: File | null;
 }
 
 export interface ICocktailDownload extends ICocktailCustom {

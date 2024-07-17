@@ -45,13 +45,14 @@ const CreateCocktailForm = () => {
     category: "Alcoholic",
     ingredients: [],
     instructions: [],
-    image: undefined,
+    image: null,
   };
   const [cocktail, setCocktail] = useState(initialState);
   const {
     control,
     handleSubmit,
     clearErrors,
+    getValues,
     reset,
     formState: { errors },
   } = useForm<ICocktailUpload>({
@@ -59,13 +60,17 @@ const CreateCocktailForm = () => {
     resolver: zodResolver(CocktailSchema),
   });
 
+  const values = getValues();
+
   const handleOpen = () => {
+    reset();
+    clearErrors();
+    setCocktail(initialState);
+    mutation.reset();
     setOpen(true);
   };
 
   const handleClose = () => {
-    clearErrors();
-    reset();
     setOpen(false);
   };
 
@@ -104,8 +109,15 @@ const CreateCocktailForm = () => {
     },
   });
 
-  const onSubmit: SubmitHandler<ICocktailUpload> = async (event: any) => {
+  // console.log("values", values);
+  // console.log("errors", errors);
+  console.log("cocktail", cocktail);
+  // console.log("error", mutation.error);
+
+  const onSubmit: SubmitHandler<ICocktailUpload> = async () => {
     setLoading(true);
+    // reset(); // reset values
+    mutation.reset(); // reset error
     mutation.mutate(cocktail);
   };
 
@@ -134,7 +146,7 @@ const CreateCocktailForm = () => {
           p={5}
           sx={{ width: "-webkit-fill-available" }}
         >
-          {mutation.isError && (
+          {mutation.isError && loading === false && (
             <FormFeedback severity="error" message={errorMessage} />
           )}
           {loading ? (
@@ -142,12 +154,17 @@ const CreateCocktailForm = () => {
           ) : (
             <>
               <Controller
+                name="id"
+                control={control}
+                render={({ field }) => <input hidden />}
+              />
+              <Controller
                 name="name"
                 control={control}
+                defaultValue={cocktail.name}
                 rules={{ required: true }}
-                render={({ field: { onChange, value, ...field } }) => (
+                render={({ field: { onChange, value } }) => (
                   <TextField
-                    {...field}
                     label="Cocktail Name"
                     value={value}
                     onChange={(event) => {
@@ -164,6 +181,7 @@ const CreateCocktailForm = () => {
               <Controller
                 name="category"
                 control={control}
+                defaultValue={cocktail.category}
                 rules={{ required: true }}
                 render={({ field: { onChange, value } }) => (
                   <Select
@@ -193,10 +211,12 @@ const CreateCocktailForm = () => {
               <Controller
                 name="ingredients"
                 control={control}
+                defaultValue={cocktail.ingredients}
                 rules={{ required: true }}
-                render={({ field: { onChange } }) => (
+                render={({ field: { onChange, value } }) => (
                   <TextField
                     label="Ingredients"
+                    value={value}
                     onChange={(event) => {
                       let arr = event.target.value.split(",");
                       setCocktail({ ...cocktail, ingredients: arr });
@@ -215,9 +235,11 @@ const CreateCocktailForm = () => {
               <Controller
                 name="instructions"
                 control={control}
+                defaultValue={cocktail.instructions}
                 rules={{ required: true }}
-                render={({ field: { onChange } }) => (
+                render={({ field: { onChange, value } }) => (
                   <TextField
+                    value={value}
                     label="Instructions"
                     onChange={(event) => {
                       let arr = event.target.value.split(",");
@@ -247,25 +269,26 @@ const CreateCocktailForm = () => {
                   <Controller
                     name="image"
                     control={control}
+                    defaultValue={initialState.image}
                     rules={{ required: true }}
                     render={({ field: { onChange } }) => (
                       <VisuallyHiddenInput
                         type="file"
-                        // value={value?.fileName}
                         onChange={(event) => {
+                          console.log(
+                            event.target.files ? event.target.files[0] : null
+                          );
                           setCocktail({
                             ...cocktail,
                             image: event.target.files
                               ? event.target.files[0]
-                              : undefined,
+                              : null,
                           });
                           onChange(
-                            event.target.files
-                              ? event.target.files[0]
-                              : undefined
+                            event.target.files ? event.target.files[0] : null
                           );
                         }}
-                        accept="image/png, image/jpeg, image/webp"
+                        // accept="image/png, image/jpeg, image/webp"
                         required
                       />
                     )}
@@ -274,8 +297,8 @@ const CreateCocktailForm = () => {
                 <Typography variant="body1">
                   File uploaded:{" "}
                   {typeof cocktail.image === "object" && cocktail.image
-                    ? cocktail.image.name
-                    : undefined}
+                    ? cocktail.image?.name
+                    : null}
                 </Typography>
               </Stack>
               {errors.image?.message && (
