@@ -147,7 +147,7 @@ export const Home: React.FC = () => {
               }}
             >
               <Box
-                className="on-load-image-animation"
+                className="image on-load-image-animation"
                 sx={{
                   height: "100%",
                   transform: "translateY(-1000px)",

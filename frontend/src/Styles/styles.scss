@@ -72,11 +72,11 @@ body {
     animation-fill-mode: forwards;
 }
 
-.no-webp .on-load-image-animation {
+.no-webp .image {
     background: url("../../public/cocktail.png") no-repeat center / cover;
 }
 
-.webp .on-load-image-animation {
+.webp .image {
     background: url("../../public/cocktail.webp") no-repeat center / cover;
 }
 
@@ -114,8 +114,4 @@ body {
     filter: blur(0px);
     transform: translateY(0);
     transition: all 1s;
-}
-
-.about-image {
-    background: url("../../public/cocktail.png") no-repeat center / cover;
 }

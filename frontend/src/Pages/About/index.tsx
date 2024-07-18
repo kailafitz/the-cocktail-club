@@ -36,10 +36,7 @@ const About = () => {
               there are caveats with formatting as you will see.
             </Typography>
           </Box>
-          <Box
-            sx={{ width: "50%", height: "100%" }}
-            className="on-load-image-animation"
-          ></Box>
+          <Box sx={{ width: "50%", height: "100%" }} className="image"></Box>
         </Stack>
       </ViewHeightContainer>
     </>
