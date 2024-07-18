@@ -46,6 +46,8 @@ export const CocktailDetails = () => {
     );
   }
 
+  console.log("data", data);
+
   return (
     <ViewHeightContainer pt>
       <Stack direction={{ xs: "column", md: "row" }} spacing={3}>
@@ -131,7 +133,7 @@ export const CocktailDetails = () => {
         </Grid>
       </Grid>
       <StyledDivider />
-      <StyledImage src={data?.image} alt="Cocktail image" />
+      <StyledImage src={data?.image_url} alt="Cocktail image" />
     </ViewHeightContainer>
   );
 };

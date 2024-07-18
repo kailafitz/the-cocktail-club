@@ -38,7 +38,7 @@ export function uploadFile(fileName, fileBuffer, mimetype) {
 }
 
 // Create cocktail
-cocktailRouter.post("/api/create-cocktail", ensureAuthenticated, upload.single("data[image]"), async (req, res) => {
+cocktailRouter.post("/api/create-cocktail", ensureAuthenticated, upload.single("data[imageFile]"), async (req, res) => {
     try {
         const { data } = req.body;
 
@@ -83,7 +83,7 @@ cocktailRouter.get("/api/cocktails/:id", ensureAuthenticated, async (req, res) =
         const { id } = req.params;
         const cocktail = await pool.query("SELECT * FROM cocktails WHERE id = $1", [id]);
         const user = await pool.query("SELECT first_name, last_name FROM users WHERE id = $1", [cocktail.rows[0].created_by]);
-        console.log("--> Cocktail details", user.rows[0]);
+        // console.log("--> Cocktail details", user.rows[0]);
 
         res.status(200).send({ cocktail: cocktail.rows, user: user.rows[0] })
     } catch (err) {
@@ -93,12 +93,39 @@ cocktailRouter.get("/api/cocktails/:id", ensureAuthenticated, async (req, res) =
 })
 
 // Update a cocktail
-cocktailRouter.put("/api/cocktail/:id", ensureAuthenticated, async (req, res) => {
+cocktailRouter.put("/api/cocktail/:id", ensureAuthenticated, upload.single("data[imageFile]"), async (req, res) => {
     try {
-        console.log("--> Cocktail Updated");
+        const { data } = req.body;
         const { id } = req.params;
-        await pool.query("UPDATE cocktails SET name = $1 WHERE id = $2", [req.body.data.name, id]);
+        // console.log(req.body, req.file);
 
+        let fileType;
+        let imageName;
+        let imageUrl;
+
+        if (req.file !== undefined) {
+            console.log("File is present");
+            const cocktail = await pool.query("SELECT * FROM cocktails WHERE id = $1", [id]);
+            console.log(cocktail.rows[0]);
+            const params = {
+                Bucket: process.env.S3_BUCKET_NAME,
+                Key: cocktail.rows[0].image_name
+            }
+            const command = new DeleteObjectCommand(params);
+            await client.send(command);
+
+            fileType = getFileExtension(req.file.originalname);
+            imageName = `${randomImageName()}${fileType}`;
+            uploadFile(imageName, req.file.buffer, req.file.mimetype);
+            imageUrl = `https://${process.env.S3_BUCKET_NAME}.s3.amazonaws.com/${imageName}`;
+        }
+
+        let values = [id, data.name, data.category, data.ingredients, data.instructions]
+        let valuesWithImage = [...values, imageName, imageUrl]
+
+        const updatedCocktail = await pool.query(`UPDATE cocktails SET name = $2, category = $3, ingredients = $4, instructions = $5 ${req.file !== undefined ? ", image_name = $6, image_url = $7" : ""} WHERE id = $1 RETURNING *`, req.file !== undefined ? valuesWithImage : values);
+
+        console.log("--> Cocktail Updated", updatedCocktail.rows);
         res.status(200).send("Update successful");
     } catch (err) {
         console.log(err);

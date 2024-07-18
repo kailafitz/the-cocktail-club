@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Stack from "@mui/material/Stack";
-import { ICocktailCustom, ICocktailUpload } from "../../Interfaces";
+import { ICustomCocktailBase, ICustomCocktailUpload } from "../../Interfaces";
 import { useMutation, useQueryClient } from "react-query";
 import { AxiosError } from "axios";
 import FormFeedback from "../Alert";
@@ -39,26 +39,33 @@ const CreateCocktailForm = () => {
   const [loading, setLoading] = useState(false);
   const [open, setOpen] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
-  let initialState: ICocktailUpload = {
+  let initialState: ICustomCocktailUpload = {
     id: 0,
     name: "",
     category: "Alcoholic",
     ingredients: [],
     instructions: [],
-    image: null,
+    imageName: "",
+    imageFile: null,
   };
   const [cocktail, setCocktail] = useState(initialState);
   const {
     control,
     handleSubmit,
     clearErrors,
-    getValues,
+    register,
     reset,
+    setValue,
+    getValues,
     formState: { errors },
-  } = useForm<ICocktailUpload>({
+  } = useForm<ICustomCocktailUpload>({
     defaultValues: initialState,
     resolver: zodResolver(CocktailSchema),
+    mode: "onSubmit",
+    reValidateMode: "onChange",
   });
+
+  const values = getValues();
 
   const handleOpen = () => {
     reset();
@@ -73,7 +80,7 @@ const CreateCocktailForm = () => {
   };
 
   const mutation = useMutation({
-    mutationFn: (data: ICocktailCustom) => {
+    mutationFn: (data: ICustomCocktailBase) => {
       return api.post(
         "api/create-cocktail",
         { data },
@@ -95,7 +102,7 @@ const CreateCocktailForm = () => {
           queryClient.invalidateQueries("Get All Cocktails");
         }
         handleClose();
-      }, 1500);
+      }, 7000);
     },
     onError: (error: AxiosError) => {
       setTimeout(() => {
@@ -110,7 +117,7 @@ const CreateCocktailForm = () => {
     },
   });
 
-  const onSubmit: SubmitHandler<ICocktailUpload> = async () => {
+  const onSubmit: SubmitHandler<ICustomCocktailUpload> = async () => {
     setLoading(true);
     // reset(); // reset values
     mutation.reset(); // reset error
@@ -149,11 +156,7 @@ const CreateCocktailForm = () => {
             <Loading color="light" />
           ) : (
             <>
-              <Controller
-                name="id"
-                control={control}
-                render={({ field }) => <input hidden />}
-              />
+              <input {...register("id")} type="hidden" />
               <Controller
                 name="name"
                 control={control}
@@ -263,27 +266,25 @@ const CreateCocktailForm = () => {
                   <FileUploadIcon />
                   {/* Upload file */}
                   <Controller
-                    name="image"
+                    name="imageFile"
                     control={control}
-                    defaultValue={initialState.image}
                     rules={{ required: true }}
                     render={({ field: { onChange } }) => (
                       <VisuallyHiddenInput
                         type="file"
-                        name="image"
+                        name="imageFile"
                         onChange={(event) => {
-                          console.log(
-                            event.target.files ? event.target.files[0] : null
-                          );
-                          setCocktail({
-                            ...cocktail,
-                            image: event.target.files
-                              ? event.target.files[0]
-                              : null,
-                          });
-                          onChange(
-                            event.target.files ? event.target.files[0] : null
-                          );
+                          if (event.target.files) {
+                            setCocktail({
+                              ...cocktail,
+                              imageName: event.target.files[0].name,
+                              imageFile: event.target.files[0],
+                            });
+                            onChange(event.target.files[0]);
+                            setValue("imageName", event.target.files[0].name, {
+                              shouldValidate: true,
+                            });
+                          }
                         }}
                         accept=".png, .jpeg, .jpg, .webp"
                         required
@@ -292,15 +293,22 @@ const CreateCocktailForm = () => {
                   />
                 </Button>
                 <Typography variant="body1">
-                  File uploaded:{" "}
-                  {typeof cocktail.image === "object" && cocktail.image
-                    ? cocktail.image?.name
-                    : null}
+                  <span>File uploaded: </span>
+                  <span style={{ wordBreak: "break-all", fontWeight: 600 }}>
+                    {values.imageName}
+                  </span>
+                  <input
+                    {...register("imageName", {
+                      required: true,
+                    })}
+                    value={values.imageFile?.name}
+                    type="hidden"
+                  />
                 </Typography>
               </Stack>
-              {errors.image?.message && (
+              {errors.imageName?.message && (
                 <FormFeedback
-                  message={errors.image?.message}
+                  message={errors.imageName?.message}
                   severity="error"
                 />
               )}

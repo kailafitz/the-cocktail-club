@@ -11,7 +11,7 @@ import { wait } from "@testing-library/user-event/dist/utils";
 import Button from "@mui/material/Button";
 import Lights from "../../Components/Lights";
 import Box from "@mui/material/Box";
-import { ICocktailDb } from "../../Interfaces";
+import { IApiCocktail } from "../../Interfaces";
 import { useTheme } from "@mui/material";
 
 const dailyDrinks = [
@@ -131,7 +131,7 @@ export const Home: React.FC = () => {
         </Stack>
         <Lights />
       </ViewHeightContainer>
-      {data.map((drink: ICocktailDb) => {
+      {data.map((drink: IApiCocktail) => {
         return (
           <React.Fragment key={drink.idDrink}>
             <Box

@@ -1,6 +1,6 @@
 import React from "react";
 import { useQuery } from "react-query";
-import { ICocktailDownload } from "../../Interfaces";
+import { ICustomCocktailDownload } from "../../Interfaces";
 import CocktailCard from "../CocktailCard";
 import ViewHeightContainer from "../Layout/ViewHeightContainer";
 import Loading from "../Status/Loading";
@@ -52,8 +52,11 @@ const CocktailList = () => {
       >
         {data.length > 0 ? (
           data
-            .sort((a: ICocktailDownload, b: ICocktailDownload) => b.id - a.id)
-            .map((cocktail: ICocktailDownload) => {
+            .sort(
+              (a: ICustomCocktailDownload, b: ICustomCocktailDownload) =>
+                b.id - a.id
+            )
+            .map((cocktail: ICustomCocktailDownload) => {
               return (
                 <CocktailCard
                   key={cocktail.id}
