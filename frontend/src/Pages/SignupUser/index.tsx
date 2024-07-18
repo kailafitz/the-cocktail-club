@@ -11,20 +11,37 @@ import Button from "@mui/material/Button";
 import { api } from "../../axios";
 import TextField from "@mui/material/TextField";
 import Loading from "../../Components/Status/Loading";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { FullSignupSchema } from "./Schema";
+import { Controller, SubmitHandler, useForm } from "react-hook-form";
+
+let initialState = {
+  id: 0,
+  email: "",
+  firstName: "",
+  lastName: "",
+  password: "",
+  confirmPassword: "",
+};
 
 const SignupUser = () => {
   const queryClient = useQueryClient();
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
-  const [user, setUser] = useState<ISignUp>({
-    id: 0,
-    email: "",
-    firstName: "",
-    lastName: "",
-    password: "",
-    confirmPassword: "",
-  });
   const [errorMessage, setErrorMessage] = useState("");
+  const [user, setUser] = useState<ISignUp>(initialState);
+  const {
+    control,
+    handleSubmit,
+    // reset,
+    // getValues,
+    formState: { errors },
+  } = useForm<ISignUp>({
+    defaultValues: initialState,
+    resolver: zodResolver(FullSignupSchema),
+    mode: "onSubmit",
+    reValidateMode: "onChange",
+  });
 
   const mutation = useMutation({
     mutationFn: (data: ISignUp) => {
@@ -41,25 +58,26 @@ const SignupUser = () => {
       );
     },
     onSuccess() {
-      console.log("Redirect");
+      // console.log("Redirect");
       queryClient.invalidateQueries("Authentication Status Check");
-      setLoading(false);
       setTimeout(() => {
+        setLoading(false);
         navigate("/profile");
-      }, 500);
+      }, 2000);
     },
     onError: (error: AxiosError) => {
-      setLoading(false);
-      setErrorMessage(
-        typeof error.response?.data === "string"
-          ? `${error.response?.data}`
-          : ""
-      );
+      setTimeout(() => {
+        setLoading(false);
+        setErrorMessage(
+          typeof error.response?.data === "string"
+            ? `${error.response?.data}`
+            : ""
+        );
+      }, 2000);
     },
   });
 
-  const handleSignup = (e: any) => {
-    e.preventDefault();
+  const onSubmit: SubmitHandler<ISignUp> = async () => {
     setLoading(true);
     mutation.mutate(user);
   };
@@ -68,9 +86,6 @@ const SignupUser = () => {
     <ViewHeightContainer pt center>
       <Grid container justifyContent="center">
         <Grid xs={12} md={5}>
-          {mutation.isError && (
-            <FormFeedback severity="error" message={errorMessage} />
-          )}
           {loading ? (
             <Loading color="light" />
           ) : (
@@ -80,49 +95,130 @@ const SignupUser = () => {
                 component="form"
                 noValidate
                 autoComplete="off"
-                onSubmit={handleSignup}
+                onSubmit={handleSubmit(onSubmit)}
                 spacing={3}
               >
+                {mutation.isError && loading === false && (
+                  <FormFeedback severity="error" message={errorMessage} />
+                )}
                 <Stack
                   direction={{ xs: "column", md: "row" }}
                   justifyContent="space-between"
                   spacing={3}
                 >
-                  <TextField
-                    sx={{ width: "-webkit-fill-available" }}
-                    label="First Name"
-                    onChange={(event) =>
-                      setUser({ ...user, firstName: event.target.value })
-                    }
+                  <Controller
+                    name="firstName"
+                    control={control}
+                    defaultValue={user.firstName}
+                    rules={{ required: true }}
+                    render={({ field: { onChange } }) => (
+                      <TextField
+                        sx={{ width: "-webkit-fill-available" }}
+                        label="First Name"
+                        onChange={(event) => {
+                          setUser({ ...user, firstName: event.target.value });
+                          onChange(event.target.value);
+                        }}
+                      />
+                    )}
                   />
-                  <TextField
-                    sx={{ width: "-webkit-fill-available" }}
-                    label="Last Name"
-                    onChange={(event) =>
-                      setUser({ ...user, lastName: event.target.value })
-                    }
+                  <Controller
+                    name="lastName"
+                    control={control}
+                    defaultValue={user.lastName}
+                    rules={{ required: true }}
+                    render={({ field: { onChange } }) => (
+                      <TextField
+                        sx={{ width: "-webkit-fill-available" }}
+                        label="Last Name"
+                        onChange={(event) => {
+                          setUser({ ...user, lastName: event.target.value });
+                          onChange(event.target.value);
+                        }}
+                      />
+                    )}
                   />
                 </Stack>
-                <TextField
-                  label="Email"
-                  onChange={(event) =>
-                    setUser({ ...user, email: event.target.value })
-                  }
+                {errors.firstName?.message && (
+                  <FormFeedback
+                    message={errors.firstName?.message}
+                    severity="error"
+                  />
+                )}
+                {errors.lastName?.message && (
+                  <FormFeedback
+                    message={errors.lastName?.message}
+                    severity="error"
+                  />
+                )}
+                <Controller
+                  name="email"
+                  control={control}
+                  defaultValue={user.email}
+                  rules={{ required: true }}
+                  render={({ field: { onChange } }) => (
+                    <TextField
+                      label="Email"
+                      onChange={(event) => {
+                        setUser({ ...user, email: event.target.value });
+                        onChange(event.target.value);
+                      }}
+                    />
+                  )}
                 />
-                <TextField
-                  type="password"
-                  label="Password"
-                  onChange={(event) =>
-                    setUser({ ...user, password: event.target.value })
-                  }
+                {errors.email?.message && (
+                  <FormFeedback
+                    message={errors.email?.message}
+                    severity="error"
+                  />
+                )}
+                <Controller
+                  name="password"
+                  control={control}
+                  defaultValue={user.password}
+                  rules={{ required: true }}
+                  render={({ field: { onChange } }) => (
+                    <TextField
+                      type="password"
+                      label="Password"
+                      onChange={(event) => {
+                        setUser({ ...user, password: event.target.value });
+                        onChange(event?.target.value);
+                      }}
+                    />
+                  )}
                 />
-                <TextField
-                  type="password"
-                  label="Confirm Password"
-                  onChange={(event) => {
-                    setUser({ ...user, confirmPassword: event.target.value });
-                  }}
+                {errors.password?.message && (
+                  <FormFeedback
+                    message={errors.password?.message}
+                    severity="error"
+                  />
+                )}
+                <Controller
+                  name="confirmPassword"
+                  control={control}
+                  defaultValue={user.confirmPassword}
+                  rules={{ required: true }}
+                  render={({ field: { onChange } }) => (
+                    <TextField
+                      type="password"
+                      label="Confirm Password"
+                      onChange={(event) => {
+                        setUser({
+                          ...user,
+                          confirmPassword: event.target.value,
+                        });
+                        onChange(event.target.value);
+                      }}
+                    />
+                  )}
                 />
+                {errors.confirmPassword?.message && (
+                  <FormFeedback
+                    message={errors.confirmPassword?.message}
+                    severity="error"
+                  />
+                )}
                 <Button variant="primaryDark" type="submit">
                   Sign up
                 </Button>

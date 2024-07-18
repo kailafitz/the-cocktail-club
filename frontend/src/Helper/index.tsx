@@ -89,7 +89,7 @@ export const useAuthentication = () => {
           withCredentials: true,
         })
         .then((res) => {
-          console.log("Setting status", res.data);
+          // console.log("Setting status", res.data);
           return res.data;
         }),
     {

@@ -30,8 +30,8 @@ const LoginUser = () => {
   const {
     control,
     handleSubmit,
-    reset,
-    getValues,
+    // reset,
+    // getValues,
     formState: { errors },
   } = useForm<ILogin>({
     defaultValues: initialState,
@@ -40,10 +40,10 @@ const LoginUser = () => {
     reValidateMode: "onChange",
   });
 
-  const values = getValues();
-  console.log("user", user);
-  console.log("values", values);
-  console.log(errors);
+  // const values = getValues();
+  // console.log("user", user);
+  // console.log("values", values);
+  // console.log(errors);
 
   const mutation = useMutation({
     mutationFn: (data: ILogin) => {
@@ -59,10 +59,10 @@ const LoginUser = () => {
       );
     },
     onSuccess() {
-      console.log("Redirect");
+      // console.log("Redirect");
+      queryClient.invalidateQueries("Authentication Status Check");
       setTimeout(() => {
         setLoading(false);
-        queryClient.invalidateQueries("Authentication Status Check");
         navigate("/profile");
       }, 2000);
     },

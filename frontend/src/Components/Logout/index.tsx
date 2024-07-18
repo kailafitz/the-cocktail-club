@@ -25,7 +25,7 @@ const Logout = (props: ILogout) => {
       );
     },
     onSuccess(res) {
-      console.log("Redirect", res.data);
+      // console.log("Redirect", res.data);
       navigate("/login");
       queryClient.invalidateQueries("Authentication Status Check");
     },
