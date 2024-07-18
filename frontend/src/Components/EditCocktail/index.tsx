@@ -158,6 +158,7 @@ const EditCocktail = ({ cocktail }: { cocktail: ICustomCocktailBase }) => {
                   <TextField
                     {...field}
                     label="Cocktail Name"
+                    required
                     defaultValue={updatedCocktail.name}
                     onChange={(event) => {
                       onChange(event.target.value);
@@ -166,7 +167,6 @@ const EditCocktail = ({ cocktail }: { cocktail: ICustomCocktailBase }) => {
                         name: event.target.value,
                       });
                     }}
-                    required
                   />
                 )}
               />
@@ -179,6 +179,7 @@ const EditCocktail = ({ cocktail }: { cocktail: ICustomCocktailBase }) => {
                 rules={{ required: true }}
                 render={({ field: { onChange, value } }) => (
                   <Select
+                    required
                     defaultValue={updatedCocktail.category}
                     onChange={(event) => {
                       setUpdatedCocktail({
@@ -189,7 +190,6 @@ const EditCocktail = ({ cocktail }: { cocktail: ICustomCocktailBase }) => {
                       });
                       onChange(event.target.value);
                     }}
-                    required
                   >
                     <MenuItem value="Alcoholic">Alcoholic</MenuItem>
                     <MenuItem value="Non-alcoholic">Non-alcoholic</MenuItem>
@@ -208,6 +208,7 @@ const EditCocktail = ({ cocktail }: { cocktail: ICustomCocktailBase }) => {
                 rules={{ required: true }}
                 render={({ field: { onChange } }) => (
                   <TextField
+                    required
                     label="Ingredients"
                     defaultValue={updatedCocktail.ingredients}
                     onChange={(event) => {
@@ -218,7 +219,6 @@ const EditCocktail = ({ cocktail }: { cocktail: ICustomCocktailBase }) => {
                       });
                       onChange(arr);
                     }}
-                    required
                   />
                 )}
               />
@@ -234,6 +234,7 @@ const EditCocktail = ({ cocktail }: { cocktail: ICustomCocktailBase }) => {
                 rules={{ required: true }}
                 render={({ field: { onChange, value } }) => (
                   <TextField
+                    required
                     defaultValue={updatedCocktail.instructions}
                     label="Instructions"
                     onChange={(event) => {
@@ -244,7 +245,6 @@ const EditCocktail = ({ cocktail }: { cocktail: ICustomCocktailBase }) => {
                       });
                       onChange(arr);
                     }}
-                    required
                   />
                 )}
               />
@@ -286,7 +286,6 @@ const EditCocktail = ({ cocktail }: { cocktail: ICustomCocktailBase }) => {
                           }
                         }}
                         accept=".png, .jpeg, .jpg, .webp"
-                        required
                       />
                     )}
                   />

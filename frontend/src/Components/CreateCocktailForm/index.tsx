@@ -166,11 +166,11 @@ const CreateCocktailForm = () => {
                   <TextField
                     label="Cocktail Name"
                     value={value}
+                    required
                     onChange={(event) => {
                       setCocktail({ ...cocktail, name: event.target.value });
                       onChange(event.target.value);
                     }}
-                    required
                   />
                 )}
               />
@@ -185,6 +185,7 @@ const CreateCocktailForm = () => {
                 render={({ field: { onChange, value } }) => (
                   <Select
                     value={value}
+                    required
                     onChange={(event) => {
                       setCocktail({
                         ...cocktail,
@@ -194,7 +195,6 @@ const CreateCocktailForm = () => {
                       });
                       onChange(event.target.value);
                     }}
-                    required
                   >
                     <MenuItem value="Alcoholic">Alcoholic</MenuItem>
                     <MenuItem value="Non-alcoholic">Non-alcoholic</MenuItem>
@@ -215,13 +215,13 @@ const CreateCocktailForm = () => {
                 render={({ field: { onChange, value } }) => (
                   <TextField
                     label="Ingredients"
+                    required
                     value={value}
                     onChange={(event) => {
                       let arr = event.target.value.split(",");
                       setCocktail({ ...cocktail, ingredients: arr });
                       onChange(arr);
                     }}
-                    required
                   />
                 )}
               />
@@ -239,13 +239,13 @@ const CreateCocktailForm = () => {
                 render={({ field: { onChange, value } }) => (
                   <TextField
                     value={value}
+                    required
                     label="Instructions"
                     onChange={(event) => {
                       let arr = event.target.value.split(",");
                       setCocktail({ ...cocktail, instructions: arr });
                       onChange(arr);
                     }}
-                    required
                   />
                 )}
               />
@@ -287,7 +287,6 @@ const CreateCocktailForm = () => {
                           }
                         }}
                         accept=".png, .jpeg, .jpg, .webp"
-                        required
                       />
                     )}
                   />
