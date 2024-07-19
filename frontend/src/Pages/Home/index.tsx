@@ -75,12 +75,22 @@ export const Home: React.FC = () => {
     <>
       <ViewHeightContainer
         pt
-        sx={{
-          justifyContent: "space-between",
-          flexDirection: "column",
-        }}
+        center
+        // sx={{
+        //   justifyContent: "space-between",
+        //   flexDirection: "column",
+        // }}
       >
-        <Stack direction="column">
+        <Box>
+          <Typography variant="h1">Project under way</Typography>
+          <Typography>
+            A work in progress but feel free to have a nosy about
+            <Button variant="primaryDark" sx={{ ml: 3 }} href="/sign-up">
+              Sign up
+            </Button>
+          </Typography>
+        </Box>
+        {/* <Stack direction="column">
           <Typography
             variant="h1"
             align="left"
@@ -89,11 +99,11 @@ export const Home: React.FC = () => {
             }}
             className="on-load-animation"
           >
-            Indulge in
-            <br className="break" /> the mastery
+            Lorem Ipsum
+            <br className="break" /> neuhf siejlk
           </Typography>
-        </Stack>
-        <Box className="on-load-animation-2" sx={{ opacity: 0 }}>
+        </Stack> */}
+        {/* <Box className="on-load-animation-2" sx={{ opacity: 0 }}>
           <Typography variant="h4" align="left" mb={2}>
             Curating the careful craft of cocktails since 1898
           </Typography>
@@ -111,8 +121,8 @@ export const Home: React.FC = () => {
               </Typography>
             </Stack>
           </Stack>
-        </Box>
-        <Stack
+        </Box> */}
+        {/* <Stack
           className="on-load-animation-3"
           sx={{ opacity: 0 }}
           direction={{ xs: "column", md: "row" }}
@@ -129,9 +139,9 @@ export const Home: React.FC = () => {
             Join a masterclass
           </Button>
         </Stack>
-        <Lights />
+        <Lights /> */}
       </ViewHeightContainer>
-      {data.map((drink: IApiCocktail) => {
+      {/* {data.map((drink: IApiCocktail) => {
         return (
           <React.Fragment key={drink.idDrink}>
             <Box
@@ -155,7 +165,7 @@ export const Home: React.FC = () => {
                 }}
               />
             </Box>
-            {/* <Button
+            <Button
                   // noWrap
                   sx={{
                     textTransform: "capitalize",
@@ -165,10 +175,10 @@ export const Home: React.FC = () => {
                   href={`drink/${drink.idDrink}/details`}
                 >
                   {drink.strDrink}
-                </Button> */}
+                </Button>
           </React.Fragment>
         );
-      })}
+      })} */}
     </>
   );
 };

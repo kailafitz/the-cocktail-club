@@ -14,6 +14,7 @@ import Loading from "../../Components/Status/Loading";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import { LoginSchema } from "./Schema";
+import Typography from "@mui/material/Typography";
 
 let initialState = {
   id: 0,
@@ -87,6 +88,7 @@ const LoginUser = () => {
 
   return (
     <ViewHeightContainer pt center>
+      {!loading && <Typography variant="pageHeading">Login</Typography>}
       <Grid container justifyContent="center">
         <Grid xs={12} md={5}>
           <Stack

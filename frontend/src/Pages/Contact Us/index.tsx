@@ -21,7 +21,11 @@ const ContactUs = () => {
           <Stack direction="column">
             <Stack direction="row" mb={3}>
               <EmailIcon color="primary" />
-              <Link href="/" variant="body1" ml={2}>
+              <Link
+                href="mailto:mikhailafitzpatrick@gmail.com"
+                variant="body1"
+                ml={2}
+              >
                 support@thecocktailclubco.com
               </Link>
             </Stack>
@@ -42,8 +46,7 @@ const ContactUs = () => {
           </Stack>
           <Stack sx={{ width: { xs: "100%", md: "40%" } }} spacing={3}>
             <Typography variant="body1">
-              Send us a message and our team will be back to you as soon as
-              possible!
+              Form is not configured just yet but will update soon!
             </Typography>
             <TextField label="Name" />
             <TextField label="Email" />

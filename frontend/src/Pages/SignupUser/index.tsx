@@ -14,6 +14,7 @@ import Loading from "../../Components/Status/Loading";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { FullSignupSchema } from "./Schema";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
+import Typography from "@mui/material/Typography";
 
 let initialState = {
   id: 0,
@@ -84,6 +85,7 @@ const SignupUser = () => {
 
   return (
     <ViewHeightContainer pt center>
+      {!loading && <Typography variant="pageHeading">Sign up</Typography>}
       <Grid container justifyContent="center">
         <Grid xs={12} md={5}>
           {loading ? (
@@ -113,7 +115,7 @@ const SignupUser = () => {
                     rules={{ required: true }}
                     render={({ field: { onChange } }) => (
                       <TextField
-                        sx={{ width: "-webkit-fill-available" }}
+                        sx={{ width: "100%", maxWidth: { md: "50%" } }}
                         label="First Name"
                         onChange={(event) => {
                           setUser({ ...user, firstName: event.target.value });
@@ -129,7 +131,7 @@ const SignupUser = () => {
                     rules={{ required: true }}
                     render={({ field: { onChange } }) => (
                       <TextField
-                        sx={{ width: "-webkit-fill-available" }}
+                        sx={{ width: "100%" }}
                         label="Last Name"
                         onChange={(event) => {
                           setUser({ ...user, lastName: event.target.value });

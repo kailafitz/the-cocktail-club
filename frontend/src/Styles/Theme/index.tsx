@@ -38,7 +38,7 @@ const theme = createTheme({
     fontFamily: "Work Sans",
     h1: {
       fontFamily: "'Cinzel Decorative', serif",
-      fontSize: "2rem",
+      fontSize: "4rem",
     },
     h2: {
       fontFamily: "Work Sans",
@@ -49,6 +49,7 @@ const theme = createTheme({
     },
     h4: {
       fontFamily: "Work Sans",
+      fontWeight: 300,
     },
     h5: {
       fontFamily: "Work Sans",
@@ -71,8 +72,9 @@ const theme = createTheme({
     },
     pageHeading: {
       fontFamily: "Work Sans",
-      marginBottom: "4rem",
+      marginBottom: "2.5rem",
       fontWeight: 300,
+      textAlign: "center",
     },
   },
   components: {
@@ -349,9 +351,9 @@ const theme = createTheme({
           props: { variant: "pageHeading" },
           style: {
             fontSize: "4rem",
-            [defaultTheme.breakpoints.up("lg")]: {
-              fontSize: "6rem",
-            },
+            // [defaultTheme.breakpoints.up("lg")]: {
+            //   fontSize: "4rem",
+            // },
           },
         },
       ],

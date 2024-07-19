@@ -8,9 +8,9 @@ import ViewHeightContainer from "../../Components/Layout/ViewHeightContainer";
 const About = () => {
   return (
     <>
-      <ViewHeightContainer pt sx={{ pb: { xs: 10, sm: 0 } }}>
+      <ViewHeightContainer pt sx={{ pb: { xs: 10, sm: 5 } }}>
         <Typography variant="pageHeading">About The Cocktail Club</Typography>
-        <Stack direction={{ xs: "column", md: "row" }} spacing={8}>
+        <Stack direction={{ xs: "column", md: "row" }} spacing={8} flexGrow={1}>
           <Box sx={{ width: "50%" }}>
             <Typography variant="body1">
               This web app is a passion project as like many others, I do love a

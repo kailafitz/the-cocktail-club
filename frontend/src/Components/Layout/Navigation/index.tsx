@@ -12,6 +12,7 @@ import Logout from "../../Logout";
 import { useAuthentication } from "../../../Helper";
 import Button from "@mui/material/Button";
 import Logo from "../../Logo";
+import Container from "@mui/material/Container";
 
 const standardRoutes = [
   {
@@ -49,23 +50,43 @@ const Navigation = () => {
 
   return (
     <>
-      <StyledIconButton
-        disableRipple
-        size="large"
-        edge="start"
-        color={open ? "dark" : "primary"}
-        aria-label="open drawer"
-        sx={{
-          position: "absolute",
-          zIndex: 9,
-          transition: "color .6s ease",
-          p: 0,
-          pt: 3,
-          pl: 2,
-        }}
-      >
-        <Hamburger toggled={open} toggle={setOpen} size={25} />
-      </StyledIconButton>
+      <Container sx={{ position: "relative" }}>
+        <StyledIconButton
+          disableRipple
+          size="large"
+          edge="start"
+          color={open ? "dark" : "primary"}
+          aria-label="open drawer"
+          sx={{
+            position: "absolute",
+            zIndex: 9,
+            transition: "color .6s ease",
+            p: 0,
+            pt: 3,
+            pl: 2,
+          }}
+        >
+          <Hamburger toggled={open} toggle={setOpen} size={25} />
+        </StyledIconButton>
+        {/* Logo */}
+        <StyledAppBar elevation={0}>
+          <Link
+            noWrap
+            sx={{
+              ml: "85px",
+              display: "block",
+              hover: {
+                cursor: "pointer",
+              },
+            }}
+            href="/"
+            underline="none"
+          >
+            <Logo />
+          </Link>
+        </StyledAppBar>
+      </Container>
+      {/* Menu */}
       <Box
         sx={{
           bgcolor: "common.black",
@@ -85,35 +106,35 @@ const Navigation = () => {
             pb: { xs: 5, md: 0 },
           }}
         >
-          <Toolbar
-            sx={{
-              justifyContent: "space-between",
-              display: "flex",
-              flexDirection: { xs: "column", md: "row" },
-              pt: { xs: "4rem", md: 0 },
-            }}
-          >
-            <List
+          <Container sx={{ position: "relative" }}>
+            <Toolbar
               sx={{
+                justifyContent: "space-between",
                 display: "flex",
-                width: { xs: "100%", md: "fit-content" },
                 flexDirection: { xs: "column", md: "row" },
-                alignItems: "center",
-                ml: { xs: 0, md: 5 },
-                a: {
-                  mb: { xs: 3, md: 0 },
-                  "&:not(:last-child):after": {
-                    content: { xs: "''", md: "'|'" },
-                    mx: { xs: 0, md: 1 },
-                    opacity: 0.3,
-                  },
-                },
+                pt: { xs: "4rem", md: 0 },
               }}
             >
-              {!isAuth &&
-                standardRoutes.map((link, i) => {
-                  return (
-                    <React.Fragment key={link.text}>
+              <List
+                sx={{
+                  display: "flex",
+                  width: { xs: "100%", md: "fit-content" },
+                  flexDirection: { xs: "column", md: "row" },
+                  alignItems: "center",
+                  ml: { xs: 0, md: 5 },
+                  a: {
+                    mb: { xs: 3, md: 0 },
+                    "&:not(:last-child):after": {
+                      content: { xs: "''", md: "'|'" },
+                      mx: { xs: 0, md: 1 },
+                      opacity: 0.3,
+                    },
+                  },
+                }}
+              >
+                {!isAuth &&
+                  standardRoutes.map((link, i) => {
+                    return (
                       <Link
                         component={NavLink}
                         key={i}
@@ -127,14 +148,12 @@ const Navigation = () => {
                       >
                         {link.text}
                       </Link>
-                    </React.Fragment>
-                  );
-                })}
-              {/* status !== "error" */}
-              {isAuth &&
-                authRoutes.map((link, i) => {
-                  return (
-                    <React.Fragment key={link.text}>
+                    );
+                  })}
+                {/* status !== "error" */}
+                {isAuth &&
+                  authRoutes.map((link, i) => {
+                    return (
                       <Link
                         component={NavLink}
                         key={i}
@@ -146,65 +165,48 @@ const Navigation = () => {
                       >
                         {link.text}
                       </Link>
-                    </React.Fragment>
-                  );
-                })}
-            </List>
-            {/* status !== "error" */}
-            {isAuth ? (
-              <Logout onClick={setOpen} />
-            ) : (
-              <Stack
-                direction={{ xs: "column", md: "row" }}
-                sx={{
-                  color: "common.black",
-                }}
-                spacing={2}
-              >
-                <Button
-                  variant="primaryLight"
-                  href={"/login"}
+                    );
+                  })}
+              </List>
+              {/* status !== "error" */}
+              {isAuth ? (
+                <Logout onClick={setOpen} />
+              ) : (
+                <Stack
+                  direction={{ xs: "column", md: "row" }}
                   sx={{
-                    fontSize: { xs: "1.5rem", md: "revert" },
+                    color: "common.black",
                   }}
-                  onClick={() => setOpen(false)}
-                  aria-label="Link to Login page"
+                  spacing={2}
                 >
-                  Login
-                </Button>
-                <Button
-                  variant="primaryLight"
-                  href="/sign-up"
-                  sx={{
-                    fontSize: { xs: "1.5rem", md: "revert" },
-                  }}
-                  onClick={() => setOpen(false)}
-                  aria-label="Link to Sign up page"
-                >
-                  Sign up
-                </Button>
-              </Stack>
-            )}
-          </Toolbar>
+                  <Button
+                    variant="primaryLight"
+                    href={"/login"}
+                    sx={{
+                      fontSize: { xs: "1.5rem", md: "revert" },
+                    }}
+                    onClick={() => setOpen(false)}
+                    aria-label="Link to Login page"
+                  >
+                    Login
+                  </Button>
+                  <Button
+                    variant="primaryLight"
+                    href="/sign-up"
+                    sx={{
+                      fontSize: { xs: "1.5rem", md: "revert" },
+                    }}
+                    onClick={() => setOpen(false)}
+                    aria-label="Link to Sign up page"
+                  >
+                    Sign up
+                  </Button>
+                </Stack>
+              )}
+            </Toolbar>
+          </Container>
         </AppBar>
       </Box>
-      <StyledAppBar elevation={0}>
-        <Link
-          variant="body1"
-          noWrap
-          sx={{
-            ml: "56px",
-            display: "block",
-            hover: {
-              cursor: "pointer",
-            },
-          }}
-          href="/"
-          underline="none"
-        >
-          <Logo />
-        </Link>
-      </StyledAppBar>
     </>
   );
 };
