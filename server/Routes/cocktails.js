@@ -9,8 +9,8 @@ import crypto from "crypto";
 
 const cocktailRouter = express.Router();
 
-let s3Config = { region: "us-east-1", credentials: fromCognitoIdentityPool({ clientConfig: { region: process.env.S3_REGION }, identityPoolId: process.env.S3_IDENTITY_POOL_ID }) } // Public bucket
-// let s3Config = { region: "us-east-1", credentials: { accessKeyId: process.env.S3_ACCESS_KEY, secretAccessKey: process.env.S3_SECRET_ACCESS_KEY } } // Private bucket
+let s3Config = { region: process.env.S3_REGION, credentials: fromCognitoIdentityPool({ clientConfig: { region: process.env.S3_REGION }, identityPoolId: process.env.S3_IDENTITY_POOL_ID }) } // Public bucket
+// let s3Config = { region: process.env.S3_REGION, credentials: { accessKeyId: process.env.S3_ACCESS_KEY, secretAccessKey: process.env.S3_SECRET_ACCESS_KEY } } // Private bucket
 const client = new S3Client(s3Config);
 
 // Create a storage strategy for multer

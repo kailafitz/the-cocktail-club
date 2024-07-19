@@ -87,6 +87,8 @@ const CreateCocktailForm = () => {
         {
           withCredentials: true,
           headers: {
+            "Access-Control-Allow-Origin":
+              "https://the-cocktail-club-co-657c5.web.app/",
             "Content-Type": "multipart/form-data",
           },
         }
