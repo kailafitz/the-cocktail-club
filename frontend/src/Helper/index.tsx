@@ -28,7 +28,7 @@ export const useSearch = (props: ISearchHook) => {
       baseURL: props.dbType === "custom" ? REACT_APP_BASE_URL : undefined,
       withCredentials: props.dbType === "custom" ? true : false,
     }).then((res) => {
-      console.log("res", res);
+      // console.log("res", res);
       let ingredients: string[] = [];
       let instructions: string[] = [];
 

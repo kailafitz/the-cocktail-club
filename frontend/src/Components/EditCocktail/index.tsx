@@ -115,10 +115,10 @@ const EditCocktail = ({ cocktail }: { cocktail: ICustomCocktailDownload }) => {
 
   let values = getValues();
 
-  console.log("cocktail", cocktail);
-  console.log("values", values);
-  console.log("updatedCocktail", updatedCocktail);
-  console.log("errors", errors);
+  // console.log("cocktail", cocktail);
+  // console.log("values", values);
+  // console.log("updatedCocktail", updatedCocktail);
+  // console.log("errors", errors);
 
   const onSubmit: SubmitHandler<ICustomCocktailUpload> = async () => {
     setLoading(true);

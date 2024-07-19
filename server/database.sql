@@ -20,8 +20,10 @@ CREATE TABLE cocktails (
     ingredients VARCHAR(50)[],
     instructions VARCHAR(255)[],
     image_name VARCHAR(500),
-    image_url VARCHAR(500),
-    FOREIGN KEY (created_by) REFERENCES users(id)
+    image_url VARCHAR(500)
 );
+
+-- ,
+--     FOREIGN KEY (created_by) REFERENCES users(id)
 
 -- INSERT INTO users(email, password, firstname, lastname, bio) VALUES ('a@a.com', 'a', 'Amy', 'Smith', 'Hi this is my bio! I love drinking');
