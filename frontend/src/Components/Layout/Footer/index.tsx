@@ -9,7 +9,7 @@ import Stack from "@mui/material/Stack";
 export const Footer = () => {
   return (
     <StyledContainer>
-      <Stack direction={{ xs: "column", md: "row" }}>
+      <Stack direction="row">
         <StyledIcon>
           <FacebookOutlinedIcon />
         </StyledIcon>
