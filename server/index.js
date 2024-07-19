@@ -31,12 +31,18 @@ const redis = new Redis(
     }
 );
 
+if (process.env.NODE_ENV === "production") {
+    app.set("trust proxy", 1);
+}
+
 app.use(session({
     store: new RedisStore({ client: redis }),
     secret: process.env.SESSION_SECRET,
     saveUninitialized: false,
     resave: false,
     cookie: {
+        secure: process.env.NODE_ENV === "development" ? false : true,
+        httpOnly: process.env.NODE_ENV === "development" ? false : true,
         maxAge: 60000 * 60000,
         secure: false,
     }
