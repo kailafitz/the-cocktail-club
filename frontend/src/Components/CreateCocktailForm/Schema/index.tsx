@@ -15,7 +15,6 @@ const CocktailCategorySchema = z.union([
 ]);
 
 export const CocktailSchema = z.object({
-  id: z.number(),
   name: z.string().min(1, { message: "Name is required" }),
   category: CocktailCategorySchema,
   ingredients: z

@@ -29,7 +29,6 @@ export interface IApiCocktail {
 }
 
 export interface ICustomCocktailBase {
-  id: number;
   name: string;
   createdBy?: string;
   category: "Alcoholic" | "Non-alcoholic";
@@ -43,6 +42,7 @@ export interface ICustomCocktailUpload extends ICustomCocktailBase {
 }
 
 export interface ICustomCocktailDownload extends ICustomCocktailBase {
+  id: number;
   image_url: string;
 }
 

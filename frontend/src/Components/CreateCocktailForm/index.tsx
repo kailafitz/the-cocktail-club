@@ -20,6 +20,7 @@ import Loading from "../Status/Loading";
 import AddIcon from "@mui/icons-material/Add";
 import { useLocation } from "react-router-dom";
 import { CocktailSchema } from "./Schema";
+import { REACT_APP_ORIGIN } from "../../config";
 
 const VisuallyHiddenInput = styled("input")({
   clip: "rect(0 0 0 0)",
@@ -40,7 +41,6 @@ const CreateCocktailForm = () => {
   const [open, setOpen] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   let initialState: ICustomCocktailUpload = {
-    id: 0,
     name: "",
     category: "Alcoholic",
     ingredients: [],
@@ -87,8 +87,7 @@ const CreateCocktailForm = () => {
         {
           withCredentials: true,
           headers: {
-            "Access-Control-Allow-Origin":
-              "https://the-cocktail-club-co-657c5.web.app/",
+            "Access-Control-Allow-Origin": REACT_APP_ORIGIN,
             "Content-Type": "multipart/form-data",
           },
         }
@@ -158,7 +157,6 @@ const CreateCocktailForm = () => {
             <Loading color="light" />
           ) : (
             <>
-              <input {...register("id")} type="hidden" />
               <Controller
                 name="name"
                 control={control}

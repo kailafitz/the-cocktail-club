@@ -41,10 +41,9 @@ app.use(session({
     saveUninitialized: false,
     resave: false,
     cookie: {
-        secure: process.env.NODE_ENV === "development" ? false : true,
+        sameSite: process.env.NODE_ENV === "development" ? "" : "none",
         secure: process.env.NODE_ENV === "development" ? false : true,
         maxAge: 60000 * 60000,
-        sameSite: "none"
     }
 }));
 app.use(cookieParser());

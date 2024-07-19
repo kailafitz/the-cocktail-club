@@ -1,7 +1,10 @@
 import React, { useState } from "react";
 import Stack from "@mui/material/Stack";
 import Dialog from "@mui/material/Dialog";
-import { ICustomCocktailBase, ICustomCocktailUpload } from "../../Interfaces";
+import {
+  ICustomCocktailDownload,
+  ICustomCocktailUpload,
+} from "../../Interfaces";
 import { useMutation, useQueryClient } from "react-query";
 import { AxiosError } from "axios";
 import FormFeedback from "../Alert";
@@ -31,7 +34,7 @@ const VisuallyHiddenInput = styled("input")({
   width: 1,
 });
 
-const EditCocktail = ({ cocktail }: { cocktail: ICustomCocktailBase }) => {
+const EditCocktail = ({ cocktail }: { cocktail: ICustomCocktailDownload }) => {
   const queryClient = useQueryClient();
   const [loading, setLoading] = useState(false);
   const [updatedCocktail, setUpdatedCocktail] = useState<ICustomCocktailUpload>(
@@ -53,7 +56,6 @@ const EditCocktail = ({ cocktail }: { cocktail: ICustomCocktailBase }) => {
     formState: { errors },
   } = useForm<ICustomCocktailUpload>({
     defaultValues: {
-      id: cocktail.id,
       name: cocktail.name,
       category: cocktail.category,
       ingredients: cocktail.ingredients,
@@ -79,7 +81,7 @@ const EditCocktail = ({ cocktail }: { cocktail: ICustomCocktailBase }) => {
   };
 
   const mutation = useMutation({
-    mutationFn: (data: ICustomCocktailBase) => {
+    mutationFn: (data: ICustomCocktailUpload) => {
       return api.put(
         `api/cocktail/${cocktail.id}`,
         { data },
