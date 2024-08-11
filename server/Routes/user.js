@@ -32,7 +32,7 @@ userRouter.put("/api/profile/set-bio", ensureAuthenticated, async (req, res) => 
         res.status(404).send("Empty string");
     }
 
-    const updateUserBio = await pool.query("UPDATE users SET bio = $1 WHERE id = $2", [req.body.data, req.user.id]);
+    await pool.query("UPDATE users SET bio = $1 WHERE id = $2", [req.body.data, req.user.id]);
 
     res.status(200).send("Bio updated successfully");
 });

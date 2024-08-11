@@ -24,7 +24,7 @@ authRouter.post("/api/sign-up", async (req, res) => {
             return res.status(404).send("Passwords do not match");
         }
         else {
-            const newUser = await pool.query(
+            await pool.query(
                 "INSERT INTO users (first_name, last_name, email, password) VALUES ($1, $2, $3, $4)",
                 [firstName, lastName, email, hashPassword(password)]
             );
