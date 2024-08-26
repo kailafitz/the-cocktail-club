@@ -28,7 +28,7 @@ export const useSearch = (props: ISearchHook) => {
       baseURL: props.dbType === "custom" ? REACT_APP_BASE_URL : undefined,
       withCredentials: props.dbType === "custom" ? true : false,
     }).then((res) => {
-      // console.log(res);
+      // console.log("res", res);
       let ingredients: string[] = [];
       let instructions: string[] = [];
 
@@ -57,10 +57,11 @@ export const useSearch = (props: ISearchHook) => {
           props.dbType !== "custom"
             ? undefined
             : `${res.data.user.first_name} ${res.data.user.last_name}`,
-        image:
+        image_url:
           props.dbType !== "custom"
             ? cocktail["strDrinkThumb"]
             : cocktail.image_url,
+        imageName: props.dbType !== "custom" ? "" : cocktail.image_name,
         category:
           props.dbType !== "custom"
             ? cocktail["strAlcoholic"]
@@ -88,7 +89,7 @@ export const useAuthentication = () => {
           withCredentials: true,
         })
         .then((res) => {
-          console.log("Setting status", res.data);
+          // console.log("Setting status", res.data);
           return res.data;
         }),
     {

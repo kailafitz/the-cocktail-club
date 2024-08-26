@@ -65,15 +65,8 @@ export const StyledIconButton = styled(IconButton)(
 
 export const StyledCardContent = styled(CardContent)(
   ({ theme }) => `
-    position: absolute;
-    bottom: 0;
     background: #00000050;
-    width: 100%;
     backdrop-filter: blur(2.5px);
     color: ${theme.palette.common.white};
-
-    &:last-child {
-      padding: ${theme.spacing(2)};
-    }
   `
 ) as typeof CardContent;

@@ -1,13 +1,13 @@
 import React from "react";
 import { useQuery } from "react-query";
-import Grid from "@mui/material/Unstable_Grid2";
-import { ICocktailDownload } from "../../Interfaces";
+import { ICustomCocktailDownload } from "../../Interfaces";
 import CocktailCard from "../CocktailCard";
 import ViewHeightContainer from "../Layout/ViewHeightContainer";
 import Loading from "../Status/Loading";
 import Error from "../Status/Error";
 import { api } from "../../axios";
 import Typography from "@mui/material/Typography";
+import Stack from "@mui/material/Stack";
 
 const CocktailList = () => {
   const { data, status } = useQuery(
@@ -43,30 +43,35 @@ const CocktailList = () => {
     );
   }
 
-  console.log(data);
-
   return (
-    <ViewHeightContainer sx={{ py: 5 }} center>
-      <Grid container spacing={6} justifyContent="center" id="results">
+    <ViewHeightContainer pt center>
+      <Stack
+        direction={{ xs: "column", md: "row" }}
+        justifyContent="center"
+        id="results"
+      >
         {data.length > 0 ? (
           data
-            .sort((a: ICocktailDownload, b: ICocktailDownload) => b.id - a.id)
-            .map((cocktail: ICocktailDownload) => {
+            .sort(
+              (a: ICustomCocktailDownload, b: ICustomCocktailDownload) =>
+                b.id - a.id
+            )
+            .map((cocktail: ICustomCocktailDownload) => {
               return (
                 <CocktailCard
                   key={cocktail.id}
                   id={cocktail.id.toString()}
                   name={cocktail.name}
                   category={cocktail.category}
-                  image={cocktail.image_url}
+                  image_url={cocktail.image_url}
                   db="custom"
                 />
               );
             })
         ) : (
-          <Typography variant="body2">No cocktails created yet.</Typography>
+          <Typography variant="body1">No cocktails created yet.</Typography>
         )}
-      </Grid>
+      </Stack>
     </ViewHeightContainer>
   );
 };

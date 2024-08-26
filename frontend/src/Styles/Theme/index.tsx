@@ -38,7 +38,7 @@ const theme = createTheme({
     fontFamily: "Work Sans",
     h1: {
       fontFamily: "'Cinzel Decorative', serif",
-      fontSize: "2rem",
+      fontSize: "4rem",
     },
     h2: {
       fontFamily: "Work Sans",
@@ -50,6 +50,7 @@ const theme = createTheme({
     },
     h4: {
       fontFamily: "Work Sans",
+      fontWeight: 300,
     },
     h5: {
       fontFamily: "Work Sans",
@@ -72,49 +73,31 @@ const theme = createTheme({
     },
     pageHeading: {
       fontFamily: "Work Sans",
-      fontSize: "4rem",
-      marginBottom: "4rem",
+      marginBottom: "2.5rem",
       fontWeight: 300,
+      textAlign: "center",
+    },
+    copyright: {
+      fontFamily: "Work Sans",
+      fontWeight: 300,
+      fontSize: "13px",
+      opacity: 0.6,
+      textAlign: "center",
     },
   },
   components: {
-    MuiContainer: {
+    MuiAlert: {
       styleOverrides: {
-        root: {
-          [defaultTheme.breakpoints.up("lg")]: {
-            maxWidth: "1300px",
-          },
+        message: {
+          fontFamily: "'Work Sans'",
         },
       },
     },
-    MuiTypography: {
-      defaultProps: {
-        variantMapping: {
-          pageHeading: "h2",
-        },
-      },
+    MuiBackdrop: {
       styleOverrides: {
         root: {
-          color: "#EBD69C",
-        },
-      },
-    },
-    MuiMenuItem: {
-      styleOverrides: {
-        root: {
-          color: "#EBD69C",
-          "&.Mui-selected": {
-            "&:hover": {
-              backgroundColor: "#EBD69C",
-              color: common.dark,
-            },
-            backgroundColor: "#EBD69C !important",
-            color: common.dark,
-          },
-          "&:hover": {
-            backgroundColor: "#EBD69C",
-            color: common.dark,
-          },
+          backgroundColor: "#ebd69cb3",
+          // backgroundColor: "rgba(0, 0, 0, 0.80)",
         },
       },
     },
@@ -175,7 +158,7 @@ const theme = createTheme({
             position: "relative",
             overflow: "hidden",
             zIndex: 1,
-            border: `${common.dark} solid 2px`,
+            border: `#EBD69C solid 2px`,
             "&:after": {
               content: '""',
               position: "absolute",
@@ -224,6 +207,11 @@ const theme = createTheme({
           },
         },
       ],
+      styleOverrides: {
+        root: {
+          minWidth: "10px",
+        },
+      },
     },
     MuiButtonBase: {
       defaultProps: {
@@ -234,16 +222,27 @@ const theme = createTheme({
       styleOverrides: {
         root: {
           fontFamily: "Work Sans",
+          textTransform: "capitalize",
         },
       },
     },
-    MuiLink: {
-      defaultProps: {
-        component: LinkBehavior,
-      } as LinkProps,
+    MuiContainer: {
       styleOverrides: {
         root: {
-          fontFamily: "Work Sans",
+          [defaultTheme.breakpoints.up("lg")]: {
+            maxWidth: "1300px",
+          },
+        },
+      },
+    },
+    MuiDialog: {
+      styleOverrides: {
+        paper: {
+          maxWidth: "unset",
+          width: "90%",
+          [defaultTheme.breakpoints.up("lg")]: {
+            width: "50%",
+          },
         },
       },
     },
@@ -276,11 +275,61 @@ const theme = createTheme({
         },
       },
     },
+    MuiLink: {
+      defaultProps: {
+        component: LinkBehavior,
+        underline: "none",
+      } as LinkProps,
+      styleOverrides: {
+        root: {
+          fontFamily: "Work Sans",
+          opacity: 1,
+          transition: "opacity .5s ease",
+          "&:hover": {
+            opacity: 0.6,
+            transition: "opacity .5s ease",
+          },
+        },
+      },
+    },
+    MuiListItemText: {
+      styleOverrides: {
+        root: {
+          fontFamily: "'Work Sans'",
+        },
+      },
+    },
+    MuiMenuItem: {
+      styleOverrides: {
+        root: {
+          color: "#EBD69C",
+          "&.Mui-selected": {
+            "&:hover": {
+              backgroundColor: "#EBD69C",
+              color: common.dark,
+            },
+            backgroundColor: "#EBD69C !important",
+            color: common.dark,
+          },
+          "&:hover": {
+            backgroundColor: "#EBD69C",
+            color: common.dark,
+          },
+        },
+      },
+    },
     MuiOutlinedInput: {
       styleOverrides: {
         notchedOutline: {
           borderWidth: "2px",
           borderColor: "#EBD69C",
+        },
+      },
+    },
+    MuiPaper: {
+      styleOverrides: {
+        root: {
+          backgroundColor: common.dark,
         },
       },
     },
@@ -306,30 +355,32 @@ const theme = createTheme({
           paddingLeft: 0,
           color: "#EBD69C",
           borderBottom: "1px solid #EBD69C",
+          fontFamily: "'Work Sans'",
         },
       },
     },
-    MuiBackdrop: {
+    MuiTypography: {
+      defaultProps: {
+        variantMapping: {
+          pageHeading: "h2",
+        },
+      },
       styleOverrides: {
         root: {
-          backgroundColor: "#ebd69cb3",
-          // backgroundColor: "rgba(0, 0, 0, 0.80)",
+          color: "#EBD69C",
         },
       },
-    },
-    MuiPaper: {
-      styleOverrides: {
-        root: {
-          backgroundColor: common.dark,
+      variants: [
+        {
+          props: { variant: "pageHeading" },
+          style: {
+            fontSize: "4rem",
+            // [defaultTheme.breakpoints.up("lg")]: {
+            //   fontSize: "4rem",
+            // },
+          },
         },
-      },
-    },
-    MuiDialog: {
-      styleOverrides: {
-        paper: {
-          maxWidth: "unset",
-        },
-      },
+      ],
     },
   },
 });

@@ -10,16 +10,41 @@ import Grid from "@mui/material/Unstable_Grid2/Grid2";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import { api } from "../../axios";
+import Loading from "../../Components/Status/Loading";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { Controller, SubmitHandler, useForm } from "react-hook-form";
+import { LoginSchema } from "./Schema";
+import Typography from "@mui/material/Typography";
+
+let initialState = {
+  id: 0,
+  email: "",
+  password: "",
+};
 
 const LoginUser = () => {
   const queryClient = useQueryClient();
   const navigate = useNavigate();
-  const [user, setUser] = useState<ILogin>({
-    id: 0,
-    email: "",
-    password: "",
-  });
+  const [loading, setLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
+  const [user, setUser] = useState<ILogin>(initialState);
+  const {
+    control,
+    handleSubmit,
+    // reset,
+    // getValues,
+    formState: { errors },
+  } = useForm<ILogin>({
+    defaultValues: initialState,
+    resolver: zodResolver(LoginSchema),
+    mode: "onSubmit",
+    reValidateMode: "onChange",
+  });
+
+  // const values = getValues();
+  // console.log("user", user);
+  // console.log("values", values);
+  // console.log(errors);
 
   const mutation = useMutation({
     mutationFn: (data: ILogin) => {
@@ -35,60 +60,103 @@ const LoginUser = () => {
       );
     },
     onSuccess() {
-      console.log("Redirect");
+      // console.log("Redirect");
       queryClient.invalidateQueries("Authentication Status Check");
-      // navigate("/profile");
       setTimeout(() => {
+        setLoading(false);
         navigate("/profile");
-      }, 500);
+      }, 2000);
     },
     onError: (error: AxiosError) => {
-      setErrorMessage(
-        typeof error.response?.data === "string"
-          ? error.response?.status === 500
-            ? `${error.message}`
-            : `${error.response?.data}`
-          : "Something has gone wrong. Please try again later."
-      );
+      setTimeout(() => {
+        setLoading(false);
+        setErrorMessage(
+          typeof error.response?.data === "string"
+            ? error.response?.status === 500
+              ? `${error.message}`
+              : `${error.response?.data}`
+            : "Something has gone wrong. Please try again later."
+        );
+      }, 2000);
     },
   });
 
-  const handleLogin = async (e: any) => {
-    e.preventDefault();
+  const onSubmit: SubmitHandler<ILogin> = async () => {
+    setLoading(true);
     mutation.mutate(user);
   };
 
   return (
     <ViewHeightContainer pt center>
+      {!loading && <Typography variant="pageHeading">Login</Typography>}
       <Grid container justifyContent="center">
         <Grid xs={12} md={5}>
-          {mutation.isError && (
-            <FormFeedback severity="error" message={errorMessage} />
-          )}
           <Stack
             direction="column"
             component="form"
             noValidate
             autoComplete="off"
-            onSubmit={handleLogin}
-            sx={{ div: { mb: 2 } }}
+            onSubmit={handleSubmit(onSubmit)}
+            spacing={3}
           >
-            <TextField
-              label="Email"
-              onChange={(event) =>
-                setUser({ ...user, email: event.target.value })
-              }
-            />
-            <TextField
-              type="password"
-              label="Password"
-              onChange={(event) =>
-                setUser({ ...user, password: event.target.value })
-              }
-            />
-            <Button variant="primaryDark" type="submit">
-              Login
-            </Button>
+            {mutation.isError && loading === false && (
+              <FormFeedback severity="error" message={errorMessage} />
+            )}
+            {loading ? (
+              <Loading color="light" />
+            ) : (
+              <>
+                <Controller
+                  name="email"
+                  control={control}
+                  defaultValue={user.email}
+                  rules={{ required: true }}
+                  render={({ field: { onChange } }) => (
+                    <TextField
+                      label="Email"
+                      type="email"
+                      required
+                      onChange={(event) => {
+                        setUser({ ...user, email: event.target.value });
+                        onChange(event.target.value);
+                      }}
+                    />
+                  )}
+                />
+                {errors.email?.message && (
+                  <FormFeedback
+                    message={errors.email?.message}
+                    severity="error"
+                  />
+                )}
+                <Controller
+                  name="password"
+                  control={control}
+                  defaultValue={user.password}
+                  rules={{ required: true }}
+                  render={({ field: { onChange } }) => (
+                    <TextField
+                      type="password"
+                      label="Password"
+                      required
+                      onChange={(event) => {
+                        setUser({ ...user, password: event.target.value });
+                        onChange(event.target.value);
+                      }}
+                    />
+                  )}
+                />
+                {errors.password?.message && (
+                  <FormFeedback
+                    message={errors.password?.message}
+                    severity="error"
+                  />
+                )}
+                <Button variant="primaryDark" type="submit">
+                  Login
+                </Button>
+              </>
+            )}
           </Stack>
         </Grid>
       </Grid>

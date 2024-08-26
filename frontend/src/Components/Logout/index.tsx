@@ -1,17 +1,20 @@
-import React from "react";
+import React, { useState } from "react";
 import { AxiosError } from "axios";
 import { useMutation, useQueryClient } from "react-query";
-// import FormFeedback from "../Alert";
+import FormFeedback from "../Alert";
 import { useNavigate } from "react-router-dom";
 import Button from "@mui/material/Button";
 import { api } from "../../axios";
 import PropTypes from "prop-types";
 import { ILogout } from "../../Interfaces";
+import { Dialog } from "@mui/material";
+import Loading from "../Status/Loading";
 
 const Logout = (props: ILogout) => {
   const queryClient = useQueryClient();
   const navigate = useNavigate();
-  // const [errorMessage, setErrorMessage] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
 
   const mutation = useMutation({
     mutationFn: () => {
@@ -24,34 +27,53 @@ const Logout = (props: ILogout) => {
       );
     },
     onSuccess(res) {
-      console.log("Redirect", res.data);
-      navigate("/login");
-      queryClient.invalidateQueries("Authentication Status Check");
+      // console.log("Redirect", res.data);
+      setTimeout(() => {
+        setLoading(false);
+        navigate("/login");
+        queryClient.invalidateQueries("Authentication Status Check");
+      }, 2000);
     },
     onError: (error: AxiosError) => {
       console.log("Logout error", error);
-      // setErrorMessage(
-      //   typeof error.response?.data === "string"
-      //     ? `${error.response?.data}`
-      //     : ""
-      // );
+      setTimeout(() => {
+        setErrorMessage(
+          typeof error.response?.data === "string"
+            ? `${error.response?.data}`
+            : ""
+        );
+      }, 2000);
     },
   });
 
   const handleLogout = (e: any) => {
+    setLoading(true);
     e.preventDefault();
+    mutation.reset();
     mutation.mutate();
   };
 
   return (
     <>
-      {/* {mutation.isError && (
-        <FormFeedback severity="error" message={errorMessage} />
-      )} */}
+      {mutation.isError && (
+        <Dialog
+          open={errorMessage !== "" ? true : false}
+          onClose={() => {
+            setErrorMessage("");
+          }}
+        >
+          <FormFeedback severity="error" message={errorMessage} />
+        </Dialog>
+      )}
+      {loading && (
+        <Dialog open={loading ? true : false}>
+          <Loading color="light" />
+        </Dialog>
+      )}
       <Button
         variant="primaryLight"
         sx={{
-          fontSize: { xs: "1.5rem" },
+          fontSize: { xs: "1.5rem", md: "revert" },
         }}
         type="submit"
         onClick={(e) => {

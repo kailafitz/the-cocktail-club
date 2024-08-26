@@ -1,20 +1,26 @@
 import React, { useState } from "react";
 import Stack from "@mui/material/Stack";
-import { ICocktailCustom, ICocktailUpload } from "../../Interfaces";
+import { ICustomCocktailBase, ICustomCocktailUpload } from "../../Interfaces";
 import { useMutation, useQueryClient } from "react-query";
 import { AxiosError } from "axios";
-import { useNavigate } from "react-router-dom";
 import FormFeedback from "../Alert";
 import MenuItem from "@mui/material/MenuItem";
 import Select from "@mui/material/Select";
 import { styled } from "@mui/material/styles";
+import { SubmitHandler, useForm, Controller } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
 import Button from "@mui/material/Button";
-import CloudUploadIcon from "@mui/icons-material/CloudUpload";
+import FileUploadIcon from "@mui/icons-material/FileUpload";
 import { api } from "../../axios";
 import TextField from "@mui/material/TextField";
 import Dialog from "@mui/material/Dialog";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
+import Loading from "../Status/Loading";
+import AddIcon from "@mui/icons-material/Add";
+import { useLocation } from "react-router-dom";
+import { CocktailSchema } from "./Schema";
+import { REACT_APP_ORIGIN } from "../../config";
 
 const VisuallyHiddenInput = styled("input")({
   clip: "rect(0 0 0 0)",
@@ -29,20 +35,43 @@ const VisuallyHiddenInput = styled("input")({
 });
 
 const CreateCocktailForm = () => {
+  const location = useLocation();
   const queryClient = useQueryClient();
-  const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
+  const [open, setOpen] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
-  const [cocktail, setCocktail] = useState<ICocktailUpload>({
-    id: 0,
+  let initialState: ICustomCocktailUpload = {
     name: "",
     category: "Alcoholic",
     ingredients: [],
     instructions: [],
-    image: null,
+    imageName: "",
+    imageFile: null,
+  };
+  const [cocktail, setCocktail] = useState(initialState);
+  const {
+    control,
+    handleSubmit,
+    clearErrors,
+    register,
+    reset,
+    setValue,
+    getValues,
+    formState: { errors },
+  } = useForm<ICustomCocktailUpload>({
+    defaultValues: initialState,
+    resolver: zodResolver(CocktailSchema),
+    mode: "onSubmit",
+    reValidateMode: "onChange",
   });
-  const [open, setOpen] = useState(false);
 
-  const handleClickOpen = () => {
+  const values = getValues();
+
+  const handleOpen = () => {
+    reset();
+    clearErrors();
+    setCocktail(initialState);
+    mutation.reset();
     setOpen(true);
   };
 
@@ -51,36 +80,48 @@ const CreateCocktailForm = () => {
   };
 
   const mutation = useMutation({
-    mutationFn: (data: ICocktailCustom) => {
+    mutationFn: (data: ICustomCocktailBase) => {
       return api.post(
         "api/create-cocktail",
         { data },
         {
           withCredentials: true,
           headers: {
+            "Access-Control-Allow-Origin": REACT_APP_ORIGIN,
             "Content-Type": "multipart/form-data",
-            "Access-Control-Allow-Origin": "*",
           },
         }
       );
     },
     onSuccess() {
       console.log("Success");
-      queryClient.invalidateQueries("Get All Cocktails");
+      setTimeout(() => {
+        setLoading(false);
+        if (location.pathname === "/profile") {
+          queryClient.invalidateQueries("Get Account Details");
+        } else {
+          queryClient.invalidateQueries("Get All Cocktails");
+        }
+        handleClose();
+      }, 7000);
     },
     onError: (error: AxiosError) => {
-      if (
-        typeof error.response?.data === "string" &&
-        error.response?.data !== "Unauthorised"
-      ) {
-        setErrorMessage(error.response?.data);
-      }
-      navigate("/login");
+      setTimeout(() => {
+        setLoading(false);
+        if (
+          typeof error.response?.data === "string" &&
+          error.response?.data !== "Unauthorised"
+        ) {
+          setErrorMessage(error.response?.data);
+        }
+      }, 1500);
     },
   });
 
-  const handleCreate = async (event: any) => {
-    event.preventDefault();
+  const onSubmit: SubmitHandler<ICustomCocktailUpload> = async () => {
+    setLoading(true);
+    // reset(); // reset values
+    mutation.reset(); // reset error
     mutation.mutate(cocktail);
   };
 
@@ -89,8 +130,9 @@ const CreateCocktailForm = () => {
       <Box>
         <Button
           variant="primaryDark"
-          onClick={handleClickOpen}
+          onClick={handleOpen}
           data-target="create-cocktail"
+          startIcon={<AddIcon />}
         >
           Add Cocktail
         </Button>
@@ -101,87 +143,192 @@ const CreateCocktailForm = () => {
           encType="multipart/form-data"
           noValidate
           autoComplete="off"
-          onSubmit={handleCreate}
+          onSubmit={handleSubmit(onSubmit)}
           direction="column"
           spacing={4}
           alignSelf="center"
           p={5}
+          sx={{ width: "-webkit-fill-available" }}
         >
-          {mutation.isError && (
+          {mutation.isError && loading === false && (
             <FormFeedback severity="error" message={errorMessage} />
           )}
-          <TextField
-            label="Cocktail Name"
-            onChange={(event) =>
-              setCocktail({ ...cocktail, name: event.target.value })
-            }
-          />
-          <Select
-            defaultValue="Alcoholic"
-            onChange={(event) =>
-              setCocktail({
-                ...cocktail,
-                category: event.target.value as "Alcoholic" | "Non-alcoholic",
-              })
-            }
-          >
-            <MenuItem value="Alcoholic">Alcoholic</MenuItem>
-            <MenuItem value="Non-alcoholic">Non-alcoholic</MenuItem>
-          </Select>
-          <TextField
-            label="Ingredients"
-            onChange={(event) => {
-              let arr = event.target.value.split(",");
-              setCocktail({ ...cocktail, ingredients: arr });
-            }}
-          />
-          <TextField
-            label="Instructions"
-            onChange={(event) => {
-              let arr = event.target.value.split(",");
-              setCocktail({ ...cocktail, instructions: arr });
-            }}
-          />
-          <Stack
-            direction={{ xs: "column", md: "row" }}
-            spacing={3}
-            alignItems="center"
-          >
-            <Button
-              // disabled
-              component="label"
-              role={undefined}
-              variant="primaryDark"
-              tabIndex={-1}
-              startIcon={<CloudUploadIcon />}
-              fullWidth={false}
-              sx={{ span: { mr: 0 } }}
-            >
-              {/* Upload file */}
-              <VisuallyHiddenInput
-                type="file"
-                name="image"
-                onChange={(event) =>
-                  setCocktail({
-                    ...cocktail,
-                    image: event.target.files ? event.target.files[0] : null,
-                  })
-                }
+          {loading ? (
+            <Loading color="light" />
+          ) : (
+            <>
+              <Controller
+                name="name"
+                control={control}
+                defaultValue={cocktail.name}
+                rules={{ required: true }}
+                render={({ field: { onChange, value } }) => (
+                  <TextField
+                    label="Cocktail Name"
+                    value={value}
+                    required
+                    onChange={(event) => {
+                      setCocktail({ ...cocktail, name: event.target.value });
+                      onChange(event.target.value);
+                    }}
+                  />
+                )}
               />
-            </Button>
-            <Typography variant="body2">
-              File uploaded:{" "}
-              {typeof cocktail.image === "object" && cocktail.image
-                ? cocktail.image.name
-                : null}
-            </Typography>
-          </Stack>
-          <Button variant="primaryDark" type="submit" onClick={handleClose}>
-            Add Cocktail
-          </Button>
-          <Button variant="primaryDark" onClick={handleClose}>
-            Cancel
-          </Button>
+              {errors.name?.message && (
+                <FormFeedback message={errors.name?.message} severity="error" />
+              )}
+              <Controller
+                name="category"
+                control={control}
+                defaultValue={cocktail.category}
+                rules={{ required: true }}
+                render={({ field: { onChange, value } }) => (
+                  <Select
+                    value={value}
+                    required
+                    onChange={(event) => {
+                      setCocktail({
+                        ...cocktail,
+                        category: event.target.value as
+                          | "Alcoholic"
+                          | "Non-alcoholic",
+                      });
+                      onChange(event.target.value);
+                    }}
+                  >
+                    <MenuItem value="Alcoholic">Alcoholic</MenuItem>
+                    <MenuItem value="Non-alcoholic">Non-alcoholic</MenuItem>
+                  </Select>
+                )}
+              />
+              {errors.category?.message && (
+                <FormFeedback
+                  message={errors.category?.message}
+                  severity="error"
+                />
+              )}
+              <Controller
+                name="ingredients"
+                control={control}
+                defaultValue={cocktail.ingredients}
+                rules={{ required: true }}
+                render={({ field: { onChange, value } }) => (
+                  <TextField
+                    label="Ingredients"
+                    required
+                    value={value}
+                    onChange={(event) => {
+                      let arr = event.target.value.split(",");
+                      setCocktail({ ...cocktail, ingredients: arr });
+                      onChange(arr);
+                    }}
+                  />
+                )}
+              />
+              {errors.ingredients?.message && (
+                <FormFeedback
+                  message={errors.ingredients?.message}
+                  severity="error"
+                />
+              )}
+              <Controller
+                name="instructions"
+                control={control}
+                defaultValue={cocktail.instructions}
+                rules={{ required: true }}
+                render={({ field: { onChange, value } }) => (
+                  <TextField
+                    value={value}
+                    required
+                    label="Instructions"
+                    onChange={(event) => {
+                      let arr = event.target.value.split(",");
+                      setCocktail({ ...cocktail, instructions: arr });
+                      onChange(arr);
+                    }}
+                  />
+                )}
+              />
+              {errors.instructions?.message && (
+                <FormFeedback
+                  message={errors.instructions?.message}
+                  severity="error"
+                />
+              )}
+              <Stack direction="row" spacing={3} alignItems="center">
+                <Button
+                  component="label"
+                  role={undefined}
+                  variant="primaryDark"
+                  tabIndex={-1}
+                  fullWidth={false}
+                >
+                  <FileUploadIcon />
+                  {/* Upload file */}
+                  <Controller
+                    name="imageFile"
+                    control={control}
+                    rules={{ required: true }}
+                    render={({ field: { onChange } }) => (
+                      <VisuallyHiddenInput
+                        type="file"
+                        name="imageFile"
+                        onChange={(event) => {
+                          if (event.target.files) {
+                            setCocktail({
+                              ...cocktail,
+                              imageName: event.target.files[0].name,
+                              imageFile: event.target.files[0],
+                            });
+                            onChange(event.target.files[0]);
+                            setValue("imageName", event.target.files[0].name, {
+                              shouldValidate: true,
+                            });
+                          }
+                        }}
+                        accept=".png, .jpeg, .jpg, .webp"
+                      />
+                    )}
+                  />
+                </Button>
+                <Typography variant="body1">
+                  <span>File uploaded: </span>
+                  <span style={{ wordBreak: "break-all", fontWeight: 600 }}>
+                    {values.imageName}
+                  </span>
+                  <input
+                    {...register("imageName", {
+                      required: true,
+                    })}
+                    value={values.imageFile?.name}
+                    type="hidden"
+                  />
+                </Typography>
+              </Stack>
+              {errors.imageName?.message && (
+                <FormFeedback
+                  message={errors.imageName?.message}
+                  severity="error"
+                />
+              )}
+              <Stack direction={{ xs: "column", md: "row" }} spacing={3}>
+                <Button
+                  variant="primaryDark"
+                  type="submit"
+                  sx={{ width: "-webkit-fill-available" }}
+                >
+                  Add Cocktail
+                </Button>
+                <Button
+                  variant="primaryLight"
+                  onClick={handleClose}
+                  sx={{ width: "-webkit-fill-available" }}
+                >
+                  Cancel
+                </Button>
+              </Stack>
+            </>
+          )}
         </Stack>
       </Dialog>
     </>

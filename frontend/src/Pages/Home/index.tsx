@@ -24,7 +24,7 @@ export const Home: React.FC = () => {
             sx={{
               fontSize: { xs: "4rem", md: "6rem" },
             }}
-            className="onLoadAnimation"
+            className="on-load-animation"
           >
             Master the Art
             <br className="break" /> of Mixology

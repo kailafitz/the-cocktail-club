@@ -41,7 +41,7 @@ const SearchByName = (props: ISearchBy) => {
     );
     let drinks = res !== null ? res.data.drinks : [];
     setInput(name);
-    console.log("drinks", drinks);
+    // console.log("drinks", drinks);
     props.searchBy(drinks);
   };
 

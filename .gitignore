@@ -93,3 +93,7 @@ node_modules/
 
 # Yarn Integrity file
 .yarn-integrity
+
+# Sass
+/frontend/src/Styles/styles.scss
+/frontend/src/Styles/styles.css.map

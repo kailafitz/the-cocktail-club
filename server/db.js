@@ -4,13 +4,7 @@ import * as dotenv from "dotenv";
 
 dotenv.config();
 
-export const pool = new Pool(process.env.NODE_ENV === "development" ? {
-    user: process.env.DB_USER,
-    password: process.env.DB_PASSWORD,
-    host: process.env.DB_HOST,
-    port: process.env.DB_PORT,
-    database: process.env.DB_NAME,
-} : {
+export const pool = new Pool({
     connectionString: process.env.DB_CONNECTION,
     ssl: {
         rejectUnauthorized: false

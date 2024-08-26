@@ -9,7 +9,7 @@ export interface ILogout {
 }
 
 export interface ISearchBy {
-  searchBy: (data: ICocktailDb[]) => void;
+  searchBy: (data: IApiCocktail[]) => void;
 }
 
 export interface IViewHeightContainer {
@@ -20,7 +20,7 @@ export interface IViewHeightContainer {
   pt?: boolean;
 }
 
-export interface ICocktailDb {
+export interface IApiCocktail {
   [key: string]: string;
   idDrink: string;
   strDrinkThumb: string;
@@ -28,27 +28,28 @@ export interface ICocktailDb {
   strAlcoholic: string;
 }
 
-export interface ICocktailCustom {
-  id: number;
+export interface ICustomCocktailBase {
   name: string;
   createdBy?: string;
   category: "Alcoholic" | "Non-alcoholic";
   ingredients: string[];
   instructions: string[];
+  imageName: string;
 }
 
-export interface ICocktailUpload extends ICocktailCustom {
-  image: File | null;
+export interface ICustomCocktailUpload extends ICustomCocktailBase {
+  imageFile?: File | null;
 }
 
-export interface ICocktailDownload extends ICocktailCustom {
+export interface ICustomCocktailDownload extends ICustomCocktailBase {
+  id: number;
   image_url: string;
 }
 
 export interface ICocktailCard {
   id: string;
   name: string;
-  image: string;
+  image_url: string;
   category?: string;
   db: string;
 }
