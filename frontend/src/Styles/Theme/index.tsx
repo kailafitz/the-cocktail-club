@@ -19,6 +19,8 @@ const common = {
   dark: "#151514",
 };
 
+const defaultTheme = createTheme();
+
 const theme = createTheme({
   palette: {
     primary: {
@@ -40,6 +42,7 @@ const theme = createTheme({
     },
     h2: {
       fontFamily: "Work Sans",
+      fontSize: "1.5rem",
     },
     h3: {
       fontFamily: "Work Sans",
@@ -75,6 +78,15 @@ const theme = createTheme({
     },
   },
   components: {
+    MuiContainer: {
+      styleOverrides: {
+        root: {
+          [defaultTheme.breakpoints.up("lg")]: {
+            maxWidth: "1300px",
+          },
+        },
+      },
+    },
     MuiTypography: {
       defaultProps: {
         variantMapping: {
