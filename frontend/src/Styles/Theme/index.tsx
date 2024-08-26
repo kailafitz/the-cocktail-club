@@ -76,6 +76,13 @@ const theme = createTheme({
       fontWeight: 300,
       textAlign: "center",
     },
+    copyright: {
+      fontFamily: "Work Sans",
+      fontWeight: 300,
+      fontSize: "13px",
+      opacity: 0.6,
+      textAlign: "center",
+    },
   },
   components: {
     MuiAlert: {
@@ -261,10 +268,17 @@ const theme = createTheme({
     MuiLink: {
       defaultProps: {
         component: LinkBehavior,
+        underline: "none",
       } as LinkProps,
       styleOverrides: {
         root: {
           fontFamily: "Work Sans",
+          opacity: 1,
+          transition: "opacity .5s ease",
+          "&:hover": {
+            opacity: 0.6,
+            transition: "opacity .5s ease",
+          },
         },
       },
     },

@@ -3,11 +3,13 @@ import { ThemeOptions } from '@mui/material/styles';
 declare module '@mui/material/styles' {
     interface TypographyVariants {
         pageHeading: React.CSSProperties;
+        copyright: React.CSSProperties;
     }
 
     // allow configuration using `createTheme`
     interface TypographyVariantsOptions {
         pageHeading?: React.CSSProperties;
+        copyright?: React.CSSProperties;
     }
 }
 
@@ -15,5 +17,6 @@ declare module '@mui/material/styles' {
 declare module '@mui/material/Typography' {
     interface TypographyPropsVariantOverrides {
         pageHeading: true;
+        copyright: true;
     }
 }
