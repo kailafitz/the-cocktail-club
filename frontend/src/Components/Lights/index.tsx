@@ -3,6 +3,7 @@ import React from "react";
 const Lights = () => {
   return (
     <svg
+      className="w-full"
       id="lights"
       width="947"
       height="861"

@@ -14,22 +14,6 @@ import MyCocktails from "./Pages/MyCocktails";
 import { ProtectedRoute } from "./Components/ProtectedRoute";
 
 function App() {
-  // const observer = new IntersectionObserver((entries) => {
-  //   entries.forEach((entry) => {
-  //     console.log(entry);
-  //     if (entry.isIntersecting) {
-  //       entry.target.classList.add("show");
-  //     } else {
-  //       entry.target.classList.remove("show");
-  //     }
-  //   });
-  // });
-
-  // const hiddenElements = document.querySelectorAll(".hidden");
-  // hiddenElements.forEach((el) => observer.observe(el));
-
-  // console.log(hiddenElements);
-
   return (
     <>
       <Navigation />

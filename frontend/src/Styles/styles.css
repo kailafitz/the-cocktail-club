@@ -111,4 +111,8 @@ body {
   filter: blur(0px);
   transform: translateY(0);
   transition: all 1s;
+}
+
+.w-full {
+  width: 100%;
 }/*# sourceMappingURL=styles.css.map */

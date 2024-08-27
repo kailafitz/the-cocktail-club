@@ -38,11 +38,11 @@ const theme = createTheme({
     fontFamily: "Work Sans",
     h1: {
       fontFamily: "'Cinzel Decorative', serif",
-      fontSize: "4rem",
     },
     h2: {
       fontFamily: "Work Sans",
       fontSize: "1.5rem",
+      fontWeight: 300,
     },
     h3: {
       fontFamily: "Work Sans",
@@ -61,6 +61,7 @@ const theme = createTheme({
     },
     body1: {
       fontFamily: "Work Sans",
+      fontWeight: 300,
     },
     body2: {
       fontFamily: "'Cinzel Decorative', serif",
@@ -70,6 +71,17 @@ const theme = createTheme({
     },
     subtitle2: {
       fontFamily: "Work Sans",
+    },
+    display: {
+      fontFamily: "'Cinzel Decorative', serif",
+      fontSize: "2rem",
+      fontWeight: 400,
+      [defaultTheme.breakpoints.up("sm")]: {
+        fontSize: "4rem",
+      },
+      [defaultTheme.breakpoints.up("lg")]: {
+        fontSize: "6rem",
+      },
     },
     pageHeading: {
       fontFamily: "Work Sans",
@@ -229,6 +241,9 @@ const theme = createTheme({
     MuiContainer: {
       styleOverrides: {
         root: {
+          [defaultTheme.breakpoints.up("xs")]: {
+            maxWidth: "90%",
+          },
           [defaultTheme.breakpoints.up("lg")]: {
             maxWidth: "1300px",
           },
@@ -283,6 +298,7 @@ const theme = createTheme({
       styleOverrides: {
         root: {
           fontFamily: "Work Sans",
+          fontWeight: 300,
           opacity: 1,
           transition: "opacity .5s ease",
           "&:hover": {
@@ -321,7 +337,7 @@ const theme = createTheme({
     MuiOutlinedInput: {
       styleOverrides: {
         notchedOutline: {
-          borderWidth: "2px",
+          borderWidth: "0.5px",
           borderColor: "#EBD69C",
         },
       },
@@ -363,6 +379,7 @@ const theme = createTheme({
       defaultProps: {
         variantMapping: {
           pageHeading: "h2",
+          display: "h1",
         },
       },
       styleOverrides: {
