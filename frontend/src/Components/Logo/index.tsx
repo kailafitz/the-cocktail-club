@@ -1,10 +1,13 @@
 import React from "react";
 
-const Logo = () => {
+type Props = {
+  className?: string;
+};
+
+const Logo = (props: Props) => {
   return (
     <svg
-      width="263"
-      height="74"
+      className={props.className}
       viewBox="0 0 263 74"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"

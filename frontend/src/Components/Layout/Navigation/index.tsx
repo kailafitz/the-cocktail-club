@@ -82,7 +82,7 @@ const Navigation = () => {
             href="/"
             underline="none"
           >
-            <Logo />
+            <Logo className="nav-logo" />
           </Link>
         </StyledAppBar>
       </Container>
