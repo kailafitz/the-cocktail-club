@@ -18,3 +18,17 @@ declare module "@mui/material/IconButton" {
         dark: true
     }
 }
+
+declare module "@mui/material/Button" {
+    interface ButtonPropsColorOverrides {
+        // neutral: true;
+        dark: true
+    }
+}
+
+declare module "@mui/material/AppBar" {
+    interface AppBarPropsColorOverrides {
+        // neutral: true;
+        dark: true
+    }
+}

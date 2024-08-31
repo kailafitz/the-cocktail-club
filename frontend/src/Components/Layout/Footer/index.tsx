@@ -19,7 +19,7 @@ export const Footer = () => {
         alignItems={{ xs: "center", md: "flex-end" }}
         justifyContent="center"
       >
-        <Logo />
+        <Logo className="footer-logo" />
         <Stack
           direction={{ xs: "column", md: "row" }}
           spacing={3}

@@ -55,24 +55,6 @@ body {
   animation-fill-mode: forwards;
 }
 
-.on-load-animation-2 {
-  animation: fadeInAnimation ease 2s 0.4s;
-  animation-iteration-count: 1;
-  animation-fill-mode: forwards;
-}
-
-.on-load-animation-3 {
-  animation: fadeInAnimation ease 2s 0.8s;
-  animation-iteration-count: 1;
-  animation-fill-mode: forwards;
-}
-
-.on-load-image-animation {
-  animation: fadeInImgAnimation ease 2s 0.4s;
-  animation-iteration-count: 1;
-  animation-fill-mode: forwards;
-}
-
 .no-webp .image {
   background: url("../../public/cocktail.png") no-repeat center/cover;
 }
@@ -91,28 +73,26 @@ body {
     transform: translateY(0);
   }
 }
-@keyframes fadeInImgAnimation {
-  0% {
-    transform: translateY(-1000px);
-  }
-  100% {
-    transform: translateY(0);
-  }
-}
-.hidden {
-  opacity: 0;
-  filter: blur(5px);
-  transform: translateY(-4rem);
-  transition: all 1s;
-}
-
-.show {
-  opacity: 1;
-  filter: blur(0px);
-  transform: translateY(0);
-  transition: all 1s;
-}
-
 .w-full {
   width: 100%;
+}
+
+.hamburger-span {
+  height: 2px;
+  width: 100%;
+  display: block;
+}
+
+.nav-logo {
+  width: 180px;
+  max-width: 100%;
+}
+
+.footer-logo {
+  width: 25%;
+  max-width: 250px;
+}
+
+.flex-1 {
+  flex-grow: 1;
 }/*# sourceMappingURL=styles.css.map */

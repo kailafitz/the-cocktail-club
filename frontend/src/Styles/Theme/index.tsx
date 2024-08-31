@@ -221,7 +221,7 @@ const theme = createTheme({
       ],
       styleOverrides: {
         root: {
-          minWidth: "10px",
+          minWidth: "unset",
         },
       },
     },
@@ -338,6 +338,7 @@ const theme = createTheme({
       styleOverrides: {
         notchedOutline: {
           borderWidth: "0.5px",
+          borderRadius: 0,
           borderColor: "#EBD69C",
         },
       },

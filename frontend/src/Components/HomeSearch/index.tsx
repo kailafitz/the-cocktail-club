@@ -30,9 +30,10 @@ const HomeSearch = () => {
           justifyContent={{ xs: "center", md: "space-between" }}
           spacing={3}
         >
-          {[0, 1, 2].map(() => {
+          {[0, 1, 2].map((div, i) => {
             return (
               <Box
+                key={i}
                 sx={{
                   maxWidth: { xs: "100%", md: "30%" },
                   position: "relative",

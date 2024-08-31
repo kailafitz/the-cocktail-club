@@ -56,7 +56,7 @@ export const Home: React.FC = () => {
             right: 0,
             height: "100%",
             width: "10%",
-            zIndex: -1,
+            zIndex: 5,
           }}
         >
           <Box sx={{ position: "relative", width: "100%", height: "100%" }}>
@@ -70,7 +70,7 @@ export const Home: React.FC = () => {
                 right: 0,
                 height: "100%",
                 width: "100%",
-                zIndex: 2,
+                zIndex: 1102,
               }}
             />
           </Box>
