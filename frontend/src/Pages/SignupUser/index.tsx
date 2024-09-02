@@ -84,7 +84,7 @@ const SignupUser = () => {
   };
 
   return (
-    <ViewHeightContainer center>
+    <ViewHeightContainer center sx={{ pb: 10 }}>
       {!loading && <Typography variant="pageHeading">Sign up</Typography>}
       <Grid container justifyContent="center">
         <Grid xs={12} md={5}>
