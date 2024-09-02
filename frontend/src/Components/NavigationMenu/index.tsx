@@ -129,7 +129,7 @@ const NavigationMenu = () => {
   return (
     <div>
       <Button
-        id="button"
+        id="menu button"
         aria-label="open drawer"
         onClick={toggleDrawer(true)}
         sx={{
@@ -144,29 +144,29 @@ const NavigationMenu = () => {
             transition: "background-color .5s ease",
             backgroundColor: open ? "dark.main" : "primary.main",
           },
-          "span:nth-child(1)": {
+          "span:nth-of-type(1)": {
             transform: "translateX(0px)",
             transition: "all .5s ease",
           },
-          "span:nth-child(2)": {
+          "span:nth-of-type(2)": {
             transform: "translateX(0px)",
             transition: "all .5s ease",
           },
-          "span:nth-child(3)": {
+          "span:nth-of-type(3)": {
             transform: "translateX(0px)",
             transition: "all .5s ease",
           },
           "&:hover": {
             cursor: "pointer",
-            "span:nth-child(1)": {
+            "span:nth-of-type(1)": {
               transform: "translateX(-10px)",
               transition: "all .5s ease",
             },
-            "span:nth-child(2)": {
+            "span:nth-of-type(2)": {
               transform: "translateX(10px)",
               transition: "all .5s ease",
             },
-            "span:nth-child(3)": {
+            "span:nth-of-type(3)": {
               transform: "translateX(-10px)",
               transition: "all .5s ease",
             },
@@ -177,7 +177,7 @@ const NavigationMenu = () => {
         <span className="hamburger-span" />
         <span className="hamburger-span" />
       </Button>
-      <Drawer open={open} onClose={toggleDrawer(false)}>
+      <Drawer id="menu" open={open} onClose={toggleDrawer(false)}>
         {DrawerList}
       </Drawer>
     </div>
