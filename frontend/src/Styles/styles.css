@@ -50,9 +50,25 @@ body {
 }
 
 .on-load-animation {
-  animation: fadeInAnimation ease 2s;
+  animation: fade-in ease 2s;
   animation-iteration-count: 1;
-  animation-fill-mode: forwards;
+  animation-fill-mode: both;
+}
+
+.delay-1 {
+  animation-delay: 0.5s;
+}
+
+.delay-2 {
+  animation-delay: 1s;
+}
+
+.delay-3 {
+  animation-delay: 1.5s;
+}
+
+.delay-4 {
+  animation-delay: 2s;
 }
 
 .no-webp .image {
@@ -63,7 +79,7 @@ body {
   background: url("../../public/cocktail.webp") no-repeat center/cover;
 }
 
-@keyframes fadeInAnimation {
+@keyframes fade-in {
   0% {
     opacity: 0;
     transform: translateY(5rem);

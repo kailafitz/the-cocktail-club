@@ -28,17 +28,32 @@ export const Home: React.FC = () => {
             </Typography>
           </Stack>
           <div>
-            <Typography variant="h2" align="left" mb={5}>
+            <Typography
+              variant="h2"
+              align="left"
+              mb={5}
+              className="on-load-animation delay-1"
+            >
               Curating the careful craft of cocktails since 1898
             </Typography>
             <Stack direction={{ xs: "column", md: "row" }} spacing={4}>
-              <Stack direction="row" alignItems="center" spacing={1}>
+              <Stack
+                direction="row"
+                alignItems="center"
+                spacing={1}
+                className="on-load-animation delay-2"
+              >
                 <img src="/laurel.png" alt="Award Icon" />
                 <Typography variant="body2">
                   2024 Bartender Spirits awards
                 </Typography>
               </Stack>
-              <Stack direction="row" alignItems="center" spacing={1}>
+              <Stack
+                direction="row"
+                alignItems="center"
+                spacing={1}
+                className="on-load-animation delay-3"
+              >
                 <img src="/laurel.png" alt="Award Icon" />
                 <Typography variant="body2">
                   2024 Bartender Spirits awards

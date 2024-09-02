@@ -144,8 +144,32 @@ const NavigationMenu = () => {
             transition: "background-color .5s ease",
             backgroundColor: open ? "dark.main" : "primary.main",
           },
+          "span:nth-child(1)": {
+            transform: "translateX(0px)",
+            transition: "all .5s ease",
+          },
+          "span:nth-child(2)": {
+            transform: "translateX(0px)",
+            transition: "all .5s ease",
+          },
+          "span:nth-child(3)": {
+            transform: "translateX(0px)",
+            transition: "all .5s ease",
+          },
           "&:hover": {
             cursor: "pointer",
+            "span:nth-child(1)": {
+              transform: "translateX(-10px)",
+              transition: "all .5s ease",
+            },
+            "span:nth-child(2)": {
+              transform: "translateX(10px)",
+              transition: "all .5s ease",
+            },
+            "span:nth-child(3)": {
+              transform: "translateX(-10px)",
+              transition: "all .5s ease",
+            },
           },
         }}
       >
