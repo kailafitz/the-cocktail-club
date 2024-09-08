@@ -67,7 +67,7 @@ const SearchByIngredient = (props: ISearchBy) => {
 
   return (
     <>
-      <Stack direction="row" spacing={4} mb={5}>
+      <Stack direction={{ xs: "column-reverse", sm: "row" }} spacing={4} mb={5}>
         <Button
           variant="primaryDark"
           endIcon={<SearchIcon />}
@@ -91,7 +91,9 @@ const SearchByIngredient = (props: ISearchBy) => {
           inputProps={{ "aria-label": "search" }}
           value={input}
           ref={anchorRef}
-          sx={{ width: { xs: "85%", md: "90%" } }}
+          sx={{
+            width: { xs: "100%", sm: "90%" },
+          }}
         ></InputBase>
       </Stack>
       <Popper

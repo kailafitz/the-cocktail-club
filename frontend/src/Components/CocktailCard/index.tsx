@@ -13,6 +13,7 @@ const CocktailCard = (props: ICocktailCard) => {
   return (
     <Card
       sx={{
+        borderRadius: 0,
         position: "relative",
         display: "flex",
         flexDirection: "column",

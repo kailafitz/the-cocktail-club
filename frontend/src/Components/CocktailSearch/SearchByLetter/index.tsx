@@ -46,11 +46,11 @@ const SearchByLetter = (props: ISearchBy) => {
             scrollToResults();
           }}
           sx={{
-            width: "4rem",
+            width: { xs: "3rem", md: "4rem" },
             fontSize: "1rem",
             borderRadius: 0,
             minWidth: "fit-content",
-            py: 1.5,
+            py: { xs: 1, md: 1.5 },
             px: 1,
             p: {
               md: 2,

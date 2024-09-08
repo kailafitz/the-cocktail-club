@@ -6,7 +6,7 @@ import CreateCocktailForm from "../../Components/CreateCocktailForm";
 
 const MyCocktails = () => {
   return (
-    <ViewHeightContainer pt>
+    <ViewHeightContainer>
       <Typography variant="pageHeading">My Cocktails</Typography>
       <CreateCocktailForm />
       <CocktailList />

@@ -74,6 +74,7 @@ const Logout = (props: ILogout) => {
         variant="primaryLight"
         sx={{
           fontSize: { xs: "1.5rem", md: "revert" },
+          width: "100%",
         }}
         type="submit"
         onClick={(e) => {

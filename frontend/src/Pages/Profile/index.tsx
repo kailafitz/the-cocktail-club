@@ -41,7 +41,7 @@ const Profile = () => {
   }
 
   return (
-    <ViewHeightContainer pt>
+    <ViewHeightContainer sx={{ pb: 10 }}>
       <Typography variant="pageHeading">My Profile</Typography>
       <Stack
         direction={{ xs: "column", md: "row" }}
@@ -60,7 +60,6 @@ const Profile = () => {
             p: 3,
             border: 2,
             borderColor: "primary.main",
-            borderRadius: 2,
           }}
           justifyContent={{ md: "space-between" }}
         >
@@ -88,7 +87,6 @@ const Profile = () => {
             width: "-webkit-fill-available",
             border: 2,
             borderColor: "primary.main",
-            borderRadius: 2,
           }}
           p={3}
         >

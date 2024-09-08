@@ -15,25 +15,26 @@ export const Footer = () => {
   return (
     <StyledContainer>
       <Stack
-        direction={{ xs: "column", md: "row" }}
-        alignItems={{ xs: "center", md: "flex-end" }}
+        direction={{ xs: "column", sm: "row" }}
+        alignItems={{ xs: "flex-start", md: "flex-end" }}
         justifyContent="center"
+        gap={{ xs: 3, md: 0 }}
       >
         <Logo className="footer-logo" />
         <Stack
           direction={{ xs: "column", md: "row" }}
           spacing={3}
           flexGrow="1"
-          justifyContent={{ xs: "center", md: "flex-end" }}
-          sx={{ pt: 5 }}
+          justifyContent={{ xs: "flex-start", sm: "flex-end" }}
+          sx={{ pt: { xs: 2, sm: 5 } }}
         >
-          <Link href="#" textAlign={{ xs: "center", md: "unset" }}>
+          <Link href="#" textAlign={{ xs: "left", sm: "right", md: "unset" }}>
             Careers
           </Link>
-          <Link href="#" textAlign={{ xs: "center", md: "unset" }}>
+          <Link href="#" textAlign={{ xs: "left", sm: "right", md: "unset" }}>
             Terms and Conditions
           </Link>
-          <Link href="#" textAlign={{ xs: "center", md: "unset" }}>
+          <Link href="#" textAlign={{ xs: "left", sm: "right", md: "unset" }}>
             Privacy Policy
           </Link>
         </Stack>

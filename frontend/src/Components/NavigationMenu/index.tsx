@@ -79,7 +79,7 @@ const NavigationMenu = () => {
                 component={NavLink}
                 key={i}
                 to={link.href}
-                sx={{ color: "common.black" }}
+                sx={{ color: "primary.main" }}
                 onClick={() => setOpen(false)}
                 aria-label={`Link to ${link.text} page`}
                 fontSize={{ xs: "1rem", md: "inherit" }}

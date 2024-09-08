@@ -12,6 +12,7 @@ import { IApiCocktail } from "../../Interfaces";
 import ScrollTop from "../../Components/ScrollToTop";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
+import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import SearchByName from "../../Components/CocktailSearch/SearchByName";
 
 export const Search = () => {
@@ -22,12 +23,15 @@ export const Search = () => {
     setSearchMethod(event.target.value as string);
   };
 
-  console.log("results", results);
-
   return (
     <>
-      <ViewHeightContainer pt>
-        <Select value={searchMethod} onChange={handleChange} sx={{ mb: 5 }}>
+      <ViewHeightContainer>
+        <Select
+          value={searchMethod}
+          onChange={handleChange}
+          sx={{ mb: 5 }}
+          IconComponent={KeyboardArrowUpIcon}
+        >
           <MenuItem value="name">Search By Name</MenuItem>
           <MenuItem value="ingredient">Search By Ingredient</MenuItem>
           <MenuItem value="letter">Search By Letter</MenuItem>
@@ -75,7 +79,11 @@ export const Search = () => {
               })}
             </Grid>
           ) : results.length < 1 ? (
-            <Typography variant="body2" align="center">
+            <Typography
+              variant="body2"
+              align="center"
+              sx={{ display: { xs: "none", md: "block" } }}
+            >
               Nothing to see here. . . yet
             </Typography>
           ) : (

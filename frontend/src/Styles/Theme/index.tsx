@@ -64,7 +64,7 @@ const theme = createTheme({
       fontWeight: 300,
     },
     body2: {
-      fontFamily: "'Cinzel Decorative', serif",
+      fontFamily: "Work Sans, serif",
     },
     subtitle1: {
       fontFamily: "Work Sans",
@@ -235,6 +235,9 @@ const theme = createTheme({
         root: {
           fontFamily: "Work Sans",
           textTransform: "capitalize",
+          "&:hover": {
+            cursor: "pointer",
+          },
         },
       },
     },

@@ -49,7 +49,7 @@ export const CocktailDetails = () => {
   console.log("data", data);
 
   return (
-    <ViewHeightContainer pt>
+    <ViewHeightContainer>
       <Stack direction={{ xs: "column", md: "row" }} spacing={3}>
         <Button
           variant="primaryDark"
