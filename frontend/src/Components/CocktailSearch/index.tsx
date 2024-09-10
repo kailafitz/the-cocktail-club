@@ -19,8 +19,8 @@ import { StyledContainer } from "./SearchByLetter/styles";
 
 const CocktailSearchUrl = () => {
   let [searchParams, setSearchParams] = useSearchParams();
-  const urlSsearchParams = new URLSearchParams(searchParams);
-  console.log("params: ", searchParams.get("method"));
+  //   const urlSsearchParams = new URLSearchParams(searchParams);
+  //   console.log("params: ", searchParams.get("method"));
   const [open, setOpen] = useState(false);
   const [searchMethod, setSearchMethod] = useState("ingredient");
   const anchorRef = useRef<HTMLButtonElement>(null);
@@ -101,8 +101,8 @@ const CocktailSearchUrl = () => {
     setOpen(false);
   };
 
-  console.log(dropdownOptions);
-  console.log(open);
+  //   console.log(dropdownOptions);
+  //   console.log(open);
 
   return (
     <>
@@ -143,7 +143,6 @@ const CocktailSearchUrl = () => {
               placeholder={`Search by ${searchMethod}…`}
               onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                 setInput(e.target.value);
-                // setOpen((prevOpen) => !prevOpen);
                 setOpen(true);
               }}
               inputProps={{ "aria-label": "search" }}
@@ -194,6 +193,7 @@ const CocktailSearchUrl = () => {
                               setInput(option);
                               searchParams.set("ingredient", option);
                               setSearchParams(searchParams);
+                              //   console.log(searchParams);
                               scrollToResults();
                               handleClose(e);
                             }}
@@ -237,7 +237,6 @@ const CocktailSearchUrl = () => {
               placeholder={`Search by ${searchMethod}…`}
               onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                 setInput(e.target.value);
-                // setOpen((prevOpen) => !prevOpen);
                 setOpen(true);
               }}
               inputProps={{ "aria-label": "search" }}
