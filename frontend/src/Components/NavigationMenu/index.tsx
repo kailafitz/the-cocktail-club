@@ -45,7 +45,7 @@ const NavigationMenu = () => {
 
   const DrawerList = (
     <Box
-      sx={{ width: { xs: 140, sm: 200, md: 250 }, p: 3 }}
+      sx={{ width: { xs: "70vw", sm: 200, md: 250 }, p: 3 }}
       role="presentation"
       onClick={toggleDrawer(false)}
     >

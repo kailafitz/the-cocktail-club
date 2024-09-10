@@ -75,6 +75,7 @@ const SearchByIngredient = (props: ISearchBy) => {
             scrollToResults();
             getDropdownOptions();
           }}
+          href={`/search/ingredient=${input}`}
         >
           Search
         </Button>

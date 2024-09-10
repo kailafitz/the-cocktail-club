@@ -14,19 +14,16 @@ import Select, { SelectChangeEvent } from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import SearchByName from "../../Components/CocktailSearch/SearchByName";
+import CocktailSearchUrl from "../../Components/CocktailSearch";
 
 export const Search = () => {
   const [results, setResults] = useState<IApiCocktail[]>([]);
-  const [searchMethod, setSearchMethod] = useState("ingredient");
-
-  const handleChange = (event: SelectChangeEvent) => {
-    setSearchMethod(event.target.value as string);
-  };
 
   return (
     <>
       <ViewHeightContainer>
-        <Select
+        <CocktailSearchUrl />
+        {/* <Select
           value={searchMethod}
           onChange={handleChange}
           sx={{ mb: 5 }}
@@ -40,7 +37,7 @@ export const Search = () => {
           <SearchByIngredient searchBy={setResults} />
         )}
         {searchMethod === "name" && <SearchByName searchBy={setResults} />}
-        {searchMethod === "letter" && <SearchByLetter searchBy={setResults} />}
+        {searchMethod === "letter" && <SearchByLetter searchBy={setResults} />} */}
         <ScrollTop />
 
         <Stack
