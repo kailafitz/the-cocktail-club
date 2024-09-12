@@ -7,12 +7,14 @@ import MyLocationIcon from "@mui/icons-material/MyLocation";
 import Link from "@mui/material/Link";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
+import Box from "@mui/material/Box";
+import Divider from "@mui/material/Divider";
 
 const ContactUs = () => {
   return (
     <ViewHeightContainer>
       <Typography variant="pageHeading">Get in Touch</Typography>
-      <ViewHeightContainer sx={{ pb: 10 }}>
+      <Box sx={{ pb: 10 }}>
         <Stack
           direction={{ xs: "column", md: "row" }}
           spacing={7}
@@ -44,6 +46,14 @@ const ContactUs = () => {
               loading="lazy"
             ></iframe>
           </Stack>
+          <Box
+            sx={{
+              width: "1px",
+              backgroundColor: "primary.main",
+              display: { xs: "none", md: "flex" },
+              opacity: 0.6,
+            }}
+          />
           <Stack sx={{ width: { xs: "100%", md: "40%" } }} spacing={3}>
             <Typography variant="body1">
               Form is not configured just yet but will update soon!
@@ -54,7 +64,7 @@ const ContactUs = () => {
             <Button variant="primaryDark">Submit</Button>
           </Stack>
         </Stack>
-      </ViewHeightContainer>
+      </Box>
     </ViewHeightContainer>
   );
 };
