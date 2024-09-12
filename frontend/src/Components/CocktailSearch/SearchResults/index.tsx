@@ -24,7 +24,6 @@ const SearchResults = () => {
         )}`
       );
       let drinks = res.data.drinks ?? [];
-      console.log(res);
       setResults(drinks);
     } else if (searchParams.get("method") === "name") {
       const res = await axios(
