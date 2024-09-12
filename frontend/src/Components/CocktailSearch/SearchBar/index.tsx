@@ -13,6 +13,7 @@ import { scrollToResults } from "../../../Helper";
 import { useSearchParams } from "react-router-dom";
 import axios from "axios";
 import { ISearchCocktailInput } from "../../../Interfaces";
+import { StyledContainer } from "./styles";
 
 const SearchBar = (props: ISearchCocktailInput) => {
   const [open, setOpen] = useState(false);
@@ -20,6 +21,13 @@ const SearchBar = (props: ISearchCocktailInput) => {
   const [input, setInput] = useState<string>("");
   const [dropdownOptions, setDropdownOptions] = useState<string[]>([]);
   const [searchParams, setSearchParams] = useSearchParams();
+
+  let letters: string[] = [];
+
+  for (let i = 65; i < 91; i++) {
+    let letter = String.fromCharCode(i);
+    letters.push(letter);
+  }
 
   const getDropdownOptions = async () => {
     let arr: string[] = [];
@@ -67,93 +75,130 @@ const SearchBar = (props: ISearchCocktailInput) => {
 
   return (
     <>
-      <Stack direction={{ xs: "column-reverse", sm: "row" }} spacing={4} mb={5}>
-        <Button
-          variant="primaryDark"
-          endIcon={<SearchIcon />}
-          onClick={() => {
-            scrollToResults();
-            getDropdownOptions();
-          }}
-        >
-          Search
-        </Button>
-        <InputBase
-          id="search"
-          aria-controls={open ? "search" : undefined}
-          aria-haspopup="true"
-          aria-expanded={open ? "true" : undefined}
-          placeholder={`Search by ${props.searchMethod}…`}
-          onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-            setInput(e.target.value);
-            setOpen(true);
-          }}
-          inputProps={{ "aria-label": "search" }}
-          value={input}
-          ref={anchorRef}
-          sx={{
-            width: { xs: "100%", sm: "90%" },
-          }}
-        ></InputBase>
-      </Stack>
-      <Popper
-        open={open}
-        anchorEl={anchorRef.current}
-        role={undefined}
-        placement="bottom-start"
-        transition
-        disablePortal
-        sx={{
-          transform: "translate3d(510.5px, 51.5px, 0px)",
-          "z-index": 8,
-        }}
-        placeholder={undefined}
-        onPointerEnterCapture={() => {}}
-        onPointerLeaveCapture={() => {}}
-      >
-        {({ TransitionProps, placement }) => (
-          <Grow
-            {...TransitionProps}
-            style={{
-              transformOrigin:
-                placement === "bottom-start" ? "left top" : "left bottom",
-            }}
+      {props.searchMethod !== "letter" ? (
+        <>
+          <Stack
+            direction={{ xs: "column-reverse", sm: "row" }}
+            spacing={4}
+            mb={5}
           >
-            <Paper
-              sx={{
-                overflow: "scroll",
-                maxHeight: "50vh",
-                height: "fit-content",
+            <Button
+              variant="primaryDark"
+              endIcon={<SearchIcon />}
+              onClick={() => {
+                scrollToResults();
+                getDropdownOptions();
               }}
             >
-              <ClickAwayListener onClickAway={handleClose}>
-                <MenuList id="search" aria-labelledby="search">
-                  {dropdownOptions.length > 0 ? (
-                    dropdownOptions.map((option, index) => (
-                      <MenuItem
-                        key={index}
-                        onClick={(e) => {
-                          setInput(option);
-                          setSearchParams({
-                            method: props.searchMethod,
-                            value: option,
-                          });
-                          scrollToResults();
-                          handleClose(e);
-                        }}
-                      >
-                        {option}
-                      </MenuItem>
-                    ))
-                  ) : (
-                    <MenuItem>No results found</MenuItem>
-                  )}
-                </MenuList>
-              </ClickAwayListener>
-            </Paper>
-          </Grow>
-        )}
-      </Popper>
+              Search
+            </Button>
+            <InputBase
+              id="search"
+              aria-controls={open ? "search" : undefined}
+              aria-haspopup="true"
+              aria-expanded={open ? "true" : undefined}
+              placeholder={`Search by ${props.searchMethod}…`}
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                setInput(e.target.value);
+                setOpen(true);
+              }}
+              inputProps={{ "aria-label": "search" }}
+              value={input}
+              ref={anchorRef}
+              sx={{
+                width: { xs: "100%", sm: "90%" },
+              }}
+            ></InputBase>
+          </Stack>
+          <Popper
+            open={open}
+            anchorEl={anchorRef.current}
+            role={undefined}
+            placement="bottom-start"
+            transition
+            disablePortal
+            sx={{
+              transform: "translate3d(510.5px, 51.5px, 0px)",
+              "z-index": 8,
+            }}
+            placeholder={undefined}
+            onPointerEnterCapture={() => {}}
+            onPointerLeaveCapture={() => {}}
+          >
+            {({ TransitionProps, placement }) => (
+              <Grow
+                {...TransitionProps}
+                style={{
+                  transformOrigin:
+                    placement === "bottom-start" ? "left top" : "left bottom",
+                }}
+              >
+                <Paper
+                  sx={{
+                    overflow: "scroll",
+                    maxHeight: "50vh",
+                    height: "fit-content",
+                  }}
+                >
+                  <ClickAwayListener onClickAway={handleClose}>
+                    <MenuList id="search" aria-labelledby="search">
+                      {dropdownOptions.length > 0 ? (
+                        dropdownOptions.map((option, index) => (
+                          <MenuItem
+                            key={index}
+                            onClick={(e) => {
+                              setInput(option);
+                              searchParams.set("value", option);
+                              setSearchParams(searchParams);
+                              scrollToResults();
+                              handleClose(e);
+                            }}
+                          >
+                            {option}
+                          </MenuItem>
+                        ))
+                      ) : (
+                        <MenuItem>No results found</MenuItem>
+                      )}
+                    </MenuList>
+                  </ClickAwayListener>
+                </Paper>
+              </Grow>
+            )}
+          </Popper>{" "}
+        </>
+      ) : (
+        <StyledContainer>
+          {letters.map((letter, index) => (
+            <Button
+              variant="primaryDark"
+              key={index}
+              href={""}
+              onClick={() => {
+                setInput(letter);
+                scrollToResults();
+                searchParams.set("value", letter);
+                setSearchParams(searchParams);
+              }}
+              sx={{
+                width: { xs: "3rem", md: "4rem" },
+                fontSize: "1rem",
+                borderRadius: 0,
+                minWidth: "fit-content",
+                py: { xs: 1, md: 1.5 },
+                px: 1,
+                p: {
+                  md: 2,
+                },
+                m: 1,
+                color: "primary.contrastText",
+              }}
+            >
+              {letter}
+            </Button>
+          ))}
+        </StyledContainer>
+      )}
     </>
   );
 };
