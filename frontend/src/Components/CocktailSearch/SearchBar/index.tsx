@@ -1,54 +1,56 @@
-import React, { useState, useRef, useEffect } from "react";
-import axios from "axios";
-import SearchIcon from "@mui/icons-material/Search";
+import React, { useEffect, useRef, useState } from "react";
+import Button from "@mui/material/Button";
+import ClickAwayListener from "@mui/material/ClickAwayListener";
+import Grow from "@mui/material/Grow";
 import InputBase from "@mui/material/InputBase";
 import MenuItem from "@mui/material/MenuItem";
 import MenuList from "@mui/material/MenuList";
-import ClickAwayListener from "@mui/material/ClickAwayListener";
-import Grow from "@mui/material/Grow";
 import Paper from "@mui/material/Paper";
-import Stack from "@mui/material/Stack";
 import Popper from "@mui/material/Popper";
-import { ISearchBy } from "../../../Interfaces";
+import Stack from "@mui/material/Stack";
+import SearchIcon from "@mui/icons-material/Search";
 import { scrollToResults } from "../../../Helper";
-import Button from "@mui/material/Button";
-import PropTypes from "prop-types";
+import { useSearchParams } from "react-router-dom";
+import axios from "axios";
+import { ISearchCocktailInput } from "../../../Interfaces";
 
-const SearchByName = (props: ISearchBy) => {
+const SearchBar = (props: ISearchCocktailInput) => {
   const [open, setOpen] = useState(false);
   const anchorRef = useRef<HTMLButtonElement>(null);
-
   const [input, setInput] = useState<string>("");
-  const [options, setOptions] = useState<string[]>([]);
+  const [dropdownOptions, setDropdownOptions] = useState<string[]>([]);
+  const [searchParams, setSearchParams] = useSearchParams();
 
-  // console.log(input, "input");
-  // console.log(options, "options");
-
-  const getOptions = async () => {
+  const getDropdownOptions = async () => {
     let arr: string[] = [];
-    const res = await axios(
-      `https://www.thecocktaildb.com/api/json/v1/1/search.php?s=${input}`
-    );
-    for (let i = 0; i < res.data.drinks.length; i++) {
-      arr.push(res.data.drinks[i].strDrink);
+    if (props.searchMethod === "ingredient") {
+      const res = await axios(
+        `https://www.thecocktaildb.com/api/json/v1/1/list.php?i=list`
+      );
+      for (let i = 0; i < res.data.drinks.length; i++) {
+        if (
+          res.data.drinks[i].strIngredient1
+            .toLowerCase()
+            .includes(input.toLowerCase())
+        ) {
+          arr.push(res.data.drinks[i].strIngredient1);
+        }
+      }
+    } else if (props.searchMethod === "name") {
+      const res = await axios(
+        `https://www.thecocktaildb.com/api/json/v1/1/search.php?s=${input}`
+      );
+      for (let i = 0; i < res.data.drinks.length; i++) {
+        arr.push(res.data.drinks[i].strDrink);
+      }
     }
-    setOptions(arr);
-  };
-
-  const getDrinks = async (name: string) => {
-    const res = await axios(
-      `https://www.thecocktaildb.com/api/json/v1/1/search.php?s=${name}`
-    );
-    let drinks = res !== null ? res.data.drinks : [];
-    setInput(name);
-    // console.log("drinks", drinks);
-    props.searchBy(drinks);
+    setDropdownOptions(arr);
   };
 
   useEffect(() => {
-    getOptions();
+    getDropdownOptions();
     if (input === "") {
-      setOptions([]);
+      setDropdownOptions([]);
     }
   }, [input]);
 
@@ -65,13 +67,13 @@ const SearchByName = (props: ISearchBy) => {
 
   return (
     <>
-      <Stack direction="row" spacing={4} mb={5}>
+      <Stack direction={{ xs: "column-reverse", sm: "row" }} spacing={4} mb={5}>
         <Button
           variant="primaryDark"
           endIcon={<SearchIcon />}
           onClick={() => {
             scrollToResults();
-            // getOptions();
+            getDropdownOptions();
           }}
         >
           Search
@@ -81,16 +83,18 @@ const SearchByName = (props: ISearchBy) => {
           aria-controls={open ? "search" : undefined}
           aria-haspopup="true"
           aria-expanded={open ? "true" : undefined}
+          placeholder={`Search by ${props.searchMethod}…`}
           onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
             setInput(e.target.value);
-            setOpen((prevOpen) => !prevOpen);
+            setOpen(true);
           }}
-          placeholder="Search by name..."
           inputProps={{ "aria-label": "search" }}
           value={input}
           ref={anchorRef}
-          sx={{ width: { xs: "85%", md: "90%" } }}
-        />
+          sx={{
+            width: { xs: "100%", sm: "90%" },
+          }}
+        ></InputBase>
       </Stack>
       <Popper
         open={open}
@@ -99,10 +103,13 @@ const SearchByName = (props: ISearchBy) => {
         placement="bottom-start"
         transition
         disablePortal
-        sx={{ transform: "translate3d(510.5px, 51.5px, 0px)", "z-index": 8 }}
+        sx={{
+          transform: "translate3d(510.5px, 51.5px, 0px)",
+          "z-index": 8,
+        }}
         placeholder={undefined}
-        onPointerEnterCapture={undefined}
-        onPointerLeaveCapture={undefined}
+        onPointerEnterCapture={() => {}}
+        onPointerLeaveCapture={() => {}}
       >
         {({ TransitionProps, placement }) => (
           <Grow
@@ -121,12 +128,16 @@ const SearchByName = (props: ISearchBy) => {
             >
               <ClickAwayListener onClickAway={handleClose}>
                 <MenuList id="search" aria-labelledby="search">
-                  {options !== null ? (
-                    options.map((option, index) => (
+                  {dropdownOptions.length > 0 ? (
+                    dropdownOptions.map((option, index) => (
                       <MenuItem
                         key={index}
                         onClick={(e) => {
-                          getDrinks(option);
+                          setInput(option);
+                          setSearchParams({
+                            method: props.searchMethod,
+                            value: option,
+                          });
                           scrollToResults();
                           handleClose(e);
                         }}
@@ -147,8 +158,4 @@ const SearchByName = (props: ISearchBy) => {
   );
 };
 
-SearchByName.propTypes = {
-  searchBy: PropTypes.func,
-};
-
-export default SearchByName;
+export default SearchBar;

@@ -13,40 +13,36 @@ import { useSearchParams } from "react-router-dom";
 import axios from "axios";
 
 export const Search = () => {
-  let [searchParams, setSearchParams] = useSearchParams();
+  let [searchParams] = useSearchParams();
   const [results, setResults] = useState<IApiCocktail[]>([]);
 
   const data = async () => {
-    if (searchParams.get("method") === null) {
-      searchParams.get("ingredient");
-      console.log("ingredient page", searchParams);
+    if (
+      searchParams.get("method") === null ||
+      searchParams.get("method") === "ingredient"
+    ) {
       const res = await axios(
         `https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=${searchParams.get(
-          "ingredient"
+          "value"
         )}`
       );
       let drinks = res.data.drinks ?? [];
       setResults(drinks);
-      // console.log(drinks);
     } else if (searchParams.get("method") === "name") {
-      searchParams.get("name");
-      console.log("name page", searchParams);
       const res = await axios(
         `https://www.thecocktaildb.com/api/json/v1/1/search.php?s=${searchParams.get(
-          "name"
+          "value"
         )}`
       );
       let drinks = res.data.drinks ?? [];
       setResults(drinks);
     } else if (searchParams.get("method") === "letter") {
-      searchParams.get("letter");
       const res = await axios(
         `https://www.thecocktaildb.com/api/json/v1/1/search.php?f=${searchParams.get(
-          "letter"
+          "value"
         )}`
       );
       let drinks = res.data.drinks ?? [];
-      let sortedDrinks = [];
       if (drinks && drinks.length > 1) {
         setResults(
           drinks.sort(function (a: IApiCocktail, b: IApiCocktail) {
@@ -60,14 +56,12 @@ export const Search = () => {
           })
         );
       }
-      console.log("letter page", searchParams);
     }
   };
 
   useEffect(() => {
     data();
   }, [searchParams]);
-  // console.log(results);
 
   return (
     <>

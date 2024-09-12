@@ -78,6 +78,10 @@ export interface ISearchHook {
   dbType: "custom" | "apidb";
 }
 
+export interface ISearchCocktailInput {
+  searchMethod: string;
+}
+
 export interface IAuthState {
   user: {} | null;
   isAuthenticated: boolean;
