@@ -54,7 +54,12 @@ const NavigationMenu = () => {
           display: "flex",
           width: { xs: "100%", md: "fit-content" },
           flexDirection: "column",
-          mb: 4,
+          pb: 2,
+          a: {
+            "&:not(:last-child)": {
+              marginBottom: 1,
+            },
+          },
         }}
       >
         {!isAuth &&
@@ -66,7 +71,7 @@ const NavigationMenu = () => {
                 to={link.href}
                 onClick={() => setOpen(false)}
                 aria-label={`Link to ${link.text} page`}
-                fontSize={{ xs: "1rem", md: "inherit" }}
+                fontSize={{ xs: "1.5rem", md: "1rem" }}
               >
                 {link.text}
               </Link>

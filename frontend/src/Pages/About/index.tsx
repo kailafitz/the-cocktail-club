@@ -11,7 +11,7 @@ const About = () => {
       <ViewHeightContainer sx={{ pb: 10 }}>
         <Typography variant="pageHeading">About The Cocktail Club</Typography>
         <Stack direction={{ xs: "column", md: "row" }} spacing={8} flexGrow={1}>
-          <Box sx={{ width: "50%" }}>
+          <Box sx={{ width: { xs: "100%", md: "50%" } }}>
             <Typography variant="body1">
               This web app is a passion project as like many others, I do love a
               cocktail. I've created a space specifically for the art of
@@ -36,7 +36,13 @@ const About = () => {
               there are caveats with formatting as you will see.
             </Typography>
           </Box>
-          <Box sx={{ width: "50%", height: "100%" }} className="image"></Box>
+          <Box
+            sx={{
+              width: { xs: "100%", md: "50%" },
+              height: { xs: "300px", md: "100%" },
+            }}
+            className="image"
+          ></Box>
         </Stack>
       </ViewHeightContainer>
     </>

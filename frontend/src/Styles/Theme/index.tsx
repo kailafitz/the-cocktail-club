@@ -395,10 +395,10 @@ const theme = createTheme({
         {
           props: { variant: "pageHeading" },
           style: {
-            fontSize: "4rem",
-            // [defaultTheme.breakpoints.up("lg")]: {
-            //   fontSize: "4rem",
-            // },
+            fontSize: "2rem",
+            [defaultTheme.breakpoints.up("md")]: {
+              fontSize: "4rem",
+            },
           },
         },
       ],
