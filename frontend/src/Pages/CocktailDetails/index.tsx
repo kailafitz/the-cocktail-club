@@ -47,7 +47,7 @@ export const CocktailDetails = () => {
   }
 
   return (
-    <ViewHeightContainer>
+    <ViewHeightContainer sx={{ pb: 10 }}>
       <Stack direction={{ xs: "column", md: "row" }} spacing={3}>
         <Button
           variant="primaryDark"
@@ -130,8 +130,8 @@ export const CocktailDetails = () => {
       <Box
         sx={{
           background: `url(${data?.image_url}) no-repeat center / cover`,
-          width: "300px",
-          height: "300px",
+          width: { xs: "150px", sm: "300px", lg: "500px" },
+          height: { xs: "150px", sm: "300px", lg: "500px" },
           borderRadius: "50%",
           margin: "0 auto",
         }}
