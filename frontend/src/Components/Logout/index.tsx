@@ -73,7 +73,7 @@ const Logout = (props: ILogout) => {
       <Button
         variant="primaryLight"
         sx={{
-          fontSize: { xs: "1.5rem", md: "revert" },
+          fontSize: { xs: "1", md: "revert" },
           width: "100%",
         }}
         type="submit"
