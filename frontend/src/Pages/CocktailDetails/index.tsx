@@ -13,7 +13,7 @@ import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import Button from "@mui/material/Button";
 import Stack from "@mui/material/Stack";
-import { StyledImage, StyledDivider } from "./styles";
+import { StyledDivider } from "./styles";
 import ArrowBack from "@mui/icons-material/ArrowBack";
 import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
 import { useSearch } from "../../Helper";
@@ -45,8 +45,6 @@ export const CocktailDetails = () => {
       </ViewHeightContainer>
     );
   }
-
-  console.log("data", data);
 
   return (
     <ViewHeightContainer>
@@ -92,8 +90,6 @@ export const CocktailDetails = () => {
         <Grid xs={12} md={3}>
           <Box
             sx={{
-              // bgcolor: "primary.main",
-              p: 3,
               height: "100%",
             }}
           >
@@ -113,8 +109,6 @@ export const CocktailDetails = () => {
         <Grid xs={12} md={9}>
           <Box
             sx={{
-              // bgcolor: "primary.main",
-              p: 3,
               height: "100%",
             }}
           >
@@ -133,7 +127,15 @@ export const CocktailDetails = () => {
         </Grid>
       </Grid>
       <StyledDivider />
-      <StyledImage src={data?.image_url} alt="Cocktail image" />
+      <Box
+        sx={{
+          background: `url(${data?.image_url}) no-repeat center / cover`,
+          width: "300px",
+          height: "300px",
+          borderRadius: "50%",
+          margin: "0 auto",
+        }}
+      />
     </ViewHeightContainer>
   );
 };

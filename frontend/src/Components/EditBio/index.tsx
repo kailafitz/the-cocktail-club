@@ -13,6 +13,7 @@ import Loading from "../Status/Loading";
 import { SubmitHandler, useForm, Controller } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { EditBioSchema } from "./Schema";
+import { Typography } from "@mui/material";
 
 const EditBio = ({ user }: { user: IUser }) => {
   const queryClient = useQueryClient();
@@ -125,6 +126,16 @@ const EditBio = ({ user }: { user: IUser }) => {
               {errors.bio?.message && (
                 <FormFeedback message={errors.bio?.message} severity="error" />
               )}
+              <Typography
+                variant="copyright"
+                sx={{
+                  opacity: 1,
+                  alignSelf: "flex-end",
+                  color: userBio.length > 255 ? "red" : "primary.main",
+                }}
+              >
+                {userBio.length} / 255
+              </Typography>
               <Stack direction={{ xs: "column", md: "row" }} spacing={3}>
                 <Button variant="primaryDark" fullWidth type="submit">
                   Update

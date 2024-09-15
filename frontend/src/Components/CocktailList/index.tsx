@@ -44,7 +44,11 @@ const CocktailList = () => {
   }
 
   return (
-    <ViewHeightContainer pt center>
+    <ViewHeightContainer
+      pt={data.length > 0 ? true : false}
+      sx={{ pb: 10 }}
+      center
+    >
       <Stack
         direction={{ xs: "column", md: "row" }}
         justifyContent="center"
