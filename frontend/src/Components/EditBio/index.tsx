@@ -18,7 +18,7 @@ import { Typography } from "@mui/material";
 const EditBio = ({ user }: { user: IUser }) => {
   const queryClient = useQueryClient();
   const [loading, setLoading] = useState(false);
-  const [userBio, setUserBio] = useState("");
+  const [userBio, setUserBio] = useState(user.bio);
   const [errorMessage, setErrorMessage] = useState("");
   const [open, setOpen] = useState(false);
   const {
@@ -131,7 +131,7 @@ const EditBio = ({ user }: { user: IUser }) => {
                 sx={{
                   opacity: 1,
                   alignSelf: "flex-end",
-                  color: userBio.length > 255 ? "red" : "primary.main",
+                  color: user.bio.length > 255 ? "red" : "primary.main",
                 }}
               >
                 {userBio.length} / 255
