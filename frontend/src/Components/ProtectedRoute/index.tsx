@@ -3,8 +3,12 @@ import { Navigate, Outlet } from "react-router-dom";
 import ViewHeightContainer from "../Layout/ViewHeightContainer";
 import Loading from "../Status/Loading";
 import { useAuthentication } from "../../Helper";
+import { IProtectedRoute } from "../../Interfaces";
+import PropTypes from "prop-types";
 
-export const ProtectedRoute = ({ children }: { children?: ReactNode }) => {
+const ProtectedRoute: React.FC<IProtectedRoute> = (
+  children: IProtectedRoute
+) => {
   const { isAuth, status } = useAuthentication();
   // console.log("Protected route", status);
 
@@ -26,3 +30,9 @@ export const ProtectedRoute = ({ children }: { children?: ReactNode }) => {
 
   return children ? <>children</> : <Outlet />;
 };
+
+ProtectedRoute.propTypes = {
+  children: PropTypes.node as PropTypes.Validator<ReactNode>,
+};
+
+export default ProtectedRoute;

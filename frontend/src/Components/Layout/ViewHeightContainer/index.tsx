@@ -1,9 +1,11 @@
-import React from "react";
 import { Container } from "@mui/material";
-import { IViewHeightContainer } from "../../../Interfaces";
 import PropTypes from "prop-types";
+import React, { ReactNode } from "react";
+import { IViewHeightContainer } from "../../../Interfaces";
 
-const ViewHeightContainer = (props: IViewHeightContainer) => {
+const ViewHeightContainer: React.FC<IViewHeightContainer> = (
+  props: IViewHeightContainer
+) => {
   return (
     <Container
       sx={{
@@ -22,7 +24,7 @@ const ViewHeightContainer = (props: IViewHeightContainer) => {
 };
 
 ViewHeightContainer.propTypes = {
-  children: PropTypes.node.isRequired,
+  children: PropTypes.node.isRequired as PropTypes.Validator<ReactNode>,
   vh: PropTypes.bool,
   sx: PropTypes.object,
   center: PropTypes.bool,

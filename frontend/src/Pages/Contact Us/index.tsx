@@ -1,16 +1,15 @@
-import React from "react";
-import ViewHeightContainer from "../../Components/Layout/ViewHeightContainer";
-import Typography from "@mui/material/Typography";
-import Stack from "@mui/material/Stack";
 import EmailIcon from "@mui/icons-material/Email";
 import MyLocationIcon from "@mui/icons-material/MyLocation";
-import Link from "@mui/material/Link";
-import TextField from "@mui/material/TextField";
-import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
-import Divider from "@mui/material/Divider";
+import Button from "@mui/material/Button";
+import Link from "@mui/material/Link";
+import Stack from "@mui/material/Stack";
+import TextField from "@mui/material/TextField";
+import Typography from "@mui/material/Typography";
+import React from "react";
+import ViewHeightContainer from "../../Components/Layout/ViewHeightContainer";
 
-const ContactUs = () => {
+const ContactUs: React.FC = () => {
   return (
     <ViewHeightContainer>
       <Typography variant="pageHeading">Get in Touch</Typography>

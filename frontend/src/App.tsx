@@ -11,7 +11,7 @@ import LoginUser from "./Pages/LoginUser";
 import SignupUser from "./Pages/SignupUser";
 import Profile from "./Pages/Profile";
 import MyCocktails from "./Pages/MyCocktails";
-import { ProtectedRoute } from "./Components/ProtectedRoute";
+import ProtectedRoute from "./Components/ProtectedRoute";
 
 function App() {
   return (

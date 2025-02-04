@@ -1,11 +1,11 @@
-import React, { useState } from "react";
-import Select, { SelectChangeEvent } from "@mui/material/Select";
-import MenuItem from "@mui/material/MenuItem";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
-import SearchBar from "./SearchBar";
+import MenuItem from "@mui/material/MenuItem";
+import Select, { SelectChangeEvent } from "@mui/material/Select";
+import { useState } from "react";
 import { useSearchParams } from "react-router-dom";
+import SearchBar from "./SearchBar";
 
-const CocktailSearchUrl = () => {
+const CocktailSearchUrl: React.FC = () => {
   let [searchParams, setSearchParams] = useSearchParams();
   const [searchMethod, setSearchMethod] = useState("ingredient");
 

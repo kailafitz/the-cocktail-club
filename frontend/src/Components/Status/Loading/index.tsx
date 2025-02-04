@@ -1,8 +1,10 @@
 import React from "react";
 import { useTheme } from "@mui/material/styles";
 import ReactLoading from "react-loading";
+import { ILoading } from "../../../Interfaces";
+import PropTypes from "prop-types";
 
-const Loading = (props: { color: "light" | "dark" }) => {
+const Loading: React.FC<ILoading> = (props: ILoading) => {
   const theme = useTheme();
   return (
     <ReactLoading
@@ -15,6 +17,12 @@ const Loading = (props: { color: "light" | "dark" }) => {
       className="loading"
     />
   );
+};
+
+Loading.propTypes = {
+  color: PropTypes.oneOf(["light", "dark"]).isRequired as PropTypes.Validator<
+    "light" | "dark"
+  >,
 };
 
 export default Loading;

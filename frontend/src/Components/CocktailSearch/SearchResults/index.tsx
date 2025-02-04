@@ -1,15 +1,15 @@
-import React, { Fragment, useEffect, useState } from "react";
-import { IApiCocktail } from "../../../Interfaces";
-import axios from "axios";
-import { useSearchParams } from "react-router-dom";
-import Loading from "../../Status/Loading";
+import Skeleton from "@mui/material/Skeleton";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Unstable_Grid2";
-import Skeleton from "@mui/material/Skeleton";
+import axios from "axios";
+import React, { Fragment, useEffect, useState } from "react";
+import { useSearchParams } from "react-router-dom";
+import { IApiCocktail } from "../../../Interfaces";
 import CocktailCard from "../../CocktailCard";
+import Loading from "../../Status/Loading";
 
-const SearchResults = () => {
+const SearchResults: React.FC = () => {
   let [searchParams] = useSearchParams();
   const [results, setResults] = useState<IApiCocktail[]>([]);
 

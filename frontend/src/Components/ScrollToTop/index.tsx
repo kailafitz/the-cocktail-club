@@ -4,7 +4,7 @@ import IconButton from "@mui/material/IconButton";
 import useScrollTrigger from "@mui/material/useScrollTrigger";
 import ArrowUpwardIcon from "@mui/icons-material/ArrowUpward";
 
-const ScrollTop = () => {
+const ScrollTop: React.FC = () => {
   const handleClick = (event: React.MouseEvent<HTMLDivElement>) => {
     const anchor = (
       (event.target as HTMLDivElement).ownerDocument || document

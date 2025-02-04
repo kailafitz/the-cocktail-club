@@ -19,7 +19,7 @@ import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
 import { useSearch } from "../../Helper";
 import EditCocktail from "../../Components/EditCocktail";
 
-export const CocktailDetails = () => {
+export const CocktailDetails: React.FC = () => {
   const navigate = useNavigate();
   const { id, dbType } = useParams() as {
     id: string;

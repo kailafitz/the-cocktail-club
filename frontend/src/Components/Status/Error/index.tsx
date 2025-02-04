@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { Typography } from "@mui/material";
 import { IError } from "../../../Interfaces";
 
-const Error = (props: IError) => {
+const Error: React.FC<IError> = (props: IError) => {
   return (
     <>
       <Typography variant="h3" align="center">
@@ -17,7 +17,7 @@ const Error = (props: IError) => {
 };
 
 Error.propTypes = {
-  message: PropTypes.string,
+  message: PropTypes.string.isRequired,
 };
 
 export default Error;

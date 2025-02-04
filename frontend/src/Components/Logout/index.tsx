@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { Dispatch, SetStateAction, useState } from "react";
 import { AxiosError } from "axios";
 import { useMutation, useQueryClient } from "react-query";
 import FormFeedback from "../Alert";
@@ -10,7 +10,7 @@ import { ILogout } from "../../Interfaces";
 import { Dialog } from "@mui/material";
 import Loading from "../Status/Loading";
 
-const Logout = (props: ILogout) => {
+const Logout: React.FC<ILogout> = (props: ILogout) => {
   const queryClient = useQueryClient();
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
@@ -88,7 +88,9 @@ const Logout = (props: ILogout) => {
 };
 
 Logout.propTypes = {
-  onClick: PropTypes.func,
+  onClick: PropTypes.func as PropTypes.Validator<
+    Dispatch<SetStateAction<boolean>>
+  >,
 };
 
 export default Logout;

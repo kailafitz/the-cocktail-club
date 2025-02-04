@@ -1,13 +1,11 @@
 import React from "react";
+import { ILogo } from "../../Interfaces";
+import PropTypes from "prop-types";
 
-type Props = {
-  className?: string;
-};
-
-const Logo = (props: Props) => {
+const Logo: React.FC<ILogo> = (props: ILogo) => {
   return (
     <svg
-      className={props.className}
+      className={props.className && props.className}
       viewBox="0 0 263 74"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
@@ -74,6 +72,10 @@ const Logo = (props: Props) => {
       />
     </svg>
   );
+};
+
+Logo.propTypes = {
+  className: PropTypes.string,
 };
 
 export default Logo;

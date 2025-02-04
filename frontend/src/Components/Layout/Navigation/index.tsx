@@ -1,10 +1,9 @@
-import React from "react";
+import Container from "@mui/material/Container";
 import Link from "@mui/material/Link";
 import Logo from "../../Logo";
-import Container from "@mui/material/Container";
 import NavigationMenu from "../../NavigationMenu";
 
-const Navigation = () => {
+const Navigation: React.FC = () => {
   return (
     <>
       <Container

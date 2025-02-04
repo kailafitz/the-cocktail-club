@@ -1,13 +1,12 @@
-import React from "react";
+import Stack from "@mui/material/Stack";
+import Typography from "@mui/material/Typography";
 import { useQuery } from "react-query";
+import { api } from "../../axios";
 import { ICustomCocktailDownload } from "../../Interfaces";
 import CocktailCard from "../CocktailCard";
 import ViewHeightContainer from "../Layout/ViewHeightContainer";
-import Loading from "../Status/Loading";
 import Error from "../Status/Error";
-import { api } from "../../axios";
-import Typography from "@mui/material/Typography";
-import Stack from "@mui/material/Stack";
+import Loading from "../Status/Loading";
 
 const CocktailList = () => {
   const { data, status } = useQuery(

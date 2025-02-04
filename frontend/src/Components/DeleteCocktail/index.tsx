@@ -11,8 +11,9 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import { api } from "../../axios";
 import Loading from "../Status/Loading";
 import { useLocation } from "react-router-dom";
+import { IDeleteCocktail } from "../../Interfaces";
 
-const DeleteCocktail = ({ cocktailId }: { cocktailId: string }) => {
+const DeleteCocktail: React.FC<IDeleteCocktail> = (props: IDeleteCocktail) => {
   const location = useLocation();
   const queryClient = useQueryClient();
   const [errorMessage, setErrorMessage] = useState("");
@@ -56,7 +57,7 @@ const DeleteCocktail = ({ cocktailId }: { cocktailId: string }) => {
   const handleSubmit = async (event: any) => {
     event.preventDefault();
     setLoading(true);
-    mutation.mutate(cocktailId);
+    mutation.mutate(props.cocktailId);
   };
 
   return (
@@ -65,11 +66,11 @@ const DeleteCocktail = ({ cocktailId }: { cocktailId: string }) => {
         sx={{ px: "6px" }}
         variant="primaryDark"
         onClick={handleOpen}
-        data-target={cocktailId.toString()}
+        data-target={props.cocktailId.toString()}
       >
         <DeleteIcon />
       </Button>
-      <Dialog open={open} id={cocktailId.toString()}>
+      <Dialog open={open} id={props.cocktailId.toString()}>
         <Stack
           p={5}
           spacing={4}
@@ -114,7 +115,7 @@ const DeleteCocktail = ({ cocktailId }: { cocktailId: string }) => {
 };
 
 DeleteCocktail.propTypes = {
-  cocktailId: PropTypes.string,
+  cocktailId: PropTypes.string.isRequired,
 };
 
 export default DeleteCocktail;

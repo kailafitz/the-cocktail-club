@@ -35,7 +35,7 @@ const authRoutes = [
   },
 ];
 
-const NavigationMenu = () => {
+const NavigationMenu: React.FC = () => {
   const { isAuth } = useAuthentication();
   const [open, setOpen] = useState(false);
 

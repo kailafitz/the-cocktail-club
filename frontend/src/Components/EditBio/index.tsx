@@ -1,21 +1,21 @@
-import React, { useState } from "react";
-import Stack from "@mui/material/Stack";
-import Dialog from "@mui/material/Dialog";
-import { IUser } from "../../Interfaces";
-import { useMutation, useQueryClient } from "react-query";
-import { AxiosError } from "axios";
-import FormFeedback from "../Alert";
-import PropTypes from "prop-types";
-import Button from "@mui/material/Button";
-import { api } from "../../axios";
-import TextField from "@mui/material/TextField";
-import Loading from "../Status/Loading";
-import { SubmitHandler, useForm, Controller } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { EditBioSchema } from "./Schema";
 import { Typography } from "@mui/material";
+import Button from "@mui/material/Button";
+import Dialog from "@mui/material/Dialog";
+import Stack from "@mui/material/Stack";
+import TextField from "@mui/material/TextField";
+import { AxiosError } from "axios";
+import PropTypes from "prop-types";
+import React, { useState } from "react";
+import { Controller, SubmitHandler, useForm } from "react-hook-form";
+import { useMutation, useQueryClient } from "react-query";
+import { api } from "../../axios";
+import { IUser } from "../../Interfaces";
+import FormFeedback from "../Alert";
+import Loading from "../Status/Loading";
+import { EditBioSchema } from "./Schema";
 
-const EditBio = ({ user }: { user: IUser }) => {
+const EditBio: React.FC<{ user: IUser }> = ({ user }) => {
   const queryClient = useQueryClient();
   const [loading, setLoading] = useState(false);
   const [userBio, setUserBio] = useState(user.bio);
@@ -153,7 +153,12 @@ const EditBio = ({ user }: { user: IUser }) => {
 };
 
 EditBio.propTypes = {
-  user: PropTypes.object,
+  user: PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    email: PropTypes.string.isRequired,
+    password: PropTypes.string.isRequired,
+    bio: PropTypes.string.isRequired,
+  }) as PropTypes.Validator<IUser>,
 };
 
 export default EditBio;

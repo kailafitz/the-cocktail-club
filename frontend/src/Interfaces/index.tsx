@@ -1,7 +1,30 @@
+import { AlertColor } from "@mui/material/Alert";
 import { Dispatch, ReactNode, SetStateAction } from "react";
+
+export interface ILogo {
+  className?: string;
+}
+
+export interface IProtectedRoute {
+  children?: ReactNode;
+}
+
+export interface IFormFeedbackProps {
+  severity: AlertColor | undefined;
+  message: string;
+  mb?: boolean;
+}
+
+export interface ILoading {
+  color: "light" | "dark";
+}
 
 export interface IError {
   message: string;
+}
+
+export interface IDeleteCocktail {
+  cocktailId: string;
 }
 
 export interface ILogout {
@@ -78,7 +101,7 @@ export interface ISearchHook {
   dbType: "custom" | "apidb";
 }
 
-export interface ISearchCocktailInput {
+export interface ISearchBar {
   searchMethod: string;
 }
 

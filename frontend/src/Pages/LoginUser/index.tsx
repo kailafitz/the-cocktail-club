@@ -22,7 +22,7 @@ let initialState = {
   password: "",
 };
 
-const LoginUser = () => {
+const LoginUser: React.FC = () => {
   const queryClient = useQueryClient();
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);

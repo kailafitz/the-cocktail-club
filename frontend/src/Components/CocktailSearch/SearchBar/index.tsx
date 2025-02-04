@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import SearchIcon from "@mui/icons-material/Search";
 import Button from "@mui/material/Button";
 import ClickAwayListener from "@mui/material/ClickAwayListener";
 import Grow from "@mui/material/Grow";
@@ -8,14 +8,15 @@ import MenuList from "@mui/material/MenuList";
 import Paper from "@mui/material/Paper";
 import Popper from "@mui/material/Popper";
 import Stack from "@mui/material/Stack";
-import SearchIcon from "@mui/icons-material/Search";
-import { scrollToResults } from "../../../Helper";
-import { useSearchParams } from "react-router-dom";
 import axios from "axios";
-import { ISearchCocktailInput } from "../../../Interfaces";
+import PropTypes from "prop-types";
+import React, { useEffect, useRef, useState } from "react";
+import { useSearchParams } from "react-router-dom";
+import { scrollToResults } from "../../../Helper";
+import { ISearchBar } from "../../../Interfaces";
 import { StyledContainer } from "./styles";
 
-const SearchBar = (props: ISearchCocktailInput) => {
+const SearchBar: React.FC<ISearchBar> = (props: ISearchBar) => {
   const [open, setOpen] = useState(false);
   const anchorRef = useRef<HTMLButtonElement>(null);
   const [input, setInput] = useState<string>("");
@@ -201,6 +202,10 @@ const SearchBar = (props: ISearchCocktailInput) => {
       )}
     </>
   );
+};
+
+SearchBar.propTypes = {
+  searchMethod: PropTypes.string.isRequired,
 };
 
 export default SearchBar;

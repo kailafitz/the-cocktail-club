@@ -5,7 +5,7 @@ import Typography from "@mui/material/Typography";
 import Stack from "@mui/material/Stack";
 import ViewHeightContainer from "../../Components/Layout/ViewHeightContainer";
 
-const About = () => {
+const About: React.FC = () => {
   return (
     <>
       <ViewHeightContainer sx={{ pb: 10 }}>

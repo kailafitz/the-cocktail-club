@@ -1,17 +1,17 @@
-import React from "react";
+import CopyrightIcon from "@mui/icons-material/Copyright";
 import FacebookOutlinedIcon from "@mui/icons-material/FacebookOutlined";
 import InstagramIcon from "@mui/icons-material/Instagram";
-import TwitterIcon from "@mui/icons-material/Twitter";
 import PinterestIcon from "@mui/icons-material/Pinterest";
-import { StyledContainer, StyledIcon } from "./styles";
-import Stack from "@mui/material/Stack";
-import Link from "@mui/material/Link";
-import CopyrightIcon from "@mui/icons-material/Copyright";
-import Typography from "@mui/material/Typography";
+import TwitterIcon from "@mui/icons-material/Twitter";
 import Divider from "@mui/material/Divider";
+import Link from "@mui/material/Link";
+import Stack from "@mui/material/Stack";
+import Typography from "@mui/material/Typography";
+import React from "react";
 import Logo from "../../Logo";
+import { StyledContainer, StyledIcon } from "./styles";
 
-export const Footer = () => {
+export const Footer: React.FC = () => {
   return (
     <StyledContainer>
       <Stack

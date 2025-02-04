@@ -1,6 +1,6 @@
 import React from "react";
 
-const Lights = () => {
+const Lights: React.FC = () => {
   return (
     <svg
       className="w-full"

@@ -1,26 +1,26 @@
-import React, { useState } from "react";
-import Stack from "@mui/material/Stack";
+import { zodResolver } from "@hookform/resolvers/zod";
+import FileUploadIcon from "@mui/icons-material/FileUpload";
+import Button from "@mui/material/Button";
 import Dialog from "@mui/material/Dialog";
+import MenuItem from "@mui/material/MenuItem";
+import Select from "@mui/material/Select";
+import Stack from "@mui/material/Stack";
+import { styled } from "@mui/material/styles";
+import TextField from "@mui/material/TextField";
+import Typography from "@mui/material/Typography";
+import { AxiosError } from "axios";
+import PropTypes from "prop-types";
+import { useState } from "react";
+import { Controller, SubmitHandler, useForm } from "react-hook-form";
+import { useMutation, useQueryClient } from "react-query";
+import { api } from "../../axios";
 import {
   ICustomCocktailDownload,
   ICustomCocktailUpload,
 } from "../../Interfaces";
-import { useMutation, useQueryClient } from "react-query";
-import { AxiosError } from "axios";
 import FormFeedback from "../Alert";
-import PropTypes from "prop-types";
-import Button from "@mui/material/Button";
-import { api } from "../../axios";
-import TextField from "@mui/material/TextField";
-import Loading from "../Status/Loading";
-import { Controller, SubmitHandler, useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
 import { CocktailSchema } from "../CreateCocktailForm/Schema";
-import Typography from "@mui/material/Typography";
-import FileUploadIcon from "@mui/icons-material/FileUpload";
-import { styled } from "@mui/material/styles";
-import Select from "@mui/material/Select";
-import MenuItem from "@mui/material/MenuItem";
+import Loading from "../Status/Loading";
 
 const VisuallyHiddenInput = styled("input")({
   clip: "rect(0 0 0 0)",
@@ -34,7 +34,9 @@ const VisuallyHiddenInput = styled("input")({
   width: 1,
 });
 
-const EditCocktail = ({ cocktail }: { cocktail: ICustomCocktailDownload }) => {
+const EditCocktail: React.FC<{ cocktail: ICustomCocktailDownload }> = ({
+  cocktail,
+}) => {
   const queryClient = useQueryClient();
   const [loading, setLoading] = useState(false);
   const [updatedCocktail, setUpdatedCocktail] = useState<ICustomCocktailUpload>(
@@ -329,7 +331,10 @@ const EditCocktail = ({ cocktail }: { cocktail: ICustomCocktailDownload }) => {
 };
 
 EditCocktail.propTypes = {
-  cocktail: PropTypes.object,
+  cocktail: PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    image_url: PropTypes.string.isRequired,
+  }) as PropTypes.Validator<ICustomCocktailDownload>,
 };
 
 export default EditCocktail;

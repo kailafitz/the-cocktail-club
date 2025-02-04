@@ -1,11 +1,11 @@
-import React from "react";
-import ViewHeightContainer from "../../Components/Layout/ViewHeightContainer";
-import Typography from "@mui/material/Typography";
+import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Stack from "@mui/material/Stack";
-import Box from "@mui/material/Box";
+import Typography from "@mui/material/Typography";
+import React from "react";
+import ViewHeightContainer from "../../Components/Layout/ViewHeightContainer";
 
-const HomeSearch = () => {
+const HomeSearch: React.FC = () => {
   return (
     <ViewHeightContainer>
       <Stack direction={{ xs: "column" }} mb={{ xs: 10, md: 20 }}>

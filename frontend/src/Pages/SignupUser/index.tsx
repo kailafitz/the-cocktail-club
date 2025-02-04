@@ -25,7 +25,7 @@ let initialState = {
   confirmPassword: "",
 };
 
-const SignupUser = () => {
+const SignupUser: React.FC = () => {
   const queryClient = useQueryClient();
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);

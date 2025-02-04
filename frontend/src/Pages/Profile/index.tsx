@@ -1,19 +1,19 @@
-import React from "react";
-import { useQuery } from "react-query";
-import Typography from "@mui/material/Typography";
-import ViewHeightContainer from "../../Components/Layout/ViewHeightContainer";
-import Loading from "../../Components/Status/Loading";
-import EditBio from "../../Components/EditBio";
-import Error from "../../Components/Status/Error";
-import { api } from "../../axios";
-import Stack from "@mui/material/Stack";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
+import Stack from "@mui/material/Stack";
+import Typography from "@mui/material/Typography";
+import React from "react";
+import { useQuery } from "react-query";
 import CocktailCard from "../../Components/CocktailCard";
-import { ICocktailCard } from "../../Interfaces";
 import CreateCocktailForm from "../../Components/CreateCocktailForm";
+import EditBio from "../../Components/EditBio";
+import ViewHeightContainer from "../../Components/Layout/ViewHeightContainer";
+import Error from "../../Components/Status/Error";
+import Loading from "../../Components/Status/Loading";
+import { ICocktailCard } from "../../Interfaces";
+import { api } from "../../axios";
 
-const Profile = () => {
+const Profile: React.FC = () => {
   const { data, status } = useQuery(["Get Account Details"], () =>
     api
       .get("api/profile", {
