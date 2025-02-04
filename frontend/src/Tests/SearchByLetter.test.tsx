@@ -30,7 +30,7 @@ describe("Search for cocktails from thecocktaildb", async () => {
         strAlcoholic: "Alcoholic",
         strGlass: "Cocktail glass",
         strInstructions: "Shake and strain into a chilled cocktail glass",
-        strInstructionsES: null,
+        strInstructionsES: "Agitar y colar en una copa de cóctel fría.",
         strInstructionsDE:
           "In ein gekühltes Cocktailglas schütteln und abseihen.",
         strInstructionsFR: null,
@@ -87,7 +87,8 @@ describe("Search for cocktails from thecocktaildb", async () => {
         strGlass: "Highball Glass",
         strInstructions:
           "Place all ingredients in the blender jar - cover and whiz on medium speed until well blended. Pour in one tall, 2 medium or 3 small glasses and drink up. Note: Use lots of ice in this one - great on hot days! To add ice: Remove the center of the cover while the blender is on - drop 3 or 4 ice cubs and blend until they're completely crushed.",
-        strInstructionsES: null,
+        strInstructionsES:
+          "Coloque todos los ingredientes en la jarra de la licuadora, cubra y bata a velocidad media hasta que est\u00e9n bien mezclados. Vierta un vaso alto, 2 medianos o 3 peque\u00f1os y b\u00e9balo. Nota: Utilice mucho hielo en este caso. \u00a1Excelente para los d\u00edas calurosos! Para agregar hielo: Retire el centro de la tapa mientras la licuadora est\u00e1 encendida; deje caer 3 o 4 cubitos de hielo y licue hasta que est\u00e9n completamente triturados.",
         strInstructionsDE:
           "Alle Zutaten in den Mixer geben - abdecken und bei mittlerer Geschwindigkeit schaumig schlagen, bis sie gut vermischt sind. In ein großes, 2 mittlere oder 3 kleine Gläser füllen und geniessen. Hinweis: Verwenden Sie viel Eis in diesem Gerät - ideal an heißen Tagen! Um Eis hinzuzufügen: Entfernen Sie die Mitte der Abdeckung, während der Mixer eingeschaltet ist - lassen Sie 3 oder 4 Eiswürfel fallen und mischen Sie sie, bis sie vollständig zerkleinert sind.",
         strInstructionsFR: null,
