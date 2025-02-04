@@ -30,9 +30,10 @@ describe("Search for cocktails from thecocktaildb", async () => {
         strAlcoholic: "Alcoholic",
         strGlass: "Cocktail glass",
         strInstructions: "Shake and strain into a chilled cocktail glass",
-        strInstructionsES: "Agitar y colar en una copa de cóctel fría.",
+        strInstructionsES:
+          "\nAgitar y colar en una copa de c\u00f3ctel fr\u00eda.",
         strInstructionsDE:
-          "In ein gekühltes Cocktailglas schütteln und abseihen.",
+          "In ein gek\u00fchltes Cocktailglas sch\u00fctteln und abseihen.",
         strInstructionsFR: null,
         strInstructionsIT:
           "Shakerare e filtrare in una coppetta da cocktail ghiacciata",
@@ -90,10 +91,10 @@ describe("Search for cocktails from thecocktaildb", async () => {
         strInstructionsES:
           "Coloque todos los ingredientes en la jarra de la licuadora, cubra y bata a velocidad media hasta que est\u00e9n bien mezclados. Vierta un vaso alto, 2 medianos o 3 peque\u00f1os y b\u00e9balo. Nota: Utilice mucho hielo en este caso. \u00a1Excelente para los d\u00edas calurosos! Para agregar hielo: Retire el centro de la tapa mientras la licuadora est\u00e1 encendida; deje caer 3 o 4 cubitos de hielo y licue hasta que est\u00e9n completamente triturados.",
         strInstructionsDE:
-          "Alle Zutaten in den Mixer geben - abdecken und bei mittlerer Geschwindigkeit schaumig schlagen, bis sie gut vermischt sind. In ein großes, 2 mittlere oder 3 kleine Gläser füllen und geniessen. Hinweis: Verwenden Sie viel Eis in diesem Gerät - ideal an heißen Tagen! Um Eis hinzuzufügen: Entfernen Sie die Mitte der Abdeckung, während der Mixer eingeschaltet ist - lassen Sie 3 oder 4 Eiswürfel fallen und mischen Sie sie, bis sie vollständig zerkleinert sind.",
+          "Alle Zutaten in den Mixer geben - abdecken und bei mittlerer Geschwindigkeit schaumig schlagen, bis sie gut vermischt sind. In ein gro\u00dfes, 2 mittlere oder 3 kleine Gl\u00e4ser f\u00fcllen und geniessen. Hinweis: Verwenden Sie viel Eis in diesem Ger\u00e4t - ideal an hei\u00dfen Tagen! Um Eis hinzuzuf\u00fcgen: Entfernen Sie die Mitte der Abdeckung, w\u00e4hrend der Mixer eingeschaltet ist - lassen Sie 3 oder 4 Eisw\u00fcrfel fallen und mischen Sie sie, bis sie vollst\u00e4ndig zerkleinert sind.",
         strInstructionsFR: null,
         strInstructionsIT:
-          "Mettere tutti gli ingredienti nella caraffa del frullatore - coprire e montare a velocità media fino a quando non sono ben amalgamati.Nota: usa molto ghiaccio in questo - ottimo nelle giornate calde!Versare in un bicchiere alto, 2 medi o 3 piccoli e bere.Per aggiungere il ghiaccio: rimuovere il centro del coperchio mentre il frullatore è acceso - far cadere 3 o 4 cubetti di ghiaccio e frullare fino a quando non saranno completamente schiacciati.",
+          "Mettere tutti gli ingredienti nella caraffa del frullatore - coprire e montare a velocit\u00e0 media fino a quando non sono ben amalgamati.Nota: usa molto ghiaccio in questo - ottimo nelle giornate calde!Versare in un bicchiere alto, 2 medi o 3 piccoli e bere.Per aggiungere il ghiaccio: rimuovere il centro del coperchio mentre il frullatore \u00e8 acceso - far cadere 3 o 4 cubetti di ghiaccio e frullare fino a quando non saranno completamente schiacciati.",
         "strInstructionsZH-HANS": null,
         "strInstructionsZH-HANT": null,
         strDrinkThumb:
