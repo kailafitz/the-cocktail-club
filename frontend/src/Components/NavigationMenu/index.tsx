@@ -71,7 +71,7 @@ const NavigationMenu = () => {
                 to={link.href}
                 onClick={() => setOpen(false)}
                 aria-label={`Link to ${link.text} page`}
-                fontSize={{ xs: "1.5rem", md: "1rem" }}
+                fontSize={{ xs: "0.9rem", md: "1rem" }}
               >
                 {link.text}
               </Link>
@@ -87,7 +87,7 @@ const NavigationMenu = () => {
                 sx={{ color: "primary.main" }}
                 onClick={() => setOpen(false)}
                 aria-label={`Link to ${link.text} page`}
-                fontSize={{ xs: "1rem", md: "inherit" }}
+                fontSize={{ xs: "0.9rem", md: "1rem" }}
               >
                 {link.text}
               </Link>
@@ -107,9 +107,6 @@ const NavigationMenu = () => {
           <Button
             variant="primaryLight"
             href={"/login"}
-            sx={{
-              fontSize: { xs: "1", md: "revert" },
-            }}
             onClick={() => setOpen(false)}
             aria-label="Link to Login page"
           >
@@ -118,9 +115,6 @@ const NavigationMenu = () => {
           <Button
             variant="primaryLight"
             href="/sign-up"
-            sx={{
-              fontSize: { xs: "1", md: "revert" },
-            }}
             onClick={() => setOpen(false)}
             aria-label="Link to Sign up page"
           >
