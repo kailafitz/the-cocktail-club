@@ -11,6 +11,12 @@ import "./testfolder/local-strategy.js";
 import * as dotenv from "dotenv";
 import { createTables } from "./db.js";
 
+// Run redis server
+// redis-server
+
+// Run server command
+// node index.js
+
 createTables();
 
 const app = express();
